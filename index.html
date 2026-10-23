@@ -1,9 +1,10 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>Cinzas da Guerra • Ficha Pathfinder 2e V2.0</title>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport"/>
+<title>Cinzas da Guerra • Registro do Personagem</title>
 <style>
 :root{
   --void:#070706;--bg:#0c0a08;--bg2:#12100d;--panel:#17130f;--panel2:#201a13;
@@ -292,373 +293,406 @@ body{background:
 .path-counter-foot .tracker-max{width:70px}.path-empty{padding:14px;border:1px dashed var(--line2);font:12px/1.5 Arial,sans-serif;color:var(--muted)}
 @media(max-width:650px){.path-panel{padding:12px}.path-panel-head h3{font-size:18px}.path-tracker-grid{grid-template-columns:1fr}}
 </style>
-</head>
+<style id="dossier-redesign">/* Cinzas da Guerra — a readable character record inspired by the Lands Between. */
+:root{--top:72px;--ui-font:Arial,Helvetica,sans-serif}
+body[data-theme="erdtree"]{--bg:#101312;--panel:#1b1d19;--panel2:#25271f;--text:#eee9db;--muted:#b5b3a5;--line:#414238;--line2:#6e684e;--gold:#bcab77;--gold2:#e0d2a5;--gold3:#8a7950;--theme-deep:#111411;--theme-card:#1a1e19;--theme-hot:#bcab77}
+body{font-family:var(--ui-font);font-size:14px;background:radial-gradient(ellipse at 77% 0,color-mix(in srgb,var(--gold) 10%,transparent),transparent 45rem),linear-gradient(150deg,var(--theme-deep),var(--bg));line-height:1.45}
+body::before{opacity:.08}
+button,input,textarea,select{font-family:var(--ui-font)}
+.topbar{padding:12px 28px;gap:15px;background:color-mix(in srgb,var(--theme-deep) 95%,transparent);box-shadow:none;border-color:var(--line)}
+.brand{gap:12px}.brand-title{font:700 17px Georgia,serif;letter-spacing:.075em}.brand-title small{font:10px var(--ui-font);letter-spacing:.1em;margin-top:5px;color:var(--muted)}
+.brand-sigil{width:40px;height:40px;flex:none}.brand-sigil::before{width:24px;height:24px}
+.btn{clip-path:none;border-radius:4px;min-height:38px;font-size:12px;font-weight:600;padding:9px 13px;box-shadow:none;background:color-mix(in srgb,var(--panel2) 75%,var(--theme-deep));letter-spacing:0;line-height:1.25}
+.btn::after{display:none}.btn:hover{transform:none;background:color-mix(in srgb,var(--panel2) 90%,var(--gold) 10%)}
+.btn.primary{background:var(--gold);color:var(--void);text-shadow:none;box-shadow:0 2px 10px #0002}.btn.primary:hover{background:var(--gold2)}
+.btn.small{font-size:11px;min-height:32px;padding:7px 10px}.btn.icon{width:38px;min-height:38px}
+.top-actions{gap:10px}.save-indicator{font-size:11px;color:var(--muted);white-space:nowrap}.save-indicator::before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:var(--good);margin-right:7px;vertical-align:middle}.save-indicator.save-error{color:#f2a097}.save-indicator.save-error::before{background:var(--danger)}
+.toolbar-menu{position:relative}.toolbar-menu>summary{display:flex;gap:18px;align-items:center;cursor:pointer;list-style:none}.toolbar-menu>summary::-webkit-details-marker{display:none}
+.toolbar-popover{position:absolute;right:0;top:calc(100% + 10px);width:220px;padding:7px;background:var(--panel);border:1px solid var(--line2);box-shadow:0 18px 40px #0008;border-radius:6px;z-index:120;display:grid;gap:4px}.toolbar-popover>.btn{display:block;text-align:left;min-width:0;background:transparent;border-color:transparent;white-space:normal}.toolbar-popover>.btn:hover{background:var(--panel2)}
+main{padding:26px 28px 40px}.sheet{max-width:1540px;background:color-mix(in srgb,var(--panel) 62%,var(--theme-deep));border:1px solid var(--line);box-shadow:0 16px 60px #0003;border-radius:8px;overflow:clip}.sheet::before,.sheet::after{display:none}
+.sheet-head{position:relative;padding:28px 30px 22px;min-height:156px;overflow:hidden;border:0;background:linear-gradient(110deg,color-mix(in srgb,var(--gold) 12%,var(--panel)),color-mix(in srgb,var(--panel) 85%,var(--theme-deep)))}
+.sheet-name-wrap{position:relative;z-index:1}.eyebrow{font:600 10px var(--ui-font);letter-spacing:.2em;color:var(--gold);margin-bottom:8px}.sheet-name{gap:18px;margin:0;flex-wrap:nowrap}.sheet-name input{font:700 36px/1.2 Georgia,serif;width:min(700px,70vw);min-width:0;max-width:100%;padding:0 0 4px;border-radius:0}.level-seal{min-width:76px;height:50px;flex:none;font-size:13px;background:color-mix(in srgb,var(--theme-deep) 50%,transparent);border-color:var(--gold3);position:relative}.level-seal::before,.level-seal::after{content:"";position:absolute;width:4px;height:4px;background:var(--gold);transform:rotate(45deg);left:calc(50% - 2px)}.level-seal::before{top:-3px}.level-seal::after{bottom:-3px}
+.identity-chips{display:flex;gap:0;flex-wrap:wrap;margin-top:9px;color:var(--muted);font-size:12px}.identity-chips span+span::before{content:"·";padding:0 12px;color:var(--gold)}
+.header-emblem{position:absolute;width:250px;height:250px;right:42px;top:-40px;pointer-events:none;opacity:.16}.header-emblem i{position:absolute;inset:35px;border:1px solid var(--gold);border-radius:50%}.header-emblem i:nth-child(2){transform:translate(-35px,30px)}.header-emblem i:nth-child(3){transform:translate(35px,30px)}.header-emblem::before{content:"";position:absolute;width:1px;height:260px;left:50%;background:var(--gold)}.header-emblem span{position:absolute;left:calc(50% - 17px);top:5px;font-size:38px;color:var(--gold)}
+.tabs{position:sticky;top:var(--top);z-index:50;display:flex;gap:6px;justify-content:flex-start;flex-wrap:nowrap;width:100%;padding:0 24px;overflow:auto;background:var(--panel);border-bottom:1px solid var(--line);scrollbar-width:thin}
+.tab{clip-path:none;flex:none;min-height:52px;padding:16px 17px 16px 35px;background:transparent;border:0;border-bottom:2px solid transparent;font:600 12px var(--ui-font);letter-spacing:0;text-transform:none;color:var(--muted);border-radius:0}.tab::before{left:12px;font-size:16px}.tab.active{color:var(--gold2);background:color-mix(in srgb,var(--gold) 6%,transparent);border-color:var(--gold);box-shadow:none}.tab:hover{color:var(--text);background:color-mix(in srgb,var(--gold) 4%,transparent)}
+.page-grid,.combat-layout,.journal-layout{padding:22px;gap:18px}.column,.combat-stack{gap:18px}.overview-layout{grid-template-columns:280px minmax(0,1fr);align-items:start}.overview-main{gap:16px}.overview-aside{gap:16px}
+.panel{border:1px solid var(--line);border-radius:5px;background:linear-gradient(125deg,color-mix(in srgb,var(--panel2) 32%,var(--panel)),var(--panel));box-shadow:none}.panel::after{display:none}.panel-head{padding:13px 17px;background:color-mix(in srgb,var(--gold) 3%,transparent);border-color:color-mix(in srgb,var(--line) 80%,transparent);gap:12px;min-height:48px}.panel-head h2{font:700 16px Georgia,serif;letter-spacing:.015em;color:var(--text);text-transform:none}.panel-head h2::before{content:"◆";display:inline-block;margin-right:9px;font-size:7px;vertical-align:middle;color:var(--gold)}.panel-body{padding:17px}.helper{font:12px/1.6 var(--ui-font);color:var(--muted)}.panel-head>.helper{font-size:11px;text-align:right;max-width:55%}
+.input{font-size:14px;min-height:40px;border-color:color-mix(in srgb,var(--line) 80%,transparent);border-radius:4px;background:color-mix(in srgb,var(--theme-deep) 80%,var(--panel));padding:9px 11px;color:var(--text)}textarea.input{line-height:1.65}.field{min-width:0;gap:6px}.field label{font:600 10px/1.4 var(--ui-font);letter-spacing:.06em;color:var(--muted)}
+.effigy-panel{position:relative;border-color:var(--line2)}.effigy-panel>.panel-head{border:0;justify-content:center;padding:15px 8px 0;min-height:30px;background:none}.effigy-panel>.panel-head h2{font:600 10px var(--ui-font);letter-spacing:.15em;color:var(--gold);text-transform:uppercase}.effigy-panel>.panel-head h2::before{display:none}.effigy-panel>.panel-head .helper{display:none}.effigy-panel>.panel-body{padding:12px}.portrait-stage{height:320px;min-height:320px;background:radial-gradient(ellipse at 50% 60%,color-mix(in srgb,var(--gold) 10%,transparent),transparent 70%),linear-gradient(180deg,transparent,var(--theme-deep));border:1px solid color-mix(in srgb,var(--gold) 20%,transparent)}.portrait-stage::before{width:190px;height:190px;opacity:.65}.portrait-stage img{height:320px;width:100%;min-height:0;filter:drop-shadow(0 14px 20px #0005)}.portrait-empty{font:12px/1.6 var(--ui-font);padding:24px;max-width:230px}.portrait-empty::before{content:"✧";display:block;font:70px Georgia,serif;color:var(--gold3);margin-bottom:16px}.portrait-empty b{font:400 22px Georgia,serif;margin-bottom:8px}.effigy-caption{text-align:center;padding:7px 14px 20px}.effigy-caption small{display:block;font-size:8px;color:var(--gold);text-transform:uppercase;letter-spacing:.15em}.effigy-caption b{display:block;font:700 23px Georgia,serif;margin:9px 0 5px;overflow-wrap:anywhere}.effigy-caption span{font-size:11px;color:var(--muted)}
+.portrait-tools{border-top:1px solid var(--line);padding:0 12px 12px}.portrait-tools>summary{list-style:none;font-size:11px;color:var(--muted);padding:11px 2px 0;cursor:pointer;display:flex;justify-content:space-between}.portrait-tools>summary::-webkit-details-marker{display:none}.portrait-controls{margin-top:12px;gap:5px}.portrait-controls .btn{font-size:10px;padding:7px}.image-editor{margin-top:12px}.image-editor-grid{grid-template-columns:1fr 1fr}.identity-edit{display:flex;align-items:center;justify-content:space-between;width:100%;font-size:12px}
+.resource-stack{display:grid;grid-template-columns:1fr 1fr;gap:12px}.resource{border:0;border-radius:0;background:transparent;padding:0;display:flex;flex-direction:column}.resource+.resource{border-left:1px solid var(--line);padding-left:14px}.resource-top b{font-size:12px;font-weight:600}.resource-top span{font-size:11px;color:var(--muted)}.resource-top{order:0}.resource-controls{order:1;margin-top:10px;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 28px 28px;align-items:center;gap:6px}.resource-number{display:flex;flex-direction:column;gap:4px;min-width:0}.resource-number>small{font-size:9px;color:var(--muted);order:-1}.resource-controls .input{min-height:40px;padding:5px 7px;font:700 24px Georgia,serif;line-height:1.2}.resource-number:nth-child(2) .input{font:400 16px var(--ui-font);color:var(--muted)}.resource-controls .btn{padding:4px;min-height:30px}.bar{order:2;height:7px;margin-top:12px;border:0;background:#0005;border-radius:2px}.fill{border-radius:2px}.hp-fill{background:linear-gradient(90deg,#863c38,#c77569)}.focus-fill{background:linear-gradient(90deg,#3b667f,#89bacd)}.xp-fill{background:linear-gradient(90deg,var(--gold3),var(--gold2))}.resource-experience{grid-column:1/-1;display:grid;grid-template-columns:1fr minmax(160px,230px);gap:6px 20px;padding-top:12px!important;padding-left:0!important;border-left:0!important;border-top:1px solid var(--line)}.resource-experience .resource-top{display:flex;align-items:center}.resource-experience .resource-controls{margin:0;grid-template-columns:1fr 1fr}.resource-experience .resource-controls .input{font:400 14px var(--ui-font);min-height:34px}.resource-experience .bar{grid-column:1/-1;margin-top:1px;height:4px}
+.attributes{grid-template-columns:repeat(6,minmax(0,1fr));gap:0}.attribute{border:0;border-right:1px solid var(--line);padding:4px 12px;background:transparent}.attribute:last-child{border:0}.attribute label{font:500 11px var(--ui-font);text-transform:none;letter-spacing:0;color:var(--muted);margin-bottom:10px}.attribute input{font:700 29px Georgia,serif;border:1px solid color-mix(in srgb,var(--gold) 28%,transparent);border-radius:3px;min-height:45px;background:color-mix(in srgb,var(--theme-deep) 60%,transparent)}.attribute .abbr{display:none}.attribute .mod{font:600 12px var(--ui-font);color:var(--gold2);letter-spacing:0;margin-top:8px}.attribute input::-webkit-inner-spin-button{opacity:0}.attribute input:focus::-webkit-inner-spin-button,.attribute input:hover::-webkit-inner-spin-button{opacity:1}
+.derived-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-top:0}.derived-card{min-height:92px;border:1px solid color-mix(in srgb,var(--line) 70%,transparent);border-radius:3px;background:color-mix(in srgb,var(--theme-deep) 40%,transparent);padding:12px}.derived-card small{font:600 10px var(--ui-font);letter-spacing:.04em}.derived-card b{font:700 27px Georgia,serif;margin-top:7px}.derived-card span{font:10px var(--ui-font)}.derived-card .roll-stat{font-size:10px;top:auto;bottom:10px;right:10px;min-height:28px}
+.status-orbs{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.orb{padding:11px 8px;border-radius:3px;background:color-mix(in srgb,var(--theme-deep) 50%,transparent)}.orb small{font:600 9px var(--ui-font);letter-spacing:.02em}.orb b{font:700 26px Georgia,serif;margin-top:4px}.orb .orb-controls{gap:6px}.orb .btn{min-height:28px;min-width:28px;font-size:13px}
+.fold-panel{overflow:visible!important}.fold-head{list-style:none;cursor:pointer;border:0;border-radius:5px}.fold-head::-webkit-details-marker{display:none}.fold-head::after{content:"+";font:20px var(--ui-font);color:var(--gold);margin-left:auto;flex:none}.fold-panel[open]>.fold-head::after{content:"−"}.fold-panel[open]>.fold-head{border-bottom:1px solid var(--line);border-radius:5px 5px 0 0}.fold-head>.helper{margin-left:auto}.fold-actions{display:flex;justify-content:flex-end;gap:7px;margin-bottom:12px}.identity-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.formula-strip{gap:10px}.formula-strip .field label{font-size:9px}.formula-strip .input{font-size:13px;min-height:38px}.level-sync-status{font-size:9px}.ascension-summary{grid-template-columns:76px minmax(0,1fr) auto;gap:15px}.ascension-level-orb{width:70px;height:78px}.ascension-copy p{font-size:12px}.ascension-copy h3{font-size:21px}.ascension-chip{font-size:10px}.mitigation-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.mitigation-card{background:color-mix(in srgb,var(--theme-deep) 40%,transparent);border-radius:3px}.mitigation-card label{font-size:10px}
+.session-strip{display:flex;gap:24px;align-items:center;padding:12px 24px;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--theme-deep) 70%,var(--panel))}.session-caption{font-size:10px;text-transform:uppercase;letter-spacing:.13em;color:var(--gold)}.quick-resource{font-size:12px;color:var(--muted);display:flex;gap:9px;align-items:center}.quick-resource input{width:62px;min-height:34px;border:1px solid var(--line);background:var(--panel);color:var(--text);border-radius:3px;text-align:center;font:700 19px Georgia,serif}.hp-quick input{border-bottom:2px solid #ad625b}.focus-quick input{border-bottom:2px solid #689ab1}.session-strip>.btn{margin-left:auto}
+.combat-layout{grid-template-columns:minmax(290px,.7fr) minmax(0,1.5fr)}.combat-banner{border-radius:5px}.combat-hud b{font:700 19px Georgia,serif}.combat-hud small{font-size:11px}.combat-hud{padding:13px}.action-slot{border-radius:3px;background:color-mix(in srgb,var(--theme-deep) 50%,transparent)}.action-slot span{font-size:10px}.conditions{grid-template-columns:1fr 1fr}.condition{grid-template-columns:22px minmax(0,1fr) 40px;min-height:52px;padding:7px;border-radius:3px}.condition b{font-size:11px}.condition small{font-size:9px}.condition .input{font-size:12px}.condition-mark{width:22px;height:25px}.turn-actions{gap:8px}.turn-actions .action-slot b{font-size:18px}
+.skill-toolbar{margin-bottom:16px}.skill-list{grid-template-columns:1fr;gap:7px}.skill-row{grid-template-columns:minmax(170px,1.3fr) 60px 150px 90px 90px 70px;padding:10px 14px;background:color-mix(in srgb,var(--theme-deep) 40%,transparent);border-radius:3px;gap:12px}.skill-name b{font:600 14px var(--ui-font)}.skill-name small{font-size:10px}.skill-row .input{font-size:13px;min-height:35px}.skill-total{font-size:21px}.skill-total button{font-family:Georgia,serif}
+.card-list{gap:12px}.card{padding:15px;border-radius:4px;background:color-mix(in srgb,var(--theme-deep) 40%,transparent)}.card-title{font:700 18px Georgia,serif}.card-sub{font:12px/1.6 var(--ui-font)}.desc{font:13px/1.7 var(--ui-font);color:var(--text);padding-top:12px;margin-top:12px}.tag{font:10px var(--ui-font);padding:5px 7px;min-height:24px;border-radius:3px;background:color-mix(in srgb,var(--theme-deep) 50%,transparent)}.editor-grid{gap:10px}.editor-actions{margin:14px 0}.feat-filter{padding:12px;gap:12px;border-radius:4px}.entry-title,.spell-game-title,.prepared-name,.library-name{font:700 18px Georgia,serif}.entry-kicker{font-size:9px}.entry-meta,.spell-game-meta,.prepared-meta,.library-sub{font:11px/1.6 var(--ui-font)}.entry-desc,.spell-game-desc,.prepared-desc,.compendium-desc{font:13px/1.7 var(--ui-font);color:var(--text)}.entry-level,.prepared-mark{font-size:10px}.entry-tags{gap:6px}.feat-game-card,.spell-game-card,.prepared-card,.library-row{padding:16px;border-radius:4px;gap:14px}.feat-game-card:hover,.spell-game-card:hover,.library-row:hover{transform:none}.entry-sigil,.spell-rune,.library-rune{width:48px;height:48px}.spell-info-chip{font-size:10px;padding:7px}.spell-info-chip b{font-size:12px}.spell-rank-head{margin:18px 0 12px}.spell-rank-head::before,.spell-rank-head::after{display:none}.spell-rank-head b{font-size:13px}.slot-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.slot-card{padding:12px;border-radius:4px}.slot-card b{font-size:13px}.slot-card .input{font-size:14px;min-height:35px}.prepared-summary span{font-size:12px}.prepared-summary strong{font-size:16px}.spell-section-divider{font-size:10px;margin:14px 0 0}.spell-section-divider::before,.spell-section-divider::after{display:none}
+.path-panel{font-size:13px}.tracker-name,.path-title{font-size:14px}.spell-compendium-intro span,.tradition-library-intro p,.divine-guide-copy p,.library-status,.compendium-status,.api-settings-note{font:12px/1.65 var(--ui-font)}.library-toolbar{grid-template-columns:minmax(200px,1.6fr) 110px auto auto;gap:10px}.library-toggle,.beginner-toggle{font-size:11px}.tradition-tab{font-size:12px;clip-path:none;border-radius:3px}.library-toolbar>.btn{grid-column:1/-1;justify-self:start}.compendium-controls .field label{font-size:9px}.inventory-summary{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}.inventory-stat{background:color-mix(in srgb,var(--theme-deep) 40%,transparent);border-radius:3px}.inventory-stat small{font-size:10px}.inventory-stat b{font-size:22px}.coin label{font-size:11px}.coin input{font:700 24px Georgia,serif}.item-row{grid-template-columns:minmax(180px,1.3fr) 60px 65px 70px 85px auto;padding:12px;border-bottom:1px solid var(--line);gap:9px}.item-row .input{font-size:13px;min-height:36px}.item-row .card-title{font-size:16px}.journal-area{min-height:280px}.roll-entry{font:12px/1.65 var(--ui-font)}.footer{font:10px var(--ui-font);letter-spacing:.04em;padding:18px 22px;text-transform:none}
+.drawer-inner{padding:20px 16px;gap:14px}.drawer-title b{font:700 18px Georgia,serif;letter-spacing:0;text-transform:none}.char-card{padding:10px;border-radius:4px;gap:10px}.char-card b{font-size:13px}.char-card small{font-size:10px;line-height:1.5}.char-actions .btn{min-height:28px;padding:5px 7px}.drawer-count{font:11px var(--ui-font);color:var(--muted)}.character-list{gap:10px}.drawer .helper{font-size:12px}.save-actions{display:flex;gap:6px;flex-wrap:wrap}
+.modal{border-radius:7px;background:var(--panel);width:min(850px,96vw)}.modal-head{background:var(--panel);padding:17px}.modal-head b{font:700 17px Georgia,serif;text-transform:none;letter-spacing:0}.modal-body{padding:20px}.modal-grid{gap:13px}.theme-card{clip-path:none;border-radius:4px}.theme-card b{font-size:15px}.theme-card small{font-size:11px}.theme-intro{font-size:12px}.toast{font:12px/1.5 var(--ui-font);border-radius:4px}.storage-notice{font-size:13px}.class-profile-entry small,.class-field-row .btn{font-size:11px}
+@media(min-width:1550px){.overview-layout{grid-template-columns:310px minmax(0,1fr)}.portrait-stage,.portrait-stage img{height:365px;min-height:365px}.overview-main{display:grid;grid-template-columns:1fr 1fr;align-items:start}.overview-main>.resources-panel,.overview-main>.panel:has(#attributes),.overview-main>.panel:has(#derivedGrid),#identityDetails{grid-column:1/-1}}
+@media(max-width:1180px){.topbar{padding:12px 18px}.save-indicator{display:none}.overview-layout{grid-template-columns:250px minmax(0,1fr)}.portrait-stage,.portrait-stage img{height:290px;min-height:290px}.sheet-head{flex-direction:row;align-items:center}.attributes{grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 0}.attribute:nth-child(3){border:0}.resource-controls{grid-template-columns:1fr 1fr}.resource-controls>.btn{display:none}.identity-grid{grid-template-columns:1fr 1fr}.identity-grid .wide{grid-column:auto}.conditions{grid-template-columns:1fr}.mitigation-grid{grid-template-columns:1fr 1fr}.skill-row{grid-template-columns:minmax(140px,1fr) 55px 120px 75px 75px 60px;gap:8px}.item-row{grid-template-columns:minmax(130px,1fr) 55px 60px auto}.item-value,.item-equip{display:none}.library-toolbar{grid-template-columns:1fr 1fr}.ascension-summary{grid-template-columns:60px 1fr}.ascension-level-orb{width:56px;height:65px}.ascension-action{grid-column:1/-1;display:flex;flex-direction:row}.ascension-action .btn{flex:1}}
+@media(max-width:900px){:root{--top:64px}.topbar{padding:10px 14px;gap:10px}.top-actions{gap:7px}.top-actions .hide-mobile{display:block}.top-actions .hide-mobile .label{display:none}.brand-title{font-size:14px}.brand-title small{display:none}.brand-sigil{width:32px;height:32px}.brand-sigil::before{width:20px;height:20px}.brand-sigil::after{font-size:13px}main{padding:14px 12px 25px}.sheet{border:1px solid var(--line)}.sheet-head{padding:24px;min-height:140px}.sheet-name input{font-size:32px;width:100%}.tabs{padding:0 12px;gap:0}.tab{min-height:49px;padding-right:14px;padding-left:30px;font-size:11px}.tab::before{left:9px}.page-grid,.combat-layout,.journal-layout{padding:16px;gap:14px}.column,.combat-stack{gap:14px}.overview-layout{grid-template-columns:225px minmax(0,1fr)}.panel-head{padding:12px 14px}.panel-head h2{font-size:15px}.panel-body{padding:14px}.panel-head>.helper{font-size:10px}.resource-stack{grid-template-columns:1fr}.resource+.resource{border-left:0;padding-left:0;padding-top:12px;border-top:1px solid var(--line)}.resource-controls{grid-template-columns:1fr 1fr 28px 28px}.resource-controls>.btn{display:block}.resource-experience{display:block}.resource-experience .resource-controls{margin-top:8px}.resource-experience .bar{margin-top:8px}.derived-grid{grid-template-columns:1fr 1fr}.identity-grid{grid-template-columns:1fr}.identity-grid .wide,.identity-grid .full{grid-column:auto}.fold-head>.helper{display:none}.skill-row{grid-template-columns:minmax(125px,1fr) 48px 110px 60px 60px 55px;gap:6px;padding:10px}.session-strip{padding:10px 16px;gap:15px}.session-caption{display:none}.mobile-nav{display:none}.combat-layout{grid-template-columns:1fr}.conditions{grid-template-columns:repeat(3,minmax(0,1fr))}.combat-banner{display:none}.combat-stack:has(#combatBanner){display:grid;grid-template-columns:1fr}.turn-actions{grid-template-columns:repeat(3,1fr)}.journal-layout{grid-template-columns:1fr 1fr}.journal-layout .full{grid-column:1/-1}.drawer{top:var(--top);height:calc(100dvh - var(--top))}.toolbar-popover{position:fixed;right:14px;top:60px}.modal-grid{grid-template-columns:1fr 1fr}.modal-grid .full{grid-column:1/-1}}
+@media(max-width:650px){.brand-sigil{display:none}.brand-title{font-size:12px;display:block;letter-spacing:.035em}.topbar{gap:9px;padding:10px}.top-actions .btn{min-width:0;padding:8px 10px}.top-actions .label{display:none}.top-actions #newBtn .label{display:inline;font-size:0}.top-actions #newBtn .label::after{content:"Ficha";font-size:11px}.toolbar-menu>summary{font-size:11px;gap:8px}.top-actions #rollBtn{display:none}.sheet-head{padding:23px 18px 19px;min-height:145px}.sheet-name{gap:12px}.sheet-name input{font-size:28px;min-width:0;width:100%}.level-seal{min-width:64px;height:45px;font-size:11px}.eyebrow{font-size:8px;letter-spacing:.14em}.identity-chips{font-size:11px;line-height:1.8;margin-top:8px}.identity-chips span+span::before{padding:0 7px}.header-emblem{right:-95px;opacity:.1}.tabs{position:static;padding:0 8px}.tab{min-height:47px;font-size:11px;padding-right:13px}.overview-layout{grid-template-columns:1fr;gap:14px}.overview-aside{display:contents}.overview-main{display:contents}.resources-panel{order:0}.overview-main>.panel:has(#attributes){order:1}.overview-main>.panel:has(#derivedGrid){order:2}.effigy-panel{order:3}.overview-aside>.panel:has(#statusOrbs){order:4}.identity-edit{display:none}#identityDetails{order:5}#progressDetails{order:6}#mitigationDetails{order:7}#vitalitySettings{order:8}.page-grid,.combat-layout,.journal-layout{padding:12px}.resource-stack{grid-template-columns:1fr 1fr;gap:12px}.resource+.resource{border-top:0;padding-top:0;border-left:1px solid var(--line);padding-left:12px}.resource-controls{grid-template-columns:1fr 1fr}.resource-controls>.btn{display:none}.resource-controls .input{font-size:23px}.resource-experience{display:grid;grid-column:1/-1;grid-template-columns:1fr 155px;gap:5px 12px;padding-top:12px!important;border-top:1px solid var(--line)!important}.resource-experience .resource-controls{margin:0}.resource-experience .resource-top{display:block}.resource-experience .resource-top span{display:block;margin-top:3px}.resource-experience .bar{margin-top:4px}.resource-experience .resource-controls .input{font-size:13px}.attributes{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 0}.attribute{padding:3px 12px}.attribute input{font-size:28px}.attribute label{font-size:11px}.derived-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.derived-card{min-height:90px}.portrait-stage,.portrait-stage img{height:320px;min-height:320px}.effigy-panel{max-width:100%}.effigy-caption b{font-size:25px}.status-orbs{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.orb{padding:10px 3px}.orb small{font-size:8px}.orb .btn{min-width:24px;min-height:26px}.orb b{font-size:25px}.identity-grid{grid-template-columns:1fr 1fr;gap:12px}.identity-grid .wide,.identity-grid .full{grid-column:1/-1}.identity-grid>.field:has(.level-field-row),.identity-grid>.field:has(.class-field-row){grid-column:1/-1}.formula-strip{grid-template-columns:1fr 1fr}.formula-strip .field label{font-size:9px}.panel-head h2{font-size:15px}.panel-head h2::before{margin-right:7px}.panel-head>.helper{font-size:10px}.resources-panel .panel-head{padding:11px 14px}.conditions{grid-template-columns:1fr 1fr}.skill-toolbar{grid-template-columns:1fr auto}.skill-toolbar .input{grid-column:1/-1}.skill-toolbar #skillResetBtn{font-size:11px}.skill-list{gap:8px}.skill-row{grid-template-columns:minmax(0,1fr) 56px;gap:8px;padding:12px}.skill-name{grid-column:1;grid-row:1}.skill-total{grid-column:2;grid-row:1}.skill-row .skill-attr{display:block;grid-column:1;grid-row:2}.skill-row .rank-select{grid-column:1/-1;grid-row:3}.skill-row .skill-item,.skill-row .skill-other{display:block;width:100%;grid-row:4}.skill-row .skill-item{grid-column:1}.skill-row .skill-other{grid-column:2}.skill-row .input{font-size:13px}.feat-filter{grid-template-columns:1fr;padding:10px;gap:9px}.feat-filter .btn{grid-column:auto}.feat-game-card,.spell-game-card,.prepared-card,.library-row{grid-template-columns:40px minmax(0,1fr);gap:10px;padding:13px}.entry-sigil,.spell-rune,.library-rune{width:37px;height:37px}.entry-title,.spell-game-title,.prepared-name,.library-name{font-size:17px}.entry-title-row{flex-wrap:wrap;gap:6px}.entry-desc,.spell-game-desc,.prepared-desc{font-size:12px;line-height:1.65}.entry-meta,.prepared-meta,.spell-game-meta{font-size:10px}.spell-game-info{grid-template-columns:1fr 1fr}.spell-info-chip{font-size:9px}.spell-info-chip b{font-size:11px}.slot-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.spell-top-grid{grid-template-columns:1fr 1fr}.session-strip{flex-wrap:wrap;padding:12px;gap:12px 20px}.quick-resource{font-size:11px;gap:6px}.quick-resource input{width:52px;font-size:19px}.session-strip>.btn{margin:0;min-height:30px;font-size:10px}.journal-layout{grid-template-columns:1fr}.journal-layout .full{grid-column:auto}.item-row{grid-template-columns:1fr 55px 55px;gap:8px;padding:10px 0}.item-row>div:first-child{grid-column:1/-1}.item-row .card-actions{justify-content:flex-end}.inventory-summary{grid-template-columns:repeat(3,minmax(0,1fr))}.currency-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.coin{padding:8px}.coin input{font-size:20px}.modal-grid{grid-template-columns:1fr}.modal-grid .full{grid-column:auto}.modal-head{padding:13px}.modal-head b{font-size:16px}.modal-body{padding:14px}.modal-backdrop{padding:10px}.editor-grid{grid-template-columns:1fr 1fr}.editor-grid .wide,.editor-grid .full{grid-column:1/-1}.footer{font-size:9px;flex-direction:column;padding:16px}.library-toolbar,.compendium-controls{grid-template-columns:1fr}.compendium-results{grid-template-columns:1fr}.library-toggle{min-height:40px}.spell-rank-head b{font-size:12px}.tradition-stats{grid-template-columns:1fr 1fr}.class-profile-layout{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition:none!important;animation:none!important}}
+@media print{.session-strip,.save-indicator,.toolbar-menu,.identity-edit,.header-emblem,.portrait-tools{display:none!important}.sheet,.sheet-head,.panel,.fold-head{background:white!important;box-shadow:none!important}.sheet{overflow:visible;border:0}.sheet-head{padding:10px;min-height:0}.identity-chips,.field label,.helper,.effigy-caption,.orb small{color:#333}.overview-layout{grid-template-columns:230px 1fr}.overview-main{display:flex}.overview-aside{display:flex}.page-grid{padding:8px}.fold-panel>.panel-body{display:block!important}.panel{break-inside:avoid}.sheet-name input,.resource-controls .input,.attribute input{color:#111!important}.page-travel{display:none!important}}
+/* Session references stay in view while configuration remains folded. */
+.combat-defenses{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}.combat-defense{cursor:pointer;text-align:left;border:1px solid var(--line);border-radius:3px;background:color-mix(in srgb,var(--theme-deep) 45%,transparent);padding:12px;color:var(--text)}.combat-defense:hover{border-color:var(--gold)}.combat-defense small{font:600 10px var(--ui-font);color:var(--muted)}.combat-defense b{display:block;font:700 25px Georgia,serif;color:var(--gold2);margin:6px 0}.combat-defense span{font:10px var(--ui-font);color:var(--muted)}#conditionSummary{max-width:none;font-size:11px}.has-active-conditions{border-color:#a5685a}.has-active-conditions #conditionSummary{color:#dda493}
+@media(max-width:900px){.combat-stack{display:contents!important}.combat-layout{display:flex;flex-direction:column}.combat-defenses-panel{order:0}.attacks-panel{order:1}.actions-panel{order:2}#conditionsDetails{order:3}#defenseDetails{order:4}.rolls-panel{order:5}.combat-layout>.combat-stack>.panel{width:100%}}
+@media(max-width:650px){.tabs{scrollbar-width:none}.tabs::-webkit-scrollbar{display:none}.skill-row [data-key="rank"]{grid-column:2;grid-row:2}.skill-row .skill-item,.skill-row .skill-other{grid-row:3}.skill-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.skill-row .skill-total{text-align:right}.combat-defenses{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.combat-defense{padding:10px}.combat-defense b{margin:3px 0}.combat-defense small{font-size:11px}#conditionsDetails .fold-head{flex-wrap:wrap}#conditionSummary{display:block;max-width:none;text-align:left;order:2;flex-basis:100%;margin:0;font-size:10px}.top-actions #newBtn .label{display:none}.top-actions #newBtn::after{display:inline;position:static;content:"Ficha";font:600 11px var(--ui-font);border:0;inset:auto;margin-left:2px}}
+@media print{.combat-defenses-panel{display:none!important}.combat-stack{display:flex!important}.combat-layout{display:grid}.combat-defenses-panel{display:none!important}}
+#defenseConfig .skill-row{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px;margin-bottom:12px;padding:14px}#defenseConfig .skill-row>.skill-name{grid-column:1/3;grid-row:1}#defenseConfig .skill-row>.skill-total{grid-column:3;grid-row:1}#defenseConfig .skill-row>.field,#defenseConfig .skill-row>.manual-flag{grid-column:auto;grid-row:auto}#defenseConfig .skill-row>select{min-width:0}.config-label{font:600 10px var(--ui-font);color:var(--muted)}#defenseConfig .manual-flag{font-size:11px;justify-content:flex-start;min-height:40px}#defenseConfig .skill-row .input{width:100%;min-width:0}#defenseConfig .skill-row .skill-total{font-size:24px}#defenseConfig .formula-strip .helper{font-size:11px}
+@media(max-width:650px){#defenseConfig .skill-row{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px}#defenseConfig .skill-row>.skill-name{grid-column:1;grid-row:1}#defenseConfig .skill-row>.skill-total{grid-column:2;grid-row:1}#spellDerived{grid-template-columns:repeat(2,minmax(0,1fr))!important}.prepared-mark{font-size:8px}.spell-game-top{flex-wrap:wrap}}
+</style></head>
 <body>
 <header class="topbar">
-  <button class="btn icon ghost" id="drawerBtn" title="Personagens">☰</button>
-  <div class="brand"><div class="brand-sigil"></div><div class="brand-title">Cinzas da Guerra<small>Pathfinder 2e • Sistema Alterado</small></div></div>
-  <div class="top-actions">
-    <button class="btn hide-mobile" id="rollBtn">d20 <span class="label">Rolagem</span></button>
-    <button class="btn theme-trigger" id="themeBtn">◈ <span class="label" id="themeBtnLabel">Tema</span></button>
-    <button class="btn hide-mobile" id="classManagerBtn">♜ <span class="label">Classes</span></button>
-    <button class="btn hide-mobile" id="printBtn">Imprimir</button>
-    <button class="btn hide-mobile" id="exportBtn">Exportar</button>
-    <button class="btn hide-mobile" id="importBtn">Importar</button>
-    <input type="file" id="importFile" accept=".json,application/json,text/plain" hidden />
-    <button class="btn primary" id="newBtn">＋ <span class="label">Nova Ficha</span></button>
-  </div>
+<button aria-controls="characterDrawer" aria-expanded="false" aria-label="Abrir personagens" class="btn icon ghost" id="drawerBtn" title="Personagens">☰</button>
+<div class="brand"><div class="brand-sigil"></div><div class="brand-title">Cinzas da Guerra<small>Terras Intermédias • Ficha do jogador</small></div></div>
+<span class="save-indicator" id="saveIndicator" role="status">Salvo neste navegador</span><div class="top-actions">
+<details class="toolbar-menu" id="toolbarMenu"><summary class="btn">Opções <span aria-hidden="true">⌄</span></summary><div class="toolbar-popover"><button class="btn" id="themeBtn">◈ <span class="label" id="themeBtnLabel">Tema</span></button><button class="btn" id="classManagerBtn">♜ <span class="label">Classes</span></button><button class="btn" id="exportBtn">Exportar</button><button class="btn" id="importBtn">Importar</button><button class="btn" id="printBtn">Imprimir</button><button class="btn" id="mobileRollBtn" type="button">Rolar dados</button></div></details><button class="btn hide-mobile" id="rollBtn">d20 <span class="label">Rolagem</span></button>
+
+
+
+
+
+<input accept=".json,application/json,text/plain" hidden="" id="importFile" type="file"/>
+<button aria-label="Nova ficha" class="btn primary" id="newBtn">＋ <span class="label">Nova Ficha</span></button>
+</div>
 </header>
-<div class="storage-notice" id="storageNotice" hidden role="alert"><span class="storage-msg"></span><button class="btn small primary" id="storageExportBtn">Exportar meu JSON</button></div>
+<div class="storage-notice" hidden="" id="storageNotice" role="alert"><span class="storage-msg"></span><button class="btn small primary" id="storageExportBtn">Exportar meu JSON</button></div>
 <div class="app" id="app">
-  <aside class="drawer">
-    <div class="drawer-inner">
-      <div class="drawer-title"><b>Personagens</b><button class="btn small" id="closeDrawer">Fechar</button></div>
-      <div class="helper">Suas fichas ficam salvas localmente neste navegador. Exporte o JSON para backup.</div>
-      <div class="save-actions"><button class="btn small" id="importDrawerBtn">⇩ Importar JSON</button><button class="btn small" id="exportDrawerBtn">⇧ Exportar backup</button></div>
-      <div class="character-list" id="characterList"></div>
-    </div>
-  </aside>
-  <main>
-    <section class="sheet">
-      <div class="sheet-head">
-        <div class="sheet-name-wrap">
-          <div class="eyebrow">Cinzas da Guerra • Edição Pública V2.0</div>
-          <div class="sheet-name"><input id="characterName" data-path="name" placeholder="Nome do Personagem" /><div class="level-seal" id="levelSeal">Nível 1</div></div>
-        </div>
-        <nav class="tabs" id="tabs">
-          <button class="tab active" data-page="overview">Visão Geral</button>
-          <button class="tab" data-page="combat">Combate</button>
-          <button class="tab" data-page="skills">Perícias</button>
-          <button class="tab" data-page="feats">Talentos</button>
-          <button class="tab" data-page="spells">Magias</button>
-          <button class="tab" data-page="inventory">Inventário</button>
-          <button class="tab" data-page="journal">Diário</button>
-        </nav>
-      </div>
+<aside aria-label="Personagens salvos" class="drawer" id="characterDrawer">
+<div class="drawer-inner">
+<div class="drawer-title"><b>Personagens</b><button class="btn small" id="closeDrawer">Fechar</button></div>
+<div class="helper">Suas fichas ficam salvas localmente neste navegador. Exporte o JSON para backup.</div>
+<div class="save-actions"><button class="btn small" id="importDrawerBtn">⇩ Importar JSON</button><button class="btn small" id="exportDrawerBtn">⇧ Exportar backup</button></div>
+<input aria-label="Buscar personagem ou classe" class="input" id="characterSearch" placeholder="Buscar personagem ou classe…" type="search"/><div class="character-list" id="characterList"></div>
+<div class="drawer-count" id="drawerCount"></div></div>
+</aside>
+<main>
+<section class="sheet">
+<div class="sheet-head">
+<div class="sheet-name-wrap">
+<div class="eyebrow">Terras Intermédias / Registro do personagem</div>
+<div class="sheet-name"><input aria-label="Nome do personagem" data-path="name" id="characterName" placeholder="Nome do Personagem"/><div class="level-seal" id="levelSeal">Nível 1</div></div>
+<div class="identity-chips" id="identityChips"></div></div>
 
-      <div class="page-travel" id="pageTravel">
-        <button class="travel-arrow" id="pagePrevBtn" type="button" aria-label="Página anterior"><span>‹</span><small>Anterior</small></button>
-        <div class="travel-center">
-          <div class="travel-sigil" id="pageTravelSigil">◈</div>
-          <div class="travel-copy"><small id="pageTravelKicker">MENU DO PERSONAGEM</small><b id="pageTravelTitle">Visão Geral</b></div>
-          <div class="page-runes" id="pageRunes" aria-label="Navegação por páginas"></div>
-        </div>
-        <button class="travel-arrow next" id="pageNextBtn" type="button" aria-label="Próxima página"><small>Próxima</small><span>›</span></button>
-      </div>
+<div aria-hidden="true" class="header-emblem"><i></i><i></i><i></i><span>✦</span></div></div><nav aria-label="Páginas da ficha" class="tabs" id="tabs">
+<button class="tab active" data-page="overview">Visão Geral</button>
+<button class="tab" data-page="combat">Combate</button>
+<button class="tab" data-page="skills">Perícias</button>
+<button class="tab" data-page="feats">Talentos</button>
+<button class="tab" data-page="spells">Magias</button>
+<button class="tab" data-page="inventory">Inventário</button>
+<button class="tab" data-page="journal">Diário</button>
+</nav><div aria-label="Recursos durante a sessão" class="session-strip" hidden="" id="sessionStrip">
+<span class="session-caption">Em sessão</span>
+<label class="quick-resource hp-quick">Vitalidade <input aria-label="Vitalidade atual em sessão" id="sessionHp" min="0" type="number"/><span id="sessionHpMax"></span></label>
+<label class="quick-resource focus-quick">Foco <input aria-label="Foco atual em sessão" id="sessionFocus" min="0" type="number"/><span id="sessionFocusMax"></span></label>
+<button class="btn small" data-open-section="vitalitySettings">Ajustar recursos</button>
+</div>
+<div class="page-travel" hidden="" id="pageTravel">
+<button aria-label="Página anterior" class="travel-arrow" id="pagePrevBtn" type="button"><span>‹</span><small>Anterior</small></button>
+<div class="travel-center">
+<div class="travel-sigil" id="pageTravelSigil">◈</div>
+<div class="travel-copy"><small id="pageTravelKicker">MENU DO PERSONAGEM</small><b id="pageTravelTitle">Visão Geral</b></div>
+<div aria-label="Navegação por páginas" class="page-runes" id="pageRunes"></div>
+</div>
+<button aria-label="Próxima página" class="travel-arrow next" id="pageNextBtn" type="button"><small>Próxima</small><span>›</span></button>
+</div>
+<section class="page active" id="page-overview">
+<div class="page-grid overview-layout">
+<div class="column overview-aside">
+<div class="panel effigy-panel">
+<div class="panel-head"><h2>Efígie do viajante</h2><span class="helper">Retrato do personagem</span></div>
+<div class="panel-body">
+<div class="portrait-stage" id="portraitStage"></div>
 
-      <section class="page active" id="page-overview">
-        <div class="page-grid">
-          <div class="column">
-            <div class="panel">
-              <div class="panel-head"><h2>Efígie</h2><span class="helper">Imagem do personagem</span></div>
-              <div class="panel-body">
-                <div class="portrait-stage" id="portraitStage"></div>
-                <div class="portrait-controls">
-                  <button class="btn small" id="portraitUploadBtn">Carregar imagem</button>
-                  <button class="btn small" id="portraitUrlBtn">Usar URL</button>
-                  <button class="btn small danger" id="portraitClearBtn">Remover</button>
-                  <input type="file" id="portraitFile" accept="image/*" hidden />
-                </div>
-                <details class="image-editor" id="portraitEditor">
-                  <summary class="helper" style="cursor:pointer">Ajustar imagem</summary>
-                  <div class="image-editor-grid" style="margin-top:8px">
-                    <div class="field"><label>Zoom</label><input type="range" min="0.5" max="2.5" step="0.05" id="imageZoom" /></div>
-                    <div class="field"><label>Horizontal</label><input type="range" min="0" max="100" step="1" id="imageX" /></div>
-                    <div class="field"><label>Vertical</label><input type="range" min="0" max="100" step="1" id="imageY" /></div>
-                    <div class="field"><label>Ajuste</label><select class="input" id="imageFit"><option value="contain">Conter</option><option value="cover">Cobrir</option></select></div>
-                  </div>
-                </details>
-              </div>
-            </div>
-            <div class="panel">
-              <div class="panel-head"><h2>Recursos</h2><button class="btn small" id="restBtn">Descanso</button></div>
-              <div class="panel-body resource-stack">
-                <div class="resource"><div class="resource-top"><b>Vitalidade</b><span id="hpLabel">0 / 0</span></div><div class="bar"><div class="fill hp-fill" id="hpFill"></div></div><div class="resource-controls"><input class="input" type="number" id="hpCurrent" placeholder="Atual"/><input class="input" type="number" id="hpMax" placeholder="Máx"/><button class="btn small" data-hp="-1">−</button><button class="btn small" data-hp="1">＋</button></div></div>
-                <div class="resource"><div class="resource-top"><b>Foco</b><span id="focusLabel">0 / 0</span></div><div class="bar"><div class="fill focus-fill" id="focusFill"></div></div><div class="resource-controls"><input class="input" type="number" id="focusCurrent"/><input class="input" type="number" id="focusMax"/><button class="btn small" data-focus="-1">−</button><button class="btn small" data-focus="1">＋</button></div></div>
-                <div class="resource"><div class="resource-top"><b>Experiência</b><span id="xpLabel">0 / 1000</span></div><div class="bar"><div class="fill xp-fill" id="xpFill"></div></div><div class="resource-controls" style="grid-template-columns:1fr 1fr"><input class="input" type="number" id="xpCurrent"/><input class="input" type="number" id="xpGoal"/></div></div>
-              </div>
-            </div>
-            <div class="panel">
-              <div class="panel-head"><h2>Estado</h2><span class="helper">Pontos e ferimentos</span></div>
-              <div class="panel-body"><div class="status-orbs" id="statusOrbs"></div></div>
-            </div>
-          </div>
 
-          <div class="column">
-            <div class="panel">
-              <div class="panel-head"><h2>Identidade</h2><span class="helper">Tudo é editável</span></div>
-              <div class="panel-body"><div class="identity-grid">
-                <div class="field"><label>Nível</label><div class="level-field-row"><input class="input" type="number" min="1" max="20" data-path="level"/><button class="btn small primary" type="button" id="levelUpBtn">✦ Ascender</button></div><small class="level-sync-status" id="levelSyncStatus">Progressão sincronizada</small></div>
-                <div class="field"><label>Classe</label><div class="class-field-row"><input class="input" id="identityClassName" data-path="identity.className" list="classNameList" placeholder="Ex.: Guerreiro"/><button class="btn small" type="button" id="applyIdentityClassBtn" title="Vincular a progressão automática desta classe">Vincular</button></div><datalist id="classNameList"></datalist></div>
-                <div class="field"><label>Arquétipo</label><input class="input" data-path="identity.archetype"/></div>
-                <div class="field"><label>Ancestralidade</label><input class="input" data-path="identity.ancestry"/></div>
-                <div class="field"><label>Herança</label><input class="input" data-path="identity.heritage"/></div>
-                <div class="field"><label>Antecedente</label><input class="input" data-path="identity.background"/></div>
-                <div class="field"><label>Divindade / Patrono</label><input class="input" data-path="identity.deity"/></div>
-                <div class="field"><label>Tamanho</label><input class="input" data-path="identity.size"/></div>
-                <div class="field"><label>Deslocamento</label><input class="input" data-path="identity.speed" placeholder="7,5 m"/></div>
-                <div class="field wide"><label>Idiomas</label><input class="input" data-path="identity.languages"/></div>
-                <div class="field"><label>Sentidos</label><input class="input" data-path="identity.senses"/></div>
-                <div class="field full"><label>Edictos, anátemas e traços importantes</label><textarea class="input" data-path="identity.edicts"></textarea></div>
-              </div></div>
-            </div>
+</div>
+<div class="effigy-caption"><small>Registro das Terras Intermédias</small><b id="effigyName">Personagem</b><span id="effigyClass">Sem classe</span></div><details class="portrait-tools"><summary>Editar retrato <span aria-hidden="true">⌄</span></summary><div class="portrait-controls">
+<button class="btn small" id="portraitUploadBtn">Carregar imagem</button>
+<button class="btn small" id="portraitUrlBtn">Usar URL</button>
+<button class="btn small danger" id="portraitClearBtn">Remover</button>
+<input accept="image/*" hidden="" id="portraitFile" type="file"/>
+</div><details class="image-editor" id="portraitEditor">
+<summary class="helper" style="cursor:pointer">Ajustar imagem</summary>
+<div class="image-editor-grid" style="margin-top:8px">
+<div class="field"><label>Zoom</label><input id="imageZoom" max="2.5" min="0.5" step="0.05" type="range"/></div>
+<div class="field"><label>Horizontal</label><input id="imageX" max="100" min="0" step="1" type="range"/></div>
+<div class="field"><label>Vertical</label><input id="imageY" max="100" min="0" step="1" type="range"/></div>
+<div class="field"><label>Ajuste</label><select class="input" id="imageFit"><option value="contain">Conter</option><option value="cover">Cobrir</option></select></div>
+</div>
+</details></details></div>
 
-            <div class="panel ascension-panel">
-              <div class="panel-head"><h2>Ascensão & Progressão</h2><span class="helper">VIT • espaços • círculos • marcos</span></div>
-              <div class="panel-body">
-                <div class="ascension-summary" id="levelProgressSummary"></div>
-              </div>
-            </div>
+<div class="panel">
+<div class="panel-head"><h2>Estado</h2><span class="helper">Pontos e ferimentos</span></div>
+<div class="panel-body"><div class="status-orbs" id="statusOrbs"></div></div>
+</div>
+<button class="btn identity-edit" data-open-section="identityDetails">Editar identidade &amp; origem <span aria-hidden="true">↗</span></button></div>
+<div class="column overview-main"><div class="panel resources-panel">
+<div class="panel-head"><h2>Recursos</h2><button class="btn small" id="restBtn">Descanso</button></div>
+<div class="panel-body resource-stack">
+<div class="resource resource-vitality"><div class="resource-top"><b>Vitalidade</b><span id="hpLabel">0 / 0</span></div><div class="bar"><div class="fill hp-fill" id="hpFill"></div></div><div class="resource-controls"><label class="resource-number"><input aria-label="Vitalidade atual" class="input" id="hpCurrent" placeholder="Atual" title="Vitalidade atual" type="number"/><small>Atual</small></label><label class="resource-number"><input aria-label="Vitalidade máxima" class="input" id="hpMax" placeholder="Máx" title="Vitalidade máxima" type="number"/><small>Máximo</small></label><button class="btn small" data-hp="-1">−</button><button class="btn small" data-hp="1">＋</button></div></div>
+<div class="resource resource-focus"><div class="resource-top"><b>Foco</b><span id="focusLabel">0 / 0</span></div><div class="bar"><div class="fill focus-fill" id="focusFill"></div></div><div class="resource-controls"><label class="resource-number"><input aria-label="Foco atual" class="input" id="focusCurrent" title="Foco atual" type="number"/><small>Atual</small></label><label class="resource-number"><input aria-label="Foco máximo" class="input" id="focusMax" title="Foco máximo" type="number"/><small>Máximo</small></label><button class="btn small" data-focus="-1">−</button><button class="btn small" data-focus="1">＋</button></div></div>
+<div class="resource resource-experience"><div class="resource-top"><b>Experiência</b><span id="xpLabel">0 / 1000</span></div><div class="bar"><div class="fill xp-fill" id="xpFill"></div></div><div class="resource-controls" style="grid-template-columns:1fr 1fr"><label class="resource-number"><input aria-label="Experiência atual" class="input" id="xpCurrent" title="Experiência atual" type="number"/><small>Atual</small></label><label class="resource-number"><input aria-label="Experiência para o próximo nível" class="input" id="xpGoal" title="Experiência para o próximo nível" type="number"/><small>Próximo nível</small></label></div></div>
+</div>
+</div>
 
-            <div class="panel">
-              <div class="panel-head"><h2>Atributos</h2><span class="helper">Valores completos, como nas fichas do mestre: 10, 14, 18, 19...</span></div>
-              <div class="panel-body"><div class="attributes" id="attributes"></div></div>
-            </div>
 
-            <div class="panel">
-              <div class="panel-head"><h2>Defesas & CDs</h2><span class="helper">Neste sistema a CA é uma rolagem</span></div>
-              <div class="panel-body">
-                <input type="checkbox" id="pwlToggle" hidden/>
-                <div class="derived-grid" id="derivedGrid"></div>
-                <div class="helper" style="margin-top:9px"><b>CA</b> é tratada como bônus defensivo: role <b>1d20 + CA</b>. O modo automático usa AGI + proficiência em armadura + item + outros, sem somar 10. Qualquer defesa pode receber valor manual.</div>
-              </div>
-            </div>
 
-            <div class="panel">
-              <div class="panel-head"><h2>Mitigação de Dano</h2><span class="helper">Redução por tipo, como nas fichas do mestre</span></div>
-              <div class="panel-body"><div class="mitigation-grid" id="mitigationGrid"></div></div>
-            </div>
 
-            <div class="panel">
-              <div class="panel-head"><h2>Configuração de Vitalidade</h2><span class="helper">Cálculo opcional</span></div>
-              <div class="panel-body">
-                <div class="formula-strip">
-                  <div class="field"><label>VIT Ancestralidade</label><input class="input" type="number" id="ancestryHp"/></div>
-                  <div class="field"><label>VIT Classe / nível</label><input class="input" type="number" id="classHp"/></div>
-                  <div class="field"><label>Outros VIT</label><input class="input" type="number" id="otherHp"/></div>
-                  <div class="field"><label>VIT Temporária</label><input class="input" type="number" id="tempHp"/></div>
-                  <div class="field"><label>Automático</label><select class="input" id="autoHp"><option value="true">Ativo</option><option value="false">Manual</option></select></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
-      <section class="page" id="page-combat">
-        <div class="combat-layout">
-          <div class="combat-stack">
-            <div class="combat-banner" id="combatBanner"></div>
-            <div class="panel"><div class="panel-head"><h2>Economia de Ações</h2><span class="helper">Referência rápida</span></div><div class="panel-body"><div class="turn-actions"><div class="action-slot"><b>◆</b><span>1 ação</span></div><div class="action-slot"><b>◆◆</b><span>2 ações</span></div><div class="action-slot"><b>◆◆◆</b><span>3 ações</span></div></div><div class="turn-actions" style="grid-template-columns:1fr 1fr;margin-top:6px"><div class="action-slot"><b>↶</b><span>Reação</span></div><div class="action-slot"><b>◇</b><span>Ação livre</span></div></div></div></div>
-            <div class="panel"><div class="panel-head"><h2>Condições</h2><button class="btn small" id="clearConditionsBtn">Limpar</button></div><div class="panel-body"><div class="conditions" id="conditionGrid"></div><div class="condition-note field"><label>Anotações de condições</label><textarea class="input" id="conditionNotes"></textarea></div></div></div>
-          </div>
-          <div class="combat-stack">
-            <div class="panel"><div class="panel-head"><h2>Golpes & Ataques</h2><button class="btn small" id="addAttackBtn">Adicionar</button></div><div class="panel-body"><div id="attackEditor"></div><div class="card-list" id="attackList"></div></div></div>
-            <div class="panel"><div class="panel-head"><h2>Defesas em Detalhe</h2><span class="helper">CA, resistências, percepção e CD de Classe</span></div><div class="panel-body" id="defenseConfig"></div></div>
-            <div class="panel"><div class="panel-head"><h2>Rolagens Recentes</h2><button class="btn small" id="clearRollsBtn">Limpar</button></div><div class="panel-body"><div class="roll-log" id="combatRollLog"></div></div></div>
-          </div>
-        </div>
-      </section>
 
-      <section class="page" id="page-skills"><div class="page-grid" style="grid-template-columns:1fr"><div class="column">
-        <div class="panel"><div class="panel-head"><h2>Perícias</h2><span class="helper">Clique no total para rolar 1d20</span></div><div class="panel-body"><div class="skill-toolbar"><input class="input" id="skillSearch" placeholder="Pesquisar perícia..."/><button class="btn" id="addLoreBtn">＋ Lore</button><button class="btn" id="skillResetBtn">Ranks padrão</button></div><div class="skill-list" id="skillList"></div></div></div>
-      </div></div></section>
+<div class="panel">
+<div class="panel-head"><h2>Atributos</h2><span class="helper">Edite os valores diretamente</span></div>
+<div class="panel-body"><div class="attributes" id="attributes"></div></div>
+</div><div class="panel">
+<div class="panel-head"><h2>Defesas &amp; CDs</h2><span class="helper">Clique em d20 para rolar</span></div>
+<div class="panel-body">
+<input hidden="" id="pwlToggle" type="checkbox"/>
+<div class="derived-grid" id="derivedGrid"></div>
+<div class="helper" style="margin-top:9px">Defesa rolada: 1d20 + CA. Os cálculos e bônus podem ser ajustados na página Combate.</div>
+</div>
+</div><details class="panel fold-panel" id="identityDetails">
+<summary class="panel-head fold-head"><h2>Identidade &amp; origem</h2><span class="helper">Classe, ancestralidade e vínculos</span></summary>
+<div class="panel-body"><div class="identity-grid">
+<div class="field"><label>Nível</label><div class="level-field-row"><input class="input" data-path="level" max="20" min="1" type="number"/><button class="btn small primary" id="levelUpBtn" type="button">✦ Ascender</button></div><small class="level-sync-status" id="levelSyncStatus">Progressão sincronizada</small></div>
+<div class="field"><label>Classe</label><div class="class-field-row"><input class="input" data-path="identity.className" id="identityClassName" list="classNameList" placeholder="Ex.: Guerreiro"/><button class="btn small" id="applyIdentityClassBtn" title="Vincular a progressão automática desta classe" type="button">Vincular</button></div><datalist id="classNameList"></datalist></div>
+<div class="field"><label>Arquétipo</label><input class="input" data-path="identity.archetype"/></div>
+<div class="field"><label>Ancestralidade</label><input class="input" data-path="identity.ancestry"/></div>
+<div class="field"><label>Herança</label><input class="input" data-path="identity.heritage"/></div>
+<div class="field"><label>Antecedente</label><input class="input" data-path="identity.background"/></div>
+<div class="field"><label>Divindade / Patrono</label><input class="input" data-path="identity.deity"/></div>
+<div class="field"><label>Tamanho</label><input class="input" data-path="identity.size"/></div>
+<div class="field"><label>Deslocamento</label><input class="input" data-path="identity.speed" placeholder="7,5 m"/></div>
+<div class="field wide"><label>Idiomas</label><input class="input" data-path="identity.languages"/></div>
+<div class="field"><label>Sentidos</label><input class="input" data-path="identity.senses"/></div>
+<div class="field full"><label>Edictos, anátemas e traços importantes</label><textarea class="input" data-path="identity.edicts"></textarea></div>
+</div></div>
+</details><details class="panel ascension-panel fold-panel" id="progressDetails">
+<summary class="panel-head fold-head"><h2>Ascensão &amp; Progressão</h2><span class="helper">Evolução, espaços e próximos marcos</span></summary>
+<div class="panel-body">
+<div class="ascension-summary" id="levelProgressSummary"></div>
+</div>
+</details><details class="panel fold-panel" id="mitigationDetails">
+<summary class="panel-head fold-head"><h2>Mitigação de Dano</h2><span class="helper">Reduções por tipo de dano</span></summary>
+<div class="panel-body"><div class="mitigation-grid" id="mitigationGrid"></div></div>
+</details><details class="panel fold-panel" id="vitalitySettings">
+<summary class="panel-head fold-head"><h2>Configuração de vitalidade</h2><span class="helper">Cálculo automático e vida temporária</span></summary>
+<div class="panel-body">
+<div class="formula-strip">
+<div class="field"><label>VIT Ancestralidade</label><input class="input" id="ancestryHp" type="number"/></div>
+<div class="field"><label>VIT Classe / nível</label><input class="input" id="classHp" type="number"/></div>
+<div class="field"><label>Outros VIT</label><input class="input" id="otherHp" type="number"/></div>
+<div class="field"><label>VIT Temporária</label><input class="input" id="tempHp" type="number"/></div>
+<div class="field"><label>Automático</label><select class="input" id="autoHp"><option value="true">Ativo</option><option value="false">Manual</option></select></div>
+</div>
+</div>
+</details></div>
+</div>
+</section>
+<section class="page" id="page-combat">
+<div class="combat-layout">
+<div class="combat-stack">
+<div class="combat-banner" id="combatBanner"></div>
+<div class="panel actions-panel"><div class="panel-head"><h2>Economia de Ações</h2><span class="helper">Referência rápida</span></div><div class="panel-body"><div class="turn-actions"><div class="action-slot"><b>◆</b><span>1 ação</span></div><div class="action-slot"><b>◆◆</b><span>2 ações</span></div><div class="action-slot"><b>◆◆◆</b><span>3 ações</span></div></div><div class="turn-actions" style="grid-template-columns:1fr 1fr;margin-top:6px"><div class="action-slot"><b>↶</b><span>Reação</span></div><div class="action-slot"><b>◇</b><span>Ação livre</span></div></div></div></div>
+<details class="panel fold-panel" id="conditionsDetails"><summary class="panel-head fold-head"><h2>Condições</h2><span class="helper" id="conditionSummary">Nenhuma condição ativa</span></summary><div class="panel-body"><div class="fold-actions"><button class="btn small" id="clearConditionsBtn">Limpar</button></div><div class="conditions" id="conditionGrid"></div><div class="condition-note field"><label>Anotações de condições</label><textarea class="input" id="conditionNotes"></textarea></div></div></details>
+</div>
+<div class="combat-stack"><div class="panel combat-defenses-panel"><div class="panel-head"><h2>Defesas rápidas</h2><span class="helper">1d20 + bônus</span></div><div class="panel-body"><div class="combat-defenses" id="combatDefenseSummary"></div></div></div>
+<div class="panel attacks-panel"><div class="panel-head"><h2>Golpes &amp; Ataques</h2><button class="btn small" id="addAttackBtn">Adicionar</button></div><div class="panel-body"><div id="attackEditor"></div><div class="card-list" id="attackList"></div></div></div>
+<details class="panel fold-panel" id="defenseDetails"><summary class="panel-head fold-head"><h2>Defesas em Detalhe</h2><span class="helper">Ajustar proficiências, itens e valores manuais</span></summary><div class="panel-body" id="defenseConfig"></div></details>
+<div class="panel rolls-panel"><div class="panel-head"><h2>Rolagens Recentes</h2><button class="btn small" id="clearRollsBtn">Limpar</button></div><div class="panel-body"><div class="roll-log" id="combatRollLog"></div></div></div>
+</div>
+</div>
+</section>
+<section class="page" id="page-skills"><div class="page-grid" style="grid-template-columns:1fr"><div class="column">
+<div class="panel"><div class="panel-head"><h2>Perícias</h2><span class="helper">Clique no total para rolar 1d20</span></div><div class="panel-body"><div class="skill-toolbar"><input class="input" id="skillSearch" placeholder="Pesquisar perícia..."/><button class="btn" id="addLoreBtn">＋ Lore</button><button class="btn" id="skillResetBtn">Ranks padrão</button></div><div class="skill-list" id="skillList"></div></div></div>
+</div></div></section>
+<section class="page" id="page-feats"><div class="page-grid" style="grid-template-columns:1fr"><div class="column">
+<div class="panel"><div class="panel-head"><h2>Talentos &amp; Habilidades</h2><button class="btn small" id="addFeatBtn">Adicionar</button></div><div class="panel-body"><div class="feat-filter"><input class="input" id="featSearch" placeholder="Pesquisar..."/><select class="input" id="featCategoryFilter"><option value="">Todas as categorias</option><option>Ancestralidade</option><option>Classe</option><option>Perícia</option><option>Geral</option><option>Arquétipo</option><option>Habilidade</option><option>Domínio</option><option>Grande Alma</option><option>Fama</option><option>Origem</option></select><button class="btn" id="sortFeatsBtn">Ordenar por nível</button></div><div class="path-panel" id="pathManager"></div><div id="featEditor"></div><div class="card-list" id="featList"></div></div></div>
+</div></div></section>
+<section class="page" id="page-spells"><div class="page-grid" style="grid-template-columns:1fr"><div class="column">
+<div class="panel prepared-spell-panel" id="preparedSpellPanel"><div class="panel-head"><h2>✦ Magias Preparadas Hoje</h2><span class="helper">Sua seleção diária fica sempre no topo</span></div><div class="panel-body"><div id="preparedSpellList"></div></div></div>
+<details class="panel fold-panel" id="castingDetails"><summary class="panel-head fold-head"><h2>Conjuração</h2><span class="helper">Tradição, proficiência e bônus</span></summary><div class="panel-body">
+<div class="spell-top-grid" id="spellConfig"></div>
+<div class="derived-grid" id="spellDerived" style="grid-template-columns:repeat(3,1fr);margin-top:8px"></div>
+</div></details>
+<div class="panel"><div class="panel-head"><h2>Slots</h2><button class="btn small" id="restoreSlotsBtn">Restaurar</button></div><div class="panel-body"><div class="slot-grid" id="slotGrid"></div></div></div>
+<details class="panel fold-panel" id="specialSlotsDetails"><summary class="panel-head fold-head"><h2>Fonte Divina / Slots Especiais</h2><span class="helper">Reservas adicionais de conjuração</span></summary><div class="panel-body"><div class="fold-actions"><button class="btn small" id="addSpecialSlotBtn">Adicionar</button></div><div class="helper" style="margin-bottom:8px">Para reservas separadas como “3 espaços de 3º nível para Ferir e Curar”.</div><div id="specialSlotList"></div></div></details>
+<div class="panel"><div class="panel-head"><h2>Grimório / Repertório</h2><button class="btn small" id="addSpellBtn">＋ Adicionar Magia Manual</button></div><div class="panel-body"><div class="helper" style="margin-bottom:8px">As preparadas aparecem primeiro. Use esta área para revisar, editar ou remover magias que já estão na ficha.</div><div id="spellEditor"></div><div id="spellList"></div></div></div>
+<div class="spell-section-divider">Adicionar e preparar novas magias</div>
+<details class="panel divine-guide spell-add-zone fold-panel" id="divineGuideDetails"><summary class="panel-head fold-head"><h2>Guia de Magias Divinas • Modo Iniciante</h2><span class="helper">Orientações para preparar suas magias</span></summary><div class="panel-body">
+<div class="divine-guide-head">
+<div class="divine-guide-copy">
+<div class="guide-kicker">Clérigo • Tradição Divina • Preparação diária</div>
+<h3 id="divineGuideTitle">Suas magias disponíveis</h3>
+<p id="divineGuideText"></p>
+<div class="divine-guide-actions">
+<button class="btn primary" id="showMyDivineBtn">Mostrar todas que posso usar</button>
+<button class="btn" id="showPreparedBtn">Ir para minhas preparadas</button>
+<label class="beginner-toggle"><input checked="" id="divineCommonOnly" type="checkbox"/> Mostrar primeiro as magias comuns</label><label class="beginner-toggle"><input checked="" id="divineCurrentOnly" type="checkbox"/> Só círculos que posso conjurar</label>
+</div>
+<div class="divine-rank-strip" id="divineRankStrip"></div>
+</div>
+<div class="divine-level-card" id="divineLevelCard"></div>
+</div>
+<div class="divine-beginner-tip" id="divineBeginnerTip"></div>
+<div class="divine-fallback" hidden="" id="divineFallback">
+<div class="divine-fallback-title">Lista Divina do PF2e dentro da ficha</div>
+<p>A ficha agora carrega automaticamente o compêndio público de Pathfinder 2e, sem API Key. Os links abaixo continuam como referência no Archives of Nethys.</p>
+<div class="divine-official-links" id="divineOfficialLinks"></div>
+</div>
+</div>
 
-      <section class="page" id="page-feats"><div class="page-grid" style="grid-template-columns:1fr"><div class="column">
-        <div class="panel"><div class="panel-head"><h2>Talentos & Habilidades</h2><button class="btn small" id="addFeatBtn">Adicionar</button></div><div class="panel-body"><div class="feat-filter"><input class="input" id="featSearch" placeholder="Pesquisar..."/><select class="input" id="featCategoryFilter"><option value="">Todas as categorias</option><option>Ancestralidade</option><option>Classe</option><option>Perícia</option><option>Geral</option><option>Arquétipo</option><option>Habilidade</option><option>Domínio</option><option>Grande Alma</option><option>Fama</option><option>Origem</option></select><button class="btn" id="sortFeatsBtn">Ordenar por nível</button></div><div id="pathManager" class="path-panel"></div><div id="featEditor"></div><div class="card-list" id="featList"></div></div></div>
-      </div></div></section>
 
-      <section class="page" id="page-spells"><div class="page-grid" style="grid-template-columns:1fr"><div class="column">
-        <div class="panel prepared-spell-panel" id="preparedSpellPanel"><div class="panel-head"><h2>✦ Magias Preparadas Hoje</h2><span class="helper">Sua seleção diária fica sempre no topo</span></div><div class="panel-body"><div id="preparedSpellList"></div></div></div>
-
-        <div class="panel"><div class="panel-head"><h2>Conjuração</h2><span class="helper">CD, BDA e tradição</span></div><div class="panel-body">
-          <div class="spell-top-grid" id="spellConfig"></div>
-          <div class="derived-grid" style="grid-template-columns:repeat(3,1fr);margin-top:8px" id="spellDerived"></div>
-        </div></div>
-        <div class="panel"><div class="panel-head"><h2>Slots</h2><button class="btn small" id="restoreSlotsBtn">Restaurar</button></div><div class="panel-body"><div class="slot-grid" id="slotGrid"></div></div></div>
-        <div class="panel"><div class="panel-head"><h2>Fonte Divina / Slots Especiais</h2><button class="btn small" id="addSpecialSlotBtn">Adicionar</button></div><div class="panel-body"><div class="helper" style="margin-bottom:8px">Para reservas separadas como “3 espaços de 3º nível para Ferir e Curar”.</div><div id="specialSlotList"></div></div></div>
-
-        <div class="panel"><div class="panel-head"><h2>Grimório / Repertório</h2><button class="btn small" id="addSpellBtn">＋ Adicionar Magia Manual</button></div><div class="panel-body"><div class="helper" style="margin-bottom:8px">As preparadas aparecem primeiro. Use esta área para revisar, editar ou remover magias que já estão na ficha.</div><div id="spellEditor"></div><div id="spellList"></div></div></div>
-
-        <div class="spell-section-divider">Adicionar e preparar novas magias</div>
-        <div class="panel divine-guide spell-add-zone"><div class="panel-head"><h2>Guia de Magias Divinas • Modo Iniciante</h2><span class="helper">A ficha lê seu nível automaticamente</span></div><div class="panel-body">
-          <div class="divine-guide-head">
-            <div class="divine-guide-copy">
-              <div class="guide-kicker">Clérigo • Tradição Divina • Preparação diária</div>
-              <h3 id="divineGuideTitle">Suas magias disponíveis</h3>
-              <p id="divineGuideText"></p>
-              <div class="divine-guide-actions">
-                <button class="btn primary" id="showMyDivineBtn">Mostrar todas que posso usar</button>
-                <button class="btn" id="showPreparedBtn">Ir para minhas preparadas</button>
-                <label class="beginner-toggle"><input type="checkbox" id="divineCommonOnly" checked/> Mostrar primeiro as magias comuns</label><label class="beginner-toggle"><input type="checkbox" id="divineCurrentOnly" checked/> Só círculos que posso conjurar</label>
-              </div>
-              <div class="divine-rank-strip" id="divineRankStrip"></div>
-            </div>
-            <div class="divine-level-card" id="divineLevelCard"></div>
-          </div>
-          <div class="divine-beginner-tip" id="divineBeginnerTip"></div>
-          <div class="divine-fallback" id="divineFallback" hidden>
-            <div class="divine-fallback-title">Lista Divina do PF2e dentro da ficha</div>
-            <p>A ficha agora carrega automaticamente o compêndio público de Pathfinder 2e, sem API Key. Os links abaixo continuam como referência no Archives of Nethys.</p>
-            <div class="divine-official-links" id="divineOfficialLinks"></div>
-          </div>
-        </div>
-
-        <div class="panel tradition-library"><div class="panel-head"><h2>Biblioteca de Todas as Magias</h2><span class="helper">Arcana • Divina • Ocultista • Primal</span></div><div class="panel-body">
-          <div class="tradition-library-intro">
-            <div><h3>Escolha uma tradição e veja a lista inteira</h3><p>A biblioteca organiza o catálogo público PF2e por tradição e círculo. Para facilitar para iniciantes, ela pode esconder automaticamente círculos acima do nível da personagem — sem apagar nada do catálogo.</p></div>
-            <button class="btn primary" id="loadSpellLibraryBtn">Atualizar catálogo público PF2e</button>
-          </div>
-          <div class="tradition-tabs" id="traditionTabs">
-            <button class="tradition-tab active" data-tradition="all">Todas</button>
-            <button class="tradition-tab" data-tradition="divine">Divina</button>
-            <button class="tradition-tab" data-tradition="arcane">Arcana</button>
-            <button class="tradition-tab" data-tradition="occult">Ocultista</button>
-            <button class="tradition-tab" data-tradition="primal">Primal</button>
-            <button class="tradition-tab" data-tradition="homebrew">Mesa / Homebrew</button>
-          </div>
-          <div class="tradition-stats" id="traditionStats"></div>
-          <div class="library-toolbar">
-            <div class="field"><label>Pesquisar magia</label><input class="input" id="librarySearch" placeholder="Ex.: cura, fogo, fear, heal..."/></div>
-            <div class="field"><label>Círculo</label><select class="input" id="libraryRank"><option value="all">Todos</option><option value="0">Truques</option><option value="1">1º</option><option value="2">2º</option><option value="3">3º</option><option value="4">4º</option><option value="5">5º</option><option value="6">6º</option><option value="7">7º</option><option value="8">8º</option><option value="9">9º</option><option value="10">10º</option></select></div>
-            <label class="library-toggle"><input type="checkbox" id="libraryMyLevel" checked/> Só o que meu nível libera</label>
-            <label class="library-toggle"><input type="checkbox" id="libraryCommonOnly"/> Só Comuns</label>
-            <button class="btn" id="libraryClearBtn">Limpar filtros</button>
-          </div>
-          <div class="library-status" id="libraryStatus">A lista oficial pode ser carregada sem chave de API. O catálogo baixado fica salvo neste navegador.</div>
-          <div class="library-list" id="libraryList"></div>
-          <div class="library-more"><button class="btn" id="libraryMoreBtn" hidden>Mostrar mais</button></div>
-        </div></div>
-
-        <div class="panel"><div class="panel-head"><h2>Compêndio PF2e & Homebrew</h2><button class="btn small" id="wgSettingsBtn">API / Homebrew opcional</button></div><div class="panel-body">
-          <div class="spell-compendium-intro"><div><b>Biblioteca conectada de magias • v2.0</b><span>Os nomes continuam originais. As <strong>descrições</strong> oficiais são mostradas em Português do Brasil; quando a tradução comunitária estiver incompleta, a ficha tenta traduzir somente a descrição sob demanda e salva o resultado no navegador.</span></div><div class="external-sources"><a class="btn small" href="https://2e.aonprd.com/Spells.aspx?Tradition=2" target="_blank" rel="noopener">Archives of Nethys</a><a class="btn small" href="https://docs.wanderersguide.app/api-reference/quickstart" target="_blank" rel="noopener">API Wanderer's Guide</a></div></div>
-          <div class="compendium-controls">
-            <div class="field"><label>Classe / Preset</label><select class="input" id="compClass"><option value="custom">Personalizado</option><option value="cleric">Clérigo</option><option value="animist">Animista</option><option value="druid">Druida</option><option value="wizard">Mago</option><option value="bard">Bardo</option><option value="oracle">Oráculo</option><option value="magus">Magus</option><option value="necromancer">Necromante</option><option value="psychic">Psíquico</option><option value="sorcerer">Feiticeiro</option><option value="witch">Bruxa</option><option value="summoner">Invocador</option></select></div>
-            <div class="field"><label>Tradição</label><select class="input" id="compTradition"><option value="" selected>Todas</option><option value="divine">Divina</option><option value="arcane">Arcana</option><option value="occult">Ocultista</option><option value="primal">Primal</option></select></div>
-            <div class="field"><label>Círculo</label><select class="input" id="compRank"><option value="all">Todos</option><option value="0">Truques</option><option value="1">1º</option><option value="2">2º</option><option value="3">3º</option><option value="4">4º</option><option value="5">5º</option><option value="6">6º</option><option value="7">7º</option><option value="8">8º</option><option value="9">9º</option><option value="10">10º</option></select></div>
-            <div class="field"><label>Buscar</label><input class="input" id="compSearch" placeholder="Nome, efeito ou termo..."/></div>
-            <div class="field"><label>Fonte</label><select class="input" id="compSource"><option value="official">PF2e público • automático</option><option value="both">PF2e público + Homebrew WG</option><option value="homebrew">Homebrew WG</option><option value="local">Homebrew local</option></select></div>
-            <button class="btn primary" id="compSearchBtn">Buscar</button>
-          </div>
-          <div class="compendium-actions"><button class="btn small" id="applyClassPresetBtn">Aplicar preset à ficha</button><button class="btn small" id="importHomebrewBtn">Importar Homebrew JSON</button><button class="btn small" id="exportHomebrewBtn">Exportar Homebrew</button><input type="file" id="homebrewFile" accept="application/json" hidden /></div><div class="homebrew-format">Homebrew local aceita um array de magias ou <b>{ "spells": [...] }</b>, com campos como name, rank, traditions, cast, range, defense, duration e description.</div>
-          <div class="compendium-status" id="compStatus">O catálogo público PF2e não precisa de API Key. A configuração do Wanderer's Guide é opcional e serve para fontes Homebrew conectadas.</div>
-          <div class="compendium-results" id="compResults"></div>
-        </div></div>
-      </div></div></section>
-
-      <section class="page" id="page-inventory"><div class="page-grid">
-        <div class="column">
-          <div class="panel"><div class="panel-head"><h2>Moedas</h2></div><div class="panel-body"><div class="currency-grid"><div class="coin"><label>PP</label><input type="number" id="coinPP"/></div><div class="coin"><label>PO</label><input type="number" id="coinGP"/></div><div class="coin"><label>PR</label><input type="number" id="coinSP"/></div><div class="coin"><label>PC</label><input type="number" id="coinCP"/></div></div></div></div>
-          <div class="panel"><div class="panel-head"><h2>Carga</h2></div><div class="panel-body"><div class="inventory-summary" id="inventorySummary"></div><div class="helper" style="margin-top:8px">Por padrão, a ficha sinaliza Sobrecarga acima de 5 + Força e limite máximo em 10 + Força. Itens L podem ser digitados como 0,1 Bulk.</div></div></div>
-          <div class="panel"><div class="panel-head"><h2>Anotações de Equipamento</h2></div><div class="panel-body"><textarea class="input" style="min-height:180px" id="equipmentNotes"></textarea></div></div>
-        </div>
-        <div class="column"><div class="panel"><div class="panel-head"><h2>Inventário</h2><button class="btn small" id="addItemBtn">Adicionar Item</button></div><div class="panel-body"><div id="itemEditor"></div><div id="itemList"></div></div></div></div>
-      </div></section>
-
-      <section class="page" id="page-journal"><div class="journal-layout">
-        <div class="panel"><div class="panel-head"><h2>História</h2></div><div class="panel-body"><textarea class="input journal-area" data-path="journal.story" placeholder="Origem, objetivos, vínculos..."></textarea></div></div>
-        <div class="panel"><div class="panel-head"><h2>Aparência & Personalidade</h2></div><div class="panel-body"><textarea class="input journal-area" data-path="journal.personality"></textarea></div></div>
-        <div class="panel"><div class="panel-head"><h2>Aliados, Facções & Inimigos</h2></div><div class="panel-body"><textarea class="input journal-area" data-path="journal.people"></textarea></div></div>
-        <div class="panel"><div class="panel-head"><h2>Missões & Pistas</h2></div><div class="panel-body"><textarea class="input journal-area" data-path="journal.quests"></textarea></div></div>
-        <div class="panel full"><div class="panel-head"><h2>Anotações Gerais</h2></div><div class="panel-body"><textarea class="input" style="min-height:220px" data-path="journal.notes"></textarea></div></div>
-        <div class="panel full"><div class="panel-head"><h2>Histórico de Rolagens</h2><button class="btn small" id="clearAllRollsBtn">Limpar</button></div><div class="panel-body"><div class="roll-log" id="journalRollLog"></div></div></div>
-      </div></section>
-
-      <div class="footer"><span>Pathfinder 2e Alterado • Cinzas da Guerra</span><span>CA Rolada • Progressão Automática • v2.0 • Souls UI</span></div>
-    </section>
-  </main>
+</details><details class="panel tradition-library fold-panel" id="spellLibraryDetails"><summary class="panel-head fold-head"><h2>Biblioteca de Todas as Magias</h2><span class="helper">Pesquisar e adicionar magias do catálogo</span></summary><div class="panel-body">
+<div class="tradition-library-intro">
+<div><h3>Escolha uma tradição e veja a lista inteira</h3><p>A biblioteca organiza o catálogo público PF2e por tradição e círculo. Para facilitar para iniciantes, ela pode esconder automaticamente círculos acima do nível da personagem — sem apagar nada do catálogo.</p></div>
+<button class="btn primary" id="loadSpellLibraryBtn">Atualizar catálogo público PF2e</button>
+</div>
+<div class="tradition-tabs" id="traditionTabs">
+<button class="tradition-tab active" data-tradition="all">Todas</button>
+<button class="tradition-tab" data-tradition="divine">Divina</button>
+<button class="tradition-tab" data-tradition="arcane">Arcana</button>
+<button class="tradition-tab" data-tradition="occult">Ocultista</button>
+<button class="tradition-tab" data-tradition="primal">Primal</button>
+<button class="tradition-tab" data-tradition="homebrew">Mesa / Homebrew</button>
+</div>
+<div class="tradition-stats" id="traditionStats"></div>
+<div class="library-toolbar">
+<div class="field"><label>Pesquisar magia</label><input class="input" id="librarySearch" placeholder="Ex.: cura, fogo, fear, heal..."/></div>
+<div class="field"><label>Círculo</label><select class="input" id="libraryRank"><option value="all">Todos</option><option value="0">Truques</option><option value="1">1º</option><option value="2">2º</option><option value="3">3º</option><option value="4">4º</option><option value="5">5º</option><option value="6">6º</option><option value="7">7º</option><option value="8">8º</option><option value="9">9º</option><option value="10">10º</option></select></div>
+<label class="library-toggle"><input checked="" id="libraryMyLevel" type="checkbox"/> Só o que meu nível libera</label>
+<label class="library-toggle"><input id="libraryCommonOnly" type="checkbox"/> Só Comuns</label>
+<button class="btn" id="libraryClearBtn">Limpar filtros</button>
+</div>
+<div class="library-status" id="libraryStatus">A lista oficial pode ser carregada sem chave de API. O catálogo baixado fica salvo neste navegador.</div>
+<div class="library-list" id="libraryList"></div>
+<div class="library-more"><button class="btn" hidden="" id="libraryMoreBtn">Mostrar mais</button></div>
+</div></details><details class="panel fold-panel" id="compendiumDetails"><summary class="panel-head fold-head"><h2>Compêndio PF2e &amp; Homebrew</h2><span class="helper">Fontes externas e magias da mesa</span></summary><div class="panel-body"><div class="fold-actions"><button class="btn small" id="wgSettingsBtn">API / Homebrew opcional</button></div>
+<div class="spell-compendium-intro"><div><b>Biblioteca conectada de magias • v2.0</b><span>Os nomes continuam originais. As <strong>descrições</strong> oficiais são mostradas em Português do Brasil; quando a tradução comunitária estiver incompleta, a ficha tenta traduzir somente a descrição sob demanda e salva o resultado no navegador.</span></div><div class="external-sources"><a class="btn small" href="https://2e.aonprd.com/Spells.aspx?Tradition=2" rel="noopener" target="_blank">Archives of Nethys</a><a class="btn small" href="https://docs.wanderersguide.app/api-reference/quickstart" rel="noopener" target="_blank">API Wanderer's Guide</a></div></div>
+<div class="compendium-controls">
+<div class="field"><label>Classe / Preset</label><select class="input" id="compClass"><option value="custom">Personalizado</option><option value="cleric">Clérigo</option><option value="animist">Animista</option><option value="druid">Druida</option><option value="wizard">Mago</option><option value="bard">Bardo</option><option value="oracle">Oráculo</option><option value="magus">Magus</option><option value="necromancer">Necromante</option><option value="psychic">Psíquico</option><option value="sorcerer">Feiticeiro</option><option value="witch">Bruxa</option><option value="summoner">Invocador</option></select></div>
+<div class="field"><label>Tradição</label><select class="input" id="compTradition"><option selected="" value="">Todas</option><option value="divine">Divina</option><option value="arcane">Arcana</option><option value="occult">Ocultista</option><option value="primal">Primal</option></select></div>
+<div class="field"><label>Círculo</label><select class="input" id="compRank"><option value="all">Todos</option><option value="0">Truques</option><option value="1">1º</option><option value="2">2º</option><option value="3">3º</option><option value="4">4º</option><option value="5">5º</option><option value="6">6º</option><option value="7">7º</option><option value="8">8º</option><option value="9">9º</option><option value="10">10º</option></select></div>
+<div class="field"><label>Buscar</label><input class="input" id="compSearch" placeholder="Nome, efeito ou termo..."/></div>
+<div class="field"><label>Fonte</label><select class="input" id="compSource"><option value="official">PF2e público • automático</option><option value="both">PF2e público + Homebrew WG</option><option value="homebrew">Homebrew WG</option><option value="local">Homebrew local</option></select></div>
+<button class="btn primary" id="compSearchBtn">Buscar</button>
+</div>
+<div class="compendium-actions"><button class="btn small" id="applyClassPresetBtn">Aplicar preset à ficha</button><button class="btn small" id="importHomebrewBtn">Importar Homebrew JSON</button><button class="btn small" id="exportHomebrewBtn">Exportar Homebrew</button><input accept="application/json" hidden="" id="homebrewFile" type="file"/></div><div class="homebrew-format">Homebrew local aceita um array de magias ou <b>{ "spells": [...] }</b>, com campos como name, rank, traditions, cast, range, defense, duration e description.</div>
+<div class="compendium-status" id="compStatus">O catálogo público PF2e não precisa de API Key. A configuração do Wanderer's Guide é opcional e serve para fontes Homebrew conectadas.</div>
+<div class="compendium-results" id="compResults"></div>
+</div></details></div></div></section>
+<section class="page" id="page-inventory"><div class="page-grid">
+<div class="column">
+<div class="panel"><div class="panel-head"><h2>Moedas</h2></div><div class="panel-body"><div class="currency-grid"><div class="coin"><label>PP</label><input id="coinPP" type="number"/></div><div class="coin"><label>PO</label><input id="coinGP" type="number"/></div><div class="coin"><label>PR</label><input id="coinSP" type="number"/></div><div class="coin"><label>PC</label><input id="coinCP" type="number"/></div></div></div></div>
+<div class="panel"><div class="panel-head"><h2>Carga</h2></div><div class="panel-body"><div class="inventory-summary" id="inventorySummary"></div><div class="helper" style="margin-top:8px">Por padrão, a ficha sinaliza Sobrecarga acima de 5 + Força e limite máximo em 10 + Força. Itens L podem ser digitados como 0,1 Bulk.</div></div></div>
+<div class="panel"><div class="panel-head"><h2>Anotações de Equipamento</h2></div><div class="panel-body"><textarea class="input" id="equipmentNotes" style="min-height:180px"></textarea></div></div>
+</div>
+<div class="column"><div class="panel"><div class="panel-head"><h2>Inventário</h2><button class="btn small" id="addItemBtn">Adicionar Item</button></div><div class="panel-body"><div id="itemEditor"></div><div id="itemList"></div></div></div></div>
+</div></section>
+<section class="page" id="page-journal"><div class="journal-layout">
+<div class="panel"><div class="panel-head"><h2>História</h2></div><div class="panel-body"><textarea class="input journal-area" data-path="journal.story" placeholder="Origem, objetivos, vínculos..."></textarea></div></div>
+<div class="panel"><div class="panel-head"><h2>Aparência &amp; Personalidade</h2></div><div class="panel-body"><textarea class="input journal-area" data-path="journal.personality"></textarea></div></div>
+<div class="panel"><div class="panel-head"><h2>Aliados, Facções &amp; Inimigos</h2></div><div class="panel-body"><textarea class="input journal-area" data-path="journal.people"></textarea></div></div>
+<div class="panel"><div class="panel-head"><h2>Missões &amp; Pistas</h2></div><div class="panel-body"><textarea class="input journal-area" data-path="journal.quests"></textarea></div></div>
+<div class="panel full"><div class="panel-head"><h2>Anotações Gerais</h2></div><div class="panel-body"><textarea class="input" data-path="journal.notes" style="min-height:220px"></textarea></div></div>
+<div class="panel full"><div class="panel-head"><h2>Histórico de Rolagens</h2><button class="btn small" id="clearAllRollsBtn">Limpar</button></div><div class="panel-body"><div class="roll-log" id="journalRollLog"></div></div></div>
+</div></section>
+<div class="footer"><span>Cinzas da Guerra · Terras Intermédias</span><span>Pathfinder 2e alterado · Dados salvos neste navegador</span></div>
+</section>
+</main>
 </div>
 <nav class="mobile-nav" id="mobileNav">
-  <button data-page="overview"><span>◇</span>Geral</button>
-  <button data-page="combat"><span>⚔</span>Combate</button>
-  <button data-page="skills"><span>✧</span>Perícias</button>
-  <button data-page="feats"><span>♜</span>Talentos</button>
-  <button data-page="spells"><span>✦</span>Magias</button>
-  <button data-page="inventory"><span>▣</span>Itens</button>
-  <button data-page="journal"><span>☷</span>Diário</button>
+<button data-page="overview"><span>◇</span>Geral</button>
+<button data-page="combat"><span>⚔</span>Combate</button>
+<button data-page="skills"><span>✧</span>Perícias</button>
+<button data-page="feats"><span>♜</span>Talentos</button>
+<button data-page="spells"><span>✦</span>Magias</button>
+<button data-page="inventory"><span>▣</span>Itens</button>
+<button data-page="journal"><span>☷</span>Diário</button>
 </nav>
-
-
-<div class="modal-backdrop" id="importModal" role="dialog" aria-modal="true" aria-label="Importar fichas JSON"><div class="modal import-modal">
-  <div class="modal-head"><b>⇩ Importar fichas • Cinzas da Guerra</b><button class="btn small" id="importCancelBtn">Cancelar</button></div>
-  <div class="modal-body">
-   <p id="importSummary" class="import-summary"></p><p id="importConflict" class="import-conflict"></p>
-   <div id="importMessage" class="import-message" role="status" aria-live="polite"></div>
-   <div class="import-options"><button class="btn primary" id="importReplaceBtn">Substituir correspondentes</button><button class="btn" id="importCopyBtn">Adicionar como cópia</button></div>
-   <div class="import-backup"><b>Proteção do seu save</b><span>Antes de importar, você pode baixar uma cópia de TODAS as suas fichas atuais. O site também tenta manter um único backup automático rotativo.</span><div class="save-actions"><button class="btn small" id="downloadImportBackupBtn">⇧ Baixar backup atual</button><button class="btn small" id="cleanAutoBackupsBtn">Limpar backups automáticos antigos</button></div></div>
-  </div></div></div>
+<div aria-label="Importar fichas JSON" aria-modal="true" class="modal-backdrop" id="importModal" role="dialog"><div class="modal import-modal">
+<div class="modal-head"><b>⇩ Importar fichas • Cinzas da Guerra</b><button class="btn small" id="importCancelBtn">Cancelar</button></div>
+<div class="modal-body">
+<p class="import-summary" id="importSummary"></p><p class="import-conflict" id="importConflict"></p>
+<div aria-live="polite" class="import-message" id="importMessage" role="status"></div>
+<div class="import-options"><button class="btn primary" id="importReplaceBtn">Substituir correspondentes</button><button class="btn" id="importCopyBtn">Adicionar como cópia</button></div>
+<div class="import-backup"><b>Proteção do seu save</b><span>Antes de importar, você pode baixar uma cópia de TODAS as suas fichas atuais. O site também tenta manter um único backup automático rotativo.</span><div class="save-actions"><button class="btn small" id="downloadImportBackupBtn">⇧ Baixar backup atual</button><button class="btn small" id="cleanAutoBackupsBtn">Limpar backups automáticos antigos</button></div></div>
+</div></div></div>
 <div class="modal-backdrop" id="levelUpModal"><div class="modal level-up-modal"><div class="modal-head"><b>Ritual de Ascensão • Progressão de Nível</b><button class="btn small" data-close="levelUpModal">Fechar</button></div><div class="modal-body">
-  <div class="level-up-grid">
-    <div class="field"><label>Nível de destino</label><input class="input" id="levelTarget" type="number" min="1" max="20"/></div>
-    <div class="field"><label>Perfil de progressão</label><select class="input" id="levelProfile"></select></div>
-    <div class="field"><label>Vitalidade ao subir</label><select class="input" id="levelHpMode"><option value="fixed">Somar VIT por nível</option><option value="formula">Usar fórmula automática de VIT</option><option value="keep">Não alterar VIT</option></select></div>
-    <div class="field"><label>Ganho de VIT por nível</label><input class="input" id="levelHpGain" type="number" step="1"/></div>
-    <label class="manual-flag"><input type="checkbox" id="levelAutoSlots"/> Calcular espaços de magia da classe</label>
-    <label class="manual-flag"><input type="checkbox" id="levelAutoSpecial"/> Calcular Fonte Divina / Ferir-Curar</label>
-    <label class="manual-flag"><input type="checkbox" id="levelRestore"/> Restaurar VIT, slots e Foco após a ascensão</label>
-    <label class="manual-flag"><input type="checkbox" id="levelTrackHistory"/> Registrar a ascensão no histórico</label>
-    <div class="full level-settings-note"><b>Perfis de classe:</b> escolha uma classe oficial ou uma classe personalizada. A ficha pode usar o PV por nível e a tabela de espaços cadastrada, mas nenhum valor atual é apagado só por abrir esta janela. Saves antigos continuam compatíveis.</div>
-  </div>
-  <div id="levelUpPreview" style="margin-top:12px"></div>
-  <div style="display:flex;justify-content:flex-end;gap:7px;flex-wrap:wrap;margin-top:12px"><button class="btn" id="syncLevelOnlyBtn">Só sincronizar espaços</button><button class="btn primary" id="applyLevelUpBtn">✦ Aplicar Ascensão</button></div>
+<div class="level-up-grid">
+<div class="field"><label>Nível de destino</label><input class="input" id="levelTarget" max="20" min="1" type="number"/></div>
+<div class="field"><label>Perfil de progressão</label><select class="input" id="levelProfile"></select></div>
+<div class="field"><label>Vitalidade ao subir</label><select class="input" id="levelHpMode"><option value="fixed">Somar VIT por nível</option><option value="formula">Usar fórmula automática de VIT</option><option value="keep">Não alterar VIT</option></select></div>
+<div class="field"><label>Ganho de VIT por nível</label><input class="input" id="levelHpGain" step="1" type="number"/></div>
+<label class="manual-flag"><input id="levelAutoSlots" type="checkbox"/> Calcular espaços de magia da classe</label>
+<label class="manual-flag"><input id="levelAutoSpecial" type="checkbox"/> Calcular Fonte Divina / Ferir-Curar</label>
+<label class="manual-flag"><input id="levelRestore" type="checkbox"/> Restaurar VIT, slots e Foco após a ascensão</label>
+<label class="manual-flag"><input id="levelTrackHistory" type="checkbox"/> Registrar a ascensão no histórico</label>
+<div class="full level-settings-note"><b>Perfis de classe:</b> escolha uma classe oficial ou uma classe personalizada. A ficha pode usar o PV por nível e a tabela de espaços cadastrada, mas nenhum valor atual é apagado só por abrir esta janela. Saves antigos continuam compatíveis.</div>
+</div>
+<div id="levelUpPreview" style="margin-top:12px"></div>
+<div style="display:flex;justify-content:flex-end;gap:7px;flex-wrap:wrap;margin-top:12px"><button class="btn" id="syncLevelOnlyBtn">Só sincronizar espaços</button><button class="btn primary" id="applyLevelUpBtn">✦ Aplicar Ascensão</button></div>
 </div></div></div>
 <div class="modal-backdrop" id="classManagerModal"><div class="modal class-manager-modal"><div class="modal-head"><b>Arquivo de Classes • Progressão</b><button class="btn small" data-close="classManagerModal">Fechar</button></div><div class="modal-body">
-  <div class="class-manager-layout">
-    <aside class="class-profile-list-wrap">
-      <div class="class-manager-tools"><button class="btn small primary" id="newClassProfileBtn">＋ Nova classe</button><button class="btn small" id="duplicateClassProfileBtn">Duplicar</button></div>
-      <div class="helper" style="margin:7px 0">Classes oficiais ficam como modelos protegidos. Duplique qualquer uma para criar a versão da sua mesa.</div>
-      <div class="class-profile-list" id="classProfileList"></div>
-    </aside>
-    <section class="class-profile-editor">
-      <div class="class-editor-banner" id="classEditorBanner"></div>
-      <input type="hidden" id="classEditId"/>
-      <div class="class-editor-grid">
-        <div class="field wide"><label>Nome da classe</label><input class="input" id="classEditName"/></div>
-        <div class="field"><label>PV de Classe / nível</label><input class="input" id="classEditHp" type="number" min="0" max="30"/></div>
-        <div class="field"><label>Tradição</label><select class="input" id="classEditTradition"><option value="">Nenhuma / variável</option><option value="divine">Divina</option><option value="arcane">Arcana</option><option value="occult">Ocultista</option><option value="primal">Primal</option></select></div>
-        <div class="field"><label>Conjuração</label><select class="input" id="classEditMode"><option value="">Sem espaços</option><option value="Preparada">Preparada</option><option value="Espontânea">Espontânea</option><option value="Híbrida">Híbrida</option></select></div>
-        <div class="field"><label>Atributo de magia</label><select class="input" id="classEditKey"><option value="str">Força</option><option value="con">Vigor</option><option value="dex">Agilidade</option><option value="cha">Carisma</option><option value="int">Inteligência</option><option value="wis">Sabedoria</option></select></div>
-        <div class="field"><label>Truques preparados/conhecidos</label><input class="input" id="classEditCantrips" type="number" min="0" max="20"/></div>
-        <div class="field"><label>Tabela de espaços</label><select class="input" id="classEditSlotTemplate"><option value="none">Sem espaços</option><option value="full3">Padrão 3 por círculo</option><option value="full4">Padrão 4 por círculo</option><option value="full2">Padrão 2 por círculo</option><option value="animist">Animista (duas fontes)</option><option value="custom">Personalizada por nível</option></select></div>
-        <div class="field"><label>Fonte especial</label><select class="input" id="classEditSpecial"><option value="none">Nenhuma</option><option value="divine-font">Fonte Divina</option><option value="animist">Aparições do Animista</option></select></div>
-        <div class="field full"><label>Observações</label><textarea class="input" id="classEditNotes" placeholder="Regras da mesa, recursos especiais, lembretes..."></textarea></div>
-      </div>
-      <div class="custom-slot-editor" id="customSlotEditor" hidden>
-        <div class="custom-slot-head"><div><b>Tabela personalizada</b><small>Escolha um nível e informe quantos espaços de cada círculo a classe possui.</small></div><div class="field"><label>Nível</label><select class="input" id="classEditLevel"></select></div></div>
-        <div class="custom-slot-grid" id="customSlotGrid"></div>
-        <div class="class-manager-tools" style="margin-top:8px"><button class="btn small" id="copyPreviousSlotsBtn">Copiar nível anterior</button><button class="btn small" id="clearLevelSlotsBtn">Zerar nível</button></div>
-      </div>
-      <div class="class-editor-actions">
-        <button class="btn danger" id="deleteClassProfileBtn">Excluir personalizada</button>
-        <span></span>
-        <button class="btn" id="importClassProfileBtn">Importar classe</button><input type="file" id="classProfileFile" accept="application/json" hidden/>
-        <button class="btn" id="exportClassProfileBtn">Exportar classe</button>
-        <button class="btn primary" id="saveClassProfileBtn">Salvar personalizada</button>
-      </div>
-      <div class="class-apply-strip"><div><b>Usar na ficha atual</b><small id="classApplyHint">Vincula o perfil sem apagar seu personagem.</small></div><button class="btn" id="applyClassProfileBtn">Vincular perfil</button><button class="btn primary" id="applyAndSyncClassProfileBtn">Vincular + sincronizar nível</button></div>
-    </section>
-  </div>
+<div class="class-manager-layout">
+<aside class="class-profile-list-wrap">
+<div class="class-manager-tools"><button class="btn small primary" id="newClassProfileBtn">＋ Nova classe</button><button class="btn small" id="duplicateClassProfileBtn">Duplicar</button></div>
+<div class="helper" style="margin:7px 0">Classes oficiais ficam como modelos protegidos. Duplique qualquer uma para criar a versão da sua mesa.</div>
+<div class="class-profile-list" id="classProfileList"></div>
+</aside>
+<section class="class-profile-editor">
+<div class="class-editor-banner" id="classEditorBanner"></div>
+<input id="classEditId" type="hidden"/>
+<div class="class-editor-grid">
+<div class="field wide"><label>Nome da classe</label><input class="input" id="classEditName"/></div>
+<div class="field"><label>PV de Classe / nível</label><input class="input" id="classEditHp" max="30" min="0" type="number"/></div>
+<div class="field"><label>Tradição</label><select class="input" id="classEditTradition"><option value="">Nenhuma / variável</option><option value="divine">Divina</option><option value="arcane">Arcana</option><option value="occult">Ocultista</option><option value="primal">Primal</option></select></div>
+<div class="field"><label>Conjuração</label><select class="input" id="classEditMode"><option value="">Sem espaços</option><option value="Preparada">Preparada</option><option value="Espontânea">Espontânea</option><option value="Híbrida">Híbrida</option></select></div>
+<div class="field"><label>Atributo de magia</label><select class="input" id="classEditKey"><option value="str">Força</option><option value="con">Vigor</option><option value="dex">Agilidade</option><option value="cha">Carisma</option><option value="int">Inteligência</option><option value="wis">Sabedoria</option></select></div>
+<div class="field"><label>Truques preparados/conhecidos</label><input class="input" id="classEditCantrips" max="20" min="0" type="number"/></div>
+<div class="field"><label>Tabela de espaços</label><select class="input" id="classEditSlotTemplate"><option value="none">Sem espaços</option><option value="full3">Padrão 3 por círculo</option><option value="full4">Padrão 4 por círculo</option><option value="full2">Padrão 2 por círculo</option><option value="animist">Animista (duas fontes)</option><option value="custom">Personalizada por nível</option></select></div>
+<div class="field"><label>Fonte especial</label><select class="input" id="classEditSpecial"><option value="none">Nenhuma</option><option value="divine-font">Fonte Divina</option><option value="animist">Aparições do Animista</option></select></div>
+<div class="field full"><label>Observações</label><textarea class="input" id="classEditNotes" placeholder="Regras da mesa, recursos especiais, lembretes..."></textarea></div>
+</div>
+<div class="custom-slot-editor" hidden="" id="customSlotEditor">
+<div class="custom-slot-head"><div><b>Tabela personalizada</b><small>Escolha um nível e informe quantos espaços de cada círculo a classe possui.</small></div><div class="field"><label>Nível</label><select class="input" id="classEditLevel"></select></div></div>
+<div class="custom-slot-grid" id="customSlotGrid"></div>
+<div class="class-manager-tools" style="margin-top:8px"><button class="btn small" id="copyPreviousSlotsBtn">Copiar nível anterior</button><button class="btn small" id="clearLevelSlotsBtn">Zerar nível</button></div>
+</div>
+<div class="class-editor-actions">
+<button class="btn danger" id="deleteClassProfileBtn">Excluir personalizada</button>
+<span></span>
+<button class="btn" id="importClassProfileBtn">Importar classe</button><input accept="application/json" hidden="" id="classProfileFile" type="file"/>
+<button class="btn" id="exportClassProfileBtn">Exportar classe</button>
+<button class="btn primary" id="saveClassProfileBtn">Salvar personalizada</button>
+</div>
+<div class="class-apply-strip"><div><b>Usar na ficha atual</b><small id="classApplyHint">Vincula o perfil sem apagar seu personagem.</small></div><button class="btn" id="applyClassProfileBtn">Vincular perfil</button><button class="btn primary" id="applyAndSyncClassProfileBtn">Vincular + sincronizar nível</button></div>
+</section>
+</div>
 </div></div></div>
 <div class="modal-backdrop" id="rollModal"><div class="modal"><div class="modal-head"><b>Rolagem</b><button class="btn small" data-close="rollModal">Fechar</button></div><div class="modal-body"><div class="modal-grid"><div class="field"><label>Nome</label><input class="input" id="rollName" value="Teste"/></div><div class="field"><label>Fórmula</label><input class="input" id="rollFormula" value="1d20+0"/></div><div class="field full"><button class="btn primary" id="executeRollBtn">Rolar</button></div></div><div id="rollResult" style="margin-top:10px"></div></div></div></div>
 <div class="modal-backdrop" id="urlModal"><div class="modal"><div class="modal-head"><b>Imagem por URL</b><button class="btn small" data-close="urlModal">Fechar</button></div><div class="modal-body"><div class="field"><label>URL da imagem</label><input class="input" id="imageUrlInput" placeholder="https://..."/></div><button class="btn primary" id="applyImageUrl" style="margin-top:9px">Aplicar</button></div></div></div>
-
 <div class="modal-backdrop" id="spellLibraryModal"><div class="modal"><div class="modal-head"><b>Detalhes da Magia</b><button class="btn small" data-close="spellLibraryModal">Fechar</button></div><div class="modal-body" id="spellLibraryDetail"></div></div></div>
-
-<div class="modal-backdrop" id="wgModal"><div class="modal"><div class="modal-head"><b>Wanderer's Guide • API de Magias</b><button class="btn small" data-close="wgModal">Fechar</button></div><div class="modal-body"><div class="modal-grid"><div class="field full"><label>API Key</label><input class="input" type="password" id="wgApiKey" autocomplete="off" placeholder="Cole a chave criada em API Clients"/></div><div class="field full"><label>IDs de fontes Homebrew (opcional)</label><input class="input" id="wgHomebrewSources" placeholder="Ex.: 123, 456"/></div><div class="field full"><button class="btn primary" id="saveWgSettings">Salvar configuração</button></div></div><div class="api-settings-note"><b>Privacidade:</b> a chave fica apenas no localStorage deste navegador e não é incluída no JSON da ficha. Por padrão, a API retorna conteúdo oficial publicado; os IDs acima permitem pesquisar fontes Homebrew às quais sua conta possui acesso.</div></div></div></div>
+<div class="modal-backdrop" id="wgModal"><div class="modal"><div class="modal-head"><b>Wanderer's Guide • API de Magias</b><button class="btn small" data-close="wgModal">Fechar</button></div><div class="modal-body"><div class="modal-grid"><div class="field full"><label>API Key</label><input autocomplete="off" class="input" id="wgApiKey" placeholder="Cole a chave criada em API Clients" type="password"/></div><div class="field full"><label>IDs de fontes Homebrew (opcional)</label><input class="input" id="wgHomebrewSources" placeholder="Ex.: 123, 456"/></div><div class="field full"><button class="btn primary" id="saveWgSettings">Salvar configuração</button></div></div><div class="api-settings-note"><b>Privacidade:</b> a chave fica apenas no localStorage deste navegador e não é incluída no JSON da ficha. Por padrão, a API retorna conteúdo oficial publicado; os IDs acima permitem pesquisar fontes Homebrew às quais sua conta possui acesso.</div></div></div></div>
 <div class="modal-backdrop" id="themeModal"><div class="modal theme-modal"><div class="modal-head"><b>Memórias de Cor • Temas Souls</b><button class="btn small" data-close="themeModal">Fechar</button></div><div class="modal-body">
-  <div class="theme-intro">Escolha uma atmosfera para toda a ficha. O tema fica salvo neste navegador e não altera os dados da personagem.</div>
-  <div class="theme-grid" id="themeGrid">
-    <button type="button" class="theme-card" data-theme-choice="erdtree"><span class="theme-icon">✦</span><b>Terras Intermédias</b><small>Ouro antigo • carvão • musgo</small><i><em style="--sw:#c8ab6d"></em><em style="--sw:#16130f"></em><em style="--sw:#55724f"></em></i></button>
-    <button type="button" class="theme-card" data-theme-choice="artorias"><span class="theme-icon">☾</span><b>Artorias</b><small>Azul abissal • preto • aço</small><i><em style="--sw:#4d7ea8"></em><em style="--sw:#07090d"></em><em style="--sw:#778391"></em></i></button>
-    <button type="button" class="theme-card" data-theme-choice="firekeeper"><span class="theme-icon">♨</span><b>Fire Keeper</b><small>Vermelho • laranja • dourado</small><i><em style="--sw:#b43b24"></em><em style="--sw:#de7d2e"></em><em style="--sw:#d6ad5b"></em></i></button>
-    <button type="button" class="theme-card" data-theme-choice="solaire"><span class="theme-icon">☼</span><b>Solaire</b><small>Sol • marfim • aço queimado</small><i><em style="--sw:#e3bd55"></em><em style="--sw:#d8d0b8"></em><em style="--sw:#353431"></em></i></button>
-    <button type="button" class="theme-card" data-theme-choice="ranni"><span class="theme-icon">✧</span><b>Ranni</b><small>Lua • azul-gelo • violeta</small><i><em style="--sw:#7fa9d8"></em><em style="--sw:#202a43"></em><em style="--sw:#70628e"></em></i></button>
-    <button type="button" class="theme-card" data-theme-choice="maliketh"><span class="theme-icon">◆</span><b>Maliketh</b><small>Ônix • carmesim • ouro negro</small><i><em style="--sw:#9b2d2d"></em><em style="--sw:#09090a"></em><em style="--sw:#9b7d48"></em></i></button>
-    <button type="button" class="theme-card" data-theme-choice="malenia"><span class="theme-icon">❈</span><b>Malenia</b><small>Escarlate • bronze • pétala pálida</small><i><em style="--sw:#ad4a3c"></em><em style="--sw:#a78048"></em><em style="--sw:#d8c7ae"></em></i></button>
-  </div>
+<div class="theme-intro">Escolha uma atmosfera para toda a ficha. O tema fica salvo neste navegador e não altera os dados da personagem.</div>
+<div class="theme-grid" id="themeGrid">
+<button class="theme-card" data-theme-choice="erdtree" type="button"><span class="theme-icon">✦</span><b>Terras Intermédias</b><small>Ouro antigo • carvão • musgo</small><i><em style="--sw:#c8ab6d"></em><em style="--sw:#16130f"></em><em style="--sw:#55724f"></em></i></button>
+<button class="theme-card" data-theme-choice="artorias" type="button"><span class="theme-icon">☾</span><b>Artorias</b><small>Azul abissal • preto • aço</small><i><em style="--sw:#4d7ea8"></em><em style="--sw:#07090d"></em><em style="--sw:#778391"></em></i></button>
+<button class="theme-card" data-theme-choice="firekeeper" type="button"><span class="theme-icon">♨</span><b>Fire Keeper</b><small>Vermelho • laranja • dourado</small><i><em style="--sw:#b43b24"></em><em style="--sw:#de7d2e"></em><em style="--sw:#d6ad5b"></em></i></button>
+<button class="theme-card" data-theme-choice="solaire" type="button"><span class="theme-icon">☼</span><b>Solaire</b><small>Sol • marfim • aço queimado</small><i><em style="--sw:#e3bd55"></em><em style="--sw:#d8d0b8"></em><em style="--sw:#353431"></em></i></button>
+<button class="theme-card" data-theme-choice="ranni" type="button"><span class="theme-icon">✧</span><b>Ranni</b><small>Lua • azul-gelo • violeta</small><i><em style="--sw:#7fa9d8"></em><em style="--sw:#202a43"></em><em style="--sw:#70628e"></em></i></button>
+<button class="theme-card" data-theme-choice="maliketh" type="button"><span class="theme-icon">◆</span><b>Maliketh</b><small>Ônix • carmesim • ouro negro</small><i><em style="--sw:#9b2d2d"></em><em style="--sw:#09090a"></em><em style="--sw:#9b7d48"></em></i></button>
+<button class="theme-card" data-theme-choice="malenia" type="button"><span class="theme-icon">❈</span><b>Malenia</b><small>Escarlate • bronze • pétala pálida</small><i><em style="--sw:#ad4a3c"></em><em style="--sw:#a78048"></em><em style="--sw:#d8c7ae"></em></i></button>
+</div>
 </div></div></div>
 <div class="toast" id="toast"></div>
-
 <script>
 // Armazenamento tolerante a navegadores que bloqueiam localStorage (ex.: visualizadores).
 // Nunca apaga o save persistido quando o navegador recusa uma gravação.
@@ -874,6 +908,7 @@ function current(){let c=state.characters.find(x=>x.id===currentId);if(!c){c=sta
 function saveState(){
  state.currentId=currentId;state.version='2.0';
  const ok=safeStore.setItem(STORAGE_KEY,JSON.stringify(state));
+ updateSaveIndicator(ok);
  if(!ok)showStorageNotice('O navegador não conseguiu salvar esta ficha. Exporte seu JSON agora; ao fechar a página, mudanças recentes podem se perder.');
  return ok;
 }
@@ -936,8 +971,9 @@ function applyLevelProgression(onlySlots=false){
 function skillTotal(c,s){return abilityVal(c,s.attr)+rankBonus(s.rank,c.level,c.pwl)+num(s.item)+num(s.other)}
 function attackTotal(c,a){if(a.manualEnabled)return num(a.manual);return abilityVal(c,a.ability||'str')+rankBonus(a.rank||'T',c.level,false)+num(a.item)+num(a.other)}
 function recalcAndRender(full=true){const c=current();if(c.hp.auto){c.hp.max=hpAuto(c);c.hp.current=Math.min(c.hp.current,c.hp.max)}renderHeader();if(full){renderOverview();renderDrawer();renderCombat();renderSkills();renderFeats();renderSpells();renderInventory();renderJournal()}else{renderDerived();renderResources();renderStatusOrbs();renderDrawerMeta();renderCombatBanner();renderSpellDerived();renderDivineGuide();renderTraditionLibrary();renderInventorySummary();renderLevelProgression()}}
-function renderHeader(){const c=current();const name=document.getElementById('characterName');if(document.activeElement!==name)name.value=c.name;document.getElementById('levelSeal').textContent=`Nível ${c.level}`;document.querySelectorAll('[data-path]').forEach(el=>{if(document.activeElement===el)return;const v=getPath(c,el.dataset.path);if(el.type==='checkbox')el.checked=!!v;else el.value=v??''})}
+function renderHeader(){const c=current();renderDossierSummary();const name=document.getElementById('characterName');if(document.activeElement!==name)name.value=c.name;document.getElementById('levelSeal').textContent=`Nível ${c.level}`;document.querySelectorAll('[data-path]').forEach(el=>{if(document.activeElement===el)return;const v=getPath(c,el.dataset.path);if(el.type==='checkbox')el.checked=!!v;else el.value=v??''})}
 function renderDrawer(){const list=document.getElementById('characterList');list.innerHTML=state.characters.map(c=>`<div class="char-card ${c.id===currentId?'active':''}" data-char="${c.id}">${c.image?.src?`<img class="char-thumb" src="${esc(c.image.src)}"/>`:`<div class="char-thumb placeholder">✦</div>`}<div><b>${esc(c.name||'Sem nome')}</b><small>Nível ${c.level} • ${esc(c.identity?.className||'Sem classe')}</small></div><div class="char-actions"><button class="btn small" data-dup="${c.id}" title="Duplicar">⧉</button><button class="btn small danger" data-del="${c.id}" title="Excluir">×</button></div></div>`).join('');
+  filterCharacterDrawer();
   list.querySelectorAll('[data-char]').forEach(el=>el.addEventListener('click',e=>{if(e.target.closest('button'))return;currentId=el.dataset.char;state.currentId=currentId;renderAll();saveState();if(innerWidth<900)document.getElementById('app').classList.remove('drawer-open')}));
   list.querySelectorAll('[data-dup]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();const src=state.characters.find(x=>x.id===b.dataset.dup);const copy=clone(src);copy.id=uid();copy.name=(copy.name||'Personagem')+' — Cópia';state.characters.push(copy);currentId=copy.id;renderAll();saveState();toast('Ficha duplicada.')}));
   list.querySelectorAll('[data-del]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();if(state.characters.length===1){toast('Mantenha pelo menos uma ficha.');return}if(!confirm('Excluir esta ficha?'))return;state.characters=state.characters.filter(x=>x.id!==b.dataset.del);if(currentId===b.dataset.del)currentId=state.characters[0].id;renderAll();saveState()}));
@@ -945,21 +981,21 @@ function renderDrawer(){const list=document.getElementById('characterList');list
 function renderDrawerMeta(){const card=document.querySelector(`.char-card[data-char="${currentId}"]`);if(card){const c=current();card.querySelector('b').textContent=c.name;card.querySelector('small').textContent=`Nível ${c.level} • ${c.identity.className||'Sem classe'}`}}
 function imageTransform(c,zoomCap=99){const x=(num(c.image.x,50)-50)*0.7,y=(num(c.image.y,50)-50)*0.7,z=Math.min(num(c.image.zoom,1),zoomCap);return `translate(${x}%,${y}%) scale(${z})`}
 function renderPortrait(){const c=current(),stage=document.getElementById('portraitStage');if(c.image.src)stage.innerHTML=`<img src="${esc(c.image.src)}" style="object-fit:${c.image.fit};object-position:50% 50%;transform:${imageTransform(c)}"/>`;else stage.innerHTML=`<div class="portrait-empty"><b>Sem Efígie</b>Carregue uma arte ou retrato do personagem.</div>`;document.getElementById('imageZoom').value=c.image.zoom;document.getElementById('imageX').value=c.image.x;document.getElementById('imageY').value=c.image.y;document.getElementById('imageFit').value=c.image.fit}
-function renderResources(){const c=current();document.getElementById('hpCurrent').value=c.hp.current;document.getElementById('hpMax').value=c.hp.max;document.getElementById('hpMax').disabled=!!c.hp.auto;document.getElementById('hpLabel').textContent=`${c.hp.current} / ${c.hp.max}${c.hp.temp?` (+${c.hp.temp} temp)`:''}`;document.getElementById('hpFill').style.width=pct(c.hp.current,c.hp.max)+'%';document.getElementById('focusCurrent').value=c.focus.current;document.getElementById('focusMax').value=c.focus.max;document.getElementById('focusLabel').textContent=`${c.focus.current} / ${c.focus.max}`;document.getElementById('focusFill').style.width=pct(c.focus.current,c.focus.max)+'%';document.getElementById('xpCurrent').value=c.xp.current;document.getElementById('xpGoal').value=c.xp.goal;document.getElementById('xpLabel').textContent=`${c.xp.current} / ${c.xp.goal}`;document.getElementById('xpFill').style.width=pct(c.xp.current,c.xp.goal)+'%';document.getElementById('ancestryHp').value=c.hp.ancestry;document.getElementById('classHp').value=c.hp.classPerLevel;document.getElementById('otherHp').value=c.hp.other;document.getElementById('tempHp').value=c.hp.temp;document.getElementById('autoHp').value=String(!!c.hp.auto)}
+function renderResources(){const c=current();renderSessionResources();document.getElementById('hpCurrent').value=c.hp.current;document.getElementById('hpMax').value=c.hp.max;document.getElementById('hpMax').disabled=!!c.hp.auto;document.getElementById('hpLabel').textContent=`${c.hp.current} / ${c.hp.max}${c.hp.temp?` (+${c.hp.temp} temp)`:''}`;document.getElementById('hpFill').style.width=pct(c.hp.current,c.hp.max)+'%';document.getElementById('focusCurrent').value=c.focus.current;document.getElementById('focusMax').value=c.focus.max;document.getElementById('focusLabel').textContent=`${c.focus.current} / ${c.focus.max}`;document.getElementById('focusFill').style.width=pct(c.focus.current,c.focus.max)+'%';document.getElementById('xpCurrent').value=c.xp.current;document.getElementById('xpGoal').value=c.xp.goal;document.getElementById('xpLabel').textContent=`${c.xp.current} / ${c.xp.goal}`;document.getElementById('xpFill').style.width=pct(c.xp.current,c.xp.goal)+'%';document.getElementById('ancestryHp').value=c.hp.ancestry;document.getElementById('classHp').value=c.hp.classPerLevel;document.getElementById('otherHp').value=c.hp.other;document.getElementById('tempHp').value=c.hp.temp;document.getElementById('autoHp').value=String(!!c.hp.auto)}
 function renderStatusOrbs(){const c=current();const data=[['hero','Pontos Heroicos',0,3],['dying','Morrendo',0,4],['wounded','Ferido',0,9],['doomed','Condenado',0,9]];document.getElementById('statusOrbs').innerHTML=data.map(([k,n,min,max])=>`<div class="orb"><small>${n}</small><b>${c[k]}</b><div class="orb-controls"><button class="btn" data-orb="${k}" data-delta="-1">−</button><button class="btn" data-orb="${k}" data-delta="1">＋</button></div></div>`).join('');document.querySelectorAll('[data-orb]').forEach(b=>b.addEventListener('click',()=>{const c=current(),k=b.dataset.orb,max=k==='hero'?3:9;c[k]=clamp(num(c[k])+num(b.dataset.delta),0,max);renderStatusOrbs();saveState()}))}
-function renderAttributes(){const c=current();document.getElementById('attributes').innerHTML=ATTRS.map(([k,n,a])=>`<div class="attribute"><label>${n}</label><input type="number" min="1" data-attr="${k}" value="${abilityScore(c,k)}"/><span class="abbr">${a}</span><span class="mod">Mod. ${signed(abilityVal(c,k))}</span></div>`).join('');document.querySelectorAll('[data-attr]').forEach(el=>el.addEventListener('input',()=>{current().attributes[el.dataset.attr]=Math.max(1,num(el.value,10));recalcAndRender(false);saveState()}))}
-function renderDerived(){const c=current(),d=defenseTotals(c);const p=document.getElementById('pwlToggle');if(p)p.checked=false;const cards=[['CA',signed(d.ac),'1d20 + CA',true],['Percepção',signed(d.perception),'SAB',true],['Fortitude',signed(d.fort),'VIG',true],['Reflexos',signed(d.ref),'AGI',true],['Vontade',signed(d.will),'SAB',true],['CD de Classe',d.classDC,'CD',false]];document.getElementById('derivedGrid').innerHTML=cards.map(([n,v,s,roll])=>`<div class="derived-card"><small>${n}</small><b>${v}</b><span>${s}</span>${roll?`<button class="btn roll-stat" data-roll-derived="${n}" data-mod="${String(v).replace('+','')}">d20</button>`:''}</div>`).join('');document.querySelectorAll('[data-roll-derived]').forEach(b=>b.addEventListener('click',()=>rollCheck(b.dataset.rollDerived,num(b.dataset.mod))))}
+function renderAttributes(){const c=current();document.getElementById('attributes').innerHTML=ATTRS.map(([k,n,a])=>`<div class="attribute"><label>${n}</label><input type="number" aria-label="${n} — valor do atributo" min="1" data-attr="${k}" value="${abilityScore(c,k)}"/><span class="abbr">${a}</span><span class="mod">Mod. ${signed(abilityVal(c,k))}</span></div>`).join('');document.querySelectorAll('[data-attr]').forEach(el=>el.addEventListener('input',()=>{current().attributes[el.dataset.attr]=Math.max(1,num(el.value,10));recalcAndRender(false);saveState()}))}
+function renderDerived(){const c=current(),d=defenseTotals(c);renderCombatDefenseSummary();const p=document.getElementById('pwlToggle');if(p)p.checked=false;const cards=[['CA',signed(d.ac),'1d20 + CA',true],['Percepção',signed(d.perception),'SAB',true],['Fortitude',signed(d.fort),'VIG',true],['Reflexos',signed(d.ref),'AGI',true],['Vontade',signed(d.will),'SAB',true],['CD de Classe',d.classDC,'CD',false]];document.getElementById('derivedGrid').innerHTML=cards.map(([n,v,s,roll])=>`<div class="derived-card"><small>${n}</small><b>${v}</b><span>${s}</span>${roll?`<button class="btn roll-stat" data-roll-derived="${n}" data-mod="${String(v).replace('+','')}">d20</button>`:''}</div>`).join('');document.querySelectorAll('[data-roll-derived]').forEach(b=>b.addEventListener('click',()=>rollCheck(b.dataset.rollDerived,num(b.dataset.mod))))}
 function renderMitigation(){const c=current(),el=document.getElementById('mitigationGrid');if(!el)return;el.innerHTML=DAMAGE_TYPES.map(t=>`<div class="mitigation-card"><label>${esc(t)}</label><input class="input mitigation-input" data-type="${esc(t)}" type="number" min="0" value="${num(c.mitigation[t])}"/></div>`).join('');document.querySelectorAll('.mitigation-input').forEach(i=>i.addEventListener('input',()=>{current().mitigation[i.dataset.type]=Math.max(0,num(i.value));saveState()}))}
 function renderOverview(){renderPortrait();renderResources();renderStatusOrbs();renderAttributes();renderDerived();renderMitigation();renderLevelProgression()}
 function renderCombatBanner(){const c=current(),d=defenseTotals(c),el=document.getElementById('combatBanner');el.innerHTML=`<div class="combat-hud"><b>${esc(c.name)}</b><small>Nível ${c.level} • CA ${signed(d.ac)} (rolada) • ${c.identity.speed||'—'}</small></div>${c.image.src?`<img src="${esc(c.image.src)}" style="object-fit:${c.image.fit};object-position:50% 50%;transform:${imageTransform(c,1.6)}"/>`:''}`}
 function renderAttackEditor(){const el=document.getElementById('attackEditor');if(!editorAttack){el.innerHTML='';return}const a=editorAttack==='new'?{id:'',name:'',type:'Corpo a Corpo',ability:'str',rank:'T',item:0,other:0,manualEnabled:false,manual:0,damage:'1d6',damageAbility:'str',traits:'',notes:''}:current().attacks.find(x=>x.id===editorAttack);if(!a){editorAttack=null;el.innerHTML='';return}el.innerHTML=`<div class="editor-grid"><input class="input" id="atkName" placeholder="Nome" value="${esc(a.name)}"/><select class="input" id="atkType"><option ${a.type==='Corpo a Corpo'?'selected':''}>Corpo a Corpo</option><option ${a.type==='À Distância'?'selected':''}>À Distância</option><option ${a.type==='Desarmado'?'selected':''}>Desarmado</option></select><select class="input" id="atkAbility">${ATTRS.map(([k,n])=>`<option value="${k}" ${a.ability===k?'selected':''}>${n}</option>`).join('')}</select><select class="input" id="atkRank">${rankOptions(a.rank)}</select><input class="input" type="number" id="atkItem" placeholder="Item" value="${num(a.item)}"/><input class="input" type="number" id="atkOther" placeholder="Outro" value="${num(a.other)}"/><label class="manual-flag"><input type="checkbox" id="atkManualEnabled" ${a.manualEnabled?'checked':''}/> BDA manual</label><input class="input" type="number" id="atkManual" placeholder="BDA total" value="${num(a.manual)}"/><input class="input" id="atkDamage" placeholder="Dano, ex. 1d8" value="${esc(a.damage)}"/><select class="input" id="atkDmgAbility">${ATTRS.map(([k,n])=>`<option value="${k}" ${a.damageAbility===k?'selected':''}>Dano: ${n}</option>`).join('')}</select><input class="input wide" id="atkTraits" placeholder="Traços" value="${esc(a.traits)}"/><textarea class="input full" id="atkNotes" placeholder="Notas">${esc(a.notes)}</textarea></div><div class="editor-actions"><button class="btn" id="cancelAttack">Cancelar</button><button class="btn primary" id="saveAttack">Salvar Golpe</button></div>`;document.getElementById('cancelAttack').onclick=()=>{editorAttack=null;renderAttackEditor()};document.getElementById('saveAttack').onclick=()=>{const c=current();const obj={id:a.id||uid(),name:document.getElementById('atkName').value.trim()||'Strike',type:document.getElementById('atkType').value,ability:document.getElementById('atkAbility').value,rank:document.getElementById('atkRank').value,item:num(document.getElementById('atkItem').value),other:num(document.getElementById('atkOther').value),manualEnabled:document.getElementById('atkManualEnabled').checked,manual:num(document.getElementById('atkManual').value),damage:document.getElementById('atkDamage').value,damageAbility:document.getElementById('atkDmgAbility').value,traits:document.getElementById('atkTraits').value,notes:document.getElementById('atkNotes').value};const idx=c.attacks.findIndex(x=>x.id===obj.id);if(idx>=0)c.attacks[idx]=obj;else c.attacks.push(obj);editorAttack=null;renderCombat();saveState()}}
 function renderAttacks(){const c=current(),el=document.getElementById('attackList');if(!c.attacks.length){el.innerHTML='<div class="helper">Nenhum golpe registrado.</div>';return}el.innerHTML=c.attacks.map(a=>{const total=attackTotal(c,a),dmgMod=abilityVal(c,a.damageAbility||'str');return `<div class="card"><div class="card-top"><div><div class="card-title">${esc(a.name)}</div><div class="card-sub">BDA ${signed(total)} • Dano ${esc(a.damage)} ${dmgMod?signed(dmgMod):''}</div></div><div class="card-actions"><button class="btn small" data-roll-atk="${a.id}">Rolar</button><button class="btn small" data-edit-atk="${a.id}">Editar</button><button class="btn small danger" data-del-atk="${a.id}">×</button></div></div><div class="tags"><span class="tag gold">${esc(a.type)}</span><span class="tag">${RANK_LABEL[a.rank]}</span>${a.traits?esc(a.traits).split(',').map(t=>`<span class="tag">${esc(t.trim())}</span>`).join(''):''}</div>${a.notes?`<div class="desc">${esc(a.notes)}</div>`:''}</div>`}).join('');el.querySelectorAll('[data-edit-atk]').forEach(b=>b.onclick=()=>{editorAttack=b.dataset.editAtk;renderAttackEditor()});el.querySelectorAll('[data-del-atk]').forEach(b=>b.onclick=()=>{current().attacks=current().attacks.filter(x=>x.id!==b.dataset.delAtk);renderCombat();saveState()});el.querySelectorAll('[data-roll-atk]').forEach(b=>b.onclick=()=>{const a=current().attacks.find(x=>x.id===b.dataset.rollAtk);rollCheck(a.name,attackTotal(current(),a))})}
-function defenseRow(key,label,attr){const c=current(),o=c.defenses[key],total=key==='armor'?defenseTotals(c).ac:profTotal(c,o,attr);return `<div class="skill-row" style="grid-template-columns:1fr 112px 64px 64px 76px 64px 58px"><div class="skill-name"><b>${label}</b><small>${attr.toUpperCase()}</small></div><select class="input def-input" data-def="${key}" data-key="rank">${rankOptions(o.rank)}</select><input class="input def-input" data-def="${key}" data-key="item" type="number" value="${num(o.item)}" title="Item"/><input class="input def-input" data-def="${key}" data-key="other" type="number" value="${num(o.other)}" title="Outros"/><label class="manual-flag"><input class="def-input" data-def="${key}" data-key="manualEnabled" type="checkbox" ${o.manualEnabled?'checked':''}/> Manual</label><input class="input def-input" data-def="${key}" data-key="manual" type="number" value="${num(o.manual)}" title="Total manual"/><div class="skill-total">${signed(total)}</div></div>`}
-function renderDefenseConfig(){const c=current();document.getElementById('defenseConfig').innerHTML=`${defenseRow('armor','CA — Defesa Rolada','dex')}<div class="formula-strip" style="grid-template-columns:1fr 1fr;margin:7px 0 10px"><div class="field"><label>Limite de AGI da Armadura</label><input class="input def-input" data-def="armor" data-key="dexCap" type="number" value="${num(c.defenses.armor.dexCap,99)}"/></div><div class="helper" style="align-self:end">Automático: AGI + proficiência + item + outros. <b>Não soma 10.</b></div></div>${defenseRow('perception','Percepção','wis')}${defenseRow('fort','Fortitude','con')}${defenseRow('ref','Reflexos','dex')}${defenseRow('will','Vontade','wis')}<div class="skill-row" style="grid-template-columns:1fr 112px 95px 64px 64px 76px 64px 58px"><div class="skill-name"><b>CD de Classe</b><small>Atributo-chave</small></div><select class="input def-input" data-def="classDC" data-key="rank">${rankOptions(c.defenses.classDC.rank)}</select><select class="input def-input" data-def="classDC" data-key="key">${ATTRS.map(([k,n])=>`<option value="${k}" ${c.defenses.classDC.key===k?'selected':''}>${n}</option>`).join('')}</select><input class="input def-input" data-def="classDC" data-key="item" type="number" value="${num(c.defenses.classDC.item)}"/><input class="input def-input" data-def="classDC" data-key="other" type="number" value="${num(c.defenses.classDC.other)}"/><label class="manual-flag"><input class="def-input" data-def="classDC" data-key="manualEnabled" type="checkbox" ${c.defenses.classDC.manualEnabled?'checked':''}/> Manual</label><input class="input def-input" data-def="classDC" data-key="manual" type="number" value="${num(c.defenses.classDC.manual)}"/><div class="skill-total">${defenseTotals(c).classDC}</div></div>`;document.querySelectorAll('.def-input').forEach(el=>el.addEventListener('input',()=>{const o=current().defenses[el.dataset.def];o[el.dataset.key]=el.type==='checkbox'?el.checked:el.type==='number'?num(el.value):el.value;recalcAndRender(false);renderDefenseConfig();saveState()}))}
-function renderConditions(){const c=current(),grid=document.getElementById('conditionGrid');grid.innerHTML=CONDITIONS.map(name=>{const d=c.conditions[name]||{active:false,value:0};return `<div class="condition ${d.active?'active':''}" data-cond="${name}"><div class="condition-mark">${d.active?'◆':'◇'}</div><div><b>${name}</b><small>${d.active?'Ativa':'Inativa'}</small></div><input class="input" type="number" min="0" value="${num(d.value)}" data-cond-value="${name}" title="Valor"/></div>`}).join('');grid.querySelectorAll('[data-cond]').forEach(el=>el.addEventListener('click',e=>{if(e.target.matches('input'))return;const name=el.dataset.cond,d=current().conditions[name]||{active:false,value:0};d.active=!d.active;current().conditions[name]=d;renderConditions();saveState()}));grid.querySelectorAll('[data-cond-value]').forEach(el=>el.addEventListener('input',()=>{const name=el.dataset.condValue,d=current().conditions[name]||{active:true,value:0};d.value=Math.max(0,num(el.value));if(d.value>0)d.active=true;current().conditions[name]=d;saveState()}));document.getElementById('conditionNotes').value=c.conditionNotes}
+function defenseRow(key,label,attr){const c=current(),o=c.defenses[key],total=key==='armor'?defenseTotals(c).ac:profTotal(c,o,attr);return `<div class="skill-row" style="grid-template-columns:1fr 112px 64px 64px 76px 64px 58px"><div class="skill-name"><b>${label}</b><small>${attr.toUpperCase()}</small></div><label class="field"><span class="config-label">Proficiência</span><select class="input def-input" data-def="${key}" data-key="rank">${rankOptions(o.rank)}</select></label><label class="field"><span class="config-label">Item</span><input class="input def-input" data-def="${key}" data-key="item" type="number" value="${num(o.item)}" title="Item"/></label><label class="field"><span class="config-label">Outros bônus</span><input class="input def-input" data-def="${key}" data-key="other" type="number" value="${num(o.other)}" title="Outros"/></label><label class="manual-flag"><input class="def-input" data-def="${key}" data-key="manualEnabled" type="checkbox" ${o.manualEnabled?'checked':''}/> Manual</label><label class="field"><span class="config-label">Total manual</span><input class="input def-input" data-def="${key}" data-key="manual" type="number" value="${num(o.manual)}" title="Total manual"/></label><div class="skill-total">${signed(total)}</div></div>`}
+function renderDefenseConfig(){const c=current();document.getElementById('defenseConfig').innerHTML=`${defenseRow('armor','CA — Defesa Rolada','dex')}<div class="formula-strip" style="grid-template-columns:1fr 1fr;margin:7px 0 10px"><div class="field"><label>Limite de AGI da Armadura</label><input class="input def-input" data-def="armor" data-key="dexCap" type="number" value="${num(c.defenses.armor.dexCap,99)}"/></div><div class="helper" style="align-self:end">Automático: AGI + proficiência + item + outros. <b>Não soma 10.</b></div></div>${defenseRow('perception','Percepção','wis')}${defenseRow('fort','Fortitude','con')}${defenseRow('ref','Reflexos','dex')}${defenseRow('will','Vontade','wis')}<div class="skill-row" style="grid-template-columns:1fr 112px 95px 64px 64px 76px 64px 58px"><div class="skill-name"><b>CD de Classe</b><small>Atributo-chave</small></div><label class="field"><span class="config-label">Proficiência</span><select class="input def-input" data-def="classDC" data-key="rank">${rankOptions(c.defenses.classDC.rank)}</select></label><select class="input def-input" data-def="classDC" data-key="key">${ATTRS.map(([k,n])=>`<option value="${k}" ${c.defenses.classDC.key===k?'selected':''}>${n}</option>`).join('')}</select><label class="field"><span class="config-label">Item</span><input class="input def-input" data-def="classDC" data-key="item" type="number" value="${num(c.defenses.classDC.item)}"/></label><label class="field"><span class="config-label">Outros bônus</span><input class="input def-input" data-def="classDC" data-key="other" type="number" value="${num(c.defenses.classDC.other)}"/></label><label class="manual-flag"><input class="def-input" data-def="classDC" data-key="manualEnabled" type="checkbox" ${c.defenses.classDC.manualEnabled?'checked':''}/> Manual</label><label class="field"><span class="config-label">Total manual</span><input class="input def-input" data-def="classDC" data-key="manual" type="number" value="${num(c.defenses.classDC.manual)}"/></label><div class="skill-total">${defenseTotals(c).classDC}</div></div>`;document.querySelectorAll('.def-input').forEach(el=>el.addEventListener('input',()=>{const o=current().defenses[el.dataset.def];o[el.dataset.key]=el.type==='checkbox'?el.checked:el.type==='number'?num(el.value):el.value;recalcAndRender(false);renderDefenseConfig();saveState()}))}
+function renderConditions(){renderConditionSummary();const c=current(),grid=document.getElementById('conditionGrid');grid.innerHTML=CONDITIONS.map(name=>{const d=c.conditions[name]||{active:false,value:0};return `<div class="condition ${d.active?'active':''}" data-cond="${name}"><div class="condition-mark">${d.active?'◆':'◇'}</div><div><b>${name}</b><small>${d.active?'Ativa':'Inativa'}</small></div><input class="input" type="number" min="0" value="${num(d.value)}" data-cond-value="${name}" title="Valor"/></div>`}).join('');grid.querySelectorAll('[data-cond]').forEach(el=>el.addEventListener('click',e=>{if(e.target.matches('input'))return;const name=el.dataset.cond,d=current().conditions[name]||{active:false,value:0};d.active=!d.active;current().conditions[name]=d;renderConditions();saveState()}));grid.querySelectorAll('[data-cond-value]').forEach(el=>el.addEventListener('input',()=>{const name=el.dataset.condValue,d=current().conditions[name]||{active:true,value:0};d.value=Math.max(0,num(el.value));if(d.value>0)d.active=true;current().conditions[name]=d;renderConditionSummary();saveState()}));document.getElementById('conditionNotes').value=c.conditionNotes}
 function renderRollLogs(){const c=current(),html=c.rolls.slice(0,30).map(r=>`<div class="roll-entry"><b>${esc(r.name)}</b> • ${esc(r.formula)} = <b>${r.total}</b><br><span style="color:var(--muted)">${esc(r.detail||'')} • ${esc(r.time||'')}</span></div>`).join('')||'<div class="helper">Nenhuma rolagem registrada.</div>';document.getElementById('combatRollLog').innerHTML=html;document.getElementById('journalRollLog').innerHTML=html}
 function renderCombat(){renderCombatBanner();renderAttackEditor();renderAttacks();renderDefenseConfig();renderConditions();renderRollLogs()}
-function renderSkills(){const c=current(),q=(document.getElementById('skillSearch')?.value||'').toLowerCase();const list=c.skills.filter(s=>s.name.toLowerCase().includes(q)).sort((a,b)=>a.lore===b.lore?a.name.localeCompare(b.name):a.lore?1:-1);document.getElementById('skillList').innerHTML=list.map(s=>`<div class="skill-row"><div class="skill-name"><b>${esc(s.name)}</b><small>${s.lore?'Lore':'Perícia'}</small></div><select class="input skill-attr" data-skill="${s.id}" data-key="attr">${ATTRS.map(([k,n,a])=>`<option value="${k}" ${s.attr===k?'selected':''}>${a}</option>`).join('')}</select><select class="input" data-skill="${s.id}" data-key="rank">${rankOptions(s.rank)}</select><input class="input skill-item" type="number" data-skill="${s.id}" data-key="item" value="${num(s.item)}" title="Bônus de item"/><input class="input skill-other" type="number" data-skill="${s.id}" data-key="other" value="${num(s.other)}" title="Outros bônus"/><div class="skill-total"><button data-skill-roll="${s.id}">${signed(skillTotal(c,s))}</button></div></div>`).join('');document.querySelectorAll('[data-skill][data-key]').forEach(el=>el.addEventListener('input',()=>{const s=current().skills.find(x=>x.id===el.dataset.skill);s[el.dataset.key]=el.type==='number'?num(el.value):el.value;renderSkills();saveState()}));document.querySelectorAll('[data-skill-roll]').forEach(b=>b.onclick=()=>{const s=current().skills.find(x=>x.id===b.dataset.skillRoll);rollCheck(s.name,skillTotal(current(),s))})}
+function renderSkills(){const c=current(),q=(document.getElementById('skillSearch')?.value||'').toLowerCase();const list=c.skills.filter(s=>s.name.toLowerCase().includes(q)).sort((a,b)=>a.lore===b.lore?a.name.localeCompare(b.name):a.lore?1:-1);document.getElementById('skillList').innerHTML=list.map(s=>`<div class="skill-row"><div class="skill-name"><b>${esc(s.name)}</b><small>${s.lore?'Lore':'Perícia'}</small></div><select class="input skill-attr" data-skill="${s.id}" data-key="attr" aria-label="Atributo de ${esc(s.name)}">${ATTRS.map(([k,n,a])=>`<option value="${k}" ${s.attr===k?'selected':''}>${a}</option>`).join('')}</select><select class="input" data-skill="${s.id}" data-key="rank" aria-label="Proficiência de ${esc(s.name)}">${rankOptions(s.rank)}</select><input class="input skill-item" type="number" data-skill="${s.id}" data-key="item" value="${num(s.item)}" title="Bônus de item"/><input class="input skill-other" type="number" data-skill="${s.id}" data-key="other" value="${num(s.other)}" title="Outros bônus"/><div class="skill-total"><button data-skill-roll="${s.id}">${signed(skillTotal(c,s))}</button></div></div>`).join('');document.querySelectorAll('[data-skill][data-key]').forEach(el=>el.addEventListener('input',()=>{const s=current().skills.find(x=>x.id===el.dataset.skill);s[el.dataset.key]=el.type==='number'?num(el.value):el.value;renderSkills();saveState()}));document.querySelectorAll('[data-skill-roll]').forEach(b=>b.onclick=()=>{const s=current().skills.find(x=>x.id===b.dataset.skillRoll);rollCheck(s.name,skillTotal(current(),s))})}
 function featSigil(category){return ({'Ancestralidade':'❈','Classe':'♜','Perícia':'✧','Geral':'◇','Arquétipo':'☾','Habilidade':'◆','Domínio':'☼','Grande Alma':'◈','Fama':'♚','Origem':'⌁'})[category]||'◇'}
 function actionCompact(a){return ({passive:'PASSIVA',one:'◆',two:'◆◆',three:'◆◆◆',reaction:'↶',free:'◇'})[a]||'—'}
 function spellTraditionClass(s){const raw=[...(Array.isArray(s?.traditions)?s.traditions:[]),s?.traits||'',current()?.spellcasting?.tradition||''].join(' ').toLowerCase();if(raw.includes('arcana')||raw.includes('arcane'))return 'trad-arcane';if(raw.includes('divina')||raw.includes('divine'))return 'trad-divine';if(raw.includes('ocult')||raw.includes('occult'))return 'trad-occult';if(raw.includes('primal'))return 'trad-primal';if(['mesa','homebrew','local-homebrew'].includes(s?.origin))return 'trad-homebrew';return 'trad-divine'}
@@ -1027,7 +1063,7 @@ async function openDivineRank(rank){
     let rows=officialRowsFor('divine',[rank]);if(divineGuideCommonOnly)rows=rows.filter(rarityLooksCommon);
     compendiumResults=rows.sort((a,b)=>String(a.name).localeCompare(String(b.name),'pt-BR'));renderCompendiumResults();document.getElementById('divineFallback').hidden=true;
     compStatus(`${compendiumResults.length} magia(s) Divinas em ${divineRankLabel(rank)}. Nenhuma API Key foi necessária.`,'good');
-    document.getElementById('compResults')?.scrollIntoView({behavior:'smooth',block:'start'});
+    document.getElementById('compendiumDetails').open=true;document.getElementById('compResults')?.scrollIntoView({behavior:'smooth',block:'start'});
   }catch(e){document.getElementById('divineFallback').hidden=false;compStatus(`Não consegui acessar o compêndio público agora (${e.message}). Use os atalhos do Archives of Nethys abaixo e tente novamente depois.`,'warn')}
   finally{if(btn){btn.disabled=false;btn.textContent='Mostrar todas que posso usar'}}
 }
@@ -1043,7 +1079,7 @@ async function showDivineForMyLevel(){
     compendiumResults=rows.sort((a,b)=>num(a.rank)-num(b.rank)||String(a.name||'').localeCompare(String(b.name||''),'pt-BR'));
     renderCompendiumResults();renderSpellLibrary();
     compStatus(`${compendiumResults.length} magia(s) Divinas ${currentOnly?`disponíveis para uma personagem de nível ${c.level} (até o ${max}º círculo)`:'no catálogo carregado'}${divineGuideCommonOnly?' • raridade comum':''}. Como Clérigo preparado, use “Preparar hoje” nas que quiser separar para o dia.`,'good');
-    document.getElementById('compResults')?.scrollIntoView({behavior:'smooth',block:'start'});
+    document.getElementById('compendiumDetails').open=true;document.getElementById('compResults')?.scrollIntoView({behavior:'smooth',block:'start'});
   }catch(e){document.getElementById('divineFallback').hidden=false;compStatus(`Não consegui carregar automaticamente (${e.message}). Os links oficiais abaixo continuam disponíveis.`,'warn')}
   finally{btn.disabled=false;btn.textContent='Mostrar todas que posso usar'}
 }
@@ -1094,7 +1130,7 @@ function renderItems(){const c=current(),el=document.getElementById('itemList');
 function renderInventory(){const c=current();document.getElementById('coinPP').value=c.inventory.coins.pp;document.getElementById('coinGP').value=c.inventory.coins.gp;document.getElementById('coinSP').value=c.inventory.coins.sp;document.getElementById('coinCP').value=c.inventory.coins.cp;document.getElementById('equipmentNotes').value=c.inventory.notes;renderInventorySummary();renderItemEditor();renderItems()}
 function renderJournal(){renderRollLogs()}
 function renderAll(){renderClassDatalist();renderHeader();renderDrawer();renderOverview();renderCombat();renderSkills();renderFeats();renderSpells();renderInventory();renderJournal();setPage(state.currentPage||'overview',false)}
-function setPage(page,save=true){state.currentPage=page;document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===`page-${page}`));document.querySelectorAll('.tab,[data-page]').forEach(b=>{if(b.dataset.page)b.classList.toggle('active',b.dataset.page===page)});updatePageTravel(page);if(save)saveState();window.scrollTo({top:0,behavior:'smooth'})}
+function setPage(page,save=true){state.currentPage=page;document.body.dataset.page=page;document.getElementById('sessionStrip').hidden=page==='overview';document.querySelectorAll('#tabs .tab').forEach(b=>b.setAttribute('aria-current',b.dataset.page===page?'page':'false'));document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===`page-${page}`));document.querySelectorAll('.tab,[data-page]').forEach(b=>{if(b.dataset.page)b.classList.toggle('active',b.dataset.page===page)});updatePageTravel(page);if(save)saveState();window.scrollTo({top:0,behavior:'smooth'})}
 function parseDice(formula){const text=String(formula).replace(/\s+/g,'').toLowerCase();const tokens=text.match(/[+-]?[^+-]+/g)||[];let total=0,parts=[];for(let token of tokens){let sign=1;if(token[0]==='+')token=token.slice(1);else if(token[0]==='-'){sign=-1;token=token.slice(1)}const m=token.match(/^(\d*)d(\d+)$/);if(m){const count=clamp(num(m[1]||1),1,100),faces=clamp(num(m[2]),2,1000),rolls=[];for(let i=0;i<count;i++)rolls.push(1+Math.floor(Math.random()*faces));const sum=rolls.reduce((a,b)=>a+b,0)*sign;total+=sum;parts.push(`${sign<0?'-':''}${count}d${faces} [${rolls.join(', ')}]`)}else{const n=num(token)*sign;total+=n;parts.push(signed(n))}}return {total,detail:parts.join(' ')}}
 function addRoll(name,formula,res){const c=current();c.rolls.unshift({id:uid(),name,formula,total:res.total,detail:res.detail,time:new Date().toLocaleString('pt-BR')});c.rolls=c.rolls.slice(0,60);renderRollLogs();saveState()}
 function rollCheck(name,mod){const formula=`1d20${mod>=0?'+':''}${mod}`,res=parseDice(formula);addRoll(name,formula,res);toast(`${name}: ${res.total}`)}
@@ -1236,7 +1272,7 @@ document.getElementById('levelUpBtn').onclick=()=>{const c=current(),base=num(c.
 document.getElementById('applyLevelUpBtn').onclick=()=>applyLevelProgression(false);document.getElementById('syncLevelOnlyBtn').onclick=()=>applyLevelProgression(true);
 
 for(const b of document.querySelectorAll('.tab,[data-page]'))if(b.dataset.page)b.addEventListener('click',()=>setPage(b.dataset.page));
-document.getElementById('drawerBtn').onclick=()=>document.getElementById('app').classList.toggle('drawer-open');document.getElementById('closeDrawer').onclick=()=>document.getElementById('app').classList.remove('drawer-open');
+document.getElementById('drawerBtn').onclick=()=>{document.getElementById('app').classList.toggle('drawer-open');syncDrawerAccess()};document.getElementById('closeDrawer').onclick=()=>{document.getElementById('app').classList.remove('drawer-open');syncDrawerAccess()};
 document.getElementById('newBtn').onclick=newCharacter;
 document.getElementById('exportBtn').onclick=document.getElementById('exportDrawerBtn').onclick=exportState;
 document.getElementById('importBtn').onclick=document.getElementById('importDrawerBtn').onclick=()=>document.getElementById('importFile').click();
@@ -1294,6 +1330,75 @@ document.getElementById('compClass').onchange=e=>{const p=CLASS_SPELL_PRESETS[e.
 
 // Inventory
 for(const [id,key] of [['coinPP','pp'],['coinGP','gp'],['coinSP','sp'],['coinCP','cp']])document.getElementById(id).oninput=e=>{current().inventory.coins[key]=Math.max(0,num(e.target.value));saveState()};document.getElementById('equipmentNotes').oninput=e=>{current().inventory.notes=e.target.value;saveState()};document.getElementById('addItemBtn').onclick=()=>{editorItem='new';renderItemEditor()};
+
+// Presentation helpers. Character rules and persistence remain in the original model.
+function renderDossierSummary(){
+ const c=current(),id=c.identity||{};
+ document.getElementById('identityChips').innerHTML=[id.className||'Sem classe',id.ancestry||'Ancestralidade não definida',id.background].filter(Boolean).map(x=>`<span>${esc(x)}</span>`).join('');
+ document.getElementById('effigyName').textContent=c.name||'Personagem';
+ document.getElementById('effigyClass').textContent=`Nível ${c.level} · ${id.className||'Sem classe'}`;
+ filterCharacterDrawer();
+}
+function renderSessionResources(){
+ const c=current();
+ for(const [key,value] of [['sessionHp',c.hp.current],['sessionFocus',c.focus.current]]){
+  const el=document.getElementById(key);if(document.activeElement!==el)el.value=value;
+ }
+ document.getElementById('sessionHpMax').textContent='/ '+c.hp.max;
+ document.getElementById('sessionFocusMax').textContent='/ '+c.focus.max;
+}
+function renderCombatDefenseSummary(){
+ const d=defenseTotals(current()),root=document.getElementById('combatDefenseSummary');
+ root.innerHTML=[['CA',d.ac],['Fortitude',d.fort],['Reflexos',d.ref],['Vontade',d.will]].map(([name,value])=>`<button class="combat-defense" data-session-defense="${name}" data-bonus="${value}" title="Rolar ${name}"><small>${name}</small><b>${signed(value)}</b><span>d20 ↗</span></button>`).join('');
+ root.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>rollCheck(b.dataset.sessionDefense,num(b.dataset.bonus))));
+}
+function renderConditionSummary(){
+ const active=Object.entries(current().conditions||{}).filter(([,v])=>v.active).map(([name,v])=>name+(num(v.value)>0?' '+v.value:''));
+ document.getElementById('conditionSummary').textContent=active.length?active.join(' · '):'Nenhuma condição ativa';
+ document.getElementById('conditionsDetails').classList.toggle('has-active-conditions',active.length>0);
+}
+function updateSaveIndicator(ok){
+ const el=document.getElementById('saveIndicator');
+ el.textContent=ok?'Salvo neste navegador':'Não foi possível salvar';
+ el.classList.toggle('save-error',!ok);
+}
+function filterCharacterDrawer(){
+ const q=(document.getElementById('characterSearch')?.value||'').trim().toLocaleLowerCase('pt-BR');
+ const cards=[...document.querySelectorAll('#characterList .char-card')];let shown=0;
+ cards.forEach(card=>{card.hidden=!card.textContent.toLocaleLowerCase('pt-BR').includes(q);if(!card.hidden)shown++});
+ document.getElementById('drawerCount').textContent=shown?`${shown} de ${cards.length} personagem(ns)`:'Nenhum personagem encontrado.';
+}
+function syncDrawerAccess(){
+ const opened=document.getElementById('app').classList.contains('drawer-open');
+ document.getElementById('drawerBtn').setAttribute('aria-expanded',String(opened));
+ document.getElementById('characterDrawer').inert=!opened;
+}
+document.getElementById('characterSearch').addEventListener('input',filterCharacterDrawer);
+document.getElementById('mobileRollBtn').addEventListener('click',()=>document.getElementById('rollBtn').click());
+document.getElementById('sessionHp').addEventListener('input',e=>{
+ current().hp.current=Math.max(0,num(e.target.value));renderResources();saveState();
+});
+document.getElementById('sessionFocus').addEventListener('input',e=>{
+ current().focus.current=Math.max(0,num(e.target.value));renderResources();saveState();
+});
+document.querySelectorAll('[data-open-section]').forEach(b=>b.addEventListener('click',()=>{
+ setPage('overview');const el=document.getElementById(b.dataset.openSection);el.open=true;el.scrollIntoView({behavior:'smooth',block:'center'});
+}));
+document.querySelectorAll('.toolbar-popover button').forEach(b=>b.addEventListener('click',()=>document.getElementById('toolbarMenu').open=false));
+document.addEventListener('click',e=>{if(!e.target.closest('#toolbarMenu'))document.getElementById('toolbarMenu').open=false});
+document.addEventListener('keydown',e=>{
+ if(e.key==='Escape'){
+  document.getElementById('toolbarMenu').open=false;
+  document.getElementById('app').classList.remove('drawer-open');syncDrawerAccess();
+ }
+});
+let printDisclosureState=[];
+addEventListener('beforeprint',()=>{
+ printDisclosureState=[...document.querySelectorAll('details')].map(el=>[el,el.open]);
+ printDisclosureState.forEach(([el])=>{if(!el.classList.contains('toolbar-menu'))el.open=true});
+});
+addEventListener('afterprint',()=>printDisclosureState.forEach(([el,open])=>el.open=open));
+syncDrawerAccess();
 
 applySoulsTheme(safeStore.getItem(SOULS_THEME_STORAGE)||'erdtree',true);loadSpellLibraryCache();loadPtBrDescriptionCache();for(const x of fullSpellLibrary){if(x.origin==='pf2e-public')publicLoadedRanks.add(num(x.rank))}applyPtBrDescriptionsEverywhere();bindStaticInputs();renderAll();setTimeout(maybePreloadDivine,700);setTimeout(()=>ensurePtBrSpellDescriptions().then(()=>{applyPtBrDescriptionsEverywhere();renderSpells();renderCompendiumResults();renderSpellLibrary();queueSpellTranslations(current().spellcasting.spells,()=>{renderSpells();renderCompendiumResults();saveState()},30);saveState()}),950);
 </script>
