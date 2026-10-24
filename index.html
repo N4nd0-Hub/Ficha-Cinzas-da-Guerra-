@@ -346,6 +346,24 @@ main{padding:26px 28px 40px}.sheet{max-width:1540px;background:color-mix(in srgb
 @media print{.combat-defenses-panel{display:none!important}.combat-stack{display:flex!important}.combat-layout{display:grid}.combat-defenses-panel{display:none!important}}
 #defenseConfig .skill-row{grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:12px;margin-bottom:12px;padding:14px}#defenseConfig .skill-row>.skill-name{grid-column:1/3;grid-row:1}#defenseConfig .skill-row>.skill-total{grid-column:3;grid-row:1}#defenseConfig .skill-row>.field,#defenseConfig .skill-row>.manual-flag{grid-column:auto;grid-row:auto}#defenseConfig .skill-row>select{min-width:0}.config-label{font:600 10px var(--ui-font);color:var(--muted)}#defenseConfig .manual-flag{font-size:11px;justify-content:flex-start;min-height:40px}#defenseConfig .skill-row .input{width:100%;min-width:0}#defenseConfig .skill-row .skill-total{font-size:24px}#defenseConfig .formula-strip .helper{font-size:11px}
 @media(max-width:650px){#defenseConfig .skill-row{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:10px}#defenseConfig .skill-row>.skill-name{grid-column:1;grid-row:1}#defenseConfig .skill-row>.skill-total{grid-column:2;grid-row:1}#spellDerived{grid-template-columns:repeat(2,minmax(0,1fr))!important}.prepared-mark{font-size:8px}.spell-game-top{flex-wrap:wrap}}
+</style><style id="talent-organization-style">/* Collections and cards share accents without sacrificing text contrast. */
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+#page-feats>.page-grid>.column>.panel>.panel-head{align-items:center;flex-wrap:wrap}
+.feat-top-actions{display:flex;gap:8px;align-items:center}.feat-page-intro{font:12px/1.6 var(--ui-font);color:var(--muted);margin:0 0 18px}
+.feat-toolbar{display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;padding:16px;border:1px solid var(--line);border-radius:5px;background:color-mix(in srgb,var(--theme-deep) 40%,transparent);margin-bottom:14px}
+.feat-toolbar .field{font-size:11px;color:var(--muted);flex:1;min-width:150px}.feat-toolbar .feat-search-field{flex:2;min-width:200px}.feat-toolbar label>span{font-size:10px;letter-spacing:.04em}.feat-toolbar .input{min-height:40px}
+.feat-view-tools{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:18px}.feat-view-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.feat-layout-toggle{display:inline-flex;gap:2px;border:1px solid var(--line);border-radius:4px;padding:2px}.feat-layout-toggle .btn{background:none;border-color:transparent;min-height:30px}.feat-layout-toggle .btn.active{color:var(--gold2);background:color-mix(in srgb,var(--gold) 12%,transparent);border-color:var(--gold3)}
+#featSummaryCount,#featResultsCount{color:var(--muted);font-size:11px}.feat-collection-tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}.feat-collection-tab{display:flex;gap:9px;align-items:center;border:1px solid var(--line);border-radius:4px;background:var(--theme-card);color:var(--muted);padding:10px 13px;font-size:12px;cursor:pointer}.feat-collection-tab>span{font-size:17px;color:var(--group-accent);line-height:1}.feat-collection-tab>small{min-width:21px;padding:2px 5px;border-radius:3px;background:#0003;text-align:center;font-size:10px;color:var(--muted)}.feat-collection-tab.active{border-color:var(--group-accent);background:color-mix(in srgb,var(--group-accent) 10%,var(--theme-deep));color:var(--text)}.feat-collection-tab:hover{border-color:var(--group-accent)}
+#featList.feat-collections{display:flex;flex-direction:column;gap:18px}.feat-collection{border:1px solid color-mix(in srgb,var(--group-accent) 45%,var(--line));border-radius:6px;min-width:0;background:color-mix(in srgb,var(--theme-deep) 45%,var(--panel));overflow:hidden}.feat-collection-head{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:14px 16px;background:linear-gradient(110deg,color-mix(in srgb,var(--group-accent) 12%,var(--panel)),color-mix(in srgb,var(--panel) 80%,var(--theme-deep)));border-bottom:1px solid color-mix(in srgb,var(--group-accent) 24%,var(--line))}.feat-collection.collapsed .feat-collection-head{border:0}.feat-group-toggle{display:flex;align-items:center;gap:12px;min-width:0;flex:1;background:none;border:0;color:var(--text);text-align:left;cursor:pointer;padding:0}.feat-group-toggle:disabled{cursor:default;opacity:1}.collection-icon{flex:none;display:grid;place-items:center;width:42px;height:42px;border:1px solid color-mix(in srgb,var(--group-accent) 45%,var(--line));border-radius:5px;font-size:24px;color:var(--group-accent);background:color-mix(in srgb,var(--group-accent) 5%,var(--theme-deep))}.feat-group-toggle b{display:block;font:700 21px/1.3 Georgia,serif;overflow-wrap:anywhere}.feat-group-toggle small{display:block;font-size:10px;font-weight:400;color:var(--muted);margin-top:5px}.feat-group-toggle em{font:18px var(--ui-font);color:var(--group-accent);font-style:normal;margin-left:8px}.feat-group-actions{display:flex;gap:6px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.feat-group-actions .btn{font-size:10px;min-height:31px;padding:6px 9px}.feat-group-actions [data-group-move]{min-width:29px;padding:6px;font-size:15px}.feat-group-body{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;padding:16px;min-height:90px}.feat-group-empty{grid-column:1/-1;text-align:center;color:var(--muted);font-size:12px;padding:20px 12px;border:1px dashed color-mix(in srgb,var(--group-accent) 26%,var(--line));border-radius:4px}
+.organized-feat.feat-game-card{grid-template-columns:45px minmax(0,1fr);gap:13px;min-height:0;padding:16px;border-radius:5px;border-top:1px solid color-mix(in srgb,var(--entry-accent) 55%,var(--line));border-right:1px solid var(--line);border-bottom:1px solid var(--line);border-left:3px solid var(--entry-accent);background:linear-gradient(135deg,color-mix(in srgb,var(--entry-accent) 5%,var(--panel)),color-mix(in srgb,var(--theme-deep) 90%,var(--panel)));align-self:start}.organized-feat::before{display:none}.organized-feat .entry-sigil{width:43px;height:43px;font-size:24px;border:1px solid color-mix(in srgb,var(--entry-accent) 45%,var(--line));border-radius:5px;background:color-mix(in srgb,var(--entry-accent) 8%,var(--theme-deep));box-shadow:none}.organized-feat .entry-sigil::after{display:none}.organized-feat .entry-title{margin:0;font:700 19px/1.35 Georgia,serif;overflow-wrap:anywhere}.organized-feat .entry-title-row{margin-top:5px;align-items:flex-start;gap:10px;flex-wrap:wrap}.organized-feat .entry-level{font-size:9px;border-radius:3px;padding:4px 6px}.organized-feat .entry-kicker{font-size:9px;letter-spacing:.09em;line-height:1.5}.organized-feat .entry-meta{font-size:11px;margin-top:6px;overflow-wrap:anywhere}.organized-feat .entry-tags{margin-top:10px}.organized-feat .tag{font-size:9px}.feat-description{margin-top:12px;border-top:1px solid var(--line);padding-top:10px}.feat-description>summary{display:flex;align-items:center;justify-content:space-between;list-style:none;cursor:pointer;font-size:11px;color:var(--muted);gap:10px;min-height:26px}.feat-description>summary::-webkit-details-marker{display:none}.feat-description[open]>summary{color:var(--text)}.organized-feat .entry-desc{font:13px/1.75 var(--ui-font);margin-top:10px;border:0;padding:0;color:var(--text);overflow-wrap:anywhere}.organized-feat .entry-actions{gap:7px;margin-top:14px;padding-top:10px;border-top:1px solid var(--line);align-items:center}.organized-feat .entry-actions>.btn{font-size:10px;padding:6px 10px;min-height:31px}.feat-move-label{flex:1;min-width:95px;max-width:230px}.feat-move-select.input{min-height:31px;padding:5px 22px 5px 7px;font-size:10px;width:100%}.feat-order-actions{display:flex;gap:3px}.feat-order-actions .btn{font-size:15px;min-height:29px;min-width:27px;padding:4px 6px}.feat-drag-handle{cursor:grab;touch-action:auto}.feat-drag-handle:active{cursor:grabbing}.btn:disabled{cursor:default;opacity:.35;transform:none}.organized-feat.dragging{opacity:.4}.feat-collection.drag-over{outline:2px dashed var(--group-accent);outline-offset:3px}.feat-collection.drag-over .feat-collection-head{background:color-mix(in srgb,var(--group-accent) 16%,var(--panel))}.feat-collections.layout-list .feat-group-body{grid-template-columns:1fr}.feat-collections.layout-list .organized-feat{grid-template-columns:35px minmax(0,1fr);gap:12px;padding:12px 16px}.feat-collections.layout-list .entry-sigil{width:33px;height:33px;font-size:20px}.feat-collections.layout-list .entry-title{font-size:18px}.feat-collections.layout-list .entry-actions{margin-top:10px;padding-top:8px}.feat-collections.layout-list .feat-move-label{max-width:260px}
+.feat-resources{margin-top:22px;border:1px solid var(--line);border-radius:5px;background:color-mix(in srgb,var(--theme-deep) 30%,transparent)}.feat-resources>summary{display:flex;gap:12px;align-items:center;justify-content:space-between;cursor:pointer;list-style:none;padding:15px 17px;font:700 15px Georgia,serif;color:var(--text)}.feat-resources>summary::after{content:'＋';font:18px var(--ui-font);color:var(--gold)}.feat-resources[open]>summary::after{content:'−'}.feat-resources>summary::-webkit-details-marker{display:none}.feat-resources #pathManager{border:0;border-top:1px solid var(--line);margin:0;border-radius:0}.feat-resources .path-panel-head h3{font-size:19px}.feat-resources .path-panel-head p{font-size:12px}.feat-resources .path-counter{border-radius:4px}
+#featEditor{z-index:140}#featGroupModal{z-index:150}.feat-editor-modal{width:min(850px,96vw)}.feat-group-modal{width:min(650px,96vw)}.feat-editor-modal .modal-grid>.field,.feat-group-modal .modal-grid>.field{font-size:11px;color:var(--muted)}.feat-editor-modal textarea{min-height:165px}.feat-editor-modal .modal-head,.feat-group-modal .modal-head{position:sticky;top:0;z-index:2}.feat-form-actions{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap;margin-top:22px;padding-top:16px;border-top:1px solid var(--line)}.feat-form-actions>.danger{margin-right:auto}.feat-group-select{display:flex;gap:8px}.feat-group-select>.input{min-width:0;flex:1}.feat-group-select>.btn{white-space:nowrap}.feat-preview{display:flex;gap:16px;align-items:center;margin:0 0 22px;padding:18px;background:linear-gradient(110deg,color-mix(in srgb,var(--entry-accent) 13%,var(--theme-deep)),var(--panel));border:1px solid color-mix(in srgb,var(--entry-accent) 45%,var(--line));border-left:3px solid var(--entry-accent);border-radius:4px}.feat-preview>span{display:grid;place-items:center;flex:none;min-width:50px;min-height:50px;border:1px solid color-mix(in srgb,var(--entry-accent) 50%,var(--line));border-radius:4px;font-size:30px;color:var(--entry-accent)}.feat-preview>div{min-width:0}.feat-preview small{display:block;font-size:8px;letter-spacing:.14em;color:var(--muted)}.feat-preview b{display:block;font:700 23px/1.3 Georgia,serif;margin-top:6px;overflow-wrap:anywhere}.feat-preview em{display:block;font:11px var(--ui-font);color:var(--muted);margin-top:5px}.feat-style-settings{border:1px solid var(--line);border-radius:4px;padding:13px}.feat-style-settings>summary{cursor:pointer;color:var(--text);font-size:12px}.feat-style-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin-top:15px}.feat-color-row{display:flex;gap:10px;align-items:center;min-height:40px}.feat-inherit{display:flex;gap:7px;align-items:center;color:var(--muted);font-size:11px;line-height:1.5}.feat-inherit input{accent-color:var(--gold)}input[type=color]{width:56px;height:40px;min-width:56px;border:1px solid var(--line);border-radius:4px;padding:4px;background:var(--theme-deep);cursor:pointer}.feat-icon-picker{display:flex;flex-wrap:wrap;gap:6px;margin-top:13px}.feat-icon-option{width:36px;height:36px;display:grid;place-items:center;border:1px solid var(--line);border-radius:4px;background:var(--theme-deep);color:var(--text);font-size:20px;cursor:pointer}.feat-icon-option:hover,.feat-icon-option.selected{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 12%,var(--panel))}
+@media(max-width:1180px){.feat-group-body{grid-template-columns:1fr}.feat-collection-head{align-items:flex-start}.feat-group-actions{max-width:290px}.feat-group-toggle b{font-size:20px}}
+@media(max-width:650px){#page-feats>.page-grid>.column>.panel>.panel-head{gap:12px}.feat-top-actions{width:100%}.feat-top-actions>.btn{flex:1}.feat-page-intro{font-size:12px}.feat-toolbar{padding:12px;gap:10px}.feat-toolbar .field{min-width:0;flex-basis:calc(50% - 10px)}.feat-toolbar .feat-search-field{flex-basis:100%}.feat-toolbar .input{font-size:12px}.feat-view-tools{gap:10px}.feat-view-actions{gap:6px;width:100%}.feat-view-actions>.btn{font-size:10px;padding:7px 9px}.feat-layout-toggle .btn{font-size:10px;padding:5px 8px}.feat-collection-tabs{gap:6px}.feat-collection-tab{font-size:11px;padding:8px 9px;gap:6px;max-width:100%;overflow-wrap:anywhere}.feat-collection-tab>span{font-size:16px}.feat-collection-head{flex-direction:column;padding:13px;gap:12px;align-items:stretch}.feat-group-toggle b{font-size:21px}.feat-group-actions{max-width:none;justify-content:flex-start;gap:5px}.feat-group-actions .btn{font-size:10px;padding:6px 8px}.feat-group-body{padding:10px;gap:10px}.organized-feat.feat-game-card{padding:12px;grid-template-columns:32px minmax(0,1fr);gap:10px}.organized-feat .entry-sigil{width:32px;height:34px;font-size:20px}.organized-feat .entry-title{font-size:18px}.organized-feat .entry-kicker{font-size:8px}.organized-feat .entry-level{font-size:8px}.organized-feat .entry-meta{font-size:10px}.organized-feat .entry-desc{font-size:12px}.organized-feat .entry-actions{gap:5px;flex-wrap:wrap}.feat-move-label{max-width:none;min-width:105px}.feat-order-actions{margin-left:auto}.feat-order-actions .btn{min-height:32px;min-width:30px}.feat-drag-handle{display:none}.feat-collections.layout-list .organized-feat{padding:10px;grid-template-columns:28px minmax(0,1fr)}.feat-collections.layout-list .entry-sigil{width:28px;height:30px;font-size:18px}.feat-collections.layout-list .entry-title{font-size:17px}.feat-group-empty{padding:15px 5px;font-size:11px}.feat-resources>summary{font-size:14px;line-height:1.5;padding:13px}.feat-style-grid{grid-template-columns:1fr;gap:12px}.feat-group-select{flex-wrap:wrap}.feat-group-select>.input{flex-basis:100%}.feat-group-select>.btn{flex:1}.feat-preview{padding:13px;gap:12px}.feat-preview b{font-size:21px}.feat-preview>span{min-width:42px;min-height:44px;font-size:27px}.feat-icon-option{width:35px;height:35px}.feat-form-actions{gap:7px}.feat-form-actions>.btn{flex:1}.feat-form-actions>.danger{flex-basis:100%;margin:0}.feat-editor-modal .modal-body,.feat-group-modal .modal-body{padding:15px}.feat-style-settings{padding:10px}.feat-inherit{font-size:11px}.feat-top-actions .btn{min-height:37px}}
+@media print{.feat-top-actions,.feat-toolbar,.feat-view-tools,.feat-collection-tabs,.feat-group-actions,.feat-description>summary,.organized-feat .entry-actions{display:none!important}.feat-group-body{display:grid!important}.organized-feat,.feat-collection{background:white!important;color:#111!important;break-inside:avoid}.organized-feat .entry-title,.organized-feat .entry-desc,.feat-group-toggle b{color:#111!important}.feat-collection-head{background:white!important}.feat-collections .feat-group-body{grid-template-columns:1fr}.feat-group-toggle em{display:none}}
+.feat-color-hex.input{width:95px;min-width:80px;flex:none;padding:8px;font:12px monospace}.feat-color-row{flex-wrap:wrap}.feat-inherit{flex-basis:100%}
+.feat-inherit{text-transform:none!important;letter-spacing:0!important;font-weight:400!important}.feat-collection.collapsed .feat-group-toggle{min-height:42px}
+body.feat-drag-active,body.feat-drag-active *{cursor:grabbing!important;user-select:none!important}.feat-drag-handle{touch-action:none}
 </style></head>
 <body>
 <header class="topbar">
@@ -353,11 +371,6 @@ main{padding:26px 28px 40px}.sheet{max-width:1540px;background:color-mix(in srgb
 <div class="brand"><div class="brand-sigil"></div><div class="brand-title">Cinzas da Guerra<small>Terras Intermédias • Ficha do jogador</small></div></div>
 <span class="save-indicator" id="saveIndicator" role="status">Salvo neste navegador</span><div class="top-actions">
 <details class="toolbar-menu" id="toolbarMenu"><summary class="btn">Opções <span aria-hidden="true">⌄</span></summary><div class="toolbar-popover"><button class="btn" id="themeBtn">◈ <span class="label" id="themeBtnLabel">Tema</span></button><button class="btn" id="classManagerBtn">♜ <span class="label">Classes</span></button><button class="btn" id="exportBtn">Exportar</button><button class="btn" id="importBtn">Importar</button><button class="btn" id="printBtn">Imprimir</button><button class="btn" id="mobileRollBtn" type="button">Rolar dados</button></div></details><button class="btn hide-mobile" id="rollBtn">d20 <span class="label">Rolagem</span></button>
-
-
-
-
-
 <input accept=".json,application/json,text/plain" hidden="" id="importFile" type="file"/>
 <button aria-label="Nova ficha" class="btn primary" id="newBtn">＋ <span class="label">Nova Ficha</span></button>
 </div>
@@ -379,7 +392,6 @@ main{padding:26px 28px 40px}.sheet{max-width:1540px;background:color-mix(in srgb
 <div class="eyebrow">Terras Intermédias / Registro do personagem</div>
 <div class="sheet-name"><input aria-label="Nome do personagem" data-path="name" id="characterName" placeholder="Nome do Personagem"/><div class="level-seal" id="levelSeal">Nível 1</div></div>
 <div class="identity-chips" id="identityChips"></div></div>
-
 <div aria-hidden="true" class="header-emblem"><i></i><i></i><i></i><span>✦</span></div></div><nav aria-label="Páginas da ficha" class="tabs" id="tabs">
 <button class="tab active" data-page="overview">Visão Geral</button>
 <button class="tab" data-page="combat">Combate</button>
@@ -410,8 +422,6 @@ main{padding:26px 28px 40px}.sheet{max-width:1540px;background:color-mix(in srgb
 <div class="panel-head"><h2>Efígie do viajante</h2><span class="helper">Retrato do personagem</span></div>
 <div class="panel-body">
 <div class="portrait-stage" id="portraitStage"></div>
-
-
 </div>
 <div class="effigy-caption"><small>Registro das Terras Intermédias</small><b id="effigyName">Personagem</b><span id="effigyClass">Sem classe</span></div><details class="portrait-tools"><summary>Editar retrato <span aria-hidden="true">⌄</span></summary><div class="portrait-controls">
 <button class="btn small" id="portraitUploadBtn">Carregar imagem</button>
@@ -427,7 +437,6 @@ main{padding:26px 28px 40px}.sheet{max-width:1540px;background:color-mix(in srgb
 <div class="field"><label>Ajuste</label><select class="input" id="imageFit"><option value="contain">Conter</option><option value="cover">Cobrir</option></select></div>
 </div>
 </details></details></div>
-
 <div class="panel">
 <div class="panel-head"><h2>Estado</h2><span class="helper">Pontos e ferimentos</span></div>
 <div class="panel-body"><div class="status-orbs" id="statusOrbs"></div></div>
@@ -441,12 +450,6 @@ main{padding:26px 28px 40px}.sheet{max-width:1540px;background:color-mix(in srgb
 <div class="resource resource-experience"><div class="resource-top"><b>Experiência</b><span id="xpLabel">0 / 1000</span></div><div class="bar"><div class="fill xp-fill" id="xpFill"></div></div><div class="resource-controls" style="grid-template-columns:1fr 1fr"><label class="resource-number"><input aria-label="Experiência atual" class="input" id="xpCurrent" title="Experiência atual" type="number"/><small>Atual</small></label><label class="resource-number"><input aria-label="Experiência para o próximo nível" class="input" id="xpGoal" title="Experiência para o próximo nível" type="number"/><small>Próximo nível</small></label></div></div>
 </div>
 </div>
-
-
-
-
-
-
 <div class="panel">
 <div class="panel-head"><h2>Atributos</h2><span class="helper">Edite os valores diretamente</span></div>
 <div class="panel-body"><div class="attributes" id="attributes"></div></div>
@@ -513,7 +516,10 @@ main{padding:26px 28px 40px}.sheet{max-width:1540px;background:color-mix(in srgb
 <div class="panel"><div class="panel-head"><h2>Perícias</h2><span class="helper">Clique no total para rolar 1d20</span></div><div class="panel-body"><div class="skill-toolbar"><input class="input" id="skillSearch" placeholder="Pesquisar perícia..."/><button class="btn" id="addLoreBtn">＋ Lore</button><button class="btn" id="skillResetBtn">Ranks padrão</button></div><div class="skill-list" id="skillList"></div></div></div>
 </div></div></section>
 <section class="page" id="page-feats"><div class="page-grid" style="grid-template-columns:1fr"><div class="column">
-<div class="panel"><div class="panel-head"><h2>Talentos &amp; Habilidades</h2><button class="btn small" id="addFeatBtn">Adicionar</button></div><div class="panel-body"><div class="feat-filter"><input class="input" id="featSearch" placeholder="Pesquisar..."/><select class="input" id="featCategoryFilter"><option value="">Todas as categorias</option><option>Ancestralidade</option><option>Classe</option><option>Perícia</option><option>Geral</option><option>Arquétipo</option><option>Habilidade</option><option>Domínio</option><option>Grande Alma</option><option>Fama</option><option>Origem</option></select><button class="btn" id="sortFeatsBtn">Ordenar por nível</button></div><div class="path-panel" id="pathManager"></div><div id="featEditor"></div><div class="card-list" id="featList"></div></div></div>
+<div class="panel"><div class="panel-head"><h2>Talentos, Dedicações &amp; Poderes</h2><div class="feat-top-actions"><button class="btn" id="sortFeatsBtn" type="button">＋ Grupo / Dedicação</button><button class="btn primary" id="addFeatBtn" type="button">＋ Habilidade</button></div></div><div class="panel-body"><p class="feat-page-intro">Organize suas habilidades por dedicação, classe ou tema. Personalize os grupos e cartões, recolha as descrições e escolha a ordem que funciona para você.</p>
+<div class="feat-toolbar"><label class="field feat-search-field"><span>Pesquisar habilidades</span><input class="input" id="featSearch" placeholder="Nome, efeito, fonte ou grupo…" type="search"/></label><label class="field"><span>Categoria</span><select class="input" id="featCategoryFilter"><option value="">Todas as categorias</option><option>Ancestralidade</option><option>Classe</option><option>Perícia</option><option>Geral</option><option>Arquétipo</option><option>Dedicação</option><option>Habilidade</option><option>Domínio</option><option>Grande Alma</option><option>Fama</option><option>Origem</option></select></label><label class="field"><span>Ordem dos cartões</span><select class="input" id="featSort"><option value="manual">Minha ordem</option><option value="level">Por nível</option><option value="name">Por nome</option><option value="category">Por categoria</option></select></label></div>
+<nav aria-label="Filtrar por grupo" class="feat-collection-tabs" id="featGroupFilter"></nav>
+<div class="feat-view-tools"><span id="featSummaryCount"></span><div class="feat-view-actions"><div aria-label="Visualização" class="feat-layout-toggle"><button class="btn small" data-feat-layout="cards" type="button">Cartões</button><button class="btn small" data-feat-layout="list" type="button">Lista</button></div><button aria-pressed="false" class="btn small" id="featDescriptions" type="button">Expandir descrições</button><button class="btn small" id="featClearFilters" type="button">Limpar filtros</button></div></div><div aria-live="polite" class="helper" id="featResultsCount"></div><div class="card-list" id="featList"></div><details class="feat-resources"><summary>Recursos de classes &amp; dedicações</summary><div class="path-panel" id="pathManager"></div></details></div></div>
 </div></div></section>
 <section class="page" id="page-spells"><div class="page-grid" style="grid-template-columns:1fr"><div class="column">
 <div class="panel prepared-spell-panel" id="preparedSpellPanel"><div class="panel-head"><h2>✦ Magias Preparadas Hoje</h2><span class="helper">Sua seleção diária fica sempre no topo</span></div><div class="panel-body"><div id="preparedSpellList"></div></div></div>
@@ -547,8 +553,6 @@ main{padding:26px 28px 40px}.sheet{max-width:1540px;background:color-mix(in srgb
 <div class="divine-official-links" id="divineOfficialLinks"></div>
 </div>
 </div>
-
-
 </details><details class="panel tradition-library fold-panel" id="spellLibraryDetails"><summary class="panel-head fold-head"><h2>Biblioteca de Todas as Magias</h2><span class="helper">Pesquisar e adicionar magias do catálogo</span></summary><div class="panel-body">
 <div class="tradition-library-intro">
 <div><h3>Escolha uma tradição e veja a lista inteira</h3><p>A biblioteca organiza o catálogo público PF2e por tradição e círculo. Para facilitar para iniciantes, ela pode esconder automaticamente círculos acima do nível da personagem — sem apagar nada do catálogo.</p></div>
@@ -693,7 +697,7 @@ main{padding:26px 28px 40px}.sheet{max-width:1540px;background:color-mix(in srgb
 </div>
 </div></div></div>
 <div class="toast" id="toast"></div>
-<script>
+<div class="modal-backdrop" id="featEditor"></div><div class="modal-backdrop" id="featGroupModal"></div><script>
 // Armazenamento tolerante a navegadores que bloqueiam localStorage (ex.: visualizadores).
 // Nunca apaga o save persistido quando o navegador recusa uma gravação.
 const _volatileStore = new Map();
@@ -899,7 +903,7 @@ function ensure(c){
   c.attacks=Array.isArray(c.attacks)?c.attacks:[];c.feats=Array.isArray(c.feats)?c.feats:[];c.trackers=Array.isArray(c.trackers)?c.trackers:[];c.conditions=c.conditions&&typeof c.conditions==='object'?c.conditions:{};c.conditionNotes=c.conditionNotes||'';
   c.spellcasting=Object.assign({},b.spellcasting,c.spellcasting||{});c.spellcasting.slots=Array.isArray(c.spellcasting.slots)?c.spellcasting.slots:b.spellcasting.slots;c.spellcasting.specialSlots=Array.isArray(c.spellcasting.specialSlots)?c.spellcasting.specialSlots:[];c.spellcasting.spells=Array.isArray(c.spellcasting.spells)?c.spellcasting.spells:[];c.spellcasting.homebrewLibrary=Array.isArray(c.spellcasting.homebrewLibrary)?c.spellcasting.homebrewLibrary:[];c.spellcasting.spells.forEach(sp=>Object.assign(sp,{origin:sp.origin||'manual',source:sp.source||'',traditions:Array.isArray(sp.traditions)?sp.traditions:[],rarity:sp.rarity||'',cast:sp.cast||'',range:sp.range||'',area:sp.area||'',targets:sp.targets||'',duration:sp.duration||'',defense:sp.defense||''}));
   c.inventory=Object.assign(b.inventory,c.inventory||{});c.inventory.coins=Object.assign(b.inventory.coins,c.inventory.coins||{});c.inventory.items=Array.isArray(c.inventory.items)?c.inventory.items:[];
-  c.journal=Object.assign(b.journal,c.journal||{});c.rolls=Array.isArray(c.rolls)?c.rolls:[];return c;
+  c.journal=Object.assign(b.journal,c.journal||{});c.rolls=Array.isArray(c.rolls)?c.rolls:[];ensureFeatOrganization(c);return c;
 }
 try{if(!safeStore.getItem(SAVE_BACKUP_STORAGE)&&safeStore.getItem(STORAGE_KEY))safeStore.setItem(SAVE_BACKUP_STORAGE,safeStore.getItem(STORAGE_KEY))}catch(e){}
 function loadState(){try{const raw=safeStore.getItem(STORAGE_KEY);if(raw){const s=JSON.parse(raw);if(Array.isArray(s.characters)&&s.characters.length){s.characters.forEach(ensure);return s}}}catch(e){}const c=blankCharacter();return {version:'2.0',currentId:c.id,currentPage:'overview',characters:[c]}}
@@ -1004,7 +1008,214 @@ function applySoulsTheme(theme,quiet=false){const key=THEME_NAMES[theme]?theme:'
 function updatePageTravel(page){const meta=PAGE_META[page]||PAGE_META.overview;const title=document.getElementById('pageTravelTitle'),sigil=document.getElementById('pageTravelSigil'),kicker=document.getElementById('pageTravelKicker'),runes=document.getElementById('pageRunes');if(title)title.textContent=meta.title;if(sigil)sigil.textContent=meta.sigil;if(kicker)kicker.textContent=meta.kicker;if(runes){runes.innerHTML=PAGE_ORDER.map(p=>`<button type="button" class="page-rune ${p===page?'active':''}" data-rune-page="${p}" aria-label="${PAGE_META[p].title}" title="${PAGE_META[p].title}"></button>`).join('');runes.querySelectorAll('[data-rune-page]').forEach(b=>b.addEventListener('click',()=>setPage(b.dataset.runePage)))}}
 function travelPage(delta){const page=state.currentPage||'overview',i=Math.max(0,PAGE_ORDER.indexOf(page)),next=PAGE_ORDER[(i+delta+PAGE_ORDER.length)%PAGE_ORDER.length];setPage(next)}
 
-function renderFeatEditor(){const el=document.getElementById('featEditor');if(!editorFeat){el.innerHTML='';return}const f=editorFeat==='new'?{id:'',name:'',level:1,category:'Classe',action:'passive',traits:'',source:'',description:''}:current().feats.find(x=>x.id===editorFeat);if(!f){editorFeat=null;return}el.innerHTML=`<div class="editor-grid"><input class="input wide" id="featName" placeholder="Nome" value="${esc(f.name)}"/><input class="input" id="featLevel" type="number" min="0" max="20" value="${num(f.level,1)}"/><select class="input" id="featCategory">${['Ancestralidade','Classe','Perícia','Geral','Arquétipo','Habilidade','Domínio','Grande Alma','Fama','Origem'].map(x=>`<option ${f.category===x?'selected':''}>${x}</option>`).join('')}</select><select class="input" id="featAction">${[['passive','Passiva'],['one','◆ 1 ação'],['two','◆◆ 2 ações'],['three','◆◆◆ 3 ações'],['reaction','↶ Reação'],['free','◇ Livre']].map(([v,n])=>`<option value="${v}" ${f.action===v?'selected':''}>${n}</option>`).join('')}</select><input class="input wide" id="featTraits" placeholder="Traços" value="${esc(f.traits)}"/><input class="input wide" id="featSource" placeholder="Fonte / livro" value="${esc(f.source)}"/><textarea class="input full" id="featDesc" placeholder="Descrição">${esc(f.description)}</textarea></div><div class="editor-actions"><button class="btn" id="cancelFeat">Cancelar</button><button class="btn primary" id="saveFeat">Salvar</button></div>`;document.getElementById('cancelFeat').onclick=()=>{editorFeat=null;renderFeatEditor()};document.getElementById('saveFeat').onclick=()=>{const obj={id:f.id||uid(),name:document.getElementById('featName').value.trim()||'Talento',level:num(document.getElementById('featLevel').value),category:document.getElementById('featCategory').value,action:document.getElementById('featAction').value,traits:document.getElementById('featTraits').value,source:document.getElementById('featSource').value,description:document.getElementById('featDesc').value};const arr=current().feats,i=arr.findIndex(x=>x.id===obj.id);if(i>=0)arr[i]=obj;else arr.push(obj);editorFeat=null;renderFeats();saveState()}}
+// Talent collections belong to each character and travel with the sheet JSON.
+function featColor(value,fallback='#bcab77'){return /^#[0-9a-f]{6}$/i.test(String(value||''))?value:fallback}
+function featIcon(value,fallback='✧'){return String(value||'').trim().slice(0,32)||fallback}
+function featDefaultGroup(f){return ['Arquétipo','Dedicação'].includes(f.category)?'dedications':['Habilidade','Domínio','Grande Alma','Fama','Origem'].includes(f.category)?'powers':'talents'}
+function ensureFeatOrganization(c){
+ const hadOrganization=!!c.featOrganization&&typeof c.featOrganization==='object'&&!Array.isArray(c.featOrganization);
+ if(!hadOrganization)c.featOrganization={groups:[{id:'talents',name:'Talentos',color:'#bcab77',icon:'✧',collapsed:true},{id:'dedications',name:'Dedicações',color:'#82a9c5',icon:'♜',collapsed:true},{id:'powers',name:'Poderes & Legados',color:'#b399cb',icon:'✦',collapsed:true}],sort:'manual',layout:'cards',descriptions:false};
+ const o=c.featOrganization;
+ if(!Array.isArray(o.groups))o.groups=[];
+ const ids=new Set();o.groups=o.groups.filter(g=>g&&typeof g==='object').map(g=>{
+  g.id=String(g.id||'');if(!g.id||ids.has(g.id))g.id=uid();ids.add(g.id);
+  g.name=String(g.name||'Grupo');g.color=featColor(g.color);g.icon=featIcon(g.icon);g.collapsed=!!g.collapsed;return g;
+ });
+ if(!['manual','level','name','category'].includes(o.sort))o.sort='manual';
+ if(!['cards','list'].includes(o.layout))o.layout='cards';o.descriptions=!!o.descriptions;
+ if(!['all','ungrouped',...ids].includes(o.filter))o.filter='all';
+ c.feats.forEach(f=>{if(!f.id)f.id=uid();if(f.groupId===undefined)f.groupId=hadOrganization?'':featDefaultGroup(f);if(!ids.has(f.groupId))f.groupId='';if(f.color)f.color=featColor(f.color,'');if(f.icon)f.icon=featIcon(f.icon,'');});
+ if(!hadOrganization)o.groups.forEach(g=>g.collapsed=!c.feats.some(f=>f.groupId===g.id));
+ return o;
+}
+const FEAT_ICON_CHOICES=['✧','✦','⚔','♜','◈','☀','☾','♡','❖','❋','⚑','◇','✥','❂','☷','☯','🔥','❄️','⚡','🌿','🩸','👁️','🛡️','💀'];
+const FEAT_CATEGORIES=['Ancestralidade','Classe','Perícia','Geral','Arquétipo','Dedicação','Habilidade','Domínio','Grande Alma','Fama','Origem'];
+let featGroupEditorId=null,featDrag=null,featLastFocus=null,featGroupLastFocus=null;
+function featGroup(c,id){return ensureFeatOrganization(c).groups.find(g=>g.id===id)}
+function featGroupsWithFallback(c){return [...ensureFeatOrganization(c).groups,{id:'',name:'Sem grupo',color:'#a4a698',icon:'◇',collapsed:false}]}
+function featGroupOptions(c,selected){return '<option value="">Sem grupo</option>'+ensureFeatOrganization(c).groups.map(g=>`<option value="${esc(g.id)}" ${g.id===selected?'selected':''}>${esc(g.name)}</option>`).join('')}
+function featAppearance(f,c=current()){
+ const g=featGroup(c,f.groupId);return {color:featColor(f.color,g?.color||'#bcab77'),icon:featIcon(f.icon,g?.icon||featSigil(f.category))};
+}
+function featIconPicker(target,value){return `<div class="feat-icon-picker" aria-label="Sugestões de ícone">${FEAT_ICON_CHOICES.map(icon=>`<button type="button" class="feat-icon-option ${icon===value?'selected':''}" data-icon-target="${target}" data-icon-value="${esc(icon)}" aria-label="Usar ícone ${esc(icon)}">${esc(icon)}</button>`).join('')}</div>`}
+function bindFeatIconPicker(root,onchange){root.querySelectorAll('[data-icon-target]').forEach(b=>b.onclick=()=>{const el=document.getElementById(b.dataset.iconTarget);el.value=b.dataset.iconValue;el.dispatchEvent(new Event('input',{bubbles:true}));onchange?.()})}
+function openFeatEditor(id,groupId){
+ featLastFocus=document.activeElement;editorFeat=id;renderFeatEditor(groupId);
+ document.getElementById('featName')?.focus();
+}
+function closeFeatEditor(){editorFeat=null;renderFeatEditor();if(featLastFocus?.isConnected)featLastFocus.focus()}
+function renderFeatEditor(initialGroup){
+ const el=document.getElementById('featEditor');
+ if(!editorFeat){el.classList.remove('open');el.innerHTML='';return}
+ const c=current(),o=ensureFeatOrganization(c),f=editorFeat==='new'?{id:'',name:'',level:1,category:'Classe',action:'passive',traits:'',source:'',description:'',groupId:initialGroup??(o.filter!=='all'&&o.filter!=='ungrouped'?o.filter:o.groups[0]?.id||'')}:c.feats.find(x=>x.id===editorFeat);
+ if(!f){editorFeat=null;renderFeatEditor();return}
+ const look=featAppearance(f,c);
+ el.innerHTML=`<div class="modal feat-editor-modal" role="dialog" aria-modal="true" aria-labelledby="featEditorTitle"><div class="modal-head"><b id="featEditorTitle">${f.id?'Editar talento ou poder':'Novo talento ou poder'}</b><button type="button" class="btn small" id="closeFeatEditor">Fechar</button></div><form id="featForm" class="modal-body">
+ <div class="feat-preview" id="featStylePreview" style="--entry-accent:${look.color}"><span id="featPreviewIcon">${esc(look.icon)}</span><div><small>PRÉVIA DO CARTÃO</small><b id="featPreviewName">${esc(f.name||'Nome da habilidade')}</b><em id="featPreviewGroup">${esc(featGroup(c,f.groupId)?.name||'Sem grupo')}</em></div></div>
+ <div class="modal-grid">
+ <label class="field full">Nome<input class="input" id="featName" required maxlength="180" value="${esc(f.name)}" placeholder="Nome do talento ou poder"/></label>
+ <label class="field full">Grupo / dedicação<div class="feat-group-select"><select class="input" id="featGroup">${featGroupOptions(c,f.groupId)}</select><button type="button" class="btn" id="featCreateGroup">＋ Grupo</button></div></label>
+ <label class="field">Categoria<select class="input" id="featCategory">${[...new Set([...FEAT_CATEGORIES,f.category].filter(Boolean))].map(x=>`<option ${f.category===x?'selected':''}>${esc(x)}</option>`).join('')}</select></label>
+ <label class="field">Nível<input class="input" id="featLevel" type="number" min="0" max="20" value="${num(f.level,1)}"/></label>
+ <label class="field">Custo de ação<select class="input" id="featAction">${[['passive','Passiva'],['one','◆ 1 ação'],['two','◆◆ 2 ações'],['three','◆◆◆ 3 ações'],['reaction','↶ Reação'],['free','◇ Livre']].map(([v,n])=>`<option value="${v}" ${f.action===v?'selected':''}>${n}</option>`).join('')}</select></label>
+ <label class="field">Fonte / dedicação<input class="input" id="featSource" placeholder="Ex.: Dedicação Cavaleiro, livro…" value="${esc(f.source)}"/></label>
+ <label class="field full">Traços<input class="input" id="featTraits" placeholder="Separe os traços por vírgulas" value="${esc(f.traits)}"/></label>
+ <details class="feat-style-settings full" open><summary>Aparência deste cartão</summary><div class="feat-style-grid">
+ <div class="field"><label for="featColor">Cor</label><div class="feat-color-row"><input type="color" id="featColor" value="${look.color}" aria-label="Cor do cartão"/><input class="input feat-color-hex" id="featColorHex" aria-label="Código da cor do cartão" pattern="#[0-9a-fA-F]{6}" value="${look.color}" maxlength="7"/><label class="feat-inherit"><input type="checkbox" id="featInheritColor" ${!f.color?'checked':''}/>Usar cor do grupo</label></div></div>
+ <div class="field"><label for="featIcon">Ícone próprio</label><input class="input" id="featIcon" value="${esc(f.icon||'')}" maxlength="32" placeholder="Vazio usa o ícone do grupo"/></div></div>${featIconPicker('featIcon',look.icon)}</details>
+ <label class="field full">Descrição & efeitos<textarea class="input" id="featDesc" rows="7" placeholder="Efeitos, condições, usos e detalhes da habilidade…">${esc(f.description)}</textarea></label>
+ </div><div class="feat-form-actions"><button type="button" class="btn" id="cancelFeat">Cancelar</button><button type="submit" class="btn primary" id="saveFeat">Salvar habilidade</button></div></form></div>`;
+ el.classList.add('open');
+ const preview=()=>{
+  const group=featGroup(c,document.getElementById('featGroup').value),inherit=document.getElementById('featInheritColor').checked;
+  const color=inherit?(group?.color||'#bcab77'):document.getElementById('featColor').value;
+  document.getElementById('featStylePreview').style.setProperty('--entry-accent',color);
+  document.getElementById('featPreviewIcon').textContent=featIcon(document.getElementById('featIcon').value,group?.icon||featSigil(document.getElementById('featCategory').value));
+  document.getElementById('featPreviewName').textContent=document.getElementById('featName').value||'Nome da habilidade';
+  document.getElementById('featPreviewGroup').textContent=group?.name||'Sem grupo';
+  if(inherit)document.getElementById('featColor').value=color;
+  document.getElementById('featColorHex').value=color;
+ };
+ for(const id of ['featName','featGroup','featIcon','featCategory','featInheritColor'])document.getElementById(id).addEventListener('input',preview);
+ document.getElementById('featColor').oninput=()=>{document.getElementById('featInheritColor').checked=false;preview()};
+ document.getElementById('featColorHex').oninput=e=>{if(!/^#[0-9a-f]{6}$/i.test(e.target.value))return;document.getElementById('featColor').value=e.target.value;document.getElementById('featInheritColor').checked=false;preview()};
+ document.getElementById('featCreateGroup').onclick=()=>openFeatGroupEditor('new',true);
+ document.getElementById('cancelFeat').onclick=document.getElementById('closeFeatEditor').onclick=closeFeatEditor;
+ bindFeatIconPicker(el,preview);
+ document.getElementById('featForm').onsubmit=e=>{
+  e.preventDefault();const name=document.getElementById('featName').value.trim();if(!name){document.getElementById('featName').focus();return}
+  const obj={...f,id:f.id||uid(),name,level:clamp(num(document.getElementById('featLevel').value),0,20),category:document.getElementById('featCategory').value,action:document.getElementById('featAction').value,traits:document.getElementById('featTraits').value,source:document.getElementById('featSource').value,description:document.getElementById('featDesc').value,groupId:document.getElementById('featGroup').value,color:document.getElementById('featInheritColor').checked?'':featColor(document.getElementById('featColor').value),icon:document.getElementById('featIcon').value.trim().slice(0,32)};
+  const index=c.feats.findIndex(x=>x.id===obj.id);if(index>=0)c.feats[index]=obj;else c.feats.push(obj);
+  // Return to the collection containing the new or moved entry.
+  if(o.filter!=='all')o.filter=obj.groupId||'ungrouped';const group=featGroup(c,obj.groupId);if(group)group.collapsed=false;
+  closeFeatEditor();renderFeats();saveState();toast('Habilidade salva.');
+ };
+}
+function openFeatGroupEditor(id,fromFeat=false){
+ const c=current(),o=ensureFeatOrganization(c),g=id==='new'?{id:'',name:'',color:'#bcab77',icon:'✧'}:o.groups.find(x=>x.id===id);if(!g)return;
+ featGroupEditorId=id;featGroupLastFocus=document.activeElement;
+ const el=document.getElementById('featGroupModal');
+ el.innerHTML=`<div class="modal feat-group-modal" role="dialog" aria-modal="true" aria-labelledby="featGroupEditorTitle"><div class="modal-head"><b id="featGroupEditorTitle">${g.id?'Editar grupo':'Novo grupo ou dedicação'}</b><button class="btn small" id="closeFeatGroup" type="button">Fechar</button></div><form class="modal-body" id="featGroupForm"><p class="helper">Reúna os poderes de uma dedicação, talentos de classe ou qualquer conjunto que fizer sentido para você.</p><div class="feat-preview" id="groupStylePreview" style="--entry-accent:${g.color}"><span id="groupPreviewIcon">${esc(g.icon)}</span><div><small>PRÉVIA DO GRUPO</small><b id="groupPreviewName">${esc(g.name||'Nome do grupo')}</b></div></div><div class="modal-grid"><label class="field full">Nome do grupo<input class="input" required id="featGroupName" maxlength="100" value="${esc(g.name)}" placeholder="Ex.: Dedicação — Cavaleiro"/></label><div class="field"><label for="featGroupColor">Cor do grupo</label><div class="feat-color-row"><input type="color" id="featGroupColor" aria-label="Cor do grupo" value="${g.color}"/><input class="input feat-color-hex" id="featGroupColorHex" aria-label="Código da cor do grupo" pattern="#[0-9a-fA-F]{6}" value="${g.color}" maxlength="7"/></div></div><label class="field">Ícone do grupo<input class="input" id="featGroupIcon" maxlength="32" value="${esc(g.icon)}"/></label><div class="full">${featIconPicker('featGroupIcon',g.icon)}</div></div><div class="feat-form-actions">${g.id?'<button class="btn danger" type="button" id="dissolveFeatGroup">Dissolver grupo</button>':''}<button class="btn" type="button" id="cancelFeatGroup">Cancelar</button><button class="btn primary" type="submit" id="saveFeatGroup">Salvar grupo</button></div><p class="helper">${g.id?'Dissolver o grupo mantém suas habilidades em “Sem grupo”.':'Você poderá mudar a ordem e mover habilidades entre grupos.'}</p></form></div>`;
+ el.classList.add('open');
+ const preview=()=>{document.getElementById('groupStylePreview').style.setProperty('--entry-accent',document.getElementById('featGroupColor').value);document.getElementById('groupPreviewName').textContent=document.getElementById('featGroupName').value||'Nome do grupo';document.getElementById('groupPreviewIcon').textContent=featIcon(document.getElementById('featGroupIcon').value)};
+ for(const key of ['featGroupName','featGroupColor','featGroupIcon'])document.getElementById(key).addEventListener('input',preview);
+ document.getElementById('featGroupColor').addEventListener('input',e=>document.getElementById('featGroupColorHex').value=e.target.value);
+ document.getElementById('featGroupColorHex').oninput=e=>{if(!/^#[0-9a-f]{6}$/i.test(e.target.value))return;document.getElementById('featGroupColor').value=e.target.value;preview()};
+ bindFeatIconPicker(el,preview);
+ const close=()=>{el.classList.remove('open');el.innerHTML='';featGroupEditorId=null;if(featGroupLastFocus?.isConnected)featGroupLastFocus.focus()};
+ document.getElementById('closeFeatGroup').onclick=document.getElementById('cancelFeatGroup').onclick=close;
+ document.getElementById('featGroupForm').onsubmit=e=>{
+  e.preventDefault();const name=document.getElementById('featGroupName').value.trim();if(!name)return;
+  const obj={...g,id:g.id||uid(),name,color:featColor(document.getElementById('featGroupColor').value),icon:featIcon(document.getElementById('featGroupIcon').value)};
+  if(g.id)Object.assign(g,obj);else o.groups.push(obj);
+  close();renderFeats();saveState();
+  if(document.getElementById('featEditor').classList.contains('open')){
+   const select=document.getElementById('featGroup'),selected=fromFeat?obj.id:select.value;select.innerHTML=featGroupOptions(c,selected);select.value=selected;select.dispatchEvent(new Event('input',{bubbles:true}));
+  }
+  toast('Grupo salvo.');
+ };
+ document.getElementById('dissolveFeatGroup')?.addEventListener('click',()=>{
+  if(!confirm(`Dissolver “${g.name}”? As habilidades serão mantidas em “Sem grupo”.`))return;
+  c.feats.forEach(f=>{if(f.groupId===g.id)f.groupId=''});o.groups=o.groups.filter(x=>x.id!==g.id);if(o.filter===g.id)o.filter='all';
+  close();renderFeats();saveState();
+  const select=document.getElementById('featGroup');if(select){const value=select.value===g.id?'':select.value;select.innerHTML=featGroupOptions(c,value);select.value=value;select.dispatchEvent(new Event('input',{bubbles:true}));}
+ });
+ document.getElementById('featGroupName').focus();
+}
+function moveFeatGroup(id,delta){const o=ensureFeatOrganization(current()),i=o.groups.findIndex(g=>g.id===id),j=i+delta;if(i<0||j<0||j>=o.groups.length)return;[o.groups[i],o.groups[j]]=[o.groups[j],o.groups[i]];renderFeats();saveState();document.querySelector(`[data-group-move="${CSS.escape(id)}"][data-delta="${delta}"]`)?.focus()}
+function sortFeatList(list,sort){
+ if(sort==='level')list.sort((a,b)=>num(a.level)-num(b.level)||String(a.name).localeCompare(String(b.name),'pt-BR'));
+ if(sort==='name')list.sort((a,b)=>String(a.name).localeCompare(String(b.name),'pt-BR'));
+ if(sort==='category')list.sort((a,b)=>String(a.category).localeCompare(String(b.category),'pt-BR')||num(a.level)-num(b.level));
+ return list;
+}
+function moveFeat(id,delta){
+ const c=current(),f=c.feats.find(x=>x.id===id);if(!f)return;const o=ensureFeatOrganization(c),peers=sortFeatList(c.feats.filter(x=>x.groupId===f.groupId),o.sort),i=peers.findIndex(x=>x.id===id),target=peers[i+delta];if(!target)return;
+ const positions=c.feats.map((x,index)=>x.groupId===f.groupId?index:-1).filter(index=>index>=0);positions.forEach((position,index)=>c.feats[position]=peers[index]);
+ const a=c.feats.indexOf(f),b=c.feats.indexOf(target);[c.feats[a],c.feats[b]]=[c.feats[b],c.feats[a]];ensureFeatOrganization(c).sort='manual';renderFeats();saveState();document.querySelector(`[data-feat-move="${CSS.escape(id)}"][data-delta="${delta}"]`)?.focus();
+}
+function dropFeat(id,groupId,targetId,after=false){
+ const c=current(),f=c.feats.find(x=>x.id===id);if(!f||id===targetId)return;
+ if(groupId&&!featGroup(c,groupId))return;
+ c.feats.splice(c.feats.indexOf(f),1);f.groupId=groupId;
+ const target=c.feats.findIndex(x=>x.id===targetId);
+ if(target>=0)c.feats.splice(target+(after?1:0),0,f);else{const last=c.feats.map(x=>x.groupId).lastIndexOf(groupId);c.feats.splice(last<0?c.feats.length:last+1,0,f)}
+ const o=ensureFeatOrganization(c);o.sort='manual';const group=featGroup(c,groupId);if(group)group.collapsed=false;renderFeats();saveState();
+}
+function renderFeatControls(){
+ const c=current(),o=ensureFeatOrganization(c),groups=featGroupsWithFallback(c),filter=document.getElementById('featGroupFilter');
+ filter.innerHTML=[{id:'all',name:'Todos',icon:'☷',color:'#bcab77'},...groups.map(g=>({...g,id:g.id||'ungrouped'}))].map(g=>{
+  const count=g.id==='all'?c.feats.length:c.feats.filter(f=>(f.groupId||'ungrouped')===g.id).length;
+  return `<button type="button" class="feat-collection-tab ${o.filter===g.id?'active':''}" style="--group-accent:${g.color}" data-feat-filter="${esc(g.id)}" aria-pressed="${o.filter===g.id}"><span>${esc(g.icon)}</span>${esc(g.name)}<small>${count}</small></button>`;
+ }).join('');
+ filter.querySelectorAll('button').forEach(b=>b.onclick=()=>{o.filter=b.dataset.featFilter;renderFeats();saveState()});
+ document.getElementById('featSort').value=o.sort;
+ document.querySelectorAll('[data-feat-layout]').forEach(b=>{b.classList.toggle('active',b.dataset.featLayout===o.layout);b.setAttribute('aria-pressed',String(b.dataset.featLayout===o.layout))});
+ const toggle=document.getElementById('featDescriptions');toggle.setAttribute('aria-pressed',String(o.descriptions));toggle.textContent=o.descriptions?'Recolher descrições':'Expandir descrições';
+ document.getElementById('featSummaryCount').textContent=`${c.feats.length} habilidade(s) · ${o.groups.length} grupo(s)`;
+}
+function renderFeatCard(f,g,peers,o){
+ const look=featAppearance(f),index=peers.findIndex(x=>x.id===f.id);
+ return `<article class="feat-game-card organized-feat" data-feat-id="${esc(f.id)}" data-category="${esc(f.category)}" style="--entry-accent:${look.color}"><div class="entry-sigil" aria-hidden="true">${esc(look.icon)}</div><div class="entry-main"><div class="entry-kicker">${esc(f.category||'Habilidade')} · ${actionCompact(f.action)}</div><div class="entry-title-row"><h3 class="entry-title">${esc(f.name)}</h3><span class="entry-level">${!num(f.level)&&String(f.source||'').includes('nível próprio não informado')?'DA DEDICAÇÃO':`NÍVEL ${num(f.level)}`}</span></div>${f.source?`<div class="entry-meta">${esc(f.source)}</div>`:''}${f.traits?`<div class="entry-tags">${f.traits.split(',').filter(t=>t.trim()).map(t=>`<span class="tag">${esc(t.trim())}</span>`).join('')}</div>`:''}${f.description?`<details class="feat-description" ${o.descriptions?'open':''}><summary>Descrição & efeitos <span aria-hidden="true">⌄</span></summary><div class="entry-desc">${esc(f.description)}</div></details>`:'<div class="entry-meta">Sem descrição registrada.</div>'}<div class="entry-actions"><button class="btn small" data-edit-feat="${esc(f.id)}">Editar</button><label class="feat-move-label"><span class="sr-only">Mover ${esc(f.name)} para grupo</span><select class="input feat-move-select" data-feat-group="${esc(f.id)}" aria-label="Grupo de ${esc(f.name)}">${featGroupOptions(current(),f.groupId)}</select></label><div class="feat-order-actions"><button class="btn small" data-feat-move="${esc(f.id)}" data-delta="-1" ${index===0?'disabled':''} aria-label="Mover ${esc(f.name)} para cima">↑</button><button class="btn small" data-feat-move="${esc(f.id)}" data-delta="1" ${index===peers.length-1?'disabled':''} aria-label="Mover ${esc(f.name)} para baixo">↓</button><button class="btn small feat-drag-handle" data-drag-feat="${esc(f.id)}" aria-label="Arrastar ${esc(f.name)}" title="Arraste para outro cartão ou grupo">⠿</button></div><button class="btn small danger" data-del-feat="${esc(f.id)}" aria-label="Remover ${esc(f.name)}">×</button></div></div></article>`;
+}
+function renderFeats(){
+ const c=current(),o=ensureFeatOrganization(c);renderPathManager();renderFeatControls();if(!document.getElementById('featEditor').classList.contains('open'))renderFeatEditor();
+ const q=(document.getElementById('featSearch').value||'').trim().toLocaleLowerCase('pt-BR'),cat=document.getElementById('featCategoryFilter').value,root=document.getElementById('featList');let visible=0;
+ root.className='feat-collections layout-'+o.layout;
+ root.innerHTML=featGroupsWithFallback(c).filter(g=>o.filter==='all'||(g.id||'ungrouped')===o.filter).map(g=>{
+  const peers=sortFeatList(c.feats.filter(f=>f.groupId===g.id),o.sort),list=peers.filter(f=>(!q||[f.name,f.traits,f.description,f.source,g.name].join(' ').toLocaleLowerCase('pt-BR').includes(q))&&(!cat||f.category===cat));
+  if(!g.id&&!peers.length&&o.filter!=='ungrouped')return '';
+  if((q||cat)&&!list.length)return '';
+  visible+=list.length;const groupIndex=o.groups.findIndex(x=>x.id===g.id);
+  return `<section class="feat-collection ${g.collapsed?'collapsed':''}" data-feat-collection="${esc(g.id)}" style="--group-accent:${g.color}"><div class="feat-collection-head"><button class="feat-group-toggle" data-toggle-group="${esc(g.id)}" aria-expanded="${!g.collapsed}" ${!g.id?'disabled':''}><span class="collection-icon" aria-hidden="true">${esc(g.icon)}</span><span><b>${esc(g.name)}</b><small>${list.length}${list.length!==peers.length?' de '+peers.length:''} habilidade(s)</small></span><em aria-hidden="true">${g.collapsed?'＋':'−'}</em></button><div class="feat-group-actions"><button class="btn small" data-add-to-group="${esc(g.id)}" aria-label="Adicionar habilidade a ${esc(g.name)}">＋ Habilidade</button>${g.id?`<button class="btn small" data-edit-group="${esc(g.id)}" aria-label="Editar grupo ${esc(g.name)}">Personalizar</button><button class="btn small" data-group-move="${esc(g.id)}" data-delta="-1" ${groupIndex===0?'disabled':''} aria-label="Mover grupo ${esc(g.name)} para cima">↑</button><button class="btn small" data-group-move="${esc(g.id)}" data-delta="1" ${groupIndex===o.groups.length-1?'disabled':''} aria-label="Mover grupo ${esc(g.name)} para baixo">↓</button>`:''}</div></div><div class="feat-group-body" ${g.collapsed?'hidden':''}>${list.length?list.map(f=>renderFeatCard(f,g,peers,o)).join(''):`<div class="feat-group-empty">${g.id==='dedications'?'Crie um grupo para cada dedicação ou reúna seus poderes aqui.':'Adicione habilidades aqui ou mova cartões de outro grupo.'}</div>`}</div></section>`;
+ }).join('');
+ if(!root.innerHTML.trim())root.innerHTML='<div class="library-empty">Nenhuma habilidade encontrada com esses filtros.</div>';
+ document.getElementById('featResultsCount').textContent=`${visible} de ${c.feats.length} habilidade(s)`;
+ const bind=(selector,handler,event='click')=>root.querySelectorAll(selector).forEach(b=>b.addEventListener(event,()=>handler(b)));
+ bind('[data-edit-feat]',b=>openFeatEditor(b.dataset.editFeat));
+ bind('[data-add-to-group]',b=>openFeatEditor('new',b.dataset.addToGroup));
+ bind('[data-edit-group]',b=>openFeatGroupEditor(b.dataset.editGroup));
+ bind('[data-toggle-group]',b=>{const g=featGroup(c,b.dataset.toggleGroup);if(g){g.collapsed=!g.collapsed;renderFeats();saveState()}});
+ bind('[data-group-move]',b=>moveFeatGroup(b.dataset.groupMove,num(b.dataset.delta)));
+ bind('[data-feat-move]',b=>moveFeat(b.dataset.featMove,num(b.dataset.delta)));
+ bind('[data-feat-group]',b=>dropFeat(b.dataset.featGroup,b.value,null),'change');
+ bind('[data-del-feat]',b=>{const f=c.feats.find(x=>x.id===b.dataset.delFeat);if(!f||!confirm(`Remover “${f.name}” da ficha?`))return;c.feats=c.feats.filter(x=>x.id!==f.id);renderFeats();saveState()});
+ root.querySelectorAll('[data-drag-feat]').forEach(handle=>handle.addEventListener('pointerdown',e=>{
+  if(e.button!==0)return;e.preventDefault();handle.setPointerCapture(e.pointerId);
+  const start={x:e.clientX,y:e.clientY,id:handle.dataset.dragFeat};let moved=false;
+  const move=ev=>{
+   if(!moved&&Math.hypot(ev.clientX-start.x,ev.clientY-start.y)<6)return;
+   moved=true;featDrag={id:start.id};document.body.classList.add('feat-drag-active');handle.closest('article').classList.add('dragging');
+   const target=document.elementFromPoint(ev.clientX,ev.clientY)?.closest('[data-feat-collection]');
+   root.querySelectorAll('.drag-over').forEach(x=>x.classList.remove('drag-over'));target?.classList.add('drag-over');
+  };
+  const finish=ev=>{
+   handle.removeEventListener('pointermove',move);handle.removeEventListener('pointerup',finish);handle.removeEventListener('pointercancel',cancel);
+   if(moved){const target=document.elementFromPoint(ev.clientX,ev.clientY),section=target?.closest('[data-feat-collection]'),card=target?.closest('[data-feat-id]');if(section)dropFeat(start.id,section.dataset.featCollection,card?.dataset.featId,card?ev.clientY>card.getBoundingClientRect().top+card.getBoundingClientRect().height/2:false)}
+   clearFeatDrag();
+  };
+  const cancel=()=>{handle.removeEventListener('pointermove',move);handle.removeEventListener('pointerup',finish);handle.removeEventListener('pointercancel',cancel);clearFeatDrag()};
+  handle.addEventListener('pointermove',move);handle.addEventListener('pointerup',finish);handle.addEventListener('pointercancel',cancel);
+ }));
+}
+function clearFeatDrag(){featDrag=null;document.body.classList.remove('feat-drag-active');document.querySelectorAll('.dragging,.drag-over').forEach(e=>e.classList.remove('dragging','drag-over'))}
+function bindFeatOrganization(){
+ document.getElementById('featEditor').addEventListener('click',e=>{if(e.target===e.currentTarget)closeFeatEditor()},true);
+ document.getElementById('featGroupModal').addEventListener('click',e=>{if(e.target===e.currentTarget)document.getElementById('closeFeatGroup')?.click()},true);
+ document.getElementById('addFeatBtn').onclick=()=>openFeatEditor('new');
+ document.getElementById('sortFeatsBtn').onclick=()=>openFeatGroupEditor('new');
+ document.getElementById('featSearch').oninput=renderFeats;document.getElementById('featCategoryFilter').onchange=renderFeats;
+ document.getElementById('featSort').onchange=e=>{ensureFeatOrganization(current()).sort=e.target.value;renderFeats();saveState()};
+ document.querySelectorAll('[data-feat-layout]').forEach(b=>b.onclick=()=>{ensureFeatOrganization(current()).layout=b.dataset.featLayout;renderFeats();saveState()});
+ document.getElementById('featDescriptions').onclick=()=>{const o=ensureFeatOrganization(current());o.descriptions=!o.descriptions;renderFeats();saveState()};
+ document.getElementById('featClearFilters').onclick=()=>{document.getElementById('featSearch').value='';document.getElementById('featCategoryFilter').value='';ensureFeatOrganization(current()).filter='all';renderFeats();saveState()};
+ document.addEventListener('keydown',e=>{
+  const group=document.getElementById('featGroupModal'),editor=document.getElementById('featEditor'),active=group.classList.contains('open')?group:editor.classList.contains('open')?editor:null;if(!active)return;
+  if(e.key==='Escape'){e.preventDefault();e.stopImmediatePropagation();if(active===group)document.getElementById('closeFeatGroup').click();else closeFeatEditor();return}
+  if(e.key==='Tab'){const focusable=[...active.querySelectorAll('button,input,select,textarea,summary')].filter(x=>!x.disabled&&x.getClientRects().length);const first=focusable[0],last=focusable.at(-1);if(e.shiftKey&&document.activeElement===first){e.preventDefault();last?.focus()}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus()}}
+ },true);
+}
+
 function renderPathManager(){
   const root=document.getElementById('pathManager');if(!root)return;const c=current();
   const paths=String(c.identity.archetype||'').split(/[•,]/).map(x=>x.trim()).filter(Boolean);
@@ -1019,7 +1230,6 @@ function renderPathManager(){
   root.querySelectorAll('.tracker-max').forEach(el=>el.addEventListener('change',()=>{const t=c.trackers.find(x=>x.id===el.dataset.id);if(t){t.max=Math.max(0,Math.floor(num(el.value)));t.current=Math.min(num(t.current),t.max);saveState();renderPathManager()}}));
 }
 
-function renderFeats(){renderPathManager();renderFeatEditor();const c=current(),q=(document.getElementById('featSearch')?.value||'').toLowerCase(),cat=document.getElementById('featCategoryFilter')?.value||'';let list=c.feats.filter(f=>(!q||(f.name+' '+f.traits+' '+f.description).toLowerCase().includes(q))&&(!cat||f.category===cat));document.getElementById('featList').innerHTML=list.length?list.map(f=>`<article class="feat-game-card" data-category="${esc(f.category)}"><div class="entry-sigil">${featSigil(f.category)}</div><div class="entry-main"><div class="entry-kicker">${esc(f.category)} • ${actionCompact(f.action)}</div><div class="entry-title-row"><div class="entry-title">${esc(f.name)}</div><span class="entry-level">${!num(f.level)&&String(f.source||'').includes('nível próprio não informado')?'DA DEDICAÇÃO':`NÍVEL ${f.level}`}</span></div><div class="entry-meta">${f.source?`Fonte: ${esc(f.source)}`:'Registro da personagem'}${f.action!=='passive'?` • Custo ${ACTION_LABEL[f.action]||'—'}`:''}</div>${f.traits?`<div class="entry-tags">${f.traits.split(',').map(t=>`<span class="tag">${esc(t.trim())}</span>`).join('')}</div>`:''}${f.description?`<div class="entry-desc">${esc(f.description)}</div>`:''}<div class="entry-actions"><span class="action-glyph">${actionCompact(f.action)}</span><button class="btn small" data-edit-feat="${f.id}">Inspecionar / Editar</button><button class="btn small danger" data-del-feat="${f.id}">Remover</button></div></div></article>`).join(''):'<div class="library-empty" style="grid-column:1/-1">Nenhum talento registrado. Use “Adicionar” para gravar uma nova memória.</div>';document.querySelectorAll('[data-edit-feat]').forEach(b=>b.onclick=()=>{editorFeat=b.dataset.editFeat;renderFeatEditor();b.closest('.panel')?.scrollIntoView({behavior:'smooth',block:'start'})});document.querySelectorAll('[data-del-feat]').forEach(b=>b.onclick=()=>{current().feats=current().feats.filter(x=>x.id!==b.dataset.delFeat);renderFeats();saveState()})}
 function renderSpellDerived(){const c=current(),t=spellTotals(c),el=document.getElementById('spellDerived');if(!el)return;el.style.gridTemplateColumns='repeat(4,1fr)';el.innerHTML=`<div class="derived-card"><small>BDA de Conjuração</small><b>${signed(t.attack)}</b><span>${(c.spellcasting.key||'wis').toUpperCase()}</span><button class="btn roll-stat" id="rollSpellAtk">d20</button></div><div class="derived-card"><small>Bônus de Dano</small><b>${signed(t.damage)}</b><span>Conjuração</span></div><div class="derived-card"><small>CD de Conjuração</small><b>${t.dc}</b><span>${c.spellcasting.manualDCEnabled?'Manual':RANK_LABEL[c.spellcasting.rank]}</span></div><div class="derived-card"><small>Foco</small><b>${c.focus.current}/${c.focus.max}</b><span>Pontos</span></div>`;document.getElementById('rollSpellAtk').onclick=()=>rollCheck('Conjuração',t.attack)}
 function renderSpellConfig(){const c=current(),s=c.spellcasting;document.getElementById('spellConfig').innerHTML=`<div class="field"><label>Tradição / Fonte</label><input class="input spell-config" data-key="tradition" value="${esc(s.tradition)}" placeholder="Divina, Arcana, Piromancia..."/></div><div class="field"><label>Atributo-chave</label><select class="input spell-config" data-key="key">${ATTRS.map(([k,n])=>`<option value="${k}" ${s.key===k?'selected':''}>${n}</option>`).join('')}</select></div><div class="field"><label>Proficiência</label><select class="input spell-config" data-key="rank">${rankOptions(s.rank)}</select></div><div class="field"><label>Bônus de Item</label><input class="input spell-config" data-key="item" type="number" value="${num(s.item)}"/></div><div class="field"><label>Outros</label><input class="input spell-config" data-key="other" type="number" value="${num(s.other)}"/></div><div class="field"><label>Bônus de Dano</label><input class="input spell-config" data-key="damageBonus" type="number" value="${num(s.damageBonus)}"/></div><div class="field"><label>BDA Manual</label><div style="display:grid;grid-template-columns:auto 1fr;gap:5px"><input class="spell-config" data-key="manualAttackEnabled" type="checkbox" ${s.manualAttackEnabled?'checked':''}/><input class="input spell-config" data-key="manualAttack" type="number" value="${num(s.manualAttack)}"/></div></div><div class="field"><label>CD Manual</label><div style="display:grid;grid-template-columns:auto 1fr;gap:5px"><input class="spell-config" data-key="manualDCEnabled" type="checkbox" ${s.manualDCEnabled?'checked':''}/><input class="input spell-config" data-key="manualDC" type="number" value="${num(s.manualDC)}"/></div></div><div class="field"><label>Modo</label><select class="input spell-config" data-key="mode"><option ${s.mode==='Preparada'?'selected':''}>Preparada</option><option ${s.mode==='Espontânea'?'selected':''}>Espontânea</option><option ${s.mode==='Mista'?'selected':''}>Mista</option></select></div>`;document.querySelectorAll('.spell-config').forEach(el=>el.addEventListener('input',()=>{current().spellcasting[el.dataset.key]=el.type==='checkbox'?el.checked:el.type==='number'?num(el.value):el.value;renderSpellDerived();saveState()}));renderSpellDerived()}
 function renderSlots(){const c=current();document.getElementById('slotGrid').innerHTML=c.spellcasting.slots.map(s=>`<div class="slot-card"><b>${s.rank}º Círculo</b><div class="slot-controls"><input class="input slot-input" data-rank="${s.rank}" data-key="current" type="number" min="0" value="${s.current}" title="Atuais"/><input class="input slot-input" data-rank="${s.rank}" data-key="max" type="number" min="0" value="${s.max}" title="Máximo"/></div></div>`).join('');document.querySelectorAll('.slot-input').forEach(el=>el.addEventListener('input',()=>{const s=current().spellcasting.slots.find(x=>x.rank===num(el.dataset.rank));s[el.dataset.key]=Math.max(0,num(el.value));saveState()}))}
@@ -1309,7 +1519,7 @@ document.getElementById('addAttackBtn').onclick=()=>{editorAttack='new';renderAt
 document.getElementById('skillSearch').oninput=renderSkills;document.getElementById('addLoreBtn').onclick=()=>{const name=prompt('Nome da Lore:','Lore:');if(!name)return;const s=makeSkill(name,'int');s.lore=true;current().skills.push(s);renderSkills();saveState()};document.getElementById('skillResetBtn').onclick=()=>{if(!confirm('Redefinir apenas os ranks das perícias para Sem Treino?'))return;current().skills.forEach(s=>s.rank='U');renderSkills();saveState()};
 
 // Feats
-document.getElementById('addFeatBtn').onclick=()=>{editorFeat='new';renderFeatEditor()};document.getElementById('featSearch').oninput=renderFeats;document.getElementById('featCategoryFilter').onchange=renderFeats;document.getElementById('sortFeatsBtn').onclick=()=>{current().feats.sort((a,b)=>a.level-b.level||a.name.localeCompare(b.name));renderFeats();saveState()};
+bindFeatOrganization();
 
 // Spells
 document.getElementById('addSpellBtn').onclick=()=>{editorSpell='new';renderSpellEditor()};document.getElementById('addSpecialSlotBtn').onclick=()=>{current().spellcasting.specialSlots.push({id:uid(),name:'Ferir / Curar',rank:1,current:0,max:0});renderSpecialSlots();saveState()};document.getElementById('restoreSlotsBtn').onclick=()=>{current().spellcasting.slots.forEach(s=>s.current=s.max);current().spellcasting.specialSlots.forEach(s=>s.current=s.max);current().focus.current=current().focus.max;renderSlots();renderResources();renderSpellDerived();saveState();toast('Slots e Foco restaurados.')};
