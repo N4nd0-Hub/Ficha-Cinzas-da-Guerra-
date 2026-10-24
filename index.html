@@ -364,18 +364,20 @@ main{padding:26px 28px 40px}.sheet{max-width:1540px;background:color-mix(in srgb
 .feat-color-hex.input{width:95px;min-width:80px;flex:none;padding:8px;font:12px monospace}.feat-color-row{flex-wrap:wrap}.feat-inherit{flex-basis:100%}
 .feat-inherit{text-transform:none!important;letter-spacing:0!important;font-weight:400!important}.feat-collection.collapsed .feat-group-toggle{min-height:42px}
 body.feat-drag-active,body.feat-drag-active *{cursor:grabbing!important;user-select:none!important}.feat-drag-handle{touch-action:none}
+</style><style id="durable-saving-style">
+.save-indicator[data-save-state="loading"]::before,.save-indicator[data-save-state="saving"]::before{background:#82b7cf}.save-indicator[data-save-state="pending"]::before,.save-indicator[data-save-state="conflict"]::before{background:#d6b46e}.save-health-status{border:1px solid var(--line);border-left:3px solid var(--good);padding:17px;border-radius:4px;background:var(--theme-deep)}.save-health-status b{display:block;font:700 20px Georgia,serif;color:var(--text)}.save-health-status span{display:block;font:12px var(--ui-font);color:var(--muted);margin-top:9px}.save-health-status[data-state="error"]{border-left-color:var(--danger)}.save-health-status[data-state="pending"],.save-health-status[data-state="conflict"]{border-left-color:var(--gold)}.save-health-actions{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.save-recovery-row{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:13px 0;border-bottom:1px solid var(--line)}.save-recovery-row b{display:block;font-size:13px}.save-recovery-row small{display:block;margin-top:5px;color:var(--muted);font-size:11px}#saveRecoveryCopies h3{font:700 18px Georgia,serif;margin-top:25px}.save-health-modal{width:min(650px,96vw)}.storage-notice .storage-msg{max-width:900px;line-height:1.6}.storage-notice .btn{flex:none}@media(max-width:650px){.save-health-status b{font-size:18px}.save-health-actions .btn{flex:1}.save-recovery-row{flex-wrap:wrap}.storage-notice{padding:13px 15px}.storage-notice .storage-msg{flex-basis:100%}}
 </style></head>
 <body>
 <header class="topbar">
 <button aria-controls="characterDrawer" aria-expanded="false" aria-label="Abrir personagens" class="btn icon ghost" id="drawerBtn" title="Personagens">☰</button>
 <div class="brand"><div class="brand-sigil"></div><div class="brand-title">Cinzas da Guerra<small>Terras Intermédias • Ficha do jogador</small></div></div>
-<span class="save-indicator" id="saveIndicator" role="status">Salvo neste navegador</span><div class="top-actions">
-<details class="toolbar-menu" id="toolbarMenu"><summary class="btn">Opções <span aria-hidden="true">⌄</span></summary><div class="toolbar-popover"><button class="btn" id="themeBtn">◈ <span class="label" id="themeBtnLabel">Tema</span></button><button class="btn" id="classManagerBtn">♜ <span class="label">Classes</span></button><button class="btn" id="exportBtn">Exportar</button><button class="btn" id="importBtn">Importar</button><button class="btn" id="printBtn">Imprimir</button><button class="btn" id="mobileRollBtn" type="button">Rolar dados</button></div></details><button class="btn hide-mobile" id="rollBtn">d20 <span class="label">Rolagem</span></button>
+<span class="save-indicator" data-save-state="loading" id="saveIndicator" role="status">Abrindo ficha…</span><div class="top-actions">
+<details class="toolbar-menu" id="toolbarMenu"><summary class="btn">Opções <span aria-hidden="true">⌄</span></summary><div class="toolbar-popover"><button class="btn" id="saveHealthBtn" type="button">Salvamento e backup</button><button class="btn" id="themeBtn">◈ <span class="label" id="themeBtnLabel">Tema</span></button><button class="btn" id="classManagerBtn">♜ <span class="label">Classes</span></button><button class="btn" id="exportBtn">Exportar</button><button class="btn" id="importBtn">Importar</button><button class="btn" id="printBtn">Imprimir</button><button class="btn" id="mobileRollBtn" type="button">Rolar dados</button></div></details><button class="btn hide-mobile" id="rollBtn">d20 <span class="label">Rolagem</span></button>
 <input accept=".json,application/json,text/plain" hidden="" id="importFile" type="file"/>
 <button aria-label="Nova ficha" class="btn primary" id="newBtn">＋ <span class="label">Nova Ficha</span></button>
 </div>
 </header>
-<div class="storage-notice" hidden="" id="storageNotice" role="alert"><span class="storage-msg"></span><button class="btn small primary" id="storageExportBtn">Exportar meu JSON</button></div>
+<div class="storage-notice" hidden="" id="storageNotice" role="alert"><span class="storage-msg"></span><button class="btn small primary" id="storageExportBtn">Exportar meu JSON</button><button class="btn small" id="storageRetryBtn" type="button">Salvar agora</button><button class="btn small" hidden="" id="storageReloadBtn" type="button">Recarregar versão salva</button></div>
 <div class="app" id="app">
 <aside aria-label="Personagens salvos" class="drawer" id="characterDrawer">
 <div class="drawer-inner">
@@ -697,7 +699,7 @@ body.feat-drag-active,body.feat-drag-active *{cursor:grabbing!important;user-sel
 </div>
 </div></div></div>
 <div class="toast" id="toast"></div>
-<div class="modal-backdrop" id="featEditor"></div><div class="modal-backdrop" id="featGroupModal"></div><script>
+<div class="modal-backdrop" id="featEditor"></div><div class="modal-backdrop" id="featGroupModal"></div><div class="modal-backdrop" id="saveHealthModal"><div aria-labelledby="saveHealthTitle" aria-modal="true" class="modal save-health-modal" role="dialog"><div class="modal-head"><b id="saveHealthTitle">Salvamento e backup</b><button class="btn small" data-close="saveHealthModal">Fechar</button></div><div class="modal-body" id="saveHealthBody"></div></div></div><script>
 // Armazenamento tolerante a navegadores que bloqueiam localStorage (ex.: visualizadores).
 // Nunca apaga o save persistido quando o navegador recusa uma gravação.
 const _volatileStore = new Map();
@@ -905,17 +907,178 @@ function ensure(c){
   c.inventory=Object.assign(b.inventory,c.inventory||{});c.inventory.coins=Object.assign(b.inventory.coins,c.inventory.coins||{});c.inventory.items=Array.isArray(c.inventory.items)?c.inventory.items:[];
   c.journal=Object.assign(b.journal,c.journal||{});c.rolls=Array.isArray(c.rolls)?c.rolls:[];ensureFeatOrganization(c);return c;
 }
-try{if(!safeStore.getItem(SAVE_BACKUP_STORAGE)&&safeStore.getItem(STORAGE_KEY))safeStore.setItem(SAVE_BACKUP_STORAGE,safeStore.getItem(STORAGE_KEY))}catch(e){}
+
 function loadState(){try{const raw=safeStore.getItem(STORAGE_KEY);if(raw){const s=JSON.parse(raw);if(Array.isArray(s.characters)&&s.characters.length){s.characters.forEach(ensure);return s}}}catch(e){}const c=blankCharacter();return {version:'2.0',currentId:c.id,currentPage:'overview',characters:[c]}}
 let state=loadState();let currentId=state.currentId||state.characters[0].id;let editorAttack=null,editorFeat=null,editorSpell=null,editorItem=null;
 function current(){let c=state.characters.find(x=>x.id===currentId);if(!c){c=state.characters[0];currentId=c.id}return c}
-function saveState(){
- state.currentId=currentId;state.version='2.0';
- const ok=safeStore.setItem(STORAGE_KEY,JSON.stringify(state));
- updateSaveIndicator(ok);
- if(!ok)showStorageNotice('O navegador não conseguiu salvar esta ficha. Exporte seu JSON agora; ao fechar a página, mudanças recentes podem se perder.');
- return ok;
+// Transactional, serialized saves. Optional spell caches never decide sheet-save status.
+const SHEET_DB_NAME='cinzas_sheet_durable_v1',SHEET_DB_STORE='records',SHEET_EMERGENCY_KEY='pf2e_cinzas_emergency_v1';
+const sheetSave={db:null,opening:null,ready:false,timer:null,chain:Promise.resolve(),generation:0,sequence:0,inFlight:0,lastIntentAt:0,dirty:false,importing:false,conflict:false,blocked:false,status:'loading',backend:'',savedAt:0,baseRevision:null,compatRevision:null,persistedJSON:null,sessionId:Date.now().toString(36)+'-'+Math.random().toString(36).slice(2),channel:null};
+function storedSheet(json){try{const data=JSON.parse(json);if(!data||!Array.isArray(data.characters)||!data.characters.length||data.characters.some(c=>!c||typeof c!=='object'||Array.isArray(c)))return null;return data}catch(_){return null}}
+function sheetSaveTime(){return sheetSave.lastIntentAt=Math.max(Date.now(),sheetSave.lastIntentAt+1)}
+function sheetRecord(json,savedAt=sheetSaveTime()){return {json,savedAt,revision:sheetSave.sessionId+':'+(++sheetSave.sequence),sessionId:sheetSave.sessionId}}
+function saveConflict(){const error=new Error('Outra aba salvou uma versão mais recente.');error.name='SheetConflictError';return error}
+function openSheetDatabase(){
+ if(sheetSave.db)return Promise.resolve(sheetSave.db);if(sheetSave.opening)return sheetSave.opening;
+ sheetSave.opening=new Promise((resolve,reject)=>{
+  let request,settled=false;const finish=(error,db)=>{if(settled){db?.close();return}settled=true;clearTimeout(timer);if(error)reject(error);else resolve(db)};
+  const timer=setTimeout(()=>finish(new Error('O armazenamento local demorou para responder.')),3500);
+  try{
+   request=indexedDB.open(SHEET_DB_NAME,1);
+   request.onupgradeneeded=()=>{if(!request.result.objectStoreNames.contains(SHEET_DB_STORE))request.result.createObjectStore(SHEET_DB_STORE)};
+   request.onerror=()=>finish(request.error||new Error('Não foi possível abrir o armazenamento local.'));
+   request.onblocked=()=>finish(new Error('Outra versão da ficha está mantendo o armazenamento ocupado.'));
+   request.onsuccess=()=>{const db=request.result;if(settled){db.close();return}sheetSave.db=db;db.onversionchange=()=>{db.close();if(sheetSave.db===db)sheetSave.db=null};db.onclose=()=>{if(sheetSave.db===db)sheetSave.db=null};finish(null,db)};
+  }catch(error){finish(error)}
+ }).finally(()=>{sheetSave.opening=null});return sheetSave.opening;
 }
+async function readSheetRecords(){
+ const db=await openSheetDatabase();return new Promise((resolve,reject)=>{
+  const tx=db.transaction(SHEET_DB_STORE,'readonly'),store=tx.objectStore(SHEET_DB_STORE),out={};
+  for(const key of ['main','previous','before-import']){const request=store.get(key);request.onsuccess=()=>out[key]=request.result||null}
+  tx.oncomplete=()=>resolve(out);tx.onabort=()=>reject(tx.error||new Error('A leitura foi interrompida.'));tx.onerror=()=>{};
+ });
+}
+async function writeSheetRecord(json,beforeImportJSON,savedAt){
+ const db=await openSheetDatabase();return new Promise((resolve,reject)=>{
+  let tx;try{tx=db.transaction(SHEET_DB_STORE,'readwrite',{durability:'strict'})}catch(_){tx=db.transaction(SHEET_DB_STORE,'readwrite')}
+  const store=tx.objectStore(SHEET_DB_STORE),record=sheetRecord(json,savedAt),request=store.get('main');let failure=null,result=record;
+  request.onsuccess=()=>{
+   const old=request.result;
+   if(old&&old.revision!==sheetSave.baseRevision&&old.json!==json&&old.json!==sheetSave.persistedJSON){failure=saveConflict();tx.abort();return}
+   if(old?.json===json&&!beforeImportJSON){result=old;return}
+   if(old&&storedSheet(old.json))store.put(old,'previous');
+   if(beforeImportJSON)store.put(sheetRecord(beforeImportJSON),'before-import');
+   store.put(record,'main');
+  };
+  tx.oncomplete=()=>{sheetSave.baseRevision=result.revision;resolve({...result,backend:'database'})};
+  tx.onabort=()=>reject(failure||tx.error||new Error('O navegador interrompeu a gravação.'));tx.onerror=()=>{};
+ });
+}
+function readCompatibilityRecord(){try{const raw=window.localStorage.getItem(SHEET_EMERGENCY_KEY);if(!raw)return null;const record=JSON.parse(raw);return storedSheet(record?.json)?record:null}catch(_){return null}}
+function discardRebuildableSpellCaches(){
+ // Only downloaded catalog/translation caches; never sheets, custom classes or backups.
+ for(const key of [SPELL_LIBRARY_STORAGE,PF2E_PUBLIC_RANKS_STORAGE,PF2E_PTBR_DESC_STORAGE,PF2E_AUTO_PTBR_DESC_STORAGE])try{window.localStorage.removeItem(key)}catch(_){}
+}
+function writeCompatibilityRecord(json,savedAt=sheetSaveTime()){
+ const previous=readCompatibilityRecord();
+ if(previous&&previous.revision!==sheetSave.compatRevision&&previous.json!==json&&previous.json!==sheetSave.persistedJSON)throw saveConflict();
+ if(previous?.sessionId===sheetSave.sessionId&&previous.savedAt>savedAt)return {...previous,backend:'compatibility'};
+ const record={...sheetRecord(json,savedAt),baseRevision:sheetSave.baseRevision},text=JSON.stringify(record);
+ const write=()=>{window.localStorage.setItem(SHEET_EMERGENCY_KEY,text);if(window.localStorage.getItem(SHEET_EMERGENCY_KEY)!==text)throw new Error('A gravação não pôde ser confirmada.')};
+ try{write()}catch(error){if(error.name!=='QuotaExceededError'&&error.code!==22&&error.code!==1014)throw error;discardRebuildableSpellCaches();write()}
+ sheetSave.compatRevision=record.revision;return {...record,backend:'compatibility'};
+}
+function queueSheetOperation(fn){const pending=sheetSave.chain.then(fn,fn);sheetSave.chain=pending.catch(()=>{});return pending}
+async function persistSheetSnapshot(json,options={}){
+ const savedAt=sheetSaveTime();
+ return queueSheetOperation(async()=>{
+  try{return await writeSheetRecord(json,options.beforeImportJSON,savedAt)}catch(error){
+   if(error.name==='SheetConflictError')throw error;
+   try{sheetSave.db?.close()}catch(_){}sheetSave.db=null;
+   // Import must keep a recoverable prior version as well as the new state.
+   if(options.beforeImportJSON&&!importBackupDownloaded){const backed=safeStore.setItem(IMPORT_BACKUP_KEY,options.beforeImportJSON);if(!backed)throw new Error('Baixe o backup atual antes de confirmar a importação neste navegador.')}
+   return writeCompatibilityRecord(json,savedAt);
+  }
+ });
+}
+function setSheetSaveStatus(status,record){
+ sheetSave.status=status;const el=document.getElementById('saveIndicator');if(!el)return;
+ const labels={loading:'Abrindo ficha…',pending:'Alterações pendentes',saving:'Salvando…',saved:'Salvo neste navegador',error:'Alterações não salvas',conflict:'Atualização em outra aba'};
+ el.textContent=labels[status]||labels.error;el.dataset.saveState=status;el.classList.toggle('save-error',status==='error');
+ if(record){sheetSave.savedAt=record.savedAt;sheetSave.backend=record.backend||sheetSave.backend}
+ el.title=sheetSave.savedAt?'Último salvamento: '+new Date(sheetSave.savedAt).toLocaleString('pt-BR'):labels[status];
+ if(status==='saved'&&!sheetSave.conflict)clearStorageNotice();
+ const modal=document.getElementById('saveHealthModal');if(modal?.classList.contains('open'))renderSaveHealth();
+}
+function handleSheetSaveError(error){
+ sheetSave.dirty=true;
+ if(error.name==='SheetConflictError'){
+  sheetSave.conflict=true;setSheetSaveStatus('conflict');showStorageNotice('Outra aba salvou uma versão mais recente. Exporte suas alterações antes de recarregar para escolher qual versão manter.');
+ }else{
+  setSheetSaveStatus('error');showStorageNotice('As alterações recentes ainda não foram salvas neste navegador. Tente “Salvar agora” ou exporte um backup antes de sair.');
+ }
+ const reload=document.getElementById('storageReloadBtn');if(reload)reload.hidden=!sheetSave.conflict;
+}
+function saveState(){
+ if(!sheetSave.ready||sheetSave.importing||sheetSave.blocked||sheetSave.conflict)return;
+ state.currentId=currentId;state.version='2.0';sheetSave.generation++;sheetSave.dirty=true;
+ clearTimeout(sheetSave.timer);setSheetSaveStatus('pending');sheetSave.timer=setTimeout(()=>flushSheetSave(),300);
+}
+async function flushSheetSave(){
+ clearTimeout(sheetSave.timer);sheetSave.timer=null;
+ if(!sheetSave.ready||sheetSave.importing||sheetSave.blocked||sheetSave.conflict)return false;
+ state.currentId=currentId;state.version='2.0';const generation=sheetSave.generation;let json;
+ try{json=JSON.stringify(state)}catch(error){handleSheetSaveError(error);return false}
+ if(json===sheetSave.persistedJSON&&!sheetSave.dirty&&!sheetSave.inFlight){setSheetSaveStatus('saved');return true}
+ if(json===sheetSave.persistedJSON&&!sheetSave.inFlight){sheetSave.dirty=false;setSheetSaveStatus('saved');return true}
+ setSheetSaveStatus('saving');sheetSave.inFlight++;
+ try{
+  const record=await persistSheetSnapshot(json);sheetSave.persistedJSON=record.json;
+  if(generation===sheetSave.generation){sheetSave.dirty=false;setSheetSaveStatus('saved',record)}else{sheetSave.savedAt=record.savedAt;sheetSave.backend=record.backend;setSheetSaveStatus('pending');if(!sheetSave.timer&&!sheetSave.importing)sheetSave.timer=setTimeout(()=>flushSheetSave(),30)}
+  notifySheetSaved(record);return true;
+ }catch(error){handleSheetSaveError(error);return false}finally{sheetSave.inFlight--}
+}
+async function hydrateSheetState(){
+ let records={},readError=null;try{records=await readSheetRecords()}catch(error){readError=error}
+ const compatibility=readCompatibilityRecord();sheetSave.compatRevision=compatibility?.revision||null;sheetSave.baseRevision=records.main?.revision||compatibility?.baseRevision||null;
+ const candidates=[];if(records.main)candidates.push({...records.main,source:'main',backend:'database'});if(compatibility&&(!records.main||records.main.json===compatibility.json||compatibility.baseRevision===records.main.revision||(compatibility.sessionId===records.main.sessionId&&compatibility.savedAt>=records.main.savedAt)))candidates.push({...compatibility,source:'compatibility',backend:'compatibility'});
+ let legacy=null;try{legacy=window.localStorage.getItem(STORAGE_KEY)}catch(_){}
+
+ const primary=candidates.sort((a,b)=>(Number(b.savedAt)||0)-(Number(a.savedAt)||0));
+ for(const key of ['previous','before-import'].filter(key=>records[key]).sort((a,b)=>records[b].savedAt-records[a].savedAt))primary.push({...records[key],source:key,backend:'database'});
+ if(legacy)primary.push({json:legacy,savedAt:0,source:'legacy',backend:'compatibility'});
+ for(const key of [IMPORT_BACKUP_KEY,SAVE_BACKUP_STORAGE]){let json;try{json=window.localStorage.getItem(key)}catch(_){}if(json)primary.push({json,savedAt:0,source:'legacy-backup',backend:'compatibility'})}
+ let selected=null;
+ for(const record of primary){const parsed=storedSheet(record.json);if(!parsed)continue;try{parsed.characters.forEach(c=>{if(!c.id)c.id=uid();ensure(c)});if(!PAGE_ORDER.includes(parsed.currentPage))parsed.currentPage='overview';if(!parsed.characters.some(c=>c.id===parsed.currentId))parsed.currentId=parsed.characters[0].id;selected={data:parsed,record};break}catch(_){}}
+ if(selected){
+  state=selected.data;currentId=state.currentId;sheetSave.savedAt=selected.record.savedAt||0;sheetSave.lastIntentAt=sheetSave.savedAt;sheetSave.backend=selected.record.backend;
+  // First successful commit also migrates older local saves and normalizes their schema.
+  sheetSave.persistedJSON=selected.record.source==='main'?selected.record.json:null;
+  if(['previous','before-import','legacy-backup'].includes(selected.record.source))toast('Uma cópia anterior da ficha foi recuperada.');
+ }else if(primary.length){sheetSave.blocked=true;showStorageNotice('Não foi possível abrir as cópias locais da ficha. Elas foram preservadas. Importe um backup JSON para recuperar seus personagens.');}
+ if(readError&&!selected){
+  // Keep any unreadable database intact. A later write may only replace a known base.
+  sheetSave.persistedJSON=null;
+ }
+ return selected;
+}
+async function checkOtherSheetVersion(){
+ if(!sheetSave.ready||sheetSave.importing||sheetSave.conflict)return;
+ try{const records=await readSheetRecords(),record=records.main;if(!record||record.revision===sheetSave.baseRevision)return;
+  if(record.json===sheetSave.persistedJSON){sheetSave.baseRevision=record.revision;return}
+  sheetSave.conflict=true;clearTimeout(sheetSave.timer);setSheetSaveStatus('conflict');showStorageNotice('Há uma versão mais recente salva em outra aba. Exporte suas alterações antes de recarregar esta ficha.');document.getElementById('storageReloadBtn').hidden=false;
+ }catch(_){}
+}
+function flushSheetOnExit(){
+ if(!sheetSave.ready||!sheetSave.dirty||sheetSave.importing||sheetSave.conflict||sheetSave.blocked)return !sheetSave.dirty;
+ try{state.currentId=currentId;state.version='2.0';const json=JSON.stringify(state);if(json===sheetSave.persistedJSON&&!sheetSave.inFlight)return true;const record=writeCompatibilityRecord(json);sheetSave.savedAt=record.savedAt;return true}catch(_){return false}
+}
+async function renderSaveHealth(){
+ const modal=document.getElementById('saveHealthModal'),body=document.getElementById('saveHealthBody');if(!body)return;
+ const labels={loading:'Abrindo ficha',pending:'Há alterações aguardando salvamento',saving:'Gravação em andamento',saved:'Suas alterações estão salvas',error:'Há alterações que ainda não foram salvas',conflict:'Outra aba salvou uma versão mais recente'};
+ body.innerHTML=`<div class="save-health-status" data-state="${sheetSave.status}"><b>${labels[sheetSave.status]||labels.error}</b><span>${sheetSave.savedAt?'Último salvamento: '+new Date(sheetSave.savedAt).toLocaleString('pt-BR'):'Nenhuma gravação confirmada nesta sessão.'}</span></div><p class="helper">A ficha salva automaticamente neste navegador. Fotos, personagens e a organização dos talentos fazem parte do mesmo salvamento. Exporte um JSON para levar a ficha a outro dispositivo.</p><div class="save-health-actions"><button class="btn primary" id="saveHealthNow" ${sheetSave.conflict||sheetSave.blocked?'disabled':''}>Salvar agora</button><button class="btn" id="saveHealthExport">Exportar backup atual</button></div><div id="saveRecoveryCopies"><p class="helper">Consultando cópias de segurança…</p></div>`;
+ document.getElementById('saveHealthNow').onclick=async()=>{if(await flushSheetSave())toast('Salvamento confirmado.')};document.getElementById('saveHealthExport').onclick=exportState;
+ try{
+  const records=await readSheetRecords();const emergency=readCompatibilityRecord();if(emergency&&emergency.json!==records.main?.json)records.emergency=emergency;if(!modal.classList.contains('open'))return;
+  const copies=[['previous','Última cópia anterior'],['before-import','Antes da última importação'],['emergency','Cópia de outra sessão']].filter(([key])=>storedSheet(records[key]?.json));
+  const target=document.getElementById('saveRecoveryCopies');if(!target)return;
+  target.innerHTML=copies.length?'<h3>Cópias de segurança</h3>'+copies.map(([key,title])=>`<div class="save-recovery-row"><div><b>${title}</b><small>${new Date(records[key].savedAt).toLocaleString('pt-BR')}</small></div><button class="btn small" data-download-save="${key}">Baixar JSON</button></div>`).join(''):'<p class="helper">As cópias anteriores aparecerão aqui após novas gravações.</p>';
+  target.querySelectorAll('button').forEach(b=>b.onclick=()=>downloadJsonText(records[b.dataset.downloadSave].json,'Cinzas_da_Guerra_copia_anterior.json'));
+ }catch(_){const target=document.getElementById('saveRecoveryCopies');if(target)target.innerHTML='<p class="helper">O backup atual continua disponível pelo botão Exportar.</p>'}
+}
+function notifySheetSaved(record){try{sheetSave.channel?.postMessage({sessionId:sheetSave.sessionId,revision:record.revision})}catch(_){}}
+function bindDurableSaving(){
+ document.getElementById('saveHealthBtn').onclick=()=>{document.getElementById('saveHealthModal').classList.add('open');renderSaveHealth()};
+ document.getElementById('storageRetryBtn').onclick=()=>flushSheetSave();
+ document.getElementById('storageReloadBtn').onclick=()=>{if(!sheetSave.dirty||confirm('Recarregar a versão salva? Exporte primeiro se quiser guardar as alterações desta aba.'))location.reload()};
+ document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden'&&sheetSave.dirty){flushSheetOnExit();flushSheetSave()}});
+ addEventListener('pagehide',flushSheetOnExit);
+ addEventListener('beforeunload',e=>{if(sheetSave.dirty&&!sheetSave.conflict&&!flushSheetOnExit()){e.preventDefault();e.returnValue=''}});
+ try{sheetSave.channel=new BroadcastChannel('cinzas-sheet-save-notifications');sheetSave.channel.onmessage=e=>{if(e.data?.sessionId!==sheetSave.sessionId)checkOtherSheetVersion()}}catch(_){}
+ addEventListener('storage',e=>{if(e.key===SHEET_EMERGENCY_KEY&&e.newValue){const record=readCompatibilityRecord();if(record&&record.revision!==sheetSave.compatRevision&&record.json!==sheetSave.persistedJSON){sheetSave.conflict=true;setSheetSaveStatus('conflict');showStorageNotice('Outra aba atualizou a ficha. Exporte suas alterações antes de recarregar.');document.getElementById('storageReloadBtn').hidden=false}}});
+}
+
 function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove('show'),1800)}
 function bindStaticInputs(){
   document.querySelectorAll('[data-path]').forEach(el=>{el.addEventListener('input',()=>{const c=current();let v=el.type==='number'?num(el.value):el.value;setPath(c,el.dataset.path,v);if(el.dataset.path==='level')c.level=clamp(Math.floor(num(v,1)),1,20);recalcAndRender(false);saveState()})});
@@ -1433,42 +1596,31 @@ function removeOldAutoBackups(){
  let n=0;for(const key of keys)if(safeStore.removeItem(key))n++;
  importMessage(`${n} backup(s) automático(s) removido(s). Seus personagens permanecem intactos.`,'good');
 }
-function commitImport(mode){
- if(!pendingImport)return;
- const pack=pendingImport,previous=JSON.stringify(state);
- // Um único backup rotativo evita que importações repetidas esgotem a quota.
- const backupStored=safeStore.setItem(IMPORT_BACKUP_KEY,previous);
- if(!backupStored&&!importBackupDownloaded){
-   importMessage('Sem espaço para o backup automático. Clique em "Baixar backup atual" antes de confirmar. Se necessário, libere backups automáticos antigos.','bad');
-   return;
- }
- const candidate=clone(state);let selected=null;
+async function commitImport(mode){
+ if(!pendingImport||sheetSave.importing)return;
+ if(sheetSave.conflict){importMessage('Outra aba salvou uma versão mais recente. Exporte suas alterações e recarregue antes de importar.','bad');return}
+ const pack=pendingImport;sheetSave.importing=true;clearTimeout(sheetSave.timer);sheetSave.timer=null;
+ for(const id of ['importReplaceBtn','importCopyBtn'])document.getElementById(id).disabled=true;
+ await sheetSave.chain;
+ const previous=JSON.stringify(state),candidate=clone(state);let selected=null;
  try{
-   {
-      for(const original of pack.list){
-       const incoming=clone(original);
-       const idx=candidate.characters.findIndex(c=>c.id===incoming.id||c.name.trim().toLowerCase()===incoming.name.trim().toLowerCase());
-       if(mode==='copy'&&idx>=0){incoming.id=uid();incoming.name+= ' — Cópia importada';candidate.characters.push(incoming)}
-       else if(idx>=0)candidate.characters[idx]=incoming;
-       else candidate.characters.push(incoming);
-       if(!selected||original.id===pack.requestedCurrentId)selected=incoming.id;
-     }
-   }
-   candidate.currentId=selected||candidate.characters[0].id;
-   candidate.version='2.0';
-   const saved=safeStore.setItem(STORAGE_KEY,JSON.stringify(candidate));
-   state=candidate;currentId=state.currentId;editorAttack=editorFeat=editorSpell=editorItem=null;
-   renderAll();
-   if(saved){clearStorageNotice();closeImportModal();toast('Importação concluída!');}
-   else{
-     showStorageNotice('Importação feita, mas SEM salvamento permanente: o armazenamento está bloqueado ou cheio. Exporte o JSON antes de fechar esta página.');
-     closeImportModal();alert('Seu JSON foi aberto e as fichas estão na tela, MAS o navegador não conseguiu salvá-las permanentemente. Use Exportar agora para não perder os dados.');
-   }
- }catch(e){
-   state=JSON.parse(previous);currentId=state.currentId||state.characters[0].id;
-   safeStore.setItem(STORAGE_KEY,previous);
-   importMessage('A importação foi interrompida e o save anterior foi mantido: '+e.message,'bad');
- }
+  for(const original of pack.list){
+   const incoming=clone(original),idx=candidate.characters.findIndex(c=>c.id===incoming.id||c.name.trim().toLowerCase()===incoming.name.trim().toLowerCase());
+   if(mode==='copy'&&idx>=0){incoming.id=uid();incoming.name+=' — Cópia importada';candidate.characters.push(incoming)}
+   else if(idx>=0)candidate.characters[idx]=incoming;else candidate.characters.push(incoming);
+   if(!selected||original.id===pack.requestedCurrentId)selected=incoming.id;
+  }
+  candidate.currentId=selected||candidate.characters[0].id;candidate.version='2.0';
+  importMessage('Salvando as fichas e a cópia de segurança…');
+  const json=JSON.stringify(candidate),record=await persistSheetSnapshot(json,{beforeImportJSON:previous});
+  state=candidate;currentId=state.currentId;editorAttack=editorFeat=editorSpell=editorItem=null;
+  sheetSave.generation++;sheetSave.persistedJSON=record.json;sheetSave.dirty=false;sheetSave.blocked=false;
+  renderAll();setSheetSaveStatus('saved',record);closeImportModal();toast('Importação salva com sucesso.');
+  notifySheetSaved(record);
+ }catch(error){
+  if(error.name==='SheetConflictError')handleSheetSaveError(error);
+  importMessage('Não foi possível salvar a importação. Suas fichas atuais foram mantidas. '+error.message,'bad');
+ }finally{sheetSave.importing=false;for(const id of ['importReplaceBtn','importCopyBtn'])document.getElementById(id).disabled=false}
 }
 function newCharacter(){const c=blankCharacter();state.characters.push(c);currentId=c.id;state.currentId=c.id;editorAttack=editorFeat=editorSpell=editorItem=null;renderAll();saveState();document.getElementById('app').classList.add('drawer-open');toast('Nova ficha criada.')}
 
@@ -1567,11 +1719,6 @@ function renderConditionSummary(){
  document.getElementById('conditionSummary').textContent=active.length?active.join(' · '):'Nenhuma condição ativa';
  document.getElementById('conditionsDetails').classList.toggle('has-active-conditions',active.length>0);
 }
-function updateSaveIndicator(ok){
- const el=document.getElementById('saveIndicator');
- el.textContent=ok?'Salvo neste navegador':'Não foi possível salvar';
- el.classList.toggle('save-error',!ok);
-}
 function filterCharacterDrawer(){
  const q=(document.getElementById('characterSearch')?.value||'').trim().toLocaleLowerCase('pt-BR');
  const cards=[...document.querySelectorAll('#characterList .char-card')];let shown=0;
@@ -1610,7 +1757,17 @@ addEventListener('beforeprint',()=>{
 addEventListener('afterprint',()=>printDisclosureState.forEach(([el,open])=>el.open=open));
 syncDrawerAccess();
 
-applySoulsTheme(safeStore.getItem(SOULS_THEME_STORAGE)||'erdtree',true);loadSpellLibraryCache();loadPtBrDescriptionCache();for(const x of fullSpellLibrary){if(x.origin==='pf2e-public')publicLoadedRanks.add(num(x.rank))}applyPtBrDescriptionsEverywhere();bindStaticInputs();renderAll();setTimeout(maybePreloadDivine,700);setTimeout(()=>ensurePtBrSpellDescriptions().then(()=>{applyPtBrDescriptionsEverywhere();renderSpells();renderCompendiumResults();renderSpellLibrary();queueSpellTranslations(current().spellcasting.spells,()=>{renderSpells();renderCompendiumResults();saveState()},30);saveState()}),950);
+async function startDurableSheet(){
+ document.getElementById('app').inert=true;document.querySelector('.top-actions').inert=true;
+ setSheetSaveStatus('loading');
+ try{await hydrateSheetState()}catch(error){sheetSave.blocked=true;showStorageNotice('Não foi possível abrir a ficha. Seus saves locais foram preservados; importe um backup JSON para recuperar os dados.');console.error('Falha ao abrir ficha:',error)}
+ applySoulsTheme(safeStore.getItem(SOULS_THEME_STORAGE)||'erdtree',true);loadSpellLibraryCache();loadPtBrDescriptionCache();for(const x of fullSpellLibrary){if(x.origin==='pf2e-public')publicLoadedRanks.add(num(x.rank))}applyPtBrDescriptionsEverywhere();bindStaticInputs();renderAll();setTimeout(maybePreloadDivine,700);setTimeout(()=>ensurePtBrSpellDescriptions().then(()=>{applyPtBrDescriptionsEverywhere();renderSpells();renderCompendiumResults();renderSpellLibrary();queueSpellTranslations(current().spellcasting.spells,()=>{renderSpells();renderCompendiumResults();saveState()},30);saveState()}),950);
+
+ sheetSave.ready=true;bindDurableSaving();
+ document.getElementById('app').inert=false;document.querySelector('.top-actions').inert=false;
+ if(sheetSave.blocked)setSheetSaveStatus('error');else saveState();
+}
+startDurableSheet();
 </script>
 </body>
 </html>
