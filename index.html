@@ -548,32 +548,7 @@ input[type=number]{font-variant-numeric:tabular-nums}
 .card-title{font-size:21px}
 .roll-log>*{border-radius:var(--r-sm)}
 
-/* ---------- Perícias ---------- */
-#page-skills .panel-body{padding-top:16px}
-.skill-toolbar{gap:10px}
-.skill-head,#skillList .skill-row{display:grid;grid-template-columns:minmax(150px,1fr) 78px 160px 74px 74px 76px;gap:10px;align-items:center}
-.skill-head{padding:0 16px 8px;font:600 9.5px var(--ui-font);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-.skill-head span:nth-child(n+4){text-align:center}
-.skill-head span:last-child{text-align:right}
-#skillList{gap:0;border:1px solid var(--hair);border-radius:var(--r-md);overflow:hidden}
-#skillList .skill-row{padding:9px 16px;border:0;border-radius:0;border-bottom:1px solid var(--hair);background:transparent;transition:background .12s}
-#skillList .skill-row:last-child{border-bottom:0}
-#skillList .skill-row:nth-child(even){background:color-mix(in srgb,var(--theme-deep) 30%,transparent)}
-#skillList .skill-row:hover{background:var(--accent-wash)}
-#skillList .skill-name b{font:600 14px var(--ui-font)}
-#skillList .skill-name small{font-size:10px;color:var(--muted)}
-#skillList .skill-row .input{min-height:34px;font-size:13px}
-#skillList .skill-item,#skillList .skill-other{text-align:center}
-#skillList [data-key="rank"]{font-weight:600}
-#skillList [data-key="rank"]:has(option[value="T"]:checked){color:#9cc2e0;border-color:color-mix(in srgb,#5d8fb8 55%,var(--line))}
-#skillList [data-key="rank"]:has(option[value="E"]:checked){color:#c6a8e6;border-color:color-mix(in srgb,#8b67b5 55%,var(--line))}
-#skillList [data-key="rank"]:has(option[value="M"]:checked){color:var(--gold2);border-color:color-mix(in srgb,var(--gold) 65%,var(--line))}
-#skillList [data-key="rank"]:has(option[value="L"]:checked){color:#f0b48a;border-color:color-mix(in srgb,#d4794a 60%,var(--line))}
-#skillList .skill-row:has([data-key="rank"] option[value="U"]:checked) .skill-name b{color:var(--muted)}
-#skillList .skill-total{text-align:right}
-#skillList .skill-total button{min-width:58px;padding:4px 10px;border:1px solid transparent;border-radius:var(--r-sm);background:transparent;font:700 24px/1 var(--display);color:var(--gold2);cursor:pointer}
-#skillList .skill-total button:hover{border-color:color-mix(in srgb,var(--gold) 50%,var(--line));background:var(--accent-wash)}
-
+/* (perícias: ver bloco "Perícias v5") */
 /* ---------- Talentos ---------- */
 .feat-toolbar{border-radius:var(--r-md);border-color:var(--hair)}
 .feat-collection-tab{border-radius:999px;border-color:var(--hair)}
@@ -634,7 +609,6 @@ input[type=number]{font-variant-numeric:tabular-nums}
   .sheet-head{grid-template-columns:1fr;align-items:start}
   .hero-vitals{justify-content:flex-start}
   .header-emblem{display:none}
-  .skill-head,#skillList .skill-row{grid-template-columns:minmax(130px,1fr) 70px 140px 64px 64px 68px;gap:8px}
 }
 @media(max-width:1180px){
   .overview-layout{grid-template-columns:260px minmax(0,1fr)}
@@ -659,12 +633,6 @@ input[type=number]{font-variant-numeric:tabular-nums}
   .overview-layout,#page-inventory .page-grid,.journal-layout{grid-template-columns:1fr}
   .overview-aside{position:static}
   #page-inventory .page-grid>.column:last-child{order:-1}
-  .skill-head{display:none}
-  #skillList .skill-row{grid-template-columns:minmax(0,1fr) 72px;grid-template-areas:"name total" "attr rank" "item other";gap:8px}
-  #skillList .skill-name{grid-area:name}#skillList .skill-total{grid-area:total}
-  #skillList .skill-attr{grid-area:attr}#skillList [data-key="rank"]{grid-area:rank;grid-column:auto;grid-row:auto}
-  #skillList .skill-item{grid-area:item;grid-row:auto}#skillList .skill-other{grid-area:other;grid-row:auto}
-  #skillList .skill-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
   .mobile-nav{border-top:1px solid var(--hair);background:color-mix(in srgb,var(--theme-deep) 92%,transparent);backdrop-filter:blur(14px);padding-bottom:env(safe-area-inset-bottom)}
   .mobile-nav button{font:600 9.5px var(--ui-font);text-transform:none;letter-spacing:.02em;border-right:0}
   .mobile-nav button span{font-size:16px}
@@ -705,14 +673,6 @@ input[type=number]{font-variant-numeric:tabular-nums}
   .hv b{font-size:22px}
   .hv-speed b{font-size:16px}
   .hv-roll::after{opacity:1;top:7px;right:7px}
-  #skillList .skill-row{grid-template-columns:58px minmax(0,1fr) 46px 46px!important;grid-template-areas:"name name total total" "attr rank item other"!important}
-  #skillList .skill-total{display:flex;justify-content:flex-end}
-  #page-skills .panel-body{padding:12px 10px}
-  .skill-head{display:grid!important;grid-template-columns:58px minmax(0,1fr) 46px 46px;gap:8px;padding:0 12px 6px;font-size:8.5px}
-  .skill-head span:first-child,.skill-head span:last-child{display:none}
-  .skill-head span:nth-child(n+4){text-align:center}
-  #skillList .skill-row{padding:10px 12px}
-  #skillList .skill-row .input{min-height:36px;font-size:12px;padding-left:6px;padding-right:4px}
 }
 @media screen and (max-width:650px){
   .brand-title{font-size:15px;letter-spacing:.05em}
@@ -724,8 +684,96 @@ input[type=number]{font-variant-numeric:tabular-nums}
 @media(prefers-reduced-motion:reduce){.page.active{animation:none}}
 @media print{
   .hero-vitals{display:flex!important}.hv{border:1px solid #999!important;background:#fff!important}.hv b,.hv small{color:#111!important}.hv-hp i{display:none}
-  .skill-head{display:grid!important;color:#333}.spell-section-divider{color:#333}
+  .spell-section-divider{color:#333}
 }
+</style>
+<style id="skills-v5">
+/* ---------- Perícias v5 ---------- */
+.skills-panel{--rU:var(--muted);--rT:#8fb7d8;--rE:#b99ae0;--rM:var(--gold2);--rL:#f0a878}
+.skills-panel .panel-body{display:flex;flex-direction:column;gap:14px}
+.sk-summary{display:flex;flex-wrap:wrap;gap:8px}
+.sk-stat{display:flex;flex-direction:column;gap:4px;min-width:96px;padding:10px 14px;border:1px solid var(--hair);border-radius:var(--r-md);background:var(--soft);color:var(--text);text-align:left}
+.sk-stat small{font:600 9.5px/1 var(--ui-font);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.sk-stat b{font:700 24px/1 var(--display);color:var(--text)}
+.sk-stat b em{font:500 12px var(--ui-font);font-style:normal;color:var(--muted);margin-left:3px}
+.sk-stat.rank-T{border-top:2px solid var(--rT)}.sk-stat.rank-E{border-top:2px solid var(--rE)}.sk-stat.rank-M{border-top:2px solid var(--rM)}.sk-stat.rank-L{border-top:2px solid var(--rL)}
+.sk-stat.rank-T b{color:var(--rT)}.sk-stat.rank-E b{color:var(--rE)}.sk-stat.rank-M b{color:var(--rM)}.sk-stat.rank-L b{color:var(--rL)}
+.sk-best{margin-left:auto;cursor:pointer;background:var(--accent-wash);transition:border-color .15s}
+.sk-best b{font-size:20px}.sk-best b em{font:700 20px var(--display);color:var(--gold2);margin-left:6px}
+.sk-best:hover{border-color:color-mix(in srgb,var(--gold) 55%,var(--line))}
+.sk-toolbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.sk-toolbar #skillSearch{flex:1 1 220px;min-height:40px}
+.sk-toolbar #skillSort{flex:0 0 auto;width:auto;min-height:40px}
+.sk-filters{display:flex;padding:3px;border:1px solid var(--hair);border-radius:999px;background:var(--sunk)}
+.sk-filters button{padding:7px 14px;border:0;border-radius:999px;background:transparent;color:var(--muted);font:600 12px var(--ui-font);cursor:pointer;transition:background .15s,color .15s}
+.sk-filters button:hover{color:var(--text)}
+.sk-filters button.on{background:var(--accent-wash);color:var(--gold2);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 40%,transparent)}
+.sk-list{display:flex;flex-direction:column;border:1px solid var(--hair);border-radius:var(--r-md);overflow:hidden;background:color-mix(in srgb,var(--theme-deep) 25%,transparent)}
+.sk-row{--rc:var(--rU);position:relative;display:grid;grid-template-columns:68px minmax(0,1fr) 76px auto 70px 70px;grid-template-areas:"total name attr rank item other";gap:12px;align-items:center;padding:10px 16px 10px 14px;border-bottom:1px solid var(--hair);transition:background .12s}
+.sk-row:last-child{border-bottom:0}
+.sk-row::before{content:"";position:absolute;left:0;top:10px;bottom:10px;width:3px;border-radius:0 3px 3px 0;background:var(--rc);opacity:.85}
+.sk-row.rank-U::before{opacity:0}
+.sk-row.rank-T{--rc:var(--rT)}.sk-row.rank-E{--rc:var(--rE)}.sk-row.rank-M{--rc:var(--rM)}.sk-row.rank-L{--rc:var(--rL)}
+.sk-row:hover{background:var(--accent-wash)}
+.sk-total{grid-area:total;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;height:52px;border:1px solid var(--hair);border-radius:var(--r-md);background:var(--sunk);color:var(--text);cursor:pointer;transition:border-color .15s,background .15s,transform .1s}
+.sk-total b{font:700 25px/1 var(--display);color:var(--rc)}
+.sk-row.rank-U .sk-total b{color:var(--text)}
+.sk-total small{font:700 8px/1 var(--ui-font);letter-spacing:.1em;color:var(--muted);opacity:.7}
+.sk-total:hover{border-color:color-mix(in srgb,var(--gold) 60%,var(--line));background:var(--accent-wash)}
+.sk-total:active{transform:scale(.96)}
+.sk-name{grid-area:name;display:flex;flex-direction:column;gap:3px;min-width:0}
+.sk-name b{font:600 15px/1.2 var(--ui-font);color:var(--text)}
+.sk-row.rank-U .sk-name b{color:color-mix(in srgb,var(--text) 72%,var(--muted))}
+.sk-break{font-size:11.5px;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sk-lore-actions{display:flex;gap:10px;margin-top:2px}
+.sk-lore-actions button{padding:0;border:0;background:none;color:var(--muted);font:600 11px var(--ui-font);cursor:pointer;text-decoration:underline;text-decoration-color:transparent;text-underline-offset:3px}
+.sk-lore-actions button:hover{color:var(--gold2);text-decoration-color:currentColor}
+.sk-lore-actions button[data-lore-remove]:hover{color:var(--blood2,#c55045)}
+.sk-attr{grid-area:attr;min-height:36px;font:600 12px var(--ui-font);padding:0 6px}
+.sk-rank{grid-area:rank;display:flex;gap:3px;padding:3px;border:1px solid var(--hair);border-radius:var(--r-sm);background:var(--sunk)}
+.sk-rank button{width:30px;height:30px;border:0;border-radius:5px;background:transparent;color:var(--muted);font:700 12px var(--ui-font);cursor:pointer;transition:background .12s,color .12s}
+.sk-rank button:hover{background:color-mix(in srgb,var(--text) 7%,transparent);color:var(--text)}
+.sk-rank button.on{color:#120f0a;background:var(--muted)}
+.sk-rank button.on[data-rank="T"]{background:var(--rT)}.sk-rank button.on[data-rank="E"]{background:var(--rE)}.sk-rank button.on[data-rank="M"]{background:var(--rM)}.sk-rank button.on[data-rank="L"]{background:var(--rL)}
+.sk-rank button:focus-visible,.sk-total:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.sk-num{display:flex;flex-direction:column;gap:3px}
+.sk-num:nth-of-type(1){grid-area:item}.sk-num:nth-of-type(2){grid-area:other}
+.sk-num span{font:600 8.5px/1 var(--ui-font);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center}
+.sk-num .input{min-height:32px;padding:0 4px;text-align:center;font:600 13px var(--ui-font)}
+.sk-group{display:flex;align-items:baseline;gap:8px;padding:9px 16px 7px;border-bottom:1px solid var(--hair);background:var(--sunk);font:600 10px var(--ui-font);letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.sk-group em{font-style:normal;color:var(--muted);letter-spacing:.04em}
+.sk-empty{padding:22px 16px;text-align:center;color:var(--muted);font-size:13px}
+.sk-section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:8px}
+.sk-section-head h3{margin:0;font:700 19px/1.2 var(--display);color:var(--text)}
+.sk-section-head small{font-size:11.5px;color:var(--muted)}
+.sk-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:4px}
+.sk-foot .helper{font-size:11.5px}
+#skillResetBtn{color:var(--muted)}
+.sk-cols{display:grid;grid-template-columns:68px minmax(0,1fr) 76px 170px 70px 70px;gap:12px;padding:0 16px 0 14px;margin-bottom:-8px;font:600 9px var(--ui-font);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.sk-cols span:first-child,.sk-cols span:nth-child(n+5){text-align:center}
+@media(min-width:901px){.sk-num span{display:none}.sk-row{padding-top:8px;padding-bottom:8px}}
+@media(max-width:1100px){.sk-cols{grid-template-columns:64px minmax(0,1fr) 70px 170px 58px 58px;gap:10px}}
+@media(max-width:900px){.sk-cols{display:none}}
+@media(max-width:1100px){.sk-row{grid-template-columns:64px minmax(0,1fr) 70px auto 58px 58px;gap:10px}}
+@media(max-width:900px){
+  .sk-best{margin-left:0;flex:1 1 100%}
+  .sk-stat{flex:1 1 0;min-width:0;padding:9px 10px}
+  .sk-stat b{font-size:21px}
+  .sk-filters{order:3;flex:1 1 100%}.sk-filters button{flex:1}
+  .sk-toolbar #skillSort{flex:1 1 auto}
+  .sk-row{grid-template-columns:58px minmax(0,1fr) 58px 58px;grid-template-areas:"total name name name" "rank rank rank attr" "item item other other";gap:8px 10px;padding:12px 12px 12px 14px}
+  .sk-row::before{top:12px;bottom:12px}
+  .sk-total{height:50px}
+  .sk-rank{justify-content:space-between}.sk-rank button{flex:1;width:auto;height:32px}
+  .sk-attr{min-height:38px}
+  .sk-num{flex-direction:row;align-items:center;gap:8px}
+  .sk-num span{text-align:left;min-width:44px}
+  .sk-num .input{flex:1;min-height:34px}
+  .sk-break{white-space:normal}
+}
+.sk-s{display:none}
+@media(max-width:650px){.sk-l{display:none}.sk-s{display:inline}.sk-summary{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}.sk-stat:first-child{grid-column:auto}.sk-stat small{font-size:7.5px;letter-spacing:.04em}.sk-stat:not(.sk-best) b em{display:none}.sk-best{grid-column:1/-1}}
+@media print{.sk-toolbar,.sk-foot,.sk-lore-actions,.sk-best{display:none!important}.sk-row{break-inside:avoid}}
 </style>
 </head>
 <body>
@@ -877,7 +925,14 @@ input[type=number]{font-variant-numeric:tabular-nums}
 </div>
 </section>
 <section class="page" id="page-skills"><div class="page-grid" style="grid-template-columns:1fr"><div class="column">
-<div class="panel"><div class="panel-head"><h2>Perícias</h2><span class="helper">Clique no total para rolar 1d20</span></div><div class="panel-body"><div class="skill-toolbar"><input class="input" id="skillSearch" placeholder="Pesquisar perícia..."/><button class="btn" id="addLoreBtn">＋ Lore</button><button class="btn" id="skillResetBtn">Ranks padrão</button></div><div aria-hidden="true" class="skill-head"><span>Perícia</span><span>Atrib.</span><span>Proficiência</span><span>Item</span><span>Outros</span><span>Total</span></div><div class="skill-list" id="skillList"></div></div></div>
+<div class="panel skills-panel"><div class="panel-head"><h2>Perícias</h2><span class="helper">Clique no total para rolar 1d20</span></div><div class="panel-body">
+<div class="sk-summary" id="skillSummary"></div>
+<div class="sk-toolbar"><input class="input" id="skillSearch" type="search" placeholder="Pesquisar perícia..." aria-label="Pesquisar perícia"/><div class="sk-filters" role="group" aria-label="Filtrar perícias"><button type="button" data-sk-filter="all">Todas</button><button type="button" data-sk-filter="trained">Treinadas</button><button type="button" data-sk-filter="untrained">Sem treino</button></div><select class="input" id="skillSort" aria-label="Ordenar perícias"><option value="name">Ordem: A–Z</option><option value="total">Ordem: maior total</option><option value="attr">Agrupar por atributo</option></select></div>
+<div aria-hidden="true" class="sk-cols"><span>Total</span><span>Perícia</span><span>Atrib.</span><span>Proficiência</span><span>Item</span><span>Outros</span></div><div class="sk-list" id="skillList"></div>
+<div class="sk-section-head"><div><h3>Conhecimentos</h3><small>Lores específicos do personagem</small></div><button class="btn" id="addLoreBtn" type="button">＋ Novo Lore</button></div>
+<div class="sk-list" id="loreList"></div>
+<div class="sk-foot"><span class="helper">Bônus = modificador do atributo + proficiência (nível + 2/4/6/8) + item + outros.</span><button class="btn" id="skillResetBtn" type="button">Zerar proficiências</button></div>
+</div></div>
 </div></div></section>
 <section class="page" id="page-feats"><div class="page-grid" style="grid-template-columns:1fr"><div class="column">
 <div class="panel"><div class="panel-head"><h2>Talentos, Dedicações &amp; Poderes</h2><div class="feat-top-actions"><button class="btn" id="sortFeatsBtn" type="button">＋ Grupo / Dedicação</button><button class="btn primary" id="addFeatBtn" type="button">＋ Habilidade</button></div></div><div class="panel-body"><p class="feat-page-intro">Organize suas habilidades por dedicação, classe ou tema. Personalize os grupos e cartões, recolha as descrições e escolha a ordem que funciona para você.</p>
@@ -1524,7 +1579,42 @@ function renderDefenseConfig(){const c=current();document.getElementById('defens
 function renderConditions(){renderConditionSummary();const c=current(),grid=document.getElementById('conditionGrid');grid.innerHTML=CONDITIONS.map(name=>{const d=c.conditions[name]||{active:false,value:0};return `<div class="condition ${d.active?'active':''}" data-cond="${name}"><div class="condition-mark">${d.active?'◆':'◇'}</div><div><b>${name}</b><small>${d.active?'Ativa':'Inativa'}</small></div><input class="input" type="number" min="0" value="${num(d.value)}" data-cond-value="${name}" title="Valor"/></div>`}).join('');grid.querySelectorAll('[data-cond]').forEach(el=>el.addEventListener('click',e=>{if(e.target.matches('input'))return;const name=el.dataset.cond,d=current().conditions[name]||{active:false,value:0};d.active=!d.active;current().conditions[name]=d;renderConditions();saveState()}));grid.querySelectorAll('[data-cond-value]').forEach(el=>el.addEventListener('input',()=>{const name=el.dataset.condValue,d=current().conditions[name]||{active:true,value:0};d.value=Math.max(0,num(el.value));if(d.value>0)d.active=true;current().conditions[name]=d;renderConditionSummary();saveState()}));document.getElementById('conditionNotes').value=c.conditionNotes}
 function renderRollLogs(){const c=current(),html=c.rolls.slice(0,30).map(r=>`<div class="roll-entry"><b>${esc(r.name)}</b> • ${esc(r.formula)} = <b>${r.total}</b><br><span style="color:var(--muted)">${esc(r.detail||'')} • ${esc(r.time||'')}</span></div>`).join('')||'<div class="helper">Nenhuma rolagem registrada.</div>';document.getElementById('combatRollLog').innerHTML=html;document.getElementById('journalRollLog').innerHTML=html}
 function renderCombat(){renderCombatBanner();renderAttackEditor();renderAttacks();renderDefenseConfig();renderConditions();renderRollLogs()}
-function renderSkills(){const c=current(),q=(document.getElementById('skillSearch')?.value||'').toLowerCase();const list=c.skills.filter(s=>s.name.toLowerCase().includes(q)).sort((a,b)=>a.lore===b.lore?a.name.localeCompare(b.name):a.lore?1:-1);document.getElementById('skillList').innerHTML=list.map(s=>`<div class="skill-row"><div class="skill-name"><b>${esc(s.name)}</b><small>${s.lore?'Lore':'Perícia'}</small></div><select class="input skill-attr" data-skill="${s.id}" data-key="attr" aria-label="Atributo de ${esc(s.name)}">${ATTRS.map(([k,n,a])=>`<option value="${k}" ${s.attr===k?'selected':''}>${a}</option>`).join('')}</select><select class="input" data-skill="${s.id}" data-key="rank" aria-label="Proficiência de ${esc(s.name)}">${rankOptions(s.rank)}</select><input class="input skill-item" type="number" data-skill="${s.id}" data-key="item" value="${num(s.item)}" title="Bônus de item"/><input class="input skill-other" type="number" data-skill="${s.id}" data-key="other" value="${num(s.other)}" title="Outros bônus"/><div class="skill-total"><button data-skill-roll="${s.id}">${signed(skillTotal(c,s))}</button></div></div>`).join('');document.querySelectorAll('[data-skill][data-key]').forEach(el=>el.addEventListener('input',()=>{const s=current().skills.find(x=>x.id===el.dataset.skill);s[el.dataset.key]=el.type==='number'?num(el.value):el.value;renderSkills();saveState()}));document.querySelectorAll('[data-skill-roll]').forEach(b=>b.onclick=()=>{const s=current().skills.find(x=>x.id===b.dataset.skillRoll);rollCheck(s.name,skillTotal(current(),s))})}
+const SKILL_UI=(()=>{try{return Object.assign({filter:'all',sort:'name'},JSON.parse(localStorage.getItem('cinzas-skill-ui')||'{}'))}catch(e){return {filter:'all',sort:'name'}}})();
+function saveSkillUi(){try{localStorage.setItem('cinzas-skill-ui',JSON.stringify(SKILL_UI))}catch(e){}}
+function skillAttrAbbr(k){return (ATTRS.find(a=>a[0]===k)||[k,k,k.toUpperCase()])[2]}
+function skillBreakdown(c,s){const parts=[`${skillAttrAbbr(s.attr)} ${signed(abilityVal(c,s.attr))}`,`${RANK_LABEL[s.rank]||'Sem Treino'} ${signed(rankBonus(s.rank,c.level,c.pwl))}`];if(num(s.item))parts.push(`Item ${signed(num(s.item))}`);if(num(s.other))parts.push(`Outros ${signed(num(s.other))}`);return parts.join(' · ')}
+function skillRowHtml(c,s){const name=esc(s.name);return `<div class="sk-row rank-${s.rank||'U'}${s.lore?' is-lore':''}" data-row="${s.id}">
+<button type="button" class="sk-total" data-skill-roll="${s.id}" title="Rolar ${name}" aria-label="Rolar ${name}"><b>${signed(skillTotal(c,s))}</b><small>d20</small></button>
+<div class="sk-name"><b>${name}</b><span class="sk-break">${esc(skillBreakdown(c,s))}</span>${s.lore?`<span class="sk-lore-actions"><button type="button" data-lore-rename="${s.id}" title="Renomear">Renomear</button><button type="button" data-lore-remove="${s.id}" title="Remover">Remover</button></span>`:''}</div>
+<select class="input sk-attr" data-skill="${s.id}" data-key="attr" aria-label="Atributo de ${name}">${ATTRS.map(([k,n,a])=>`<option value="${k}" ${s.attr===k?'selected':''}>${a}</option>`).join('')}</select>
+<div class="sk-rank" role="radiogroup" aria-label="Proficiência de ${name}">${RANKS.map(r=>`<button type="button" role="radio" aria-checked="${s.rank===r}" class="${s.rank===r?'on':''}" data-skill-rank="${s.id}" data-rank="${r}" title="${RANK_LABEL[r]}">${r}</button>`).join('')}</div>
+<label class="sk-num"><span>Item</span><input class="input" type="number" inputmode="numeric" data-skill="${s.id}" data-key="item" value="${num(s.item)}"/></label>
+<label class="sk-num"><span>Outros</span><input class="input" type="number" inputmode="numeric" data-skill="${s.id}" data-key="other" value="${num(s.other)}"/></label>
+</div>`}
+function renderSkillSummary(c){const el=document.getElementById('skillSummary');if(!el)return;const base=c.skills.filter(s=>!s.lore);const counts={T:0,E:0,M:0,L:0};c.skills.forEach(s=>{if(counts[s.rank]!=null)counts[s.rank]++});const best=[...c.skills].sort((a,b)=>skillTotal(c,b)-skillTotal(c,a))[0];const trained=base.filter(s=>s.rank!=='U').length;
+el.innerHTML=`<div class="sk-stat"><small>Treinadas</small><b>${trained}<em>/ ${base.length}</em></b></div>`+['T','E','M','L'].map(r=>`<div class="sk-stat rank-${r}" title="${RANK_LABEL[r]}"><small><span class="sk-l">${RANK_LABEL[r]}</span><span class="sk-s">${({T:'Novato',E:'Espec.',M:'Mestre',L:'Lend.'})[r]}</span></small><b>${counts[r]}</b></div>`).join('')+(best?`<button type="button" class="sk-stat sk-best" data-skill-roll="${best.id}" title="Rolar ${esc(best.name)}"><small>Melhor perícia</small><b>${esc(best.name)} <em>${signed(skillTotal(c,best))}</em></b></button>`:'')}
+function updateSkillRow(id){const c=current(),s=c.skills.find(x=>x.id===id),row=document.querySelector(`.sk-row[data-row="${id}"]`);if(!s||!row)return;row.className=`sk-row rank-${s.rank||'U'}${s.lore?' is-lore':''}`;row.querySelector('.sk-total b').textContent=signed(skillTotal(c,s));row.querySelector('.sk-break').textContent=skillBreakdown(c,s);row.querySelectorAll('[data-skill-rank]').forEach(b=>{const on=b.dataset.rank===s.rank;b.classList.toggle('on',on);b.setAttribute('aria-checked',on)});renderSkillSummary(c);bindSkillRolls(document.getElementById('skillSummary'))}
+function bindSkillRolls(root){root?.querySelectorAll('[data-skill-roll]').forEach(b=>b.onclick=()=>{const s=current().skills.find(x=>x.id===b.dataset.skillRoll);if(s)rollCheck(s.name,skillTotal(current(),s))})}
+function renderSkills(){const c=current(),q=(document.getElementById('skillSearch')?.value||'').trim().toLowerCase();const listEl=document.getElementById('skillList'),loreEl=document.getElementById('loreList');if(!listEl)return;
+ document.querySelectorAll('[data-sk-filter]').forEach(b=>{const on=b.dataset.skFilter===SKILL_UI.filter;b.classList.toggle('on',on);b.setAttribute('aria-pressed',on)});const sortEl=document.getElementById('skillSort');if(sortEl)sortEl.value=SKILL_UI.sort;
+ const pass=s=>(!q||s.name.toLowerCase().includes(q))&&(SKILL_UI.filter==='all'||(SKILL_UI.filter==='trained'?s.rank!=='U':s.rank==='U'));
+ const cmp=SKILL_UI.sort==='total'?(a,b)=>skillTotal(c,b)-skillTotal(c,a)||a.name.localeCompare(b.name):(a,b)=>a.name.localeCompare(b.name);
+ const base=c.skills.filter(s=>!s.lore&&pass(s)).sort(cmp),lores=c.skills.filter(s=>s.lore&&pass(s)).sort(cmp);
+ let html='';
+ if(SKILL_UI.sort==='attr'){for(const [k,n] of ATTRS){const g=base.filter(s=>s.attr===k);if(!g.length)continue;html+=`<div class="sk-group"><span>${n}</span><em>${signed(abilityVal(c,k))}</em></div>`+g.map(s=>skillRowHtml(c,s)).join('')}}
+ else html=base.map(s=>skillRowHtml(c,s)).join('');
+ listEl.innerHTML=html||`<div class="sk-empty">Nenhuma perícia encontrada${q?` para “${esc(q)}”`:''}.</div>`;
+ const allLores=c.skills.filter(s=>s.lore).length;
+ loreEl.innerHTML=lores.map(s=>skillRowHtml(c,s)).join('')||`<div class="sk-empty">${allLores?'Nenhum Lore corresponde ao filtro.':'Nenhum Lore ainda. Use “Novo Lore” para registrar conhecimentos como Lore: Guerra ou Lore: Terras Intermédias.'}</div>`;
+ renderSkillSummary(c);
+ const page=document.getElementById('page-skills');
+ page.querySelectorAll('.sk-row [data-skill][data-key]').forEach(el=>{const ev=el.tagName==='SELECT'?'change':'input';el.addEventListener(ev,()=>{const s=current().skills.find(x=>x.id===el.dataset.skill);if(!s)return;s[el.dataset.key]=el.type==='number'?num(el.value):el.value;updateSkillRow(s.id);saveState()})});
+ page.querySelectorAll('[data-skill-rank]').forEach(b=>b.onclick=()=>{const s=current().skills.find(x=>x.id===b.dataset.skillRank);if(!s)return;s.rank=b.dataset.rank;if(SKILL_UI.filter!=='all')renderSkills();else updateSkillRow(s.id);saveState()});
+ page.querySelectorAll('[data-lore-rename]').forEach(b=>b.onclick=()=>{const s=current().skills.find(x=>x.id===b.dataset.loreRename);if(!s)return;const name=prompt('Novo nome do Lore:',s.name);if(!name||!name.trim())return;s.name=name.trim();renderSkills();saveState()});
+ page.querySelectorAll('[data-lore-remove]').forEach(b=>b.onclick=()=>{const c2=current(),i=c2.skills.findIndex(x=>x.id===b.dataset.loreRemove);if(i<0||!confirm(`Remover “${c2.skills[i].name}”?`))return;c2.skills.splice(i,1);renderSkills();saveState()});
+ bindSkillRolls(page)}
+document.addEventListener('click',e=>{const f=e.target.closest('[data-sk-filter]');if(f){SKILL_UI.filter=f.dataset.skFilter;saveSkillUi();renderSkills()}});
+document.addEventListener('change',e=>{if(e.target.id==='skillSort'){SKILL_UI.sort=e.target.value;saveSkillUi();renderSkills()}});
 function featSigil(category){return ({'Ancestralidade':'❈','Classe':'♜','Perícia':'✧','Geral':'◇','Arquétipo':'☾','Habilidade':'◆','Domínio':'☼','Grande Alma':'◈','Fama':'♚','Origem':'⌁'})[category]||'◇'}
 function actionCompact(a){return ({passive:'PASSIVA',one:'◆',two:'◆◆',three:'◆◆◆',reaction:'↶',free:'◇'})[a]||'—'}
 function spellTraditionClass(s){const raw=[...(Array.isArray(s?.traditions)?s.traditions:[]),s?.traits||'',current()?.spellcasting?.tradition||''].join(' ').toLowerCase();if(raw.includes('arcana')||raw.includes('arcane'))return 'trad-arcane';if(raw.includes('divina')||raw.includes('divine'))return 'trad-divine';if(raw.includes('ocult')||raw.includes('occult'))return 'trad-occult';if(raw.includes('primal'))return 'trad-primal';if(['mesa','homebrew','local-homebrew'].includes(s?.origin))return 'trad-homebrew';return 'trad-divine'}
@@ -2030,7 +2120,7 @@ document.getElementById('pwlToggle').onchange=e=>{current().pwl=false;};
 document.getElementById('addAttackBtn').onclick=()=>{editorAttack='new';renderAttackEditor()};document.getElementById('clearConditionsBtn').onclick=()=>{current().conditions={};renderConditions();saveState()};document.getElementById('conditionNotes').oninput=e=>{current().conditionNotes=e.target.value;saveState()};document.getElementById('clearRollsBtn').onclick=document.getElementById('clearAllRollsBtn').onclick=()=>{current().rolls=[];renderRollLogs();saveState()};
 
 // Skills
-document.getElementById('skillSearch').oninput=renderSkills;document.getElementById('addLoreBtn').onclick=()=>{const name=prompt('Nome da Lore:','Lore:');if(!name)return;const s=makeSkill(name,'int');s.lore=true;current().skills.push(s);renderSkills();saveState()};document.getElementById('skillResetBtn').onclick=()=>{if(!confirm('Redefinir apenas os ranks das perícias para Sem Treino?'))return;current().skills.forEach(s=>s.rank='U');renderSkills();saveState()};
+document.getElementById('skillSearch').oninput=renderSkills;document.getElementById('addLoreBtn').onclick=()=>{const name=prompt('Nome do Lore:','Lore: ');if(!name||!name.trim()||name.trim()==='Lore:')return;const s=makeSkill(name.trim(),'int');s.lore=true;current().skills.push(s);renderSkills();saveState()};document.getElementById('skillResetBtn').onclick=()=>{if(!confirm('Voltar todas as perícias para Sem Treino? Itens e outros bônus são mantidos.'))return;current().skills.forEach(s=>s.rank='U');renderSkills();saveState()};
 
 // Feats
 bindFeatOrganization();
