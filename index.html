@@ -1140,6 +1140,117 @@ body[data-theme="parchment"] .overview-row .input{color-scheme:light}
   .overview-roll,.overview-row output{color:#111}
 }
 </style>
+<style id="combat-reference-style">
+/* Painel de combate */
+#page-combat{container:combat-page / inline-size}
+#page-combat .combat-layout{
+  display:grid;grid-template-columns:minmax(240px,.73fr) minmax(0,1.9fr);
+  grid-template-areas:"side primary";align-items:start;
+}
+#page-combat .combat-stack{display:flex!important}
+.combat-primary{grid-area:primary}
+.combat-sidebar{grid-area:side}
+#page-combat .combat-banner{min-height:152px}
+#page-combat .combat-banner img{height:170px;min-height:152px}
+#page-combat .combat-hud{inset:auto 9px 9px;padding:10px;background:#100b09e6;border-radius:var(--r-sm)}
+#page-combat .combat-hud b{font-family:var(--display)}
+#page-combat .combat-defenses-panel{display:block}
+#page-combat .combat-defenses{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+#page-combat .combat-defense{min-width:0;padding:8px}
+#page-combat .combat-defense small{overflow-wrap:anywhere}
+#page-combat .combat-defense:nth-child(5){grid-column:1/-1}
+#page-combat .combat-legend{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.combat-legend .action-slot{display:grid;align-content:center;justify-items:center;gap:4px;padding:6px 3px;min-width:0}
+.combat-legend .action-slot b{font-size:13px}
+.combat-legend .action-slot span{font-size:9px;letter-spacing:.02em;text-align:center}
+#page-combat #conditionsDetails .panel-head{flex-wrap:wrap;gap:4px 8px}
+#page-combat #conditionsDetails .helper{overflow-wrap:anywhere}
+#page-combat .conditions{grid-template-columns:minmax(0,1fr)}
+#page-combat .rolls-panel .roll-log{max-height:255px;overflow:auto}
+.combat-log-tools{display:flex;justify-content:flex-end;margin-bottom:8px}
+.combat-panel{min-width:0;scroll-margin-top:calc(var(--top) + 110px)}
+.combat-panel:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.combat-panel .panel-head{flex-wrap:wrap;gap:7px}
+.combat-panel .panel-head h2{margin-right:auto}
+.combat-shortcuts{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;
+  padding:7px;border:1px solid var(--hair);border-radius:var(--r-md);background:var(--sunk);
+}
+.combat-shortcut{
+  min-width:0;min-height:40px;display:flex;align-items:center;justify-content:space-between;gap:6px;
+  padding:6px 9px;text-align:left;background:var(--raise);border:1px solid var(--hair);border-radius:var(--r-sm);
+  color:var(--text);cursor:pointer;font:600 12px var(--ui-font);
+}
+.combat-shortcut:hover,.combat-shortcut:focus-visible{border-color:var(--gold);background:var(--accent-wash)}
+.combat-shortcut strong{font:700 11px var(--ui-font);color:var(--gold2)}
+.combat-filters{display:grid;grid-template-columns:minmax(0,1fr) minmax(130px,.45fr);gap:8px;margin-bottom:12px}
+.combat-filters[hidden]{display:none}
+.combat-filters .input,.combat-action-filter{min-width:0;min-height:39px;width:100%}
+.combat-action-filter{max-width:185px}
+.combat-resource-bar{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:12px}
+.combat-resource-bar:empty{display:none}
+.combat-resource{
+  display:inline-flex;align-items:center;gap:5px;padding:6px 8px;border-radius:var(--r-sm);
+  border:1px solid var(--hair);background:var(--sunk);color:var(--muted);font:500 11px var(--ui-font);
+}
+.combat-resource b{color:var(--text);font-variant-numeric:tabular-nums}
+button.combat-resource{cursor:pointer}
+button.combat-resource:hover,button.combat-resource:focus-visible{border-color:var(--gold);color:var(--gold2)}
+.combat-entry-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;align-items:start}
+.combat-entry{
+  --combat-entry-color:var(--gold);border:1px solid var(--hair);
+  border-radius:var(--r-sm);background:linear-gradient(115deg,color-mix(in srgb,var(--combat-entry-color) 8%,var(--sunk)),var(--sunk) 60%);
+  border-left:2px solid var(--combat-entry-color);min-width:0;
+}
+.combat-entry[open]{grid-column:1/-1}
+.combat-entry summary{
+  display:grid;grid-template-columns:30px minmax(0,1fr) auto;align-items:start;gap:8px;
+  padding:10px;list-style:none;cursor:pointer;
+}
+.combat-entry summary::-webkit-details-marker{display:none}
+.combat-entry summary:hover,.combat-entry summary:focus-visible{background:var(--accent-wash)}
+.combat-entry summary::after{
+  content:"";width:7px;height:7px;margin:5px 2px 0;border:solid var(--gold);border-width:0 1px 1px 0;
+  transform:rotate(45deg);transition:transform .18s var(--ease);
+}
+.combat-entry[open]>summary::after{transform:rotate(225deg)}
+.combat-entry-icon{
+  display:grid;place-items:center;min-height:30px;border:1px solid var(--hair);border-radius:var(--r-sm);
+  background:color-mix(in srgb,var(--combat-entry-color) 13%,var(--sunk));color:var(--gold2);font:700 16px var(--display);
+}
+.combat-entry-copy{display:grid;gap:4px;min-width:0;overflow-wrap:anywhere}
+.combat-entry-name{color:var(--text);font:700 19px/1.05 var(--display)}
+.combat-entry-meta{color:var(--gold2);font:600 10px/1.35 var(--ui-font)}
+.combat-entry-excerpt{color:var(--muted);font:400 11px/1.45 var(--ui-font)}
+.combat-entry[open] .combat-entry-excerpt{display:none}
+.combat-entry-body{border-top:1px solid var(--hair);padding:10px 13px;color:var(--text);font:400 13px/1.55 var(--ui-font);overflow-wrap:anywhere}
+.combat-entry-body p{margin:0;white-space:pre-wrap}
+.combat-entry-facts{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 9px}
+.combat-entry-facts div{padding:5px 7px;border:1px solid var(--hair);border-radius:var(--r-sm);font-size:11px}
+.combat-entry-facts dt,.combat-entry-facts dd{display:inline;margin:0}
+.combat-entry-facts dt{color:var(--muted);margin-right:5px}
+.combat-more{margin-top:8px}
+.combat-more>summary{padding:8px 3px;color:var(--gold2);font-size:12px;cursor:pointer}
+.combat-empty{margin:0;padding:7px 0;color:var(--muted);font-size:12px}
+@container combat-page (max-width:740px){
+  #page-combat .combat-layout{grid-template-columns:minmax(0,1fr);grid-template-areas:"primary" "side";padding:12px}
+}
+@container combat-page (min-width:741px) and (max-width:880px){
+  .combat-entry-list{grid-template-columns:minmax(0,1fr)}
+}
+@container combat-page (max-width:510px){
+  .combat-shortcuts{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .combat-entry-list,.combat-filters{grid-template-columns:minmax(0,1fr)}
+  .combat-panel{scroll-margin-top:calc(var(--top) + 65px)}
+  #page-combat .combat-primary .panel-body,#page-combat .combat-sidebar .panel-body{padding:12px}
+}
+@media print{
+  #page-combat .combat-layout{grid-template-columns:1fr;grid-template-areas:"primary" "side"}
+  #page-combat .combat-defenses-panel,.combat-shortcuts,.combat-filters,.combat-action-filter{display:none!important}
+  .combat-entry{background:white;color:#111;break-inside:avoid}
+  .combat-entry :is(.combat-entry-name,.combat-entry-meta,.combat-entry-excerpt){color:#222}
+}
+</style>
 </head>
 <body>
 <header class="topbar">
@@ -1295,16 +1406,57 @@ body[data-theme="parchment"] .overview-row .input{color-scheme:light}
 </section>
 <section class="page" id="page-combat">
 <div class="combat-layout">
-<div class="combat-stack">
-<div class="combat-banner" id="combatBanner"></div>
-<div class="panel actions-panel"><div class="panel-head"><h2>Economia de Ações</h2><span class="helper">Referência rápida</span></div><div class="panel-body"><div class="turn-actions"><div class="action-slot"><b>◆</b><span>1 ação</span></div><div class="action-slot"><b>◆◆</b><span>2 ações</span></div><div class="action-slot"><b>◆◆◆</b><span>3 ações</span></div></div><div class="turn-actions" style="grid-template-columns:1fr 1fr;margin-top:6px"><div class="action-slot"><b>↶</b><span>Reação</span></div><div class="action-slot"><b>◇</b><span>Ação livre</span></div></div></div></div>
-<details class="panel fold-panel" id="conditionsDetails"><summary class="panel-head fold-head"><h2>Condições</h2><span class="helper" id="conditionSummary">Nenhuma condição ativa</span></summary><div class="panel-body"><div class="fold-actions"><button class="btn small" id="clearConditionsBtn">Limpar</button></div><div class="conditions" id="conditionGrid"></div><div class="condition-note field"><label>Anotações de condições</label><textarea class="input" id="conditionNotes"></textarea></div></div></details>
-</div>
-<div class="combat-stack"><div class="panel combat-defenses-panel"><div class="panel-head"><h2>Defesas rápidas</h2><span class="helper">1d20 + bônus</span></div><div class="panel-body"><div class="combat-defenses" id="combatDefenseSummary"></div></div></div>
-<div class="panel attacks-panel"><div class="panel-head"><h2>Golpes &amp; Ataques</h2><button class="btn small" id="addAttackBtn">Adicionar</button></div><div class="panel-body"><div id="attackEditor"></div><div class="card-list" id="attackList"></div></div></div>
+<div class="combat-stack combat-primary">
+<nav class="combat-shortcuts" aria-label="Atalhos de combate">
+  <button class="combat-shortcut" type="button" data-combat-jump="combatAttacks">Ataques <strong id="combatAttackCount"></strong></button>
+  <button class="combat-shortcut" type="button" data-combat-jump="combatSpells">Magias <strong id="combatSpellCount"></strong></button>
+  <button class="combat-shortcut" type="button" data-combat-jump="combatAbilities">Habilidades <strong id="combatAbilityCount"></strong></button>
+  <button class="combat-shortcut" type="button" data-combat-jump="combatTalents">Talentos <strong id="combatTalentCount"></strong></button>
+</nav>
+<section class="panel attacks-panel combat-panel" id="combatAttacks" tabindex="-1" aria-labelledby="combatAttacksTitle"><div class="panel-head"><h2 id="combatAttacksTitle">Golpes &amp; Ataques</h2><button class="btn small" id="addAttackBtn">Adicionar</button></div><div class="panel-body"><div id="attackEditor"></div><div class="card-list" id="attackList"></div></div></section>
+<section class="panel combat-panel" id="combatSpells" tabindex="-1" aria-labelledby="combatSpellsTitle">
+  <div class="panel-head"><h2 id="combatSpellsTitle">Magias</h2><button class="btn small" type="button" data-page="spells">Abrir grimório</button></div>
+  <div class="panel-body">
+    <div class="combat-resource-bar" id="combatSpellResources" aria-label="Recursos de conjuração"></div>
+    <div class="combat-filters" id="combatSpellFilters">
+      <input class="input" type="search" id="combatSpellSearch" placeholder="Buscar magia na ficha" aria-label="Buscar magia na ficha"/>
+      <select class="input" id="combatSpellFilter" aria-label="Filtrar magias de combate">
+        <option value="all">Todas as magias</option><option value="prepared">Preparadas</option>
+        <option value="focus">Magias de foco</option><option value="cantrip">Truques</option>
+      </select>
+    </div>
+    <div id="combatSpellList"></div>
+  </div>
+</section>
+<section class="panel combat-panel" id="combatAbilities" tabindex="-1" aria-labelledby="combatAbilitiesTitle">
+  <div class="panel-head"><h2 id="combatAbilitiesTitle">Habilidades ativas</h2>
+    <select class="input combat-action-filter" id="combatActionFilter" aria-label="Filtrar habilidades por ação">
+      <option value="all">Todos os custos</option>
+      <option value="one">1 ação</option><option value="two">2 ações</option><option value="three">3 ações</option>
+      <option value="reaction">Reação</option><option value="free">Ação livre</option>
+    </select>
+  </div>
+  <div class="panel-body" id="combatAbilityList"></div>
+</section>
+<section class="panel combat-panel" id="combatTalents" tabindex="-1" aria-labelledby="combatTalentsTitle">
+  <div class="panel-head"><h2 id="combatTalentsTitle">Resumo de talentos</h2><button class="btn small" type="button" data-page="feats">Abrir talentos</button></div>
+  <div class="panel-body" id="combatTalentList"></div>
+</section>
 <details class="panel fold-panel" id="defenseDetails"><summary class="panel-head fold-head"><h2>Defesas em Detalhe</h2><span class="helper">Ajustar proficiências, itens e valores manuais</span></summary><div class="panel-body" id="defenseConfig"></div></details>
-<div class="panel rolls-panel"><div class="panel-head"><h2>Rolagens Recentes</h2><button class="btn small" id="clearRollsBtn">Limpar</button></div><div class="panel-body"><div class="roll-log" id="combatRollLog"></div></div></div>
 </div>
+<aside class="combat-stack combat-sidebar" aria-label="Informações da sessão">
+<div class="combat-banner" id="combatBanner"></div>
+<div class="combat-stack"><div class="panel combat-defenses-panel"><div class="panel-head"><h2>Defesas rápidas</h2><span class="helper">1d20 + bônus</span></div><div class="panel-body"><div class="combat-defenses" id="combatDefenseSummary"></div></div></div>
+<div class="panel actions-panel"><div class="panel-head"><h2>Economia de Ações</h2></div><div class="panel-body"><div class="combat-legend"><div class="action-slot"><b>◆</b><span>1 ação</span></div><div class="action-slot"><b>◆◆</b><span>2 ações</span></div><div class="action-slot"><b>◆◆◆</b><span>3 ações</span></div><div class="action-slot"><b>↶</b><span>Reação</span></div><div class="action-slot"><b>◇</b><span>Ação livre</span></div></div></div></div>
+<details class="panel fold-panel" id="conditionsDetails"><summary class="panel-head fold-head"><h2>Condições</h2><span class="helper" id="conditionSummary">Nenhuma condição ativa</span></summary><div class="panel-body"><div class="fold-actions"><button class="btn small" id="clearConditionsBtn">Limpar</button></div><div class="conditions" id="conditionGrid"></div><div class="condition-note field"><label>Anotações de condições</label><textarea class="input" id="conditionNotes"></textarea></div></div></details>
+<details class="panel fold-panel rolls-panel" open>
+  <summary class="panel-head fold-head"><h2>Rolagens recentes</h2></summary>
+  <div class="panel-body">
+    <div class="combat-log-tools"><button class="btn small" id="clearRollsBtn" type="button">Limpar</button></div>
+    <div class="roll-log" id="combatRollLog"></div>
+  </div>
+</details>
+</aside>
 </div>
 </section>
 <section class="page" id="page-skills"><div class="page-grid" style="grid-template-columns:1fr"><div class="column">
@@ -2078,13 +2230,136 @@ function renderDerived(){
 }
 function renderMitigation(){const c=current(),el=document.getElementById('mitigationGrid');if(!el)return;el.innerHTML=DAMAGE_TYPES.map(t=>`<div class="mitigation-card"><label>${esc(t)}</label><input class="input mitigation-input" data-type="${esc(t)}" type="number" min="0" value="${num(c.mitigation[t])}"/></div>`).join('');document.querySelectorAll('.mitigation-input').forEach(i=>i.addEventListener('input',()=>{current().mitigation[i.dataset.type]=Math.max(0,num(i.value));saveState()}))}
 function renderOverview(){renderPortrait();renderResources();renderStatusOrbs();renderAttributes();renderDerived();renderMitigation();renderLevelProgression()}
-function renderCombatBanner(){const c=current(),d=defenseTotals(c),el=document.getElementById('combatBanner');el.innerHTML=`<div class="combat-hud"><b>${esc(c.name)}</b><small>Nível ${c.level} • CA ${signed(d.ac)} (rolada) • ${c.identity.speed||'—'}</small></div>${c.image.src?`<img src="${esc(c.image.src)}" style="object-fit:${c.image.fit};object-position:50% 50%;transform:${imageTransform(c,1.6)}"/>`:''}`}
+function renderCombatBanner(){const c=current(),d=defenseTotals(c),el=document.getElementById('combatBanner');el.innerHTML=`<div class="combat-hud"><b>${esc(c.name)}</b><small>Nível ${c.level} • CA ${signed(d.ac)} (rolada) • ${esc(c.identity.speed||'—')}</small></div>${c.image.src?`<img src="${esc(c.image.src)}" style="object-fit:${c.image.fit};object-position:50% 50%;transform:${imageTransform(c,1.6)}"/>`:''}`}
 function renderAttackEditor(){const el=document.getElementById('attackEditor');if(!editorAttack){el.innerHTML='';return}const a=editorAttack==='new'?{id:'',name:'',type:'Corpo a Corpo',ability:'str',rank:'T',item:0,other:0,manualEnabled:false,manual:0,damage:'1d6',damageAbility:'str',traits:'',notes:''}:current().attacks.find(x=>x.id===editorAttack);if(!a){editorAttack=null;el.innerHTML='';return}el.innerHTML=`<div class="editor-grid"><input class="input" id="atkName" placeholder="Nome" value="${esc(a.name)}"/><select class="input" id="atkType"><option ${a.type==='Corpo a Corpo'?'selected':''}>Corpo a Corpo</option><option ${a.type==='À Distância'?'selected':''}>À Distância</option><option ${a.type==='Desarmado'?'selected':''}>Desarmado</option></select><select class="input" id="atkAbility">${ATTRS.map(([k,n])=>`<option value="${k}" ${a.ability===k?'selected':''}>${n}</option>`).join('')}</select><select class="input" id="atkRank">${rankOptions(a.rank)}</select><input class="input" type="number" id="atkItem" placeholder="Item" value="${num(a.item)}"/><input class="input" type="number" id="atkOther" placeholder="Outro" value="${num(a.other)}"/><label class="manual-flag"><input type="checkbox" id="atkManualEnabled" ${a.manualEnabled?'checked':''}/> BDA manual</label><input class="input" type="number" id="atkManual" placeholder="BDA total" value="${num(a.manual)}"/><input class="input" id="atkDamage" placeholder="Dano, ex. 1d8" value="${esc(a.damage)}"/><select class="input" id="atkDmgAbility">${ATTRS.map(([k,n])=>`<option value="${k}" ${a.damageAbility===k?'selected':''}>Dano: ${n}</option>`).join('')}</select><input class="input wide" id="atkTraits" placeholder="Traços" value="${esc(a.traits)}"/><textarea class="input full" id="atkNotes" placeholder="Notas">${esc(a.notes)}</textarea></div><div class="editor-actions"><button class="btn" id="cancelAttack">Cancelar</button><button class="btn primary" id="saveAttack">Salvar Golpe</button></div>`;document.getElementById('cancelAttack').onclick=()=>{editorAttack=null;renderAttackEditor()};document.getElementById('saveAttack').onclick=()=>{const c=current();const obj={id:a.id||uid(),name:document.getElementById('atkName').value.trim()||'Strike',type:document.getElementById('atkType').value,ability:document.getElementById('atkAbility').value,rank:document.getElementById('atkRank').value,item:num(document.getElementById('atkItem').value),other:num(document.getElementById('atkOther').value),manualEnabled:document.getElementById('atkManualEnabled').checked,manual:num(document.getElementById('atkManual').value),damage:document.getElementById('atkDamage').value,damageAbility:document.getElementById('atkDmgAbility').value,traits:document.getElementById('atkTraits').value,notes:document.getElementById('atkNotes').value};const idx=c.attacks.findIndex(x=>x.id===obj.id);if(idx>=0)c.attacks[idx]=obj;else c.attacks.push(obj);editorAttack=null;renderCombat();saveState()}}
-function renderAttacks(){const c=current(),el=document.getElementById('attackList');if(!c.attacks.length){el.innerHTML='<div class="helper">Nenhum golpe registrado.</div>';return}el.innerHTML=c.attacks.map(a=>{const total=attackTotal(c,a),dmgMod=abilityVal(c,a.damageAbility||'str');return `<div class="card"><div class="card-top"><div><div class="card-title">${esc(a.name)}</div><div class="card-sub">BDA ${signed(total)} • Dano ${esc(a.damage)} ${dmgMod?signed(dmgMod):''}</div></div><div class="card-actions"><button class="btn small" data-roll-atk="${a.id}">Rolar</button><button class="btn small" data-edit-atk="${a.id}">Editar</button><button class="btn small danger" data-del-atk="${a.id}">×</button></div></div><div class="tags"><span class="tag gold">${esc(a.type)}</span><span class="tag">${RANK_LABEL[a.rank]}</span>${a.traits?esc(a.traits).split(',').map(t=>`<span class="tag">${esc(t.trim())}</span>`).join(''):''}</div>${a.notes?`<div class="desc">${esc(a.notes)}</div>`:''}</div>`}).join('');el.querySelectorAll('[data-edit-atk]').forEach(b=>b.onclick=()=>{editorAttack=b.dataset.editAtk;renderAttackEditor()});el.querySelectorAll('[data-del-atk]').forEach(b=>b.onclick=()=>{current().attacks=current().attacks.filter(x=>x.id!==b.dataset.delAtk);renderCombat();saveState()});el.querySelectorAll('[data-roll-atk]').forEach(b=>b.onclick=()=>{const a=current().attacks.find(x=>x.id===b.dataset.rollAtk);rollCheck(a.name,attackTotal(current(),a))})}
+function renderAttacks(){const c=current(),el=document.getElementById('attackList');document.getElementById('combatAttackCount').textContent=c.attacks.length;if(!c.attacks.length){el.innerHTML='<div class="helper">Nenhum golpe registrado.</div>';return}el.innerHTML=c.attacks.map(a=>{const total=attackTotal(c,a),dmgMod=abilityVal(c,a.damageAbility||'str');return `<div class="card"><div class="card-top"><div><div class="card-title">${esc(a.name)}</div><div class="card-sub">BDA ${signed(total)} • Dano ${esc(a.damage)} ${dmgMod?signed(dmgMod):''}</div></div><div class="card-actions"><button class="btn small" data-roll-atk="${a.id}">Rolar</button><button class="btn small" data-edit-atk="${a.id}">Editar</button><button class="btn small danger" data-del-atk="${a.id}">×</button></div></div><div class="tags"><span class="tag gold">${esc(a.type)}</span><span class="tag">${RANK_LABEL[a.rank]}</span>${a.traits?esc(a.traits).split(',').map(t=>`<span class="tag">${esc(t.trim())}</span>`).join(''):''}</div>${a.notes?`<div class="desc">${esc(a.notes)}</div>`:''}</div>`}).join('');el.querySelectorAll('[data-edit-atk]').forEach(b=>b.onclick=()=>{editorAttack=b.dataset.editAtk;renderAttackEditor()});el.querySelectorAll('[data-del-atk]').forEach(b=>b.onclick=()=>{current().attacks=current().attacks.filter(x=>x.id!==b.dataset.delAtk);renderCombat();saveState()});el.querySelectorAll('[data-roll-atk]').forEach(b=>b.onclick=()=>{const a=current().attacks.find(x=>x.id===b.dataset.rollAtk);rollCheck(a.name,attackTotal(current(),a))})}
 function defenseRow(key,label,attr){const c=current(),o=c.defenses[key],total=key==='armor'?defenseTotals(c).ac:profTotal(c,o,attr);return `<div class="skill-row" style="grid-template-columns:1fr 112px 64px 64px 76px 64px 58px"><div class="skill-name"><b>${label}</b><small>${attr.toUpperCase()}</small></div><label class="field"><span class="config-label">Proficiência</span><select class="input def-input" data-def="${key}" data-key="rank">${rankOptions(o.rank)}</select></label><label class="field"><span class="config-label">Item</span><input class="input def-input" data-def="${key}" data-key="item" type="number" value="${num(o.item)}" title="Item"/></label><label class="field"><span class="config-label">Outros bônus</span><input class="input def-input" data-def="${key}" data-key="other" type="number" value="${num(o.other)}" title="Outros"/></label><label class="manual-flag"><input class="def-input" data-def="${key}" data-key="manualEnabled" type="checkbox" ${o.manualEnabled?'checked':''}/> Manual</label><label class="field"><span class="config-label">Total manual</span><input class="input def-input" data-def="${key}" data-key="manual" type="number" value="${num(o.manual)}" title="Total manual"/></label><div class="skill-total">${signed(total)}</div></div>`}
 function renderDefenseConfig(){const c=current();document.getElementById('defenseConfig').innerHTML=`${defenseRow('armor','CA — Defesa Rolada','dex')}<div class="formula-strip" style="grid-template-columns:1fr 1fr;margin:7px 0 10px"><div class="field"><label>Limite de AGI da Armadura</label><input class="input def-input" data-def="armor" data-key="dexCap" type="number" value="${num(c.defenses.armor.dexCap,99)}"/></div><div class="helper" style="align-self:end">Automático: AGI + proficiência + item + outros. <b>Não soma 10.</b></div></div>${defenseRow('perception','Percepção','wis')}${defenseRow('fort','Fortitude','con')}${defenseRow('ref','Reflexos','dex')}${defenseRow('will','Vontade','wis')}<div class="skill-row" style="grid-template-columns:1fr 112px 95px 64px 64px 76px 64px 58px"><div class="skill-name"><b>CD de Classe</b><small>Atributo-chave</small></div><label class="field"><span class="config-label">Proficiência</span><select class="input def-input" data-def="classDC" data-key="rank">${rankOptions(c.defenses.classDC.rank)}</select></label><select class="input def-input" data-def="classDC" data-key="key">${ATTRS.map(([k,n])=>`<option value="${k}" ${c.defenses.classDC.key===k?'selected':''}>${n}</option>`).join('')}</select><label class="field"><span class="config-label">Item</span><input class="input def-input" data-def="classDC" data-key="item" type="number" value="${num(c.defenses.classDC.item)}"/></label><label class="field"><span class="config-label">Outros bônus</span><input class="input def-input" data-def="classDC" data-key="other" type="number" value="${num(c.defenses.classDC.other)}"/></label><label class="manual-flag"><input class="def-input" data-def="classDC" data-key="manualEnabled" type="checkbox" ${c.defenses.classDC.manualEnabled?'checked':''}/> Manual</label><label class="field"><span class="config-label">Total manual</span><input class="input def-input" data-def="classDC" data-key="manual" type="number" value="${num(c.defenses.classDC.manual)}"/></label><div class="skill-total">${defenseTotals(c).classDC}</div></div>`;document.querySelectorAll('.def-input').forEach(el=>el.addEventListener('input',()=>{const o=current().defenses[el.dataset.def];o[el.dataset.key]=el.type==='checkbox'?el.checked:el.type==='number'?num(el.value):el.value;recalcAndRender(false);renderDefenseConfig();saveState()}))}
 function renderConditions(){renderConditionSummary();const c=current(),grid=document.getElementById('conditionGrid');grid.innerHTML=CONDITIONS.map(name=>{const d=c.conditions[name]||{active:false,value:0};return `<div class="condition ${d.active?'active':''}" data-cond="${name}"><div class="condition-mark">${d.active?'◆':'◇'}</div><div><b>${name}</b><small>${d.active?'Ativa':'Inativa'}</small></div><input class="input" type="number" min="0" value="${num(d.value)}" data-cond-value="${name}" title="Valor"/></div>`}).join('');grid.querySelectorAll('[data-cond]').forEach(el=>el.addEventListener('click',e=>{if(e.target.matches('input'))return;const name=el.dataset.cond,d=current().conditions[name]||{active:false,value:0};d.active=!d.active;current().conditions[name]=d;renderConditions();saveState()}));grid.querySelectorAll('[data-cond-value]').forEach(el=>el.addEventListener('input',()=>{const name=el.dataset.condValue,d=current().conditions[name]||{active:true,value:0};d.value=Math.max(0,num(el.value));if(d.value>0)d.active=true;current().conditions[name]=d;renderConditionSummary();saveState()}));document.getElementById('conditionNotes').value=c.conditionNotes}
 function renderRollLogs(){const c=current(),html=c.rolls.slice(0,30).map(r=>`<div class="roll-entry"><b>${esc(r.name)}</b> • ${esc(r.formula)} = <b>${r.total}</b><br><span style="color:var(--muted)">${esc(r.detail||'')} • ${esc(r.time||'')}</span></div>`).join('')||'<div class="helper">Nenhuma rolagem registrada.</div>';document.getElementById('combatRollLog').innerHTML=html;document.getElementById('journalRollLog').innerHTML=html}
+const COMBAT_ACTION_NAMES={one:'1 ação',two:'2 ações',three:'3 ações',reaction:'Reação',free:'Ação livre'};
+function combatActionText(action){
+ const name=COMBAT_ACTION_NAMES[action];
+ return typeof name==='string'?`${ACTION_LABEL[action]} ${name}`:'';
+}
+function combatEntry({name,icon,meta,description,facts=[],color=''}){
+ const text=String(description||'').trim();
+ const short=text.replace(/\s+/g,' ');
+ const excerpt=short.length>156?short.slice(0,153).replace(/\s+\S*$/,'')+'…':short;
+ const fields=facts.filter(([,value])=>String(value??'').trim());
+ return `<details class="combat-entry" ${color?`style="--combat-entry-color:${color}"`:''}>
+  <summary>
+   <span class="combat-entry-icon" aria-hidden="true">${esc(icon)}</span>
+   <span class="combat-entry-copy">
+    <strong class="combat-entry-name">${esc(name)}</strong>
+    ${meta?`<span class="combat-entry-meta">${esc(meta)}</span>`:''}
+    ${excerpt?`<span class="combat-entry-excerpt">${esc(excerpt)}</span>`:''}
+   </span>
+  </summary>
+  <div class="combat-entry-body">
+   ${fields.length?`<dl class="combat-entry-facts">${fields.map(([label,value])=>`<div><dt>${esc(label)}</dt><dd>${esc(value)}</dd></div>`).join('')}</dl>`:''}
+   <p>${esc(text||'Sem descrição registrada.')}</p>
+  </div>
+ </details>`;
+}
+function combatList(entries,makeCard,limit,empty){
+ if(!entries.length)return `<p class="combat-empty">${esc(empty)}</p>`;
+ const cards=entries.map(makeCard);
+ const grid=list=>`<div class="combat-entry-list">${list.join('')}</div>`;
+ return grid(cards.slice(0,limit))+(cards.length>limit
+  ?`<details class="combat-more"><summary>Mostrar mais (${cards.length-limit})</summary>${grid(cards.slice(limit))}</details>`
+  :'');
+}
+function renderCombatSpellResources(){
+ const c=current(),book=c.spellcasting,root=document.getElementById('combatSpellResources');
+ const slots=book.slots.filter(slot=>num(slot.max)>0||num(slot.current)>0);
+ const hasFocus=num(c.focus.max)>0||num(c.focus.current)>0||book.spells.some(spell=>spell.isFocus);
+ if(!book.spells.length&&!slots.length&&!book.specialSlots.length&&!hasFocus){root.innerHTML='';return}
+ const resource=(label,value)=>`<span class="combat-resource">${esc(label)} <b>${esc(value)}</b></span>`;
+ const total=spellTotals(c);
+ root.innerHTML=(book.spells.length
+  ?`<button class="combat-resource" type="button" id="combatSpellAttack">Ataque mágico <b>${signed(total.attack)}</b></button>`+resource('CD',total.dc)
+  :'')
+  +(hasFocus?resource('Foco',`${num(c.focus.current)} / ${num(c.focus.max)}`):'')
+  +slots.map(slot=>resource(`${num(slot.rank)}º círculo`,`${num(slot.current)} / ${num(slot.max)}`)).join('')
+  +book.specialSlots.map(slot=>resource(slot.name||'Espaço especial',`${num(slot.current)} / ${num(slot.max)}`)).join('');
+ document.getElementById('combatSpellAttack')?.addEventListener('click',()=>rollCheck('Ataque de Magia',spellTotals(current()).attack));
+}
+function renderCombatSpells(){
+ const {spells}=current().spellcasting;
+ const mode=document.getElementById('combatSpellFilter').value;
+ document.getElementById('combatSpellFilters').hidden=!spells.length;
+ const normalize=value=>String(value||'').normalize('NFD').replace(/\p{M}/gu,'').toLocaleLowerCase('pt-BR');
+ const query=normalize(document.getElementById('combatSpellSearch').value.trim());
+ const list=spells.filter(spell=>{
+  if(query&&!normalize(spell.name).includes(query))return false;
+  if(mode==='prepared')return spell.prepared&&!spell.isFocus;
+  if(mode==='focus')return spell.isFocus;
+  if(mode==='cantrip')return num(spell.rank)===0&&!spell.isFocus;
+  return true;
+ });
+ const priority=spell=>spell.isFocus?1:spell.prepared?0:num(spell.rank)===0?2:3;
+ list.sort((a,b)=>priority(a)-priority(b)||num(a.rank)-num(b.rank)||String(a.name).localeCompare(String(b.name),'pt-BR'));
+ document.getElementById('combatSpellCount').textContent=spells.length;
+ document.getElementById('combatSpellList').innerHTML=combatList(list,spell=>{
+  const rank=num(spell.rank);
+  const type=spell.isFocus?'Foco':spell.prepared?'Preparada':'';
+  return combatEntry({
+   name:spell.name,icon:spell.isFocus?'✦':rank||'∞',
+   meta:[rank===0?'Truque':`${rank}º círculo`,type,combatActionText(spell.action)||spell.cast].filter(Boolean).join(' · '),
+   description:spell.description,
+   facts:[['Conjuração',spell.cast],['Alcance',spell.range],['Defesa',spell.defense],['Alvo',spell.targets],['Área',spell.area],['Duração',spell.duration],['Traços',spell.traits]]
+  });
+ },6,spells.length?'Nenhuma magia corresponde à busca ou ao filtro.':'Nenhuma magia registrada na ficha.');
+}
+function renderCombatTalents(){
+ const c=current(),organization=ensureFeatOrganization(c);
+ const mode=document.getElementById('combatActionFilter').value;
+ const active=[],passive=[];
+ for(const feat of sortFeatList([...c.feats],organization.sort)){
+  (Object.hasOwn(COMBAT_ACTION_NAMES,feat.action)?active:passive).push(feat);
+ }
+ const makeCard=feat=>{
+  const look=featAppearance(feat,c);
+  return combatEntry({
+   name:feat.name,icon:look.icon,color:look.color,
+   meta:[combatActionText(feat.action)||'Passiva',feat.category,organization.groups.find(group=>group.id===feat.groupId)?.name].filter(Boolean).join(' · '),
+   description:feat.description,facts:[['Traços',feat.traits],['Fonte',feat.source]]
+  });
+ };
+ document.getElementById('combatActionFilter').hidden=!active.length;
+ document.getElementById('combatAbilityCount').textContent=active.length;
+ document.getElementById('combatTalentCount').textContent=passive.length;
+ document.getElementById('combatAbilityList').innerHTML=combatList(
+  active.filter(feat=>mode==='all'||feat.action===mode),makeCard,6,
+  active.length?'Nenhuma habilidade usa esse custo de ação.':'Nenhuma habilidade com custo de ação registrado em Talentos.'
+ );
+ document.getElementById('combatTalentList').innerHTML=combatList(passive,makeCard,4,'Nenhum talento passivo registrado na ficha.');
+}
+function renderCombatReference(){
+ const page=document.getElementById('page-combat');
+ if(page.dataset.character!==current().id){
+  page.dataset.character=current().id;
+  document.getElementById('combatSpellSearch').value='';
+  document.getElementById('combatSpellFilter').value='all';
+  document.getElementById('combatActionFilter').value='all';
+ }
+ renderCombatSpellResources();
+ renderCombatSpells();
+ renderCombatTalents();
+}
+function bindCombatReference(){
+ document.getElementById('combatSpellSearch').addEventListener('input',renderCombatSpells);
+ document.getElementById('combatSpellFilter').addEventListener('change',renderCombatSpells);
+ document.getElementById('combatActionFilter').addEventListener('change',renderCombatTalents);
+ document.querySelectorAll('[data-combat-jump]').forEach(button=>button.addEventListener('click',()=>{
+  const target=document.getElementById(button.dataset.combatJump);
+  const reduce=document.body.dataset.appearanceMotion==='reduced'||matchMedia('(prefers-reduced-motion: reduce)').matches;
+  target.focus({preventScroll:true});
+  target.scrollIntoView({behavior:reduce?'instant':'smooth',block:'start'});
+ }));
+}
+
 function renderCombat(){renderCombatBanner();renderAttackEditor();renderAttacks();renderDefenseConfig();renderConditions();renderRollLogs()}
 const SKILL_UI=(()=>{try{return Object.assign({filter:'all',sort:'name'},JSON.parse(localStorage.getItem('cinzas-skill-ui')||'{}'))}catch(e){return {filter:'all',sort:'name'}}})();
 function saveSkillUi(){try{localStorage.setItem('cinzas-skill-ui',JSON.stringify(SKILL_UI))}catch(e){}}
@@ -2607,7 +2882,7 @@ function renderItems(){const c=current(),el=document.getElementById('itemList');
 function renderInventory(){const c=current();document.getElementById('coinPP').value=c.inventory.coins.pp;document.getElementById('coinGP').value=c.inventory.coins.gp;document.getElementById('coinSP').value=c.inventory.coins.sp;document.getElementById('coinCP').value=c.inventory.coins.cp;document.getElementById('equipmentNotes').value=c.inventory.notes;renderInventorySummary();renderItemEditor();renderItems()}
 function renderJournal(){renderRollLogs()}
 function renderAll(){renderClassDatalist();renderHeader();renderDrawer();renderOverview();renderCombat();renderSkills();renderFeats();renderSpells();renderInventory();renderJournal();setPage(state.currentPage||'overview',false)}
-function setPage(page,save=true){state.currentPage=page;document.body.dataset.page=page;document.getElementById('sessionStrip').hidden=page==='overview';document.querySelectorAll('#tabs .tab').forEach(b=>b.setAttribute('aria-current',b.dataset.page===page?'page':'false'));document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===`page-${page}`));document.querySelectorAll('.tab,[data-page]').forEach(b=>{if(b.dataset.page)b.classList.toggle('active',b.dataset.page===page)});updatePageTravel(page);if(save)saveState();window.scrollTo({top:0,behavior:'smooth'})}
+function setPage(page,save=true){state.currentPage=page;document.body.dataset.page=page;document.getElementById('sessionStrip').hidden=page==='overview';document.querySelectorAll('#tabs .tab').forEach(b=>b.setAttribute('aria-current',b.dataset.page===page?'page':'false'));document.querySelectorAll('.page').forEach(p=>p.classList.toggle('active',p.id===`page-${page}`));document.querySelectorAll('.tab,[data-page]').forEach(b=>{if(b.dataset.page)b.classList.toggle('active',b.dataset.page===page)});updatePageTravel(page);if(page==='combat')renderCombatReference();if(save)saveState();window.scrollTo({top:0,behavior:'smooth'})}
 function parseDice(formula){const text=String(formula).replace(/\s+/g,'').toLowerCase();const tokens=text.match(/[+-]?[^+-]+/g)||[];let total=0,parts=[];for(let token of tokens){let sign=1;if(token[0]==='+')token=token.slice(1);else if(token[0]==='-'){sign=-1;token=token.slice(1)}const m=token.match(/^(\d*)d(\d+)$/);if(m){const count=clamp(num(m[1]||1),1,100),faces=clamp(num(m[2]),2,1000),rolls=[];for(let i=0;i<count;i++)rolls.push(1+Math.floor(Math.random()*faces));const sum=rolls.reduce((a,b)=>a+b,0)*sign;total+=sum;parts.push(`${sign<0?'-':''}${count}d${faces} [${rolls.join(', ')}]`)}else{const n=num(token)*sign;total+=n;parts.push(signed(n))}}return {total,detail:parts.join(' ')}}
 function addRoll(name,formula,res){const c=current();c.rolls.unshift({id:uid(),name,formula,total:res.total,detail:res.detail,time:new Date().toLocaleString('pt-BR')});c.rolls=c.rolls.slice(0,60);renderRollLogs();saveState()}
 function rollCheck(name,mod){const formula=`1d20${mod>=0?'+':''}${mod}`,res=parseDice(formula);addRoll(name,formula,res);toast(`${name}: ${res.total}`)}
@@ -2775,6 +3050,7 @@ document.getElementById('skillSearch').oninput=renderSkills;document.getElementB
 
 // Feats
 bindFeatOrganization();
+bindCombatReference();
 
 // Spells
 document.getElementById('addSpellBtn').onclick=()=>{editorSpell='new';renderSpellEditor()};document.getElementById('addSpecialSlotBtn').onclick=()=>{current().spellcasting.specialSlots.push({id:uid(),name:'Ferir / Curar',rank:1,current:0,max:0});renderSpecialSlots();saveState()};document.getElementById('restoreSlotsBtn').onclick=()=>{current().spellcasting.slots.forEach(s=>s.current=s.max);current().spellcasting.specialSlots.forEach(s=>s.current=s.max);current().focus.current=current().focus.max;renderSlots();renderResources();renderSpellDerived();saveState();toast('Slots e Foco restaurados.')};
@@ -2811,10 +3087,11 @@ function renderSessionResources(){
  }
  document.getElementById('sessionHpMax').textContent='/ '+c.hp.max;
  document.getElementById('sessionFocusMax').textContent='/ '+c.focus.max;
+ if(state.currentPage==='combat')renderCombatSpellResources();
 }
 function renderCombatDefenseSummary(){
  const d=defenseTotals(current()),root=document.getElementById('combatDefenseSummary');
- root.innerHTML=[['CA',d.ac],['Fortitude',d.fort],['Reflexos',d.ref],['Vontade',d.will]].map(([name,value])=>`<button class="combat-defense" data-session-defense="${name}" data-bonus="${value}" title="Rolar ${name}"><small>${name}</small><b>${signed(value)}</b><span>d20 ↗</span></button>`).join('');
+ root.innerHTML=[['CA',d.ac],['Fortitude',d.fort],['Reflexos',d.ref],['Vontade',d.will],['Percepção',d.perception]].map(([name,value])=>`<button class="combat-defense" data-session-defense="${name}" data-bonus="${value}" title="Rolar ${name}"><small>${name}</small><b>${signed(value)}</b><span>d20 ↗</span></button>`).join('');
  root.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>rollCheck(b.dataset.sessionDefense,num(b.dataset.bonus))));
 }
 function renderConditionSummary(){
