@@ -1259,7 +1259,7 @@ button.combat-resource:hover,button.combat-resource:focus-visible{border-color:v
 <div class="brand"><div class="brand-sigil"></div><div class="brand-title">Cinzas da Guerra<small>Terras Intermédias • Ficha do jogador</small></div></div>
 <span class="save-indicator" data-save-state="loading" id="saveIndicator" role="status">Abrindo ficha…</span><div class="top-actions">
 <button class="btn appearance-trigger" type="button" id="themeBtn" aria-haspopup="dialog" aria-controls="appearanceDialog"><span aria-hidden="true">◈</span> Visual</button>
-<details class="toolbar-menu" id="toolbarMenu"><summary class="btn">Opções <span aria-hidden="true">⌄</span></summary><div class="toolbar-popover"><button class="btn" id="saveHealthBtn" type="button">Salvamento e backup</button><button class="btn" id="classManagerBtn">♜ <span class="label">Classes</span></button><button class="btn" id="exportBtn">Exportar</button><button class="btn" id="importBtn">Importar</button><button class="btn" id="printBtn">Imprimir</button><button class="btn" id="mobileRollBtn" type="button">Rolar dados</button></div></details><button class="btn hide-mobile" id="rollBtn">d20 <span class="label">Rolagem</span></button>
+<details class="toolbar-menu" id="toolbarMenu"><summary class="btn">Opções <span aria-hidden="true">⌄</span></summary><div class="toolbar-popover"><button class="btn" id="saveHealthBtn" type="button">Salvamento e backup</button><button class="btn" id="classManagerBtn">♜ <span class="label">Classes</span></button><button class="btn" id="exportBtn">Exportar</button><button class="btn" id="importBtn">Importar</button><button class="btn" id="printBtn" type="button">Exportar PDF</button><button class="btn" id="mobileRollBtn" type="button">Rolar dados</button></div></details><button class="btn hide-mobile" id="rollBtn">d20 <span class="label">Rolagem</span></button>
 <input accept=".json,application/json,text/plain" hidden="" id="importFile" type="file"/>
 <button aria-label="Nova ficha" class="btn primary" id="newBtn">＋ <span class="label">Nova Ficha</span></button>
 </div>
@@ -3101,7 +3101,6 @@ document.getElementById('cleanAutoBackupsBtn').onclick=removeOldAutoBackups;
 document.getElementById('importCancelBtn').onclick=closeImportModal;
 document.getElementById('importModal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeImportModal()});
 document.getElementById('storageExportBtn').onclick=exportState;
-document.getElementById('printBtn').onclick=()=>window.print();
 document.getElementById('rollBtn').onclick=()=>document.getElementById('rollModal').classList.add('open');document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.close).classList.remove('open'));document.querySelectorAll('.modal-backdrop').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('open')}));
 document.getElementById('executeRollBtn').onclick=()=>{try{const name=document.getElementById('rollName').value||'Rolagem',formula=document.getElementById('rollFormula').value||'1d20',res=parseDice(formula);document.getElementById('rollResult').innerHTML=`<div class="derived-card"><small>${esc(name)}</small><b>${res.total}</b><span>${esc(res.detail)}</span></div>`;addRoll(name,formula,res)}catch(e){toast('Fórmula inválida.')}};
 
@@ -3243,5 +3242,6 @@ for(const name of ['renderAll','renderResources','renderDerived','renderHeader',
 }
 startDurableSheet();
 </script>
+<script src="./assets/ficha-pdf.js"></script>
 </body>
 </html>
