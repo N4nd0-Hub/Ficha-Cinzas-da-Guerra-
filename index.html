@@ -1512,12 +1512,17 @@ body[data-appearance-motion="reduced"] :is(.er-die,.er-grace-light,.er-ember,.er
   box-shadow:0 10px 24px rgba(0,0,0,.55)}
 .gb-spread::after{content:"";position:absolute;z-index:3;left:50%;top:0;bottom:0;width:70px;margin-left:-35px;pointer-events:none;
   background:linear-gradient(90deg,transparent,rgba(60,38,18,.16) 30%,rgba(40,24,10,.42) 49%,rgba(40,24,10,.42) 51%,rgba(60,38,18,.16) 70%,transparent)}
-.gb-page{position:relative;min-width:0;overflow-y:auto;overflow-x:hidden;padding:34px 40px 64px;color:var(--ink);
+.gb-page{position:relative;min-width:0;overflow:hidden;padding:0;color:var(--ink);
   font:400 16.5px/1.55 var(--display);scrollbar-width:thin;scrollbar-color:rgba(92,70,49,.45) transparent;
   background:
     radial-gradient(140% 100% at 50% 50%,transparent 60%,rgba(120,88,40,.16)),
     repeating-linear-gradient(0deg,rgba(120,90,50,.025) 0 2px,transparent 2px 5px),
     linear-gradient(180deg,var(--paper),var(--paper2))}
+.gb-scroll{height:100%;overflow-y:auto;overflow-x:hidden;padding:34px 40px 70px;scrollbar-width:thin;scrollbar-color:rgba(92,70,49,.45) transparent;overscroll-behavior:contain}
+.gb-folio{pointer-events:none;z-index:1}
+.gb-page::after{content:"";position:absolute;left:0;right:0;bottom:0;height:54px;pointer-events:none;background:linear-gradient(180deg,transparent,var(--paper2) 70%)}
+.gb-corner{z-index:2}
+.gb-degrees,.gb-list,.gb-sub,.gb-desc .gb-heighten,.gb-cast{clear:both}
 .gb-left{border-radius:3px 0 0 3px;box-shadow:inset -18px 0 30px -18px rgba(80,52,20,.45),-1px 0 0 #d9c8a2,-2px 0 0 #c6b286,-3px 0 0 #d6c39b,-4px 0 0 #b69f72}
 .gb-right{border-radius:0 3px 3px 0;box-shadow:inset 18px 0 30px -18px rgba(80,52,20,.45),1px 0 0 #d9c8a2,2px 0 0 #c6b286,3px 0 0 #d6c39b,4px 0 0 #b69f72}
 .gb-page ::selection{background:rgba(155,116,49,.3)}
@@ -1658,6 +1663,49 @@ body[data-appearance-motion="reduced"] :is(.er-die,.er-grace-light,.er-ember,.er
 
 /* Editor */
 .gb-editor:not(:has(#spellEditor *)){display:none}
+/* Texto rico do grimório */
+.gb-desc strong{font-weight:700;color:var(--ink);background:linear-gradient(transparent 62%,rgba(201,169,92,.28) 62%)}
+.gb-desc em{font-style:italic;color:var(--ink2)}
+.gb-desc p{margin:0 0 11px}
+.gb-desc .gb-labeled{text-align:left}
+.gb-label{color:var(--rubric);font-variant:small-caps;letter-spacing:.03em}
+.gb-desc .gb-heighten{margin:14px 0 10px;padding:8px 12px;border-left:3px solid var(--gild);background:linear-gradient(90deg,rgba(201,169,92,.16),transparent);text-align:left}
+.gb-desc .gb-heighten .gb-label{color:#7a5a1a}
+.gb-sub{margin:16px 0 8px;font:700 19px/1.2 var(--display);font-variant:small-caps;letter-spacing:.04em;color:var(--rubric);display:flex;align-items:center;gap:10px}
+.gb-sub::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,var(--gild),transparent)}
+.gb-list{margin:2px 0 12px;padding:0 0 0 4px;list-style:none}
+.gb-list li{position:relative;padding:2px 0 2px 22px}
+.gb-list li::before{content:"❖";position:absolute;left:2px;top:3px;font-size:11px;color:var(--gild)}
+.gb-degrees{display:grid;gap:0;margin:6px 0 14px;border:1px solid rgba(155,116,49,.45);border-radius:3px;overflow:hidden;background:rgba(255,248,230,.35)}
+.gb-degrees .deg{display:grid;grid-template-columns:136px minmax(0,1fr);gap:10px;align-items:baseline;padding:7px 12px;border-top:1px dotted rgba(92,70,49,.3)}
+.gb-degrees .deg:first-child{border-top:0}
+.gb-degrees dt{font:700 11px var(--ui-font);letter-spacing:.06em;text-transform:uppercase}
+.gb-degrees dd{margin:0;text-align:left}
+.gb-degrees .cs{background:linear-gradient(90deg,rgba(201,169,92,.28),transparent 70%)}.gb-degrees .cs dt{color:#7a5a1a}.gb-degrees .cs dt::before{content:"✦✦ ";color:var(--gild)}
+.gb-degrees .s dt{color:#3f5a2c}.gb-degrees .s dt::before{content:"✦ ";color:#6d8a4f}
+.gb-degrees .f dt{color:#7d3a26}.gb-degrees .f dt::before{content:"✕ ";color:#a0553b}
+.gb-degrees .cf{background:linear-gradient(90deg,rgba(141,42,27,.16),transparent 70%)}.gb-degrees .cf dt{color:var(--rubric)}.gb-degrees .cf dt::before{content:"✕✕ ";color:var(--rubric)}
+.gb-dice{display:inline;padding:0 4px;margin:0 1px;border:1px solid rgba(141,42,27,.45);border-radius:3px;background:rgba(141,42,27,.07);color:var(--rubric);font:700 .95em var(--display);cursor:pointer;white-space:nowrap;transition:background .15s,box-shadow .15s}
+.gb-dice::before{content:"⚄ ";font-size:.85em}
+.gb-dice:hover{background:rgba(141,42,27,.15);box-shadow:0 0 0 2px rgba(141,42,27,.15)}
+.gb-desc .gb-first::first-letter{float:left}
+
+/* Editor: barra de formatação e prévia */
+.gb-fmt{display:flex;flex-wrap:wrap;align-items:center;gap:5px;padding:6px;border:1px solid var(--hair,var(--line));border-radius:6px 6px 0 0;border-bottom:0;background:color-mix(in srgb,var(--theme-deep) 70%,transparent)}
+.gb-fmt+textarea{border-top-left-radius:0!important;border-top-right-radius:0!important}
+.gb-fmt button{min-width:34px;height:32px;padding:0 10px;border:1px solid color-mix(in srgb,var(--gold) 28%,transparent);border-radius:4px;background:transparent;color:var(--text);font:600 12px var(--ui-font);cursor:pointer;transition:border-color .15s,color .15s,background .15s}
+.gb-fmt button:hover{border-color:var(--gold);color:var(--gold2);background:var(--accent-wash)}
+.gb-fmt button b{font:800 15px Georgia,serif}.gb-fmt button i{font:italic 600 15px Georgia,serif}
+.gb-fmt .sep{width:1px;height:20px;margin:0 3px;background:var(--hair,var(--line))}
+.gb-fmt-hint{margin-left:auto;font:500 11px var(--ui-font);color:var(--muted)}
+.gb-fmt-hint code{padding:1px 4px;border-radius:3px;background:rgba(0,0,0,.3);color:var(--gold2);font:600 11px ui-monospace,Consolas,monospace}
+.gb-preview{--paper:#f0e4c8;--paper2:#e0cda5;--ink:#2a1d12;--ink2:#5c4631;--ink3:#8a7254;--rubric:#8d2a1b;--gild:#9b7431;
+  margin-top:4px;padding:14px 18px;border-radius:4px;color:var(--ink);font:400 16px/1.55 var(--display);background:linear-gradient(180deg,var(--paper),var(--paper2));box-shadow:inset 0 0 30px rgba(120,88,40,.18)}
+.gb-preview>small{display:block;margin-bottom:8px;font:700 9.5px var(--ui-font);letter-spacing:.2em;text-transform:uppercase;color:var(--ink3)}
+.gb-preview .gb-desc .gb-first::first-letter{float:none;margin:0;padding:0;border:0;background:none;box-shadow:none;font:inherit;color:inherit}
+.gb-preview .gb-empty{font-style:italic;color:var(--ink3);margin:0}
+@media(max-width:900px){.gb-fmt-hint{margin-left:0;width:100%}.gb-degrees .deg{grid-template-columns:1fr;gap:2px}}
+
 
 /* Celular: uma página por vez, fitas no topo */
 @media(max-width:900px){
@@ -1668,7 +1716,9 @@ body[data-appearance-motion="reduced"] :is(.er-die,.er-grace-light,.er-ember,.er
   .gb-rib:hover{transform:none}.gb-rib.on{transform:translateY(2px)}
   .gb-spread{grid-template-columns:1fr;height:auto}
   .gb-spread::after{display:none}
-  .gb-page{overflow:visible;padding:24px 20px 56px;font-size:16px}
+  .gb-page{overflow:visible;font-size:16px}
+  .gb-scroll{height:auto;overflow:visible;padding:24px 20px 60px}
+  .gb-page::after{height:40px}
   .gb-left{border-radius:3px 3px 0 0;box-shadow:inset 0 -18px 24px -20px rgba(80,52,20,.45)}
   .gb-right{border-radius:0 0 3px 3px;box-shadow:inset 0 18px 24px -20px rgba(80,52,20,.45)}
   .gb-chapter h2{font-size:28px}.gb-spell-head h3{font-size:29px}
@@ -2758,7 +2808,7 @@ function combatActionText(action){
  return typeof name==='string'?`${ACTION_LABEL[action]} ${name}`:'';
 }
 function combatEntry({name,icon,meta,description,facts=[],color=''}){
- const text=String(description||'').trim();
+ const text=String(description||'').replace(/\*\*(.+?)\*\*/g,'$1').replace(/(^|[^*])\*(?=\S)([^*\n]+?)\*/g,'$1$2').replace(/^#{1,3}\s+/gm,'').trim();
  const short=text.replace(/\s+/g,' ');
  const excerpt=short.length>156?short.slice(0,153).replace(/\s+\S*$/,'')+'…':short;
  const fields=facts.filter(([,value])=>String(value??'').trim());
@@ -4054,13 +4104,58 @@ function indexBlock(ch,sel){
 }
 function leftPage(ch,c,sel,list){
   const i=list.indexOf(ch),prev=list[i-1],next=list[i+1];
-  return `<header class="gb-chapter"><small>${ch.kicker}</small><h2><span class="gb-mark">${ch.mark}</span>${ch.title}</h2><div class="gb-rule"></div></header>
+  return `<div class="gb-scroll"><header class="gb-chapter"><small>${ch.kicker}</small><h2><span class="gb-mark">${ch.mark}</span>${ch.title}</h2><div class="gb-rule"></div></header>
     ${slotBlock(ch,c)}
-    ${indexBlock(ch,sel)}
+    ${indexBlock(ch,sel)}</div>
     ${prev?`<button type="button" class="gb-corner prev" data-gb-goto="${prev.key}" aria-label="Capítulo anterior: ${esc(prev.title)}"><span>‹ ${prev.label}</span></button>`:''}
     <div class="gb-folio">${i*2+1}</div>`;
 }
-function paragraphs(text){
+/* ---------- Texto do grimório ----------
+   **negrito**, *itálico*, "- " listas, "## " subtítulos, rótulos ("Alvos: ..."),
+   graus de sucesso agrupados e dados (2d6+3) clicáveis para rolar. */
+const DEG_RE=/(Sucesso cr[ií]tico|Falha cr[ií]tica|Acerto cr[ií]tico|Sucesso|Falha|Acerto|Erro)\s*:\s*/gi;
+const DEG_CLASS=k=>{k=k.toLowerCase().replace('í','i');return k.startsWith('sucesso cr')||k.startsWith('acerto cr')?'cs':k.startsWith('falha cr')?'cf':k.startsWith('sucesso')||k.startsWith('acerto')?'s':'f'};
+function inlineMarks(t){
+  t=t.replace(/\*\*(?=\S)([^*]+?)\*\*/g,'<strong>$1</strong>');
+  t=t.replace(/(^|[^*\w])\*(?=\S)([^*\n]+?)\*(?![\w*])/g,'$1<em>$2</em>');
+  t=t.replace(/(^|[^\w-])(\d{0,2}d\d{1,3}(?:\s?[+−-]\s?\d+)?)(?![\w])/g,(m,pre,d)=>`${pre}<button type="button" class="gb-dice" data-gb-dice="${d.replace(/−/g,'-').replace(/\s/g,'')}" title="Rolar ${d}">${d}</button>`);
+  return t;
+}
+function degreeRows(text){
+  const parts=[];let m,last=0,cur=null;DEG_RE.lastIndex=0;
+  while((m=DEG_RE.exec(text))){if(cur)cur.body=text.slice(last,m.index).trim();else if(m.index>0)parts.lead=text.slice(0,m.index).trim();cur={label:m[1],body:''};parts.push(cur);last=DEG_RE.lastIndex}
+  if(cur)cur.body=text.slice(last).trim();
+  return parts;
+}
+function richText(raw){
+  const lines=String(raw||'').replace(/\r/g,'').split('\n').map(l=>l.trim());
+  let html='',list=null,deg=null,first=true;
+  const flushList=()=>{if(list){html+=`<ul class="gb-list">${list.join('')}</ul>`;list=null}};
+  const flushDeg=()=>{if(deg){html+=`<dl class="gb-degrees">${deg.join('')}</dl>`;deg=null}};
+  const degRow=(label,body)=>`<div class="deg ${DEG_CLASS(label)}"><dt>${esc(label.charAt(0).toUpperCase()+label.slice(1))}</dt><dd>${inlineMarks(esc(body.replace(/^[.;\s]+|[.;\s]+$/g,'')))}.</dd></div>`;
+  for(const line of lines){
+    if(!line){flushList();flushDeg();continue}
+    const li=line.match(/^(?:[-•–]|\*(?=\s))\s+(.*)$/);
+    if(li){flushDeg();(list??=[]).push(`<li>${inlineMarks(esc(li[1]))}</li>`);first=false;continue}
+    flushList();
+    const h=line.match(/^#{1,3}\s+(.*)$/);
+    if(h){flushDeg();html+=`<h4 class="gb-sub">${inlineMarks(esc(h[1]))}</h4>`;first=false;continue}
+    DEG_RE.lastIndex=0;const startsDeg=DEG_RE.exec(line);const rows=degreeRows(line);
+    if(startsDeg&&startsDeg.index===0||rows.length>=2){
+      if(rows.lead){flushDeg();html+=`<p${first?' class="gb-first"':''}>${inlineMarks(esc(rows.lead))}</p>`;first=false}
+      deg??=[];rows.forEach(r=>deg.push(degRow(r.label,r.body)));first=false;continue;
+    }
+    flushDeg();
+    const lab=line.match(/^([A-ZÀ-Ý][^:.\n*]{1,30}(?:\([^)]*\))?):\s+(.*)$/);
+    if(lab){const heighten=/^elevad/i.test(lab[1]);html+=`<p class="${heighten?'gb-heighten':'gb-labeled'}"><b class="gb-label">${esc(lab[1])}:</b> ${inlineMarks(esc(lab[2]))}</p>`;first=false;continue}
+    html+=`<p${first?' class="gb-first"':''}>${inlineMarks(esc(line))}</p>`;first=false;
+  }
+  flushList();flushDeg();
+  return html;
+}
+window.spellRichText=richText;
+function paragraphs(text){return richText(text)}
+function paragraphsOld(text){
   const parts=String(text||'').split(/\n+/).map(t=>t.trim()).filter(Boolean);
   return parts.map((p,i)=>{const m=p.match(/^([^:.]{2,28}(?:\([^)]*\))?):\s+(.*)$/);return `<p${i===0?' class="gb-first"':''}>${m&&i>0?`<b>${esc(m[1])}:</b> ${esc(m[2])}`:esc(p)}</p>`}).join('');
 }
@@ -4068,14 +4163,14 @@ function rightPage(ch,c,sel,list){
   const i=list.indexOf(ch),next=list[i+1];
   const corner=next?`<button type="button" class="gb-corner next" data-gb-goto="${next.key}" aria-label="Próximo capítulo: ${esc(next.title)}"><span>${next.label} ›</span></button>`:'';
   const folio=`<div class="gb-folio">${i*2+2}</div>`;
-  if(!sel)return `<div class="gb-blank"><div class="gb-blank-sigil">✦</div><p>Página em branco.</p><small>Adicione magias pela <button type="button" class="gb-link" data-gb-jump="spellLibraryDetails">Biblioteca</button> ou escreva uma <button type="button" class="gb-link" data-gb-new>magia manual</button>.</small></div>${corner}${folio}`;
+  if(!sel)return `<div class="gb-scroll"><div class="gb-blank"><div class="gb-blank-sigil">✦</div><p>Página em branco.</p><small>Adicione magias pela <button type="button" class="gb-link" data-gb-jump="spellLibraryDetails">Biblioteca</button> ou escreva uma <button type="button" class="gb-link" data-gb-new>magia manual</button>.</small></div></div>${corner}${folio}`;
   const s=sel,r=num(s.rank),t=spellTotals(c);
   const desc=spellDescriptionForDisplay(s);
   const facts=[['Conjuração',s.cast||actionText(s)],['Alcance',s.range],['Área',s.area],['Alvos',s.targets],['Defesa',s.defense],['Duração',s.duration]].filter(([,v])=>v);
   const slot=(c.spellcasting.slots||[]).find(x=>num(x.rank)===r);
   const cost=s.isFocus?`1 Ponto de Foco (${num(c.focus.current)} restantes)`:r===0?'Sem custo':`1 espaço de ${ROMAN[r]} círculo (${num(slot?.current)} restantes)`;
   const save=/vontade|fortitude|reflexos|will|fort|reflex/i.test(String(s.defense||''));
-  return `<article class="gb-spell" data-spell-id="${s.id}">
+  return `<div class="gb-scroll"><article class="gb-spell" data-spell-id="${s.id}">
     <header class="gb-spell-head"><small>${s.isFocus?'Magia de foco':rankLabel(r)} · <span class="gb-act">${actionOf(s)}</span>${s.rarity?` · ${esc(s.rarity)}`:''}</small>
       <h3>${esc(s.name)}</h3>
       ${s.traits?`<div class="gb-traits">${s.traits.split(',').map(x=>x.trim()).filter(Boolean).map(x=>`<span>${esc(x)}</span>`).join('')}</div>`:''}</header>
@@ -4094,7 +4189,7 @@ function rightPage(ch,c,sel,list){
         <button type="button" class="gb-btn ghost danger" data-gb-del="${s.id}">Remover</button>
       </span>
     </footer>
-  </article>${corner}${folio}`;
+  </article></div>${corner}${folio}`;
 }
 function ribbons(list,ch){
   return list.map(x=>`<button type="button" role="tab" aria-selected="${x.key===ch.key}" class="gb-rib ${x.key===ch.key?'on':''} ${x.today?'today':''} ${x.focus?'focus':''}" data-gb-goto="${x.key}" title="${esc(x.title)}"><b>${x.label}</b>${x.spells.length?`<small>${x.spells.length}</small>`:''}</button>`).join('');
@@ -4128,15 +4223,16 @@ function goTo(key){
   const list=chapters(current()),shown=currentChapter(list).key;if(key===shown)return;const from=list.findIndex(x=>x.key===shown),to=list.findIndex(x=>x.key===key);if(to<0)return;
   const dir=to>from?1:-1;
   const L=root.querySelector('.gb-left'),R=root.querySelector('.gb-right');
-  const oldL=L.innerHTML,oldR=R.innerHTML,scL=L.scrollTop,scR=R.scrollTop;
+  const sc=n=>n.querySelector('.gb-scroll')?.scrollTop||0;
+  const oldL=L.innerHTML,oldR=R.innerHTML,scL=sc(L),scR=sc(R);
   const hadFocus=root.contains(document.activeElement);
-  ui.ch=key;saveUi();render();L.scrollTop=0;R.scrollTop=0;
+  ui.ch=key;saveUi();render();
   if(hadFocus)root.querySelector('.gb-rib.on')?.focus({preventScroll:true});
   snd('page');
   if(reduced()){root.querySelector('.gb-spread').animate([{opacity:.4},{opacity:1}],{duration:220});return}
   flip(root,dir,oldL,oldR,scL,scR);
 }
-function face(cls,html,scroll){const d=document.createElement('section');d.className='gb-page '+cls;d.innerHTML=html;d.scrollTop=scroll||0;d.setAttribute('aria-hidden','true');d.inert=true;return d}
+function face(cls,html,scroll){const d=document.createElement('section');d.className='gb-page '+cls;d.innerHTML=html;const sc=d.querySelector('.gb-scroll');if(sc)requestAnimationFrame(()=>{sc.scrollTop=scroll||0});d.setAttribute('aria-hidden','true');d.inert=true;return d}
 function flip(root,dir,oldL,oldR,scL,scR){
   const spread=root.querySelector('.gb-spread'),L=root.querySelector('.gb-left'),R=root.querySelector('.gb-right');
   const box=n=>({left:n.offsetLeft,top:n.offsetTop,width:n.offsetWidth,height:n.offsetHeight});
@@ -4196,7 +4292,7 @@ function selectSpell(id){
   ui.sel[ch.key]=id;saveUi();finishFlip();
   const sel=selectedSpell(ch),R=root.querySelector('.gb-right');
   root.querySelectorAll('.gb-entry').forEach(b=>b.classList.toggle('sel',b.dataset.gbSpell===id));
-  R.innerHTML=rightPage(ch,c,sel,list);R.scrollTop=0;snd('tick');
+  R.innerHTML=rightPage(ch,c,sel,list);snd('tick');
   if(!reduced())R.querySelector('.gb-spell')?.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:260,easing:'ease-out'});
   if(mobile())R.scrollIntoView({behavior:reduced()?'auto':'smooth',block:'start'});
 }
@@ -4204,6 +4300,7 @@ function bind(root){
   root.addEventListener('click',e=>{
     const t=e.target.closest('button');if(!t||!root.contains(t))return;
     const d=t.dataset,c=current();
+    if(d.gbDice){const sp=t.closest('[data-spell-id]'),s=sp&&c.spellcasting.spells.find(x=>x.id===sp.dataset.spellId);const res=parseDice(d.gbDice);addRoll(s?`${s.name}: ${d.gbDice}`:d.gbDice,d.gbDice,res);return}
     if(d.gbGoto){goTo(d.gbGoto);return}
     if(d.gbSpell){selectSpell(d.gbSpell);return}
     if(d.gbCast){cast(d.gbCast);return}
@@ -4228,11 +4325,46 @@ function bind(root){
 }
 function step(dir){const list=chapters(current()),i=list.indexOf(currentChapter(list)),n=list[i+dir];if(n)goTo(n.key);else{snd('tick');$('grimoireBook')?.querySelector('.gb-spread')?.animate([{transform:'translateX(0)'},{transform:`translateX(${dir*-6}px)`},{transform:'translateX(0)'}],{duration:240})}}
 
+
+/* ---------- Editor: negrito, itálico e prévia ---------- */
+function wrapSel(ta,mark){
+  const a=ta.selectionStart,b=ta.selectionEnd,v=ta.value,sel=v.slice(a,b),m=mark.length;
+  if(sel&&sel.startsWith(mark)&&sel.endsWith(mark)&&sel.length>=2*m){ta.setRangeText(sel.slice(m,-m),a,b,'select')}
+  else if(v.slice(a-m,a)===mark&&v.slice(b,b+m)===mark){ta.setRangeText(sel,a-m,b+m,'select')}
+  else{const txt=sel||'texto';ta.setRangeText(mark+txt+mark,a,b,'end');ta.setSelectionRange(a+m,a+m+txt.length)}
+  ta.focus();ta.dispatchEvent(new Event('input',{bubbles:true}));
+}
+function prefixLines(ta,prefix){
+  const v=ta.value;let a=v.lastIndexOf('\n',ta.selectionStart-1)+1,b=ta.selectionEnd;const nl=v.indexOf('\n',b);b=nl<0?v.length:nl;
+  const block=v.slice(a,b).split('\n').map(l=>l.startsWith(prefix)?l.slice(prefix.length):prefix+l).join('\n');
+  ta.setRangeText(block,a,b,'select');ta.focus();ta.dispatchEvent(new Event('input',{bubbles:true}));
+}
+function insertBlock(ta,text){
+  const a=ta.selectionEnd,v=ta.value,pre=a>0&&v[a-1]!=='\n'?'\n':'';
+  ta.setRangeText(pre+text,a,a,'end');ta.focus();ta.dispatchEvent(new Event('input',{bubbles:true}));
+}
+function enhanceEditor(){
+  const ta=$('spellDesc');if(!ta||ta.dataset.enhanced)return;ta.dataset.enhanced='1';
+  ta.rows=Math.max(ta.rows||0,8);
+  const bar=document.createElement('div');bar.className='gb-fmt full';bar.setAttribute('role','toolbar');bar.setAttribute('aria-label','Formatação da descrição');
+  bar.innerHTML=`<button type="button" data-fmt="b" title="Negrito (Ctrl+B)" aria-label="Negrito"><b>B</b></button><button type="button" data-fmt="i" title="Itálico (Ctrl+I)" aria-label="Itálico"><i>I</i></button><span class="sep"></span><button type="button" data-fmt="list" title="Transformar linhas em lista">• Lista</button><button type="button" data-fmt="sub" title="Subtítulo">Subtítulo</button><button type="button" data-fmt="deg" title="Inserir os quatro graus de sucesso">Graus de sucesso</button><button type="button" data-fmt="hi" title="Inserir texto de elevação">Elevada</button><span class="gb-fmt-hint"><code>**negrito**</code> · <code>*itálico*</code> · dados como <code>2d6</code> viram botão de rolagem</span>`;
+  const prev=document.createElement('div');prev.className='gb-preview full';prev.innerHTML='<small>Prévia no grimório</small><div class="gb-desc"></div>';
+  ta.before(bar);ta.after(prev);
+  const draw=()=>{prev.querySelector('.gb-desc').innerHTML=ta.value.trim()?richText(ta.value):'<p class="gb-empty">A descrição aparece aqui como no livro.</p>'};
+  bar.addEventListener('mousedown',e=>{if(e.target.closest('button'))e.preventDefault()});
+  bar.addEventListener('click',e=>{const b=e.target.closest('[data-fmt]');if(!b)return;const f=b.dataset.fmt;
+    if(f==='b')wrapSel(ta,'**');else if(f==='i')wrapSel(ta,'*');else if(f==='list')prefixLines(ta,'- ');else if(f==='sub')prefixLines(ta,'## ');
+    else if(f==='deg')insertBlock(ta,'Sucesso crítico: \nSucesso: \nFalha: \nFalha crítica: ');else if(f==='hi')insertBlock(ta,'Elevada (+1): ')});
+  ta.addEventListener('keydown',e=>{if(!(e.ctrlKey||e.metaKey)||e.altKey)return;const k=e.key.toLowerCase();if(k==='b'){e.preventDefault();wrapSel(ta,'**')}else if(k==='i'){e.preventDefault();wrapSel(ta,'*')}});
+  ta.addEventListener('input',draw);draw();
+}
 /* ---------- Ligação com a ficha ---------- */
 function init(){
   const root=$('grimoireBook');if(!root||root.dataset.bound)return;root.dataset.bound='1';bind(root);
   const _renderSpells=window.renderSpells;
   if(typeof _renderSpells==='function')window.renderSpells=function(){const out=_renderSpells.apply(this,arguments);try{if(!animating)render()}catch(err){console.warn('Grimório',err)}return out};
+  const _renderSpellEditor=window.renderSpellEditor;
+  if(typeof _renderSpellEditor==='function')window.renderSpellEditor=function(){const out=_renderSpellEditor.apply(this,arguments);try{enhanceEditor()}catch(err){console.warn('Editor do grimório',err)}return out};
   const _setPage=window.setPage;
   if(typeof _setPage==='function')window.setPage=function(page){const out=_setPage.apply(this,arguments);if(page==='spells')try{render()}catch{}return out};
   try{render()}catch(err){console.warn('Grimório',err)}
