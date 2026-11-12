@@ -1479,6 +1479,206 @@ button.er-stat:hover{border-color:var(--gold);box-shadow:0 0 16px -4px color-mix
 body[data-appearance-motion="reduced"] :is(.er-die,.er-grace-light,.er-ember,.er-fill){animation:none!important}
 @media print{.er-hud,.er-stats,.er-roll,.er-grace,.er-died,.er-pop,.er-vignette,.er-sound,.er-keycap{display:none!important}}
 </style>
+<style id="grimoire-book-style">
+/* ==========================================================================
+   Grimório — livro aberto na aba Magias
+   ========================================================================== */
+.gb{--leather:#2c1b10;--leather2:#170d07;--tool:#b8914a;--tool2:#e3c27a;--paper:#f0e4c8;--paper2:#e0cda5;--paper3:#c9b083;
+  --ink:#2a1d12;--ink2:#5c4631;--ink3:#8a7254;--rubric:#8d2a1b;--gild:#9b7431;--azure:#2e5a86;
+  position:relative;display:grid;gap:12px;margin-bottom:6px}
+.gb-legacy{display:none!important}
+.gb-headbar{display:flex;flex-wrap:wrap;align-items:stretch;justify-content:space-between;gap:10px}
+.gb-head{display:flex;flex-wrap:wrap;gap:8px}
+.gb-stat{display:grid;gap:3px;min-width:96px;padding:8px 13px;border:1px solid color-mix(in srgb,var(--gold) 28%,transparent);border-radius:6px;background:color-mix(in srgb,var(--theme-deep) 70%,transparent);color:var(--text);text-align:left;font:inherit}
+.gb-stat small{font:700 9px var(--ui-font);letter-spacing:.13em;text-transform:uppercase;color:var(--muted)}
+.gb-stat b{font:700 21px/1 var(--display);color:var(--gold2)}
+.gb-stat.roll{cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.gb-stat.roll:hover{border-color:var(--gold);box-shadow:0 0 16px -4px color-mix(in srgb,var(--gold) 60%,transparent)}
+.gb-headtools{display:flex;align-items:center;gap:8px}
+
+/* Capa */
+.gb-book{position:relative;margin-right:70px;padding:14px;border-radius:8px 16px 16px 8px;
+  background:
+    radial-gradient(120% 90% at 30% 0,rgba(255,220,160,.08),transparent 55%),
+    repeating-radial-gradient(circle at 20% 30%,rgba(0,0,0,.08) 0 1px,transparent 1px 3px),
+    linear-gradient(135deg,var(--leather),var(--leather2));
+  box-shadow:0 30px 60px -20px #000,0 0 0 1px #000,inset 0 0 0 1px rgba(255,220,160,.06),inset 0 0 40px rgba(0,0,0,.6)}
+.gb-book::before,.gb-book::after{content:"";position:absolute;pointer-events:none;border-radius:5px 12px 12px 5px}
+.gb-book::before{inset:5px;border:1px solid color-mix(in srgb,var(--tool) 70%,transparent)}
+.gb-book::after{inset:9px;border:1px solid color-mix(in srgb,var(--tool) 30%,transparent)}
+
+/* Páginas */
+.gb-spread{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;height:clamp(560px,74vh,780px);perspective:2400px;border-radius:3px;
+  box-shadow:0 10px 24px rgba(0,0,0,.55)}
+.gb-spread::after{content:"";position:absolute;z-index:3;left:50%;top:0;bottom:0;width:70px;margin-left:-35px;pointer-events:none;
+  background:linear-gradient(90deg,transparent,rgba(60,38,18,.16) 30%,rgba(40,24,10,.42) 49%,rgba(40,24,10,.42) 51%,rgba(60,38,18,.16) 70%,transparent)}
+.gb-page{position:relative;min-width:0;overflow-y:auto;overflow-x:hidden;padding:34px 40px 64px;color:var(--ink);
+  font:400 16.5px/1.55 var(--display);scrollbar-width:thin;scrollbar-color:rgba(92,70,49,.45) transparent;
+  background:
+    radial-gradient(140% 100% at 50% 50%,transparent 60%,rgba(120,88,40,.16)),
+    repeating-linear-gradient(0deg,rgba(120,90,50,.025) 0 2px,transparent 2px 5px),
+    linear-gradient(180deg,var(--paper),var(--paper2))}
+.gb-left{border-radius:3px 0 0 3px;box-shadow:inset -18px 0 30px -18px rgba(80,52,20,.45),-1px 0 0 #d9c8a2,-2px 0 0 #c6b286,-3px 0 0 #d6c39b,-4px 0 0 #b69f72}
+.gb-right{border-radius:0 3px 3px 0;box-shadow:inset 18px 0 30px -18px rgba(80,52,20,.45),1px 0 0 #d9c8a2,2px 0 0 #c6b286,3px 0 0 #d6c39b,4px 0 0 #b69f72}
+.gb-page ::selection{background:rgba(155,116,49,.3)}
+.gb-folio{position:absolute;bottom:18px;left:0;right:0;text-align:center;font:600 13px var(--display);color:var(--ink3);letter-spacing:.2em}
+.gb-folio::before,.gb-folio::after{content:"·";margin:0 8px;color:var(--gild)}
+
+/* Cabeçalho do capítulo */
+.gb-chapter{margin-bottom:16px;text-align:center}
+.gb-chapter small{display:block;font:700 10px var(--ui-font);letter-spacing:.3em;text-transform:uppercase;color:var(--ink3)}
+.gb-chapter h2{margin:6px 0 0;display:flex;align-items:center;justify-content:center;gap:12px;font:700 34px/1.05 var(--display);font-variant:small-caps;letter-spacing:.03em;color:var(--rubric)}
+.gb-mark{display:inline-grid;place-items:center;min-width:42px;height:42px;padding:0 6px;border:1.5px solid var(--gild);border-radius:4px;color:var(--gild);font:700 21px var(--display);font-variant:normal;
+  background:radial-gradient(circle,rgba(255,236,190,.6),transparent 70%);box-shadow:inset 0 0 0 3px rgba(155,116,49,.18)}
+.gb-rule{height:12px;margin:12px auto 0;width:70%;background:
+  radial-gradient(circle,var(--gild) 2.5px,transparent 3px) center/12px 12px no-repeat,
+  linear-gradient(90deg,transparent,var(--gild) 30%,transparent 48%,transparent 52%,var(--gild) 70%,transparent) center/100% 1px no-repeat}
+
+/* Espaços (losangos) */
+.gb-slots,.gb-slotrow{display:flex;align-items:center;justify-content:center;gap:12px;margin:0 0 18px}
+.gb-slots small{font:700 10px var(--ui-font);letter-spacing:.2em;text-transform:uppercase;color:var(--ink3)}
+.gb-slots em,.gb-slotrow em{font:600 15px var(--display);font-style:normal;color:var(--ink2);min-width:42px}
+.gb-pips{display:flex;flex-wrap:wrap;gap:11px;padding:3px}
+.gb-pip{width:17px;height:17px;padding:0;border:1.5px solid var(--gild);background:transparent;transform:rotate(45deg);border-radius:2px;cursor:pointer;transition:background .15s,box-shadow .15s,transform .15s}
+.gb-pip.on{background:radial-gradient(circle at 35% 35%,#f6dc95,#b88a36 60%,#7c5a1f);box-shadow:0 0 8px rgba(184,138,54,.55)}
+.gb-pip:hover{transform:rotate(45deg) scale(1.18)}
+.gb-pip:focus-visible{outline:2px solid var(--rubric);outline-offset:2px}
+.gb-pips.focus .gb-pip{border-color:var(--azure)}
+.gb-pips.focus .gb-pip.on{background:radial-gradient(circle at 35% 35%,#bfe0ff,#4d84bb 60%,#24527f);box-shadow:0 0 8px rgba(77,132,187,.55)}
+.gb-slotsum{display:grid;gap:6px;margin:0 auto 18px;width:max-content;max-width:100%;padding:10px 16px;border:1px solid rgba(155,116,49,.35);border-radius:4px;background:rgba(255,248,230,.35)}
+.gb-slotrow{justify-content:flex-start;margin:0}
+.gb-slotrow span{min-width:30px;font:700 15px var(--display);color:var(--rubric);text-align:right}
+.gb-note{margin:0 auto 18px;max-width:34ch;text-align:center;font-style:italic;color:var(--ink2);font-size:15px}
+
+/* Índice com pontilhado */
+.gb-index{list-style:none;margin:0;padding:0;display:grid;gap:1px}
+.gb-index-group{margin:12px 0 4px;font:700 10px var(--ui-font);letter-spacing:.24em;text-transform:uppercase;color:var(--rubric)}
+.gb-index-group:first-child{margin-top:0}
+.gb-entry{display:flex;align-items:baseline;gap:8px;width:100%;padding:7px 10px;border:0;border-radius:3px;background:transparent;color:var(--ink);font:600 18px/1.25 var(--display);text-align:left;cursor:pointer;transition:background .15s,color .15s}
+.gb-entry:hover{background:rgba(155,116,49,.12)}
+.gb-entry.sel{background:linear-gradient(90deg,rgba(141,42,27,.14),rgba(155,116,49,.1));color:var(--rubric)}
+.gb-entry.sel .gb-entry-name::before{content:"❧ ";color:var(--gild)}
+.gb-entry-name{flex:none;max-width:72%}
+.gb-leader{flex:1;min-width:20px;border-bottom:2px dotted rgba(92,70,49,.35);transform:translateY(-5px)}
+.gb-entry-act{flex:none;font:700 11px var(--ui-font);letter-spacing:.06em;color:var(--ink2)}
+.gb-star{font-style:normal;color:var(--gild);font-size:13px}
+.gb-blank-index{padding:18px;text-align:center;font-style:italic;color:var(--ink2);border:1px dashed rgba(92,70,49,.35);border-radius:4px}
+
+/* Página da magia */
+.gb-spell-head{text-align:center;margin-bottom:14px}
+.gb-spell-head small{font:700 10px var(--ui-font);letter-spacing:.22em;text-transform:uppercase;color:var(--ink3)}
+.gb-act{letter-spacing:.04em;color:var(--rubric)}
+.gb-spell-head h3{margin:6px 0 10px;font:700 36px/1.05 var(--display);color:var(--ink);letter-spacing:.01em}
+.gb-traits{display:flex;flex-wrap:wrap;justify-content:center;gap:5px}
+.gb-traits span{padding:2px 9px;border:1px solid rgba(141,42,27,.45);border-radius:2px;background:rgba(141,42,27,.06);color:var(--rubric);font:700 10px var(--ui-font);letter-spacing:.12em;text-transform:uppercase}
+.gb-facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;margin:0 0 16px;border-top:1px solid rgba(155,116,49,.45);border-bottom:1px solid rgba(155,116,49,.45)}
+.gb-facts div{padding:7px 10px;border-bottom:1px dotted rgba(92,70,49,.25)}
+.gb-facts div:nth-last-child(-n+2){border-bottom:0}
+.gb-facts dt{font:700 9.5px var(--ui-font);letter-spacing:.16em;text-transform:uppercase;color:var(--ink3)}
+.gb-facts dd{margin:2px 0 0;font:600 16px/1.3 var(--display);color:var(--ink)}
+.gb-desc p{margin:0 0 10px;text-align:justify;hyphens:auto}
+.gb-desc p b{color:var(--rubric)}
+.gb-desc .gb-first::first-letter{float:left;margin:4px 8px 0 0;padding:2px 6px;font:700 50px/.9 var(--display);color:var(--rubric);
+  border:1.5px solid var(--gild);background:radial-gradient(circle,rgba(255,236,190,.8),rgba(240,220,170,.2));box-shadow:inset 0 0 0 3px rgba(155,116,49,.2)}
+.gb-desc.translation-pending{color:var(--ink3);font-style:italic}
+
+/* Botões de tinta e lacre */
+.gb-cast{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:18px 0 14px}
+.gb-btn{display:inline-flex;align-items:center;gap:7px;min-height:38px;padding:7px 14px;border:1.5px solid rgba(92,70,49,.55);border-radius:3px;background:rgba(255,248,230,.45);color:var(--ink);
+  font:700 15px var(--display);font-variant:small-caps;letter-spacing:.06em;cursor:pointer;transition:background .15s,border-color .15s,box-shadow .15s,transform .1s}
+.gb-btn:hover{border-color:var(--gild);background:rgba(255,236,190,.75);box-shadow:0 0 0 3px rgba(155,116,49,.15)}
+.gb-btn:active{transform:translateY(1px)}
+.gb-btn b{font:700 15px var(--display);color:var(--rubric)}
+.gb-btn.seal{flex-direction:column;align-items:flex-start;gap:1px;padding:8px 18px;border-color:#5e1a10;color:#fbeed2;
+  background:radial-gradient(120% 140% at 30% 20%,#b23a26,#7d2214 60%,#561409);box-shadow:0 6px 14px -6px rgba(90,20,10,.8),inset 0 1px 0 rgba(255,200,170,.25)}
+.gb-btn.seal span{font-size:18px}
+.gb-btn.seal small{font:600 10.5px var(--ui-font);font-variant:normal;letter-spacing:.02em;color:#f2cdb6}
+.gb-btn.seal:hover{background:radial-gradient(120% 140% at 30% 20%,#c9452e,#8d2818 60%,#5e170b);box-shadow:0 0 0 3px rgba(141,42,27,.2),0 6px 18px -6px rgba(140,30,15,.9)}
+.gb-dc{padding:6px 12px;border:1px dashed rgba(92,70,49,.5);border-radius:3px;font:600 15px var(--display);font-variant:small-caps;color:var(--ink2)}
+.gb-dc b{color:var(--rubric)}
+.gb-btn.ghost{min-height:32px;padding:4px 10px;font-size:14px;background:transparent;border-color:rgba(92,70,49,.35)}
+.gb-btn.ghost.on{border-color:var(--gild);color:#6e4f17;background:rgba(232,200,120,.3)}
+.gb-btn.ghost.danger:hover{border-color:var(--rubric);color:var(--rubric);background:rgba(141,42,27,.08)}
+.gb-spell-foot{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;padding-top:12px;border-top:1px solid rgba(155,116,49,.35)}
+.gb-src{display:flex;align-items:center;gap:6px;font:500 12px var(--ui-font);color:var(--ink3)}
+.gb-tools{display:flex;flex-wrap:wrap;gap:6px}
+.gb-src .source-badge{padding:2px 7px;border:1px solid rgba(92,70,49,.45)!important;border-radius:2px;background:rgba(255,248,230,.5)!important;color:var(--ink2)!important;font:700 9.5px var(--ui-font)!important;letter-spacing:.12em;text-transform:uppercase;box-shadow:none!important}
+.gb-src .source-badge.official{color:var(--azure)!important;border-color:rgba(46,90,134,.45)!important}
+.gb-src .source-badge.table,.gb-src .source-badge.homebrew{color:var(--rubric)!important;border-color:rgba(141,42,27,.45)!important}
+.gb-link{padding:0;border:0;background:none;color:var(--rubric);font:inherit;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.gb-blank{display:grid;place-items:center;align-content:center;gap:8px;min-height:70%;text-align:center;color:var(--ink2)}
+.gb-blank-sigil{font-size:46px;color:var(--gild);opacity:.6}
+.gb-blank p{margin:0;font:600 24px var(--display);font-style:italic}
+
+/* Cantos das páginas */
+.gb-corner{position:absolute;bottom:0;width:86px;height:86px;padding:0;border:0;background:transparent;cursor:pointer;z-index:2}
+.gb-corner span{position:absolute;bottom:14px;font:700 12px var(--display);letter-spacing:.08em;color:var(--ink3);transition:color .2s}
+.gb-corner.next{right:0}.gb-corner.next span{right:16px}
+.gb-corner.prev{left:0}.gb-corner.prev span{left:16px}
+.gb-corner::before{content:"";position:absolute;bottom:0;width:0;height:0;transition:width .25s ease,height .25s ease}
+.gb-corner.next::before{right:0;background:linear-gradient(135deg,rgba(0,0,0,0) 50%,#cdb98f 50%,#efe2c3 75%,#e0cca2);box-shadow:-3px -3px 8px rgba(70,45,15,.25)}
+.gb-corner.prev::before{left:0;background:linear-gradient(225deg,rgba(0,0,0,0) 50%,#cdb98f 50%,#efe2c3 75%,#e0cca2);box-shadow:3px -3px 8px rgba(70,45,15,.25)}
+.gb-corner:hover::before,.gb-corner:focus-visible::before{width:44px;height:44px}
+.gb-corner:hover span,.gb-corner:focus-visible span{color:var(--rubric)}
+.gb-corner:focus-visible{outline:none}
+
+/* Fitas marcadoras */
+.gb-ribbons{position:absolute;z-index:0;top:26px;right:-64px;display:flex;flex-direction:column;gap:5px}
+.gb-rib{--cloth:#7a1f16;--cloth2:#4f120c;position:relative;display:flex;align-items:center;justify-content:space-between;gap:4px;width:72px;height:36px;padding:0 16px 0 18px;border:0;cursor:pointer;
+  background:linear-gradient(90deg,var(--cloth2),var(--cloth) 40%,var(--cloth2));color:#f3dfb0;
+  clip-path:polygon(0 0,100% 0,86% 50%,100% 100%,0 100%);box-shadow:inset 0 0 0 1px rgba(0,0,0,.25);
+  transform:translateX(-10px);transition:transform .22s cubic-bezier(.2,.8,.2,1),filter .2s}
+.gb-rib b{font:700 14px var(--display);letter-spacing:.04em}
+.gb-rib small{font:700 9px var(--ui-font);opacity:.75}
+.gb-rib:hover{transform:translateX(-4px);filter:brightness(1.15)}
+.gb-rib.on{transform:translateX(0);filter:brightness(1.25) drop-shadow(0 0 6px rgba(240,200,120,.5))}
+.gb-rib.today{--cloth:#a27a2a;--cloth2:#6f4f14;color:#fff3cf}
+.gb-rib.focus{--cloth:#24527f;--cloth2:#163552}
+.gb-rib:focus-visible{outline:none;filter:brightness(1.35)}
+
+/* Navegação */
+.gb-arrows{display:flex;align-items:center;justify-content:center;gap:12px;margin-right:70px;color:var(--muted)}
+.gb-arrow{width:36px;height:36px;border:1px solid color-mix(in srgb,var(--gold) 35%,transparent);border-radius:50%;background:color-mix(in srgb,var(--theme-deep) 70%,transparent);color:var(--gold2);font:700 20px/1 var(--display);cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.gb-arrow:hover{border-color:var(--gold);box-shadow:0 0 14px -4px color-mix(in srgb,var(--gold) 60%,transparent)}
+.gb-arrows .count{min-width:52px;text-align:center;font:600 13px var(--ui-font);font-variant-numeric:tabular-nums}
+.gb-hint{font:500 11.5px var(--ui-font);color:var(--muted);opacity:.75}
+
+/* Folha virando */
+.gb-leaf,.gb-under{position:absolute;z-index:4;pointer-events:none}
+.gb-leaf{transform-style:preserve-3d;will-change:transform}
+.gb-leaf>.gb-page,.gb-under>.gb-page{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;overflow:hidden}
+.gb-leaf>.gb-back{transform:rotateY(180deg)}
+.gb-leaf>.gb-single{display:grid;grid-template-columns:1fr;border-radius:3px}
+.gb-shade{position:absolute;inset:0;z-index:5;pointer-events:none;background:linear-gradient(90deg,rgba(40,24,8,.55),rgba(40,24,8,.1) 60%,transparent);opacity:0;backface-visibility:hidden}
+.gb-leaf>.gb-page{box-shadow:0 10px 24px rgba(0,0,0,.28)}
+
+/* Efeito ao conjurar */
+.gb-castfx{position:absolute;left:50%;top:40%;width:240px;height:240px;pointer-events:none;z-index:6}
+.gb-castfx svg{width:100%;height:100%;fill:none;stroke:#b88a36;stroke-width:2;filter:drop-shadow(0 0 8px rgba(240,200,110,.9))}
+
+/* Editor */
+.gb-editor:not(:has(#spellEditor *)){display:none}
+
+/* Celular: uma página por vez, fitas no topo */
+@media(max-width:900px){
+  .gb-book{margin-right:0;padding:10px;border-radius:8px}
+  .gb-ribbons{position:relative;top:auto;right:auto;z-index:2;flex-direction:row;gap:4px;margin:-2px -2px 10px;overflow-x:auto;scrollbar-width:none;padding:2px}
+  .gb-ribbons::-webkit-scrollbar{display:none}
+  .gb-rib{flex:none;width:auto;min-width:48px;height:34px;padding:0 10px;clip-path:polygon(0 0,100% 0,100% 82%,50% 100%,0 82%);transform:none;justify-content:center}
+  .gb-rib:hover{transform:none}.gb-rib.on{transform:translateY(2px)}
+  .gb-spread{grid-template-columns:1fr;height:auto}
+  .gb-spread::after{display:none}
+  .gb-page{overflow:visible;padding:24px 20px 56px;font-size:16px}
+  .gb-left{border-radius:3px 3px 0 0;box-shadow:inset 0 -18px 24px -20px rgba(80,52,20,.45)}
+  .gb-right{border-radius:0 0 3px 3px;box-shadow:inset 0 18px 24px -20px rgba(80,52,20,.45)}
+  .gb-chapter h2{font-size:28px}.gb-spell-head h3{font-size:29px}
+  .gb-facts{grid-template-columns:1fr 1fr}
+  .gb-arrows{margin-right:0}.gb-hint{display:none}
+  .gb-corner{width:70px;height:70px}
+}
+@media(prefers-reduced-motion:reduce){.gb-rib,.gb-corner::before{transition:none}}
+@media print{.gb{display:none!important}.gb .gb-legacy,.gb-legacy{display:block!important}}
+</style>
 </head>
 <body>
 <header class="topbar">
@@ -1704,10 +1904,21 @@ body[data-appearance-motion="reduced"] :is(.er-die,.er-grace-light,.er-ember,.er
 <div class="feat-view-tools"><span id="featSummaryCount"></span><div class="feat-view-actions"><div aria-label="Visualização" class="feat-layout-toggle"><button class="btn small" data-feat-layout="cards" type="button">Cartões</button><button class="btn small" data-feat-layout="list" type="button">Lista</button></div><button aria-pressed="false" class="btn small" id="featDescriptions" type="button">Expandir descrições</button><button class="btn small" id="featClearFilters" type="button">Limpar filtros</button></div></div><div aria-live="polite" class="helper" id="featResultsCount"></div><div class="card-list" id="featList"></div><details class="feat-resources"><summary>Recursos de classes &amp; dedicações</summary><div class="path-panel" id="pathManager"></div></details></div></div>
 </div></div></section>
 <section class="page" id="page-spells"><div class="page-grid" style="grid-template-columns:1fr"><div class="column">
-<div class="spell-section-divider first">Para a sessão</div><div class="panel prepared-spell-panel" id="preparedSpellPanel"><div class="panel-head"><h2>Magias Preparadas Hoje</h2><span class="helper">Sua seleção diária fica sempre no topo</span></div><div class="panel-body"><div id="preparedSpellList"></div></div></div>
+<div class="spell-section-divider first">Grimório</div>
+<div class="gb" id="grimoireBook" aria-label="Grimório">
+ <div class="gb-headbar"><div class="gb-head" id="grimoireHead"></div><div class="gb-headtools"><button class="btn small" id="addSpellBtn" type="button">＋ Magia manual</button><button class="btn small" type="button" data-gb-jump="spellLibraryDetails">Biblioteca</button></div></div>
+ <div class="gb-book">
+  <nav class="gb-ribbons" role="tablist" aria-label="Capítulos do grimório"></nav>
+  <div class="gb-spread"><section class="gb-page gb-left" aria-label="Página do capítulo"></section><section class="gb-page gb-right" aria-label="Página da magia"></section></div>
+ </div>
+ <div class="gb-arrows"><button type="button" class="gb-arrow" data-gb-prev aria-label="Capítulo anterior">‹</button><span class="count"></span><button type="button" class="gb-arrow" data-gb-next aria-label="Próximo capítulo">›</button><span class="gb-hint">Fitas, cantos das páginas, setas ← → ou deslize no celular</span></div>
+</div>
+<div class="panel gb-editor" id="grimoireEditor"><div class="panel-head"><h2>Escrever no grimório</h2><span class="helper">Nova magia ou ajustes da magia inspecionada</span></div><div class="panel-body"><div id="spellEditor"></div></div></div>
+<div class="spell-section-divider">Espaços &amp; conjuração</div>
+<div class="panel prepared-spell-panel gb-legacy" id="preparedSpellPanel"><div class="panel-head"><h2>Magias Preparadas Hoje</h2><span class="helper">Sua seleção diária fica sempre no topo</span></div><div class="panel-body"><div id="preparedSpellList"></div></div></div>
 <div class="spell-pair"><div class="panel"><div class="panel-head"><h2>Espaços de magia</h2><button class="btn small" id="restoreSlotsBtn">Restaurar</button></div><div class="panel-body"><div class="slot-grid" id="slotGrid"></div></div></div>
 <details class="panel fold-panel" id="specialSlotsDetails"><summary class="panel-head fold-head"><h2>Fonte Divina / Slots Especiais</h2><span class="helper">Reservas adicionais de conjuração</span></summary><div class="panel-body"><div class="fold-actions"><button class="btn small" id="addSpecialSlotBtn">Adicionar</button></div><div class="helper" style="margin-bottom:8px">Para reservas separadas como “3 espaços de 3º nível para Ferir e Curar”.</div><div id="specialSlotList"></div></div></details></div>
-<div class="spell-section-divider">Repertório &amp; conjuração</div><div class="panel"><div class="panel-head"><h2>Grimório / Repertório</h2><button class="btn small" id="addSpellBtn">＋ Adicionar Magia Manual</button></div><div class="panel-body"><div class="helper" style="margin-bottom:8px">As preparadas aparecem primeiro. Use esta área para revisar, editar ou remover magias que já estão na ficha.</div><div id="spellEditor"></div><div id="spellList"></div></div></div>
+<div class="panel gb-legacy"><div class="panel-head"><h2>Grimório / Repertório</h2></div><div class="panel-body"><div id="spellList"></div></div></div>
 <details class="panel fold-panel" id="castingDetails"><summary class="panel-head fold-head"><h2>Conjuração</h2><span class="helper">Tradição, proficiência e bônus</span></summary><div class="panel-body">
 <div class="spell-top-grid" id="spellConfig"></div>
 <div class="derived-grid" id="spellDerived" style="grid-template-columns:repeat(3,1fr);margin-top:8px"></div>
@@ -3526,6 +3737,8 @@ const Sound=(()=>{
     hit(){noise(.28,{vol:.4,freq:380,type:'lowpass'});tone(80,.32,{vol:.28,to:38})},
     heal(){[440,554.4,659.3].forEach((f,i)=>tone(f,1.1,{vol:.06,attack:.06,delay:i*.05}))},
     grace(){[261.6,329.6,392,523.3].forEach((f,i)=>tone(f,3.2,{vol:.05,attack:.7,delay:i*.12}));tone(1568,2.2,{vol:.012,attack:.9,delay:.5})},
+    page(){noise(.42,{vol:.16,freq:900,q:.7});noise(.3,{vol:.1,freq:2600,q:1.2,delay:.12});noise(.12,{vol:.12,freq:300,type:'lowpass',delay:.36})},
+    cast(){[392,523.3,784].forEach((f,i)=>tone(f,1.3,{vol:.05,attack:.03,delay:i*.07}));tone(1046.5,.9,{vol:.03,attack:.15,delay:.2,to:1568});noise(.6,{vol:.05,freq:5000,q:.6,delay:.05})},
     died(){tone(55,2.8,{type:'sawtooth',vol:.09,attack:.3,filter:300});tone(58.3,2.8,{type:'sawtooth',vol:.06,attack:.3,filter:260});noise(1.2,{vol:.12,freq:120,type:'lowpass',delay:.05})}
   };
   return {
@@ -3535,6 +3748,7 @@ const Sound=(()=>{
   };
 })();
 
+window.ErSound=Sound;
 function addSoundButton(){
   const anchor=$('themeBtn');if(!anchor||$('erSoundBtn'))return;
   const b=document.createElement('button');b.type='button';b.id='erSoundBtn';b.className='btn er-sound';
@@ -3761,6 +3975,268 @@ document.addEventListener('click',e=>{if(e.target.closest('.tab,.mobile-nav butt
 
 /* ---------------- Início ---------------- */
 function init(){addSoundButton();addKeycaps();try{renderHeroVitals()}catch{}}
+if(document.readyState==='loading')addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+<script id="grimoire-book-script">
+/* ==========================================================================
+   Grimório — a aba Magias como um livro aberto.
+   Capítulos por círculo (Hoje, Truques, I–X, Foco) com fitas marcadoras,
+   página virando em 3D ao trocar de capítulo, conjurar gastando espaço.
+   Lê e grava os mesmos dados de sempre (c.spellcasting); não muda o formato.
+   ========================================================================== */
+(()=>{
+const $=id=>document.getElementById(id);
+const ROMAN=['','I','II','III','IV','V','VI','VII','VIII','IX','X'];
+const ORD=['Truques','Primeiro','Segundo','Terceiro','Quarto','Quinto','Sexto','Sétimo','Oitavo','Nono','Décimo'];
+const UIKEY='cinzas-grimoire-ui';
+let ui;try{ui=Object.assign({ch:'today',sel:{}},JSON.parse(localStorage.getItem(UIKEY)||'{}'))}catch{ui={ch:'today',sel:{}}}
+const saveUi=()=>{try{localStorage.setItem(UIKEY,JSON.stringify(ui))}catch{}};
+const snd=n=>{try{window.ErSound?.play(n)}catch{}};
+const reduced=()=>document.body.dataset.appearanceMotion==='reduced'||matchMedia('(prefers-reduced-motion: reduce)').matches;
+const mobile=()=>matchMedia('(max-width: 900px)').matches;
+const byName=(a,b)=>String(a.name).localeCompare(String(b.name),'pt-BR');
+const byRankName=(a,b)=>num(a.rank)-num(b.rank)||byName(a,b);
+const actionOf=s=>({one:'◆',two:'◆◆',three:'◆◆◆',reaction:'↶',free:'◇',passive:'—'})[s.action]||(s.action==='ritual'?'Ritual':'—');
+const actionText=s=>({one:'1 ação',two:'2 ações',three:'3 ações',reaction:'Reação',free:'Ação livre',passive:'Ritual / outro',ritual:'Ritual'})[s.action]||'—';
+const isAttack=s=>/\b(CA|AC)\b/.test(String(s.defense||''))||/\bataque\b/i.test(String(s.traits||''));
+const rankLabel=r=>r===0?'Truque':`${ROMAN[r]} Círculo`;
+
+function chapters(c){
+  const sc=c.spellcasting,spells=sc.spells||[],out=[];
+  out.push({key:'today',label:'Hoje',mark:'✦',kicker:'Seleção do dia',title:'Preparadas de Hoje',spells:spells.filter(s=>s.prepared&&!s.isFocus).sort(byRankName),today:true});
+  const cantrips=spells.filter(s=>!s.isFocus&&num(s.rank)===0);
+  if(cantrips.length)out.push({key:'r0',rank:0,label:'∞',mark:'∞',kicker:'Capítulo dos truques',title:'Truques',spells:cantrips.sort(byName)});
+  for(let r=1;r<=10;r++){
+    const sp=spells.filter(s=>!s.isFocus&&num(s.rank)===r),slot=(sc.slots||[]).find(x=>num(x.rank)===r);
+    if(sp.length||num(slot?.max)>0)out.push({key:'r'+r,rank:r,label:ROMAN[r],mark:ROMAN[r],kicker:`Capítulo ${ROMAN[r]}`,title:`${ORD[r]} Círculo`,spells:sp.sort(byName),slot});
+  }
+  const focus=spells.filter(s=>s.isFocus);
+  if(focus.length||num(c.focus?.max)>0)out.push({key:'focus',label:'Foco',mark:'◈',kicker:'Dádivas da divindade',title:'Magias de Foco',spells:focus.sort(byRankName),focus:true});
+  return out;
+}
+function currentChapter(list){
+  let ch=list.find(x=>x.key===ui.ch);
+  // Sem mudar ui.ch: os dados podem ainda estar carregando e o capítulo salvo voltará a existir.
+  if(!ch)ch=list.find(x=>x.spells.length)||list[0];
+  return ch;
+}
+function selectedSpell(ch){
+  const id=ui.sel[ch.key];return ch.spells.find(s=>s.id===id)||ch.spells[0]||null;
+}
+function pips(cur,max,attr){
+  let h='';for(let i=0;i<max;i++)h+=`<button type="button" class="gb-pip ${i<cur?'on':''}" ${attr}="${i}" aria-label="${i<cur?'Gastar':'Recuperar'} espaço"></button>`;return h;
+}
+function slotBlock(ch,c){
+  if(ch.today){
+    const rows=(c.spellcasting.slots||[]).filter(s=>num(s.max)>0);
+    if(!rows.length)return '';
+    return `<div class="gb-slotsum">${rows.map(s=>`<div class="gb-slotrow" data-gb-goto="r${s.rank}"><span>${ROMAN[s.rank]}</span><div class="gb-pips">${pips(num(s.current),num(s.max),`data-gb-pip-rank="${s.rank}" data-gb-pip`)}</div><em>${num(s.current)}/${num(s.max)}</em></div>`).join('')}</div>`;
+  }
+  if(ch.focus){
+    const cur=num(c.focus.current),max=num(c.focus.max);
+    return max>0?`<div class="gb-slots"><small>Pontos de Foco</small><div class="gb-pips focus">${pips(cur,max,'data-gb-focus-pip')}</div><em>${cur} / ${max}</em></div>`:'';
+  }
+  if(ch.rank===0)return `<p class="gb-note">Truques não gastam espaços e ficam mais fortes conforme o seu nível.</p>`;
+  const s=ch.slot,cur=num(s?.current),max=num(s?.max);
+  if(!max)return `<p class="gb-note">Nenhum espaço de ${ROMAN[ch.rank]} círculo configurado. Ajuste em “Espaços de magia”, abaixo do grimório.</p>`;
+  return `<div class="gb-slots"><small>Espaços</small><div class="gb-pips">${pips(cur,max,`data-gb-pip-rank="${ch.rank}" data-gb-pip`)}</div><em>${cur} / ${max}</em></div>`;
+}
+function indexBlock(ch,sel){
+  if(!ch.spells.length)return `<div class="gb-blank-index">${ch.today?'Nenhuma magia preparada hoje. Abra um capítulo e use <b>Preparar</b> nas magias que quiser levar.':'Nenhuma magia escrita neste capítulo.'}</div>`;
+  let last=null,html='<ol class="gb-index">';
+  for(const s of ch.spells){
+    const r=num(s.rank);
+    if(ch.today&&r!==last){html+=`<li class="gb-index-group">${rankLabel(r)}</li>`;last=r}
+    html+=`<li><button type="button" class="gb-entry ${sel&&sel.id===s.id?'sel':''}" data-gb-spell="${s.id}"><span class="gb-entry-name">${esc(s.name)}${s.prepared&&!ch.today&&!s.isFocus?' <i class="gb-star" title="Preparada">✦</i>':''}</span><span class="gb-leader"></span><span class="gb-entry-act">${actionOf(s)}</span></button></li>`;
+  }
+  return html+'</ol>';
+}
+function leftPage(ch,c,sel,list){
+  const i=list.indexOf(ch),prev=list[i-1],next=list[i+1];
+  return `<header class="gb-chapter"><small>${ch.kicker}</small><h2><span class="gb-mark">${ch.mark}</span>${ch.title}</h2><div class="gb-rule"></div></header>
+    ${slotBlock(ch,c)}
+    ${indexBlock(ch,sel)}
+    ${prev?`<button type="button" class="gb-corner prev" data-gb-goto="${prev.key}" aria-label="Capítulo anterior: ${esc(prev.title)}"><span>‹ ${prev.label}</span></button>`:''}
+    <div class="gb-folio">${i*2+1}</div>`;
+}
+function paragraphs(text){
+  const parts=String(text||'').split(/\n+/).map(t=>t.trim()).filter(Boolean);
+  return parts.map((p,i)=>{const m=p.match(/^([^:.]{2,28}(?:\([^)]*\))?):\s+(.*)$/);return `<p${i===0?' class="gb-first"':''}>${m&&i>0?`<b>${esc(m[1])}:</b> ${esc(m[2])}`:esc(p)}</p>`}).join('');
+}
+function rightPage(ch,c,sel,list){
+  const i=list.indexOf(ch),next=list[i+1];
+  const corner=next?`<button type="button" class="gb-corner next" data-gb-goto="${next.key}" aria-label="Próximo capítulo: ${esc(next.title)}"><span>${next.label} ›</span></button>`:'';
+  const folio=`<div class="gb-folio">${i*2+2}</div>`;
+  if(!sel)return `<div class="gb-blank"><div class="gb-blank-sigil">✦</div><p>Página em branco.</p><small>Adicione magias pela <button type="button" class="gb-link" data-gb-jump="spellLibraryDetails">Biblioteca</button> ou escreva uma <button type="button" class="gb-link" data-gb-new>magia manual</button>.</small></div>${corner}${folio}`;
+  const s=sel,r=num(s.rank),t=spellTotals(c);
+  const desc=spellDescriptionForDisplay(s);
+  const facts=[['Conjuração',s.cast||actionText(s)],['Alcance',s.range],['Área',s.area],['Alvos',s.targets],['Defesa',s.defense],['Duração',s.duration]].filter(([,v])=>v);
+  const slot=(c.spellcasting.slots||[]).find(x=>num(x.rank)===r);
+  const cost=s.isFocus?`1 Ponto de Foco (${num(c.focus.current)} restantes)`:r===0?'Sem custo':`1 espaço de ${ROMAN[r]} círculo (${num(slot?.current)} restantes)`;
+  const save=/vontade|fortitude|reflexos|will|fort|reflex/i.test(String(s.defense||''));
+  return `<article class="gb-spell" data-spell-id="${s.id}">
+    <header class="gb-spell-head"><small>${s.isFocus?'Magia de foco':rankLabel(r)} · <span class="gb-act">${actionOf(s)}</span>${s.rarity?` · ${esc(s.rarity)}`:''}</small>
+      <h3>${esc(s.name)}</h3>
+      ${s.traits?`<div class="gb-traits">${s.traits.split(',').map(x=>x.trim()).filter(Boolean).map(x=>`<span>${esc(x)}</span>`).join('')}</div>`:''}</header>
+    ${facts.length?`<dl class="gb-facts">${facts.map(([k,v])=>`<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join('')}</dl>`:''}
+    <div class="gb-desc ${s.translationFailed?'translation-unavailable':(desc.startsWith('Traduzindo')?'translation-pending':'')}">${desc?paragraphs(desc):'<p class="gb-first">Sem descrição registrada. Use <b>Inspecionar</b> para escrever o efeito.</p>'}</div>
+    <div class="gb-cast">
+      <button type="button" class="gb-btn seal" data-gb-cast="${s.id}"><span>Conjurar</span><small>${cost}</small></button>
+      ${isAttack(s)?`<button type="button" class="gb-btn" data-gb-attack="${s.id}">Rolar ataque <b>${signed(t.attack)}</b></button>`:''}
+      ${save?`<span class="gb-dc">CD <b>${t.dc}</b></span>`:''}
+    </div>
+    <footer class="gb-spell-foot">
+      <span class="gb-src">${spellOriginBadge(s)}${s.source&&!/^(mesa|homebrew|manual)$/i.test(String(s.source).trim())?` <span>${esc(s.source)}</span>`:''}</span>
+      <span class="gb-tools">
+        ${s.isFocus?'':`<button type="button" class="gb-btn ghost ${s.prepared?'on':''}" data-gb-prep="${s.id}">${s.prepared?'✦ Preparada':'Preparar'}</button>`}
+        <button type="button" class="gb-btn ghost" data-gb-edit="${s.id}">Inspecionar</button>
+        <button type="button" class="gb-btn ghost danger" data-gb-del="${s.id}">Remover</button>
+      </span>
+    </footer>
+  </article>${corner}${folio}`;
+}
+function ribbons(list,ch){
+  return list.map(x=>`<button type="button" role="tab" aria-selected="${x.key===ch.key}" class="gb-rib ${x.key===ch.key?'on':''} ${x.today?'today':''} ${x.focus?'focus':''}" data-gb-goto="${x.key}" title="${esc(x.title)}"><b>${x.label}</b>${x.spells.length?`<small>${x.spells.length}</small>`:''}</button>`).join('');
+}
+function renderHead(c){
+  const t=spellTotals(c),sc=c.spellcasting,el=$('grimoireHead');if(!el)return;
+  el.innerHTML=`<button type="button" class="gb-stat roll" data-gb-attack="any" title="Rolar ataque mágico"><small>Ataque mágico</small><b>${signed(t.attack)}</b></button>
+    <div class="gb-stat"><small>CD de magia</small><b>${t.dc}</b></div>
+    <div class="gb-stat"><small>Tradição</small><b>${esc(sc.tradition||'—')}</b></div>
+    <div class="gb-stat"><small>Escritas</small><b>${(sc.spells||[]).length}</b></div>`;
+}
+let animating=null;
+function render(){
+  const root=$('grimoireBook');if(!root)return;
+  const c=current(),list=chapters(c),ch=currentChapter(list),sel=selectedSpell(ch);
+  renderHead(c);
+  root.querySelector('.gb-left').innerHTML=leftPage(ch,c,sel,list);
+  root.querySelector('.gb-right').innerHTML=rightPage(ch,c,sel,list);
+  root.querySelector('.gb-ribbons').innerHTML=ribbons(list,ch);
+  root.querySelector('.gb-arrows .count').textContent=`${list.indexOf(ch)+1} / ${list.length}`;
+  root.dataset.empty=String(!(c.spellcasting.spells||[]).length);
+  try{queueSpellTranslations(ch.spells,()=>{if(!animating)render()},Math.min(ch.spells.length,12))}catch{}
+}
+window.renderGrimoire=render;
+
+/* ---------- Virar página ---------- */
+function finishFlip(){if(animating){animating.forEach(a=>{try{a.finish()}catch{}});animating=null}document.querySelectorAll('.gb-leaf,.gb-under').forEach(n=>n.remove())}
+function goTo(key){
+  const root=$('grimoireBook');if(!root)return;
+  finishFlip();
+  const list=chapters(current()),shown=currentChapter(list).key;if(key===shown)return;const from=list.findIndex(x=>x.key===shown),to=list.findIndex(x=>x.key===key);if(to<0)return;
+  const dir=to>from?1:-1;
+  const L=root.querySelector('.gb-left'),R=root.querySelector('.gb-right');
+  const oldL=L.innerHTML,oldR=R.innerHTML,scL=L.scrollTop,scR=R.scrollTop;
+  const hadFocus=root.contains(document.activeElement);
+  ui.ch=key;saveUi();render();L.scrollTop=0;R.scrollTop=0;
+  if(hadFocus)root.querySelector('.gb-rib.on')?.focus({preventScroll:true});
+  snd('page');
+  if(reduced()){root.querySelector('.gb-spread').animate([{opacity:.4},{opacity:1}],{duration:220});return}
+  flip(root,dir,oldL,oldR,scL,scR);
+}
+function face(cls,html,scroll){const d=document.createElement('section');d.className='gb-page '+cls;d.innerHTML=html;d.scrollTop=scroll||0;d.setAttribute('aria-hidden','true');d.inert=true;return d}
+function flip(root,dir,oldL,oldR,scL,scR){
+  const spread=root.querySelector('.gb-spread'),L=root.querySelector('.gb-left'),R=root.querySelector('.gb-right');
+  const box=n=>({left:n.offsetLeft,top:n.offsetTop,width:n.offsetWidth,height:n.offsetHeight});
+  const place=(el,b)=>Object.assign(el.style,{left:b.left+'px',top:b.top+'px',width:b.width+'px',height:b.height+'px'});
+  const opts={duration:760,easing:'cubic-bezier(.45,.05,.22,1)'};
+  const leaf=document.createElement('div');leaf.className='gb-leaf';
+  const under=document.createElement('div');under.className='gb-under';
+  if(mobile()){
+    // Uma página só: a folha antiga gira sobre a borda e revela a nova.
+    const whole={left:0,top:0,width:spread.offsetWidth,height:spread.offsetHeight};
+    place(leaf,whole);leaf.style.transformOrigin=dir>0?'left center':'right center';
+    const f=face('gb-single',`<div class="gb-left-copy">${oldL}</div><div class="gb-right-copy">${oldR}</div>`);leaf.appendChild(f);
+    spread.appendChild(leaf);
+    animating=[leaf.animate([{transform:'rotateY(0deg)',opacity:1},{transform:`rotateY(${dir>0?-80:80}deg)`,opacity:1,offset:.85},{transform:`rotateY(${dir>0?-92:92}deg)`,opacity:0}],{duration:620,easing:'cubic-bezier(.5,0,.3,1)'}),
+      f.animate([{filter:'brightness(1)'},{filter:'brightness(.55)'}],{duration:620})];
+  }else if(dir>0){
+    place(under,box(L));under.appendChild(face('gb-left',oldL,scL));
+    place(leaf,box(R));leaf.style.transformOrigin='left center';
+    leaf.append(face('gb-right gb-front',oldR,scR),face('gb-left gb-back',L.innerHTML));
+    spread.append(under,leaf);
+    animating=[leaf.animate([{transform:'rotateY(0deg)'},{transform:'rotateY(-180deg)'}],opts)];
+  }else{
+    place(under,box(R));under.appendChild(face('gb-right',oldR,scR));
+    place(leaf,box(L));leaf.style.transformOrigin='right center';
+    leaf.append(face('gb-left gb-front',oldL,scL),face('gb-right gb-back',R.innerHTML));
+    spread.append(under,leaf);
+    animating=[leaf.animate([{transform:'rotateY(0deg)'},{transform:'rotateY(180deg)'}],opts)];
+  }
+  const shade=document.createElement('i');shade.className='gb-shade';leaf.appendChild(shade);
+  animating.push(shade.animate([{opacity:0},{opacity:.55,offset:.5},{opacity:0}],opts));
+  animating[0].onfinish=()=>{leaf.remove();under.remove();animating=null};
+}
+
+/* ---------- Ações ---------- */
+function castFx(){
+  const page=$('grimoireBook')?.querySelector('.gb-right');if(!page||reduced())return;
+  const fx=document.createElement('div');fx.className='gb-castfx';fx.innerHTML='<svg viewBox="0 0 200 200" aria-hidden="true"><circle cx="100" cy="100" r="86"/><circle cx="100" cy="100" r="64"/><path d="M100 14 L174 143 L26 143 Z"/><path d="M100 186 L26 57 L174 57 Z"/></svg>';
+  page.appendChild(fx);fx.animate([{transform:'translate(-50%,-50%) scale(.4) rotate(0deg)',opacity:0},{opacity:1,offset:.25},{transform:'translate(-50%,-50%) scale(1.25) rotate(60deg)',opacity:0}],{duration:900,easing:'ease-out'}).onfinish=()=>fx.remove();
+}
+function refreshAfter(){try{renderSpells()}catch{}try{renderHeroVitals()}catch{}try{if(state.currentPage==='combat')renderCombatSpellResources()}catch{}saveState()}
+function cast(id){
+  const c=current(),s=c.spellcasting.spells.find(x=>x.id===id);if(!s)return;
+  const r=num(s.rank);let msg=`${s.name} conjurada.`;
+  if(s.isFocus){
+    if(num(c.focus.current)<=0){toast('Sem Pontos de Foco. Refocalize ou descanse no Sítio da Graça.');shakePips();return}
+    c.focus.current=num(c.focus.current)-1;msg=`${s.name} conjurada — Foco ${c.focus.current}/${num(c.focus.max)}.`;
+  }else if(r>0){
+    const slot=c.spellcasting.slots.find(x=>num(x.rank)===r);
+    if(!slot||num(slot.current)<=0){toast(`Sem espaços de ${ROMAN[r]} círculo restantes.`);shakePips();return}
+    slot.current=num(slot.current)-1;msg=`${s.name} conjurada — espaços de ${ROMAN[r]} círculo: ${slot.current}/${num(slot.max)}.`;
+  }
+  refreshAfter();snd('cast');castFx();toast(msg);
+}
+function shakePips(){const p=$('grimoireBook')?.querySelector('.gb-left .gb-pips');if(p)p.animate([{transform:'translateX(0)'},{transform:'translateX(-5px)'},{transform:'translateX(4px)'},{transform:'translateX(-2px)'},{transform:'translateX(0)'}],{duration:320});snd('tick')}
+function selectSpell(id){
+  const root=$('grimoireBook'),c=current(),list=chapters(c),ch=currentChapter(list);
+  ui.sel[ch.key]=id;saveUi();finishFlip();
+  const sel=selectedSpell(ch),R=root.querySelector('.gb-right');
+  root.querySelectorAll('.gb-entry').forEach(b=>b.classList.toggle('sel',b.dataset.gbSpell===id));
+  R.innerHTML=rightPage(ch,c,sel,list);R.scrollTop=0;snd('tick');
+  if(!reduced())R.querySelector('.gb-spell')?.animate([{opacity:0,transform:'translateY(6px)'},{opacity:1,transform:'none'}],{duration:260,easing:'ease-out'});
+  if(mobile())R.scrollIntoView({behavior:reduced()?'auto':'smooth',block:'start'});
+}
+function bind(root){
+  root.addEventListener('click',e=>{
+    const t=e.target.closest('button');if(!t||!root.contains(t))return;
+    const d=t.dataset,c=current();
+    if(d.gbGoto){goTo(d.gbGoto);return}
+    if(d.gbSpell){selectSpell(d.gbSpell);return}
+    if(d.gbCast){cast(d.gbCast);return}
+    if(d.gbAttack){const s=c.spellcasting.spells.find(x=>x.id===d.gbAttack);rollCheck(s?`Ataque mágico: ${s.name}`:'Ataque mágico',spellTotals(c).attack);return}
+    if('gbPip' in d&&d.gbPipRank){const slot=c.spellcasting.slots.find(x=>num(x.rank)===num(d.gbPipRank));if(!slot)return;const i=num(d.gbPip);slot.current=i<num(slot.current)?i:i+1;slot.current=Math.max(0,Math.min(num(slot.max),slot.current));refreshAfter();snd('tick');return}
+    if('gbFocusPip' in d){const i=num(d.gbFocusPip);c.focus.current=Math.max(0,Math.min(num(c.focus.max),i<num(c.focus.current)?i:i+1));refreshAfter();snd('tick');return}
+    if(d.gbPrep){const s=c.spellcasting.spells.find(x=>x.id===d.gbPrep);if(!s)return;s.prepared=!s.prepared;refreshAfter();snd(s.prepared?'heal':'tick');toast(`${s.name} ${s.prepared?'preparada para hoje':'retirada das preparadas'}.`);return}
+    if(d.gbEdit){editorSpell=d.gbEdit;renderSpellEditor();$('grimoireEditor')?.scrollIntoView({behavior:'smooth',block:'center'});return}
+    if(d.gbDel){const s=c.spellcasting.spells.find(x=>x.id===d.gbDel);if(!s||!confirm(`Remover “${s.name}” do grimório?`))return;c.spellcasting.spells=c.spellcasting.spells.filter(x=>x.id!==d.gbDel);refreshAfter();toast(`${s.name} foi removida do grimório.`);return}
+    if('gbJump' in d){const det=$(d.gbJump);if(det){det.open=true;det.scrollIntoView({behavior:'smooth',block:'start'})}return}
+    if('gbNew' in d){$('addSpellBtn')?.click();$('grimoireEditor')?.scrollIntoView({behavior:'smooth',block:'center'});return}
+    if('gbPrev' in d||'gbNext' in d){step('gbNext' in d?1:-1)}
+  });
+  root.addEventListener('keydown',e=>{
+    if(/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName))return;
+    if(e.key==='ArrowRight'){e.preventDefault();step(1)}else if(e.key==='ArrowLeft'){e.preventDefault();step(-1)}
+  });
+  // Deslizar o dedo vira a página no celular.
+  let sx=null,sy=null;
+  root.querySelector('.gb-spread').addEventListener('pointerdown',e=>{if(e.pointerType==='mouse')return;sx=e.clientX;sy=e.clientY},{passive:true});
+  root.querySelector('.gb-spread').addEventListener('pointerup',e=>{if(sx==null)return;const dx=e.clientX-sx,dy=e.clientY-sy;sx=null;if(Math.abs(dx)>70&&Math.abs(dx)>Math.abs(dy)*1.4)step(dx<0?1:-1)},{passive:true});
+}
+function step(dir){const list=chapters(current()),i=list.indexOf(currentChapter(list)),n=list[i+dir];if(n)goTo(n.key);else{snd('tick');$('grimoireBook')?.querySelector('.gb-spread')?.animate([{transform:'translateX(0)'},{transform:`translateX(${dir*-6}px)`},{transform:'translateX(0)'}],{duration:240})}}
+
+/* ---------- Ligação com a ficha ---------- */
+function init(){
+  const root=$('grimoireBook');if(!root||root.dataset.bound)return;root.dataset.bound='1';bind(root);
+  const _renderSpells=window.renderSpells;
+  if(typeof _renderSpells==='function')window.renderSpells=function(){const out=_renderSpells.apply(this,arguments);try{if(!animating)render()}catch(err){console.warn('Grimório',err)}return out};
+  const _setPage=window.setPage;
+  if(typeof _setPage==='function')window.setPage=function(page){const out=_setPage.apply(this,arguments);if(page==='spells')try{render()}catch{}return out};
+  try{render()}catch(err){console.warn('Grimório',err)}
+}
 if(document.readyState==='loading')addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
