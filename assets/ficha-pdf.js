@@ -213,10 +213,10 @@
   statRow(['str','dex','con','int','wis','cha'].map(key=>[attrLabel(key),abilityScore(c,key),signed(abilityVal(c,key))]),{crests:true});
   need(24);
   heading('Defesas e salvaguardas');
-  const defenseNames={armor:'CA rolada',classDC:'CD de classe'};
+  const defenseNames={armor:'CA',classDC:'CD de classe'};
   statRow(Object.entries(DEFENSE_FIELDS).map(([key,field])=>{
    const defense=c.defenses[key],total=d[field.result];
-   const value=key==='classDC'?total:key==='armor'?'d20'+signed(total):signed(total);
+   const value=key==='classDC'||key==='armor'?total:signed(total);
    const note=defense.manualEnabled?'Manual':`${defenseAttribute(defense,field)[2]} · ${rankLabel(defense.rank)}`;
    return [defenseNames[key]||field.label,value,note];
   }));

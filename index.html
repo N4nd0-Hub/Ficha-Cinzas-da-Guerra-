@@ -1728,6 +1728,7 @@ body[data-appearance-motion="reduced"] :is(.er-die,.er-grace-light,.er-ember,.er
 }
 @media(prefers-reduced-motion:reduce){.gb-rib,.gb-corner::before{transition:none}}
 @media print{.gb{display:none!important}.gb .gb-legacy,.gb-legacy{display:block!important}}
+.combat-defense.fixed{cursor:default}.combat-defense.fixed span{opacity:.7}
 </style>
 </head>
 <body>
@@ -2294,7 +2295,7 @@ function findClassProfileByName(name){const q=String(name||'').trim().toLowerCas
 
 const ATTRS=[['str','Força','FOR'],['con','Vigor','VIG'],['dex','Agilidade','AGI'],['cha','Carisma','CAR'],['int','Inteligência','INT'],['wis','Sabedoria','SAB']];
 const DEFENSE_FIELDS={
- armor:{label:'CA — Defesa Rolada',attribute:'dex',result:'ac'},
+ armor:{label:'CA — Classe de Armadura',attribute:'dex',result:'ac',base:10},
  perception:{label:'Percepção',attribute:'wis',result:'perception'},
  fort:{label:'Fortitude',attribute:'con',result:'fort'},
  ref:{label:'Reflexos',attribute:'dex',result:'ref'},
@@ -2404,7 +2405,7 @@ function blankCharacter(){
     identity:{className:'',archetype:'',ancestry:'',heritage:'',background:'',deity:'',size:'Médio',speed:'7,5 m',languages:'',senses:'',edicts:''},
     image:{src:'',zoom:1,x:50,y:50,fit:'contain'},attributeMode:'scores',attributes:{str:10,con:10,dex:10,cha:10,int:10,wis:10},
     hp:{current:10,max:10,temp:0,ancestry:8,classPerLevel:8,other:0,auto:false},focus:{current:0,max:0},xp:{current:0,goal:1000},hero:1,dying:0,wounded:0,doomed:0,leveling:{profile:'manual',hpMode:'keep',hpGain:0,autoSlots:false,autoSpecial:false,restore:true,trackHistory:true,lastAppliedLevel:1,history:[]},
-    defenses:{armor:{rank:'U',item:0,other:0,dexCap:99,manualEnabled:false,manual:0},perception:{rank:'T',item:0,other:0,manualEnabled:false,manual:0},fort:{rank:'T',item:0,other:0,manualEnabled:false,manual:0},ref:{rank:'T',item:0,other:0,manualEnabled:false,manual:0},will:{rank:'T',item:0,other:0,manualEnabled:false,manual:0},classDC:{rank:'T',key:'str',item:0,other:0,manualEnabled:false,manual:10}},
+    defenses:{armor:{rank:'U',item:0,other:0,dexCap:99,manualEnabled:false,manual:10,fixedAC:true},perception:{rank:'T',item:0,other:0,manualEnabled:false,manual:0},fort:{rank:'T',item:0,other:0,manualEnabled:false,manual:0},ref:{rank:'T',item:0,other:0,manualEnabled:false,manual:0},will:{rank:'T',item:0,other:0,manualEnabled:false,manual:0},classDC:{rank:'T',key:'str',item:0,other:0,manualEnabled:false,manual:10}},
     mitigation:Object.fromEntries(DAMAGE_TYPES.map(t=>[t,0])),
     skills:SKILLS.map(([n,a])=>makeSkill(n,a)), attacks:[], feats:[], trackers:[], conditions:{},conditionNotes:'',
     spellcasting:{tradition:'',key:'wis',rank:'U',item:0,other:0,mode:'Preparada',manualAttackEnabled:false,manualAttack:0,manualDCEnabled:false,manualDC:10,damageBonus:0,slots:Array.from({length:10},(_,i)=>({rank:i+1,current:0,max:0})),specialSlots:[],spells:[],homebrewLibrary:[]},
@@ -2419,7 +2420,7 @@ function ensure(c){
   const levelDefaults={profile:fallbackProfile,hpMode:c.hp.auto?'formula':'keep',hpGain:0,autoSlots:!!fallbackClass&&fallbackClass.slotTemplate!=='none',autoSpecial:!!fallbackClass&&fallbackClass.special!=='none',restore:true,trackHistory:true,lastAppliedLevel:c.level,history:[]};
   c.leveling=Object.assign({},levelDefaults,c.leveling||{});if(!getClassProfile(c.leveling.profile)&&c.leveling.profile!=='manual')c.leveling.profile=fallbackProfile;c.leveling.lastAppliedLevel=clamp(Math.floor(num(c.leveling.lastAppliedLevel,c.level)),1,20);c.leveling.history=Array.isArray(c.leveling.history)?c.leveling.history:[];
   c.hero=clamp(num(c.hero,1),0,3);c.dying=Math.max(0,num(c.dying));c.wounded=Math.max(0,num(c.wounded));c.doomed=Math.max(0,num(c.doomed));
-  c.defenses=c.defenses||{};for(const k of Object.keys(b.defenses))c.defenses[k]=Object.assign({},b.defenses[k],c.defenses[k]||{});c.mitigation=Object.assign({},b.mitigation,c.mitigation||{});
+  c.defenses=c.defenses||{};const legacyAC=!!c.defenses.armor&&!c.defenses.armor.fixedAC;for(const k of Object.keys(b.defenses))c.defenses[k]=Object.assign({},b.defenses[k],c.defenses[k]||{});if(legacyAC&&c.defenses.armor.manualEnabled)c.defenses.armor.manual=num(c.defenses.armor.manual)+10;c.defenses.armor.fixedAC=true;c.mitigation=Object.assign({},b.mitigation,c.mitigation||{});
   c.skills=Array.isArray(c.skills)?c.skills:[];for(const [n,a] of SKILLS){if(!c.skills.some(s=>s.name===n&&!s.lore))c.skills.push(makeSkill(n,a))}c.skills.forEach(s=>{s.id=s.id||uid();s.attr=ATTRS.some(x=>x[0]===s.attr)?s.attr:'int';s.rank=RANKS.includes(s.rank)?s.rank:'U';s.item=num(s.item);s.other=num(s.other)});
   c.attacks=Array.isArray(c.attacks)?c.attacks:[];c.feats=Array.isArray(c.feats)?c.feats:[];c.trackers=Array.isArray(c.trackers)?c.trackers:[];c.conditions=c.conditions&&typeof c.conditions==='object'?c.conditions:{};c.conditionNotes=c.conditionNotes||'';
   c.spellcasting=Object.assign({},b.spellcasting,c.spellcasting||{});c.spellcasting.slots=Array.isArray(c.spellcasting.slots)?c.spellcasting.slots:b.spellcasting.slots;c.spellcasting.specialSlots=Array.isArray(c.spellcasting.specialSlots)?c.spellcasting.specialSlots:[];c.spellcasting.spells=Array.isArray(c.spellcasting.spells)?c.spellcasting.spells:[];c.spellcasting.homebrewLibrary=Array.isArray(c.spellcasting.homebrewLibrary)?c.spellcasting.homebrewLibrary:[];c.spellcasting.spells.forEach(sp=>Object.assign(sp,{origin:sp.origin||'manual',source:sp.source||'',traditions:Array.isArray(sp.traditions)?sp.traditions:[],rarity:sp.rarity||'',cast:sp.cast||'',range:sp.range||'',area:sp.area||'',targets:sp.targets||'',duration:sp.duration||'',defense:sp.defense||''}));
@@ -2734,8 +2735,9 @@ function renderDerived(){
  const rows=[['Fortitude',d.fort],['Vontade',d.will],['Reflexos',d.ref],['Percepção',d.perception],['CA',d.ac]];
  const root=document.getElementById('derivedGrid');
  root.innerHTML=rows.map(([name,value],index)=>`<div class="overview-row${index===4?' overview-defense-extra':''}">
-  <button class="overview-roll" type="button" data-roll-derived="${name}" data-mod="${value}" title="Rolar ${name}">${name}</button>
-  <output aria-label="Bônus de ${name}">${signed(value)}</output>
+  ${name==='CA'?`<span>CA</span>
+  <output aria-label="Classe de Armadura">${value}</output>`:`<button class="overview-roll" type="button" data-roll-derived="${name}" data-mod="${value}" title="Rolar ${name}">${name}</button>
+  <output aria-label="Bônus de ${name}">${signed(value)}</output>`}
  </div>`).join('')+`<div class="overview-row"><span>CD de Classe</span><output aria-label="CD de Classe">${d.classDC}</output></div>`;
  root.querySelectorAll('[data-roll-derived]').forEach(button=>{
   button.addEventListener('click',()=>rollCheck(button.dataset.rollDerived,num(button.dataset.mod)));
@@ -2743,7 +2745,7 @@ function renderDerived(){
 }
 function renderMitigation(){const c=current(),el=document.getElementById('mitigationGrid');if(!el)return;el.innerHTML=DAMAGE_TYPES.map(t=>`<div class="mitigation-card"><label>${esc(t)}</label><input class="input mitigation-input" data-type="${esc(t)}" type="number" min="0" value="${num(c.mitigation[t])}"/></div>`).join('');document.querySelectorAll('.mitigation-input').forEach(i=>i.addEventListener('input',()=>{current().mitigation[i.dataset.type]=Math.max(0,num(i.value));saveState()}))}
 function renderOverview(){renderPortrait();renderResources();renderStatusOrbs();renderAttributes();renderDerived();renderMitigation();renderLevelProgression()}
-function renderCombatBanner(){const c=current(),d=defenseTotals(c),el=document.getElementById('combatBanner');el.innerHTML=`<div class="combat-hud"><b>${esc(c.name)}</b><small>Nível ${c.level} • CA ${signed(d.ac)} (rolada) • ${esc(c.identity.speed||'—')}</small></div>${c.image.src?`<img src="${esc(c.image.src)}" style="object-fit:${c.image.fit};object-position:50% 50%;transform:${imageTransform(c,1.6)}"/>`:''}`}
+function renderCombatBanner(){const c=current(),d=defenseTotals(c),el=document.getElementById('combatBanner');el.innerHTML=`<div class="combat-hud"><b>${esc(c.name)}</b><small>Nível ${c.level} • CA ${d.ac} • ${esc(c.identity.speed||'—')}</small></div>${c.image.src?`<img src="${esc(c.image.src)}" style="object-fit:${c.image.fit};object-position:50% 50%;transform:${imageTransform(c,1.6)}"/>`:''}`}
 function renderAttackEditor(){const el=document.getElementById('attackEditor');if(!editorAttack){el.innerHTML='';return}const a=editorAttack==='new'?{id:'',name:'',type:'Corpo a Corpo',ability:'str',rank:'T',item:0,other:0,manualEnabled:false,manual:0,damage:'1d6',damageAbility:'str',traits:'',notes:''}:current().attacks.find(x=>x.id===editorAttack);if(!a){editorAttack=null;el.innerHTML='';return}el.innerHTML=`<div class="editor-grid"><input class="input" id="atkName" placeholder="Nome" value="${esc(a.name)}"/><select class="input" id="atkType"><option ${a.type==='Corpo a Corpo'?'selected':''}>Corpo a Corpo</option><option ${a.type==='À Distância'?'selected':''}>À Distância</option><option ${a.type==='Desarmado'?'selected':''}>Desarmado</option></select><select class="input" id="atkAbility">${ATTRS.map(([k,n])=>`<option value="${k}" ${a.ability===k?'selected':''}>${n}</option>`).join('')}</select><select class="input" id="atkRank">${rankOptions(a.rank)}</select><input class="input" type="number" id="atkItem" placeholder="Item" value="${num(a.item)}"/><input class="input" type="number" id="atkOther" placeholder="Outro" value="${num(a.other)}"/><label class="manual-flag"><input type="checkbox" id="atkManualEnabled" ${a.manualEnabled?'checked':''}/> BDA manual</label><input class="input" type="number" id="atkManual" placeholder="BDA total" value="${num(a.manual)}"/><input class="input" id="atkDamage" placeholder="Dano, ex. 1d8" value="${esc(a.damage)}"/><select class="input" id="atkDmgAbility">${ATTRS.map(([k,n])=>`<option value="${k}" ${a.damageAbility===k?'selected':''}>Dano: ${n}</option>`).join('')}</select><input class="input wide" id="atkTraits" placeholder="Traços" value="${esc(a.traits)}"/><textarea class="input full" id="atkNotes" placeholder="Notas">${esc(a.notes)}</textarea></div><div class="editor-actions"><button class="btn" id="cancelAttack">Cancelar</button><button class="btn primary" id="saveAttack">Salvar Golpe</button></div>`;document.getElementById('cancelAttack').onclick=()=>{editorAttack=null;renderAttackEditor()};document.getElementById('saveAttack').onclick=()=>{const c=current();const obj={id:a.id||uid(),name:document.getElementById('atkName').value.trim()||'Strike',type:document.getElementById('atkType').value,ability:document.getElementById('atkAbility').value,rank:document.getElementById('atkRank').value,item:num(document.getElementById('atkItem').value),other:num(document.getElementById('atkOther').value),manualEnabled:document.getElementById('atkManualEnabled').checked,manual:num(document.getElementById('atkManual').value),damage:document.getElementById('atkDamage').value,damageAbility:document.getElementById('atkDmgAbility').value,traits:document.getElementById('atkTraits').value,notes:document.getElementById('atkNotes').value};const idx=c.attacks.findIndex(x=>x.id===obj.id);if(idx>=0)c.attacks[idx]=obj;else c.attacks.push(obj);editorAttack=null;renderCombat();saveState()}}
 function renderAttacks(){const c=current(),el=document.getElementById('attackList');document.getElementById('combatAttackCount').textContent=c.attacks.length;if(!c.attacks.length){el.innerHTML='<div class="helper">Nenhum golpe registrado.</div>';return}el.innerHTML=c.attacks.map(a=>{const total=attackTotal(c,a),dmgMod=abilityVal(c,a.damageAbility||'str');return `<div class="card"><div class="card-top"><div><div class="card-title">${esc(a.name)}</div><div class="card-sub">BDA ${signed(total)} • Dano ${esc(a.damage)} ${dmgMod?signed(dmgMod):''}</div></div><div class="card-actions"><button class="btn small" data-roll-atk="${a.id}">Rolar</button><button class="btn small" data-edit-atk="${a.id}">Editar</button><button class="btn small danger" data-del-atk="${a.id}">×</button></div></div><div class="tags"><span class="tag gold">${esc(a.type)}</span><span class="tag">${RANK_LABEL[a.rank]}</span>${a.traits?esc(a.traits).split(',').map(t=>`<span class="tag">${esc(t.trim())}</span>`).join(''):''}</div>${a.notes?`<div class="desc">${esc(a.notes)}</div>`:''}</div>`}).join('');el.querySelectorAll('[data-edit-atk]').forEach(b=>b.onclick=()=>{editorAttack=b.dataset.editAtk;renderAttackEditor()});el.querySelectorAll('[data-del-atk]').forEach(b=>b.onclick=()=>{current().attacks=current().attacks.filter(x=>x.id!==b.dataset.delAtk);renderCombat();saveState()});el.querySelectorAll('[data-roll-atk]').forEach(b=>b.onclick=()=>{const a=current().attacks.find(x=>x.id===b.dataset.rollAtk);rollCheck(a.name,attackTotal(current(),a))})}
 function renderDefenseConfig(){
@@ -2789,7 +2791,7 @@ function updateDefenseConfigTotals(c,totals){
   const [,,abbr]=defenseAttribute(defense,field);
   row.querySelector('[data-defense-attribute]').textContent=defense.manualEnabled?'Valor manual':abbr;
   const total=totals[field.result];
-  row.querySelector('[data-defense-total]').textContent=id==='classDC'?total:signed(total);
+  row.querySelector('[data-defense-total]').textContent=id==='classDC'||id==='armor'?total:signed(total);
  });
 }
 document.getElementById('defenseConfig').addEventListener('input',event=>{
@@ -3660,7 +3662,7 @@ function renderSessionResources(){
 }
 function renderCombatDefenseSummary(){
  const d=defenseTotals(current()),root=document.getElementById('combatDefenseSummary');
- root.innerHTML=[['CA',d.ac],['Fortitude',d.fort],['Reflexos',d.ref],['Vontade',d.will],['Percepção',d.perception]].map(([name,value])=>`<button class="combat-defense" data-session-defense="${name}" data-bonus="${value}" title="Rolar ${name}"><small>${name}</small><b>${signed(value)}</b><span>d20 ↗</span></button>`).join('');
+ root.innerHTML=[['CA',d.ac],['Fortitude',d.fort],['Reflexos',d.ref],['Vontade',d.will],['Percepção',d.perception]].map(([name,value])=>name==='CA'?`<div class="combat-defense fixed" title="Classe de Armadura (fixa)"><small>CA</small><b>${value}</b><span>fixa</span></div>`:`<button class="combat-defense" data-session-defense="${name}" data-bonus="${value}" title="Rolar ${name}"><small>${name}</small><b>${signed(value)}</b><span>d20 ↗</span></button>`).join('');
  root.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>rollCheck(b.dataset.sessionDefense,num(b.dataset.bonus))));
 }
 function renderConditionSummary(){
@@ -3724,7 +3726,7 @@ function renderHeroVitals(){
  const low=max&&cur/max<=.3?' low':'';
  el.innerHTML=`<div class="hv hv-hp${low}" style="--pct:${pct}%"><small>Vitalidade</small><b>${cur}<em>/ ${max}</em></b>${num(hp.temp)?`<span class="hv-temp">+${num(hp.temp)} temp.</span>`:''}<i aria-hidden="true"></i></div>`
  +`<div class="hv hv-focus"><small>Foco</small><b>${num(fc.current)}<em>/ ${num(fc.max)}</em></b></div>`
- +`<button class="hv hv-roll" type="button" data-hv-roll="CA" data-mod="${num(d.ac)}" title="Rolar 1d20 + CA"><small>CA</small><b>${signed(d.ac)}</b></button>`
+ +`<div class="hv"><small>CA</small><b>${num(d.ac)}</b></div>`
  +`<button class="hv hv-roll" type="button" data-hv-roll="Percepção" data-mod="${num(d.perception)}" title="Rolar Percepção"><small>Percepção</small><b>${signed(d.perception)}</b></button>`
  +`<div class="hv"><small>CD de Classe</small><b>${esc(String(d.classDC??'—'))}</b></div>`
  +`<div class="hv hv-speed"><small>Deslocamento</small><b>${esc(c.identity?.speed||'—')}</b></div>`;
@@ -3841,7 +3843,7 @@ window.renderHeroVitals=function(){
   const d=defenseTotals(c),key=[d.ac,d.perception,d.classDC,c.identity?.speed].join('|');
   if(key!==statsKey){statsKey=key;
     el.querySelector('.er-stats').innerHTML=
-      `<button type="button" class="er-stat" data-er-roll="CA" data-mod="${num(d.ac)}" title="Rolar CA"><small>CA</small><b>${signed(num(d.ac))}</b></button>`+
+      `<div class="er-stat" title="Classe de Armadura"><small>CA</small><b>${num(d.ac)}</b></div>`+
       `<button type="button" class="er-stat" data-er-roll="Percepção" data-mod="${num(d.perception)}" title="Rolar Percepção"><small>Percepção</small><b>${signed(num(d.perception))}</b></button>`+
       `<div class="er-stat"><small>CD de Classe</small><b>${esc(String(d.classDC??'—'))}</b></div>`+
       `<div class="er-stat"><small>Deslocamento</small><b>${esc(c.identity?.speed||'—')}</b></div>`;
