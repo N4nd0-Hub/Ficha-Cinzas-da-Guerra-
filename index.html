@@ -1729,6 +1729,75 @@ body[data-appearance-motion="reduced"] :is(.er-die,.er-grace-light,.er-ember,.er
 @media(prefers-reduced-motion:reduce){.gb-rib,.gb-corner::before{transition:none}}
 @media print{.gb{display:none!important}.gb .gb-legacy,.gb-legacy{display:block!important}}
 .combat-defense.fixed{cursor:default}.combat-defense.fixed span{opacity:.7}
+
+/* ---------- Combos: fitas de cetim penduradas no livro ----------
+   Cada combo é uma fita que sai de entre as páginas e cai pela borda de baixo,
+   com ponta em rabo de andorinha. A fita ativa é a mais longa e dourada. */
+.gb-combos{position:absolute;z-index:auto;left:42px;top:calc(100% - 26px);display:flex;align-items:flex-start;gap:10px;pointer-events:none}
+.gb-combos>*{pointer-events:auto}
+.gb-combo{--cloth:#a27a2a;--cloth2:#6f4f14;--len:74px;position:relative;z-index:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px;
+  width:auto;min-width:64px;max-width:150px;height:var(--len);padding:30px 12px 0;border:0;cursor:pointer;color:#fff1d2;
+  background:
+    linear-gradient(90deg,rgba(0,0,0,.38),transparent 18%,rgba(255,240,210,.22) 34%,transparent 46%,transparent 76%,rgba(0,0,0,.35)),
+    repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px),
+    linear-gradient(180deg,var(--cloth2) 0,var(--cloth) 30%,var(--cloth) 80%,var(--cloth2));
+  clip-path:polygon(0 0,100% 0,100% 100%,50% calc(100% - 15px),0 100%);
+  transform-origin:50% 0;animation:gbSway 5.5s ease-in-out infinite;animation-delay:calc(var(--i,0) * -1.3s);
+  transition:height .35s cubic-bezier(.3,1.5,.5,1),filter .25s;filter:saturate(.85) brightness(.9)}
+.gb-combo::before{content:"";position:absolute;left:5px;right:5px;top:22px;bottom:19px;pointer-events:none;
+  border-left:1px dashed rgba(255,226,160,.38);border-right:1px dashed rgba(255,226,160,.38);
+  -webkit-mask:linear-gradient(#000 calc(100% - 4px),transparent);mask:linear-gradient(#000 calc(100% - 4px),transparent)}
+.gb-combo::after{content:"";position:absolute;left:0;right:0;top:0;height:24px;pointer-events:none;background:linear-gradient(rgba(0,0,0,.55),transparent)}
+.gb-combo i{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;font-style:normal;font-size:12px;line-height:1;color:#3a2408;
+  background:radial-gradient(circle at 35% 30%,#ffe9b0,#c99a45 60%,#8a6322);box-shadow:0 1px 2px rgba(0,0,0,.5),inset 0 0 0 1px rgba(90,60,20,.5)}
+.gb-combo b{max-width:100%;font:700 12.5px/1.1 var(--display);letter-spacing:.04em;font-variant:small-caps;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 1px rgba(0,0,0,.6)}
+.gb-combo small{font:700 9px var(--ui-font);letter-spacing:.08em;opacity:.8}
+.gb-combo-edit-ic{display:none}
+.gb-combo:hover{--len:86px;filter:saturate(.95) brightness(.95)}
+.gb-combo.on{--len:104px;z-index:0;filter:saturate(1.08) brightness(1.08) drop-shadow(0 6px 6px rgba(0,0,0,.5))}
+.gb-combo.on::before{border-color:rgba(255,226,160,.7)}
+.gb-combo.on:hover{--len:110px}
+.gb-combo.on b::after{content:" ✎";font-size:10px;opacity:.65}
+.gb-combo.pull{animation:gbPull .55s cubic-bezier(.3,1.6,.5,1)}
+@keyframes gbSway{0%,100%{transform:rotate(-.9deg)}50%{transform:rotate(.9deg)}}
+@keyframes gbPull{0%{transform:scaleY(1)}35%{transform:scaleY(1.18) rotate(0)}70%{transform:scaleY(.96)}100%{transform:scaleY(1)}}
+.gb-combo.add{--cloth:#3a2c1c;--cloth2:#20170e;--len:58px;min-width:58px;filter:none;opacity:.6;padding-top:28px}
+.gb-combo.add i{background:none;box-shadow:none;color:#d9c08a;font-size:15px;width:auto;height:auto}
+.gb-combo.add b{font-size:11px;color:#d9c08a}
+.gb-combo.add:hover{opacity:1;--len:66px}
+.gb-combo:focus-visible{outline:none;filter:brightness(1.3)}
+body[data-appearance-motion="reduced"] .gb-combo{animation:none}
+@media(prefers-reduced-motion:reduce){.gb-combo{animation:none}}
+.gb-arrows{min-height:92px;justify-content:flex-end;align-items:flex-start;padding:16px 4px 0 0}
+.gb-cdots{display:inline-flex;gap:2px;margin-left:5px;vertical-align:2px}
+.gb-cdots i{display:inline-grid;place-items:center;width:15px;height:15px;border-radius:50%;font:normal 9px/1 var(--display);color:#fff3d6;background:linear-gradient(var(--cloth),var(--cloth2));box-shadow:0 0 0 1px rgba(0,0,0,.2)}
+.gb-combo-pop{position:absolute;z-index:20;bottom:calc(100% + 34px);left:-10px;width:min(340px,86vw);display:grid;gap:10px;padding:14px;border-radius:6px;color:var(--ink);
+  background:linear-gradient(#f6ecd4,#e8d7b0);border:1px solid #b6995f;box-shadow:0 18px 40px rgba(0,0,0,.55),inset 0 0 0 3px rgba(255,255,255,.25);animation:gbPop .2s ease-out}
+@keyframes gbPop{from{opacity:0;transform:translateY(6px) scale(.98)}to{opacity:1;transform:none}}
+.gb-combo-pop small{display:block;margin-bottom:4px;font:700 9.5px var(--ui-font);letter-spacing:.2em;text-transform:uppercase;color:var(--ink3)}
+.gb-combo-pop input{width:100%;padding:8px 10px;border:1px solid #b6995f;border-radius:4px;background:#fffaf0;color:var(--ink);font:700 17px var(--display)}
+.gb-combo-icons,.gb-combo-colors{display:flex;flex-wrap:wrap;gap:5px}
+.gb-combo-icons button{width:32px;height:32px;border:1px solid rgba(92,70,49,.3);border-radius:4px;background:rgba(255,250,240,.6);color:var(--ink);font:16px var(--display);cursor:pointer}
+.gb-combo-icons button.on,.gb-combo-icons button:hover{border-color:var(--rubric);color:var(--rubric);background:#fff7e6}
+.gb-combo-colors button{width:28px;height:28px;border-radius:50%;border:2px solid #fff5dc;background:linear-gradient(135deg,var(--cloth),var(--cloth2));box-shadow:0 0 0 1px rgba(0,0,0,.25);cursor:pointer;transition:transform .15s}
+.gb-combo-colors button.on{transform:scale(1.15);box-shadow:0 0 0 2px var(--ink)}
+.gb-combo-actions{display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
+.gb-chapter h2 .gb-title{min-width:0}
+.gb-combo-name{--cloth:#a27a2a;--cloth2:#6f4f14;position:relative;display:inline-flex;align-items:center;gap:8px;margin:10px auto 0;padding:5px 26px 6px;border:0;cursor:pointer;color:#fff1d2;
+  font:700 15px/1 var(--display);font-variant:small-caps;letter-spacing:.06em;text-shadow:0 1px 1px rgba(0,0,0,.55);
+  background:linear-gradient(90deg,rgba(0,0,0,.3),transparent 20%,rgba(255,240,210,.18) 45%,transparent 60%,rgba(0,0,0,.3)),linear-gradient(var(--cloth),var(--cloth2));
+  clip-path:polygon(0 0,100% 0,calc(100% - 12px) 50%,100% 100%,0 100%,12px 50%);filter:drop-shadow(0 2px 2px rgba(60,30,10,.35));transition:filter .2s,transform .2s}
+.gb-combo-name i{font-style:normal;font-size:13px}
+.gb-combo-name:hover{transform:translateY(-1px);filter:brightness(1.12) drop-shadow(0 3px 4px rgba(60,30,10,.4))}
+@media(max-width:900px){
+  .gb-combos{left:14px;right:14px;top:calc(100% - 16px);overflow-x:auto;scrollbar-width:none;gap:8px;padding-bottom:6px}
+  .gb-combos::-webkit-scrollbar{display:none}
+  .gb-combo{flex:none;--len:66px;padding-top:24px}.gb-combo.on{--len:84px}.gb-combo:hover{--len:66px}.gb-combo.on:hover{--len:84px}
+  .gb-combo b{font-size:11.5px}
+  .gb-arrows{min-height:0;padding:96px 0 0;justify-content:center}
+  .gb-combo-pop{position:fixed;z-index:400;top:50%;bottom:auto;left:50%;transform:translate(-50%,-50%);animation:none;max-height:80vh;overflow:auto}
+}
+
 </style>
 </head>
 <body>
@@ -1959,6 +2028,7 @@ body[data-appearance-motion="reduced"] :is(.er-die,.er-grace-light,.er-ember,.er
 <div class="gb" id="grimoireBook" aria-label="Grimório">
  <div class="gb-headbar"><div class="gb-head" id="grimoireHead"></div><div class="gb-headtools"><button class="btn small" id="addSpellBtn" type="button">＋ Magia manual</button><button class="btn small" type="button" data-gb-jump="spellLibraryDetails">Biblioteca</button></div></div>
  <div class="gb-book">
+  <div class="gb-combos" id="grimoireCombos" role="tablist" aria-label="Combos de magias preparadas"></div>
   <nav class="gb-ribbons" role="tablist" aria-label="Capítulos do grimório"></nav>
   <div class="gb-spread"><section class="gb-page gb-left" aria-label="Página do capítulo"></section><section class="gb-page gb-right" aria-label="Página da magia"></section></div>
  </div>
@@ -4054,9 +4124,30 @@ const actionText=s=>({one:'1 ação',two:'2 ações',three:'3 ações',reaction:
 const isAttack=s=>/\b(CA|AC)\b/.test(String(s.defense||''))||/\bataque\b/i.test(String(s.traits||''));
 const rankLabel=r=>r===0?'Truque':`${ROMAN[r]} Círculo`;
 
+/* ---------- Combos (conjuntos de magias preparadas) ----------
+   c.spellcasting.loadouts=[{id,name,icon,color,spellIds}] e activeLoadout.
+   O combo ativo sempre espelha as magias marcadas como preparadas; trocar de
+   combo guarda o atual e prepara as magias do outro. */
+const COMBO_COLORS={crimson:['#9a2a22','#5c140f'],gold:['#a27a2a','#6f4f14'],azure:['#2d5f8f','#173755'],verdant:['#3f6e3a','#22401f'],violet:['#6b3f8e','#3d2155'],ash:['#6a625a','#3b3632']};
+const COMBO_ICONS=['⚔','✦','☀','✚','☾','◈','❖','⛨','⚚','✧','☄','⚗'];
+const comboIcon=i=>String(i||'✦')+'︎';
+function combos(c){
+  const sc=c.spellcasting,spells=sc.spells||[];
+  if(!Array.isArray(sc.loadouts)||!sc.loadouts.length){
+    sc.loadouts=[{id:uid(),name:'Batalha',icon:'⚔',color:'crimson',spellIds:spells.filter(s=>s.prepared&&!s.isFocus).map(s=>s.id)}];
+    sc.activeLoadout=sc.loadouts[0].id;
+  }
+  let active=sc.loadouts.find(l=>l.id===sc.activeLoadout);
+  if(!active){active=sc.loadouts[0];sc.activeLoadout=active.id}
+  const ids=new Set(spells.map(s=>s.id));
+  sc.loadouts.forEach(l=>{l.spellIds=Array.isArray(l.spellIds)?l.spellIds.filter(id=>ids.has(id)):[];if(!COMBO_COLORS[l.color])l.color='gold';l.name=String(l.name||'Combo').slice(0,28)});
+  active.spellIds=spells.filter(s=>s.prepared&&!s.isFocus).map(s=>s.id);
+  return {list:sc.loadouts,active};
+}
+function comboStyle(l){const [a,b]=COMBO_COLORS[l.color]||COMBO_COLORS.gold;return `--cloth:${a};--cloth2:${b}`}
 function chapters(c){
-  const sc=c.spellcasting,spells=sc.spells||[],out=[];
-  out.push({key:'today',label:'Hoje',mark:'✦',kicker:'Seleção do dia',title:'Preparadas de Hoje',spells:spells.filter(s=>s.prepared&&!s.isFocus).sort(byRankName),today:true});
+  const sc=c.spellcasting,spells=sc.spells||[],out=[],cb=combos(c);
+  out.push({key:'today',label:comboIcon(cb.active.icon),mark:comboIcon(cb.active.icon),kicker:'Seleção do dia',title:'Preparadas de Hoje',combo:cb.active,spells:spells.filter(s=>s.prepared&&!s.isFocus).sort(byRankName),today:true});
   const cantrips=spells.filter(s=>!s.isFocus&&num(s.rank)===0);
   if(cantrips.length)out.push({key:'r0',rank:0,label:'∞',mark:'∞',kicker:'Capítulo dos truques',title:'Truques',spells:cantrips.sort(byName)});
   for(let r=1;r<=10;r++){
@@ -4095,18 +4186,18 @@ function slotBlock(ch,c){
   return `<div class="gb-slots"><small>Espaços</small><div class="gb-pips">${pips(cur,max,`data-gb-pip-rank="${ch.rank}" data-gb-pip`)}</div><em>${cur} / ${max}</em></div>`;
 }
 function indexBlock(ch,sel){
-  if(!ch.spells.length)return `<div class="gb-blank-index">${ch.today?'Nenhuma magia preparada hoje. Abra um capítulo e use <b>Preparar</b> nas magias que quiser levar.':'Nenhuma magia escrita neste capítulo.'}</div>`;
+  if(!ch.spells.length)return `<div class="gb-blank-index">${ch.today?`O combo <b>${esc(ch.combo.name)}</b> está vazio. Abra um capítulo pelas fitas e use <b>Preparar</b> nas magias que quiser levar nele.`:'Nenhuma magia escrita neste capítulo.'}</div>`;
   let last=null,html='<ol class="gb-index">';
   for(const s of ch.spells){
     const r=num(s.rank);
     if(ch.today&&r!==last){html+=`<li class="gb-index-group">${rankLabel(r)}</li>`;last=r}
-    html+=`<li><button type="button" class="gb-entry ${sel&&sel.id===s.id?'sel':''}" data-gb-spell="${s.id}"><span class="gb-entry-name">${esc(s.name)}${s.prepared&&!ch.today&&!s.isFocus?' <i class="gb-star" title="Preparada">✦</i>':''}</span><span class="gb-leader"></span><span class="gb-entry-act">${actionOf(s)}</span></button></li>`;
+    html+=`<li><button type="button" class="gb-entry ${sel&&sel.id===s.id?'sel':''}" data-gb-spell="${s.id}"><span class="gb-entry-name">${esc(s.name)}${s.prepared&&!ch.today&&!s.isFocus?' <i class="gb-star" title="Preparada no combo ativo">✦</i>':''}${!ch.today&&!s.isFocus?comboDots(s):''}</span><span class="gb-leader"></span><span class="gb-entry-act">${actionOf(s)}</span></button></li>`;
   }
   return html+'</ol>';
 }
 function leftPage(ch,c,sel,list){
   const i=list.indexOf(ch),prev=list[i-1],next=list[i+1];
-  return `<div class="gb-scroll"><header class="gb-chapter"><small>${ch.kicker}</small><h2><span class="gb-mark">${ch.mark}</span>${ch.title}</h2><div class="gb-rule"></div></header>
+  return `<div class="gb-scroll"><header class="gb-chapter"><small>${ch.kicker}</small><h2><span class="gb-mark">${ch.mark}</span><span class="gb-title">${esc(ch.title)}</span></h2>${ch.today?`<button type="button" class="gb-combo-name" style="${comboStyle(ch.combo)}" data-gb-combo="${ch.combo.id}" title="Editar combo"><i>${comboIcon(ch.combo.icon)}</i><span class="gb-combo-label">${esc(ch.combo.name)}</span></button>`:''}<div class="gb-rule"></div></header>
     ${slotBlock(ch,c)}
     ${indexBlock(ch,sel)}</div>
     ${prev?`<button type="button" class="gb-corner prev" data-gb-goto="${prev.key}" aria-label="Capítulo anterior: ${esc(prev.title)}"><span>‹ ${prev.label}</span></button>`:''}
@@ -4194,7 +4285,7 @@ function rightPage(ch,c,sel,list){
   </article></div>${corner}${folio}`;
 }
 function ribbons(list,ch){
-  return list.map(x=>`<button type="button" role="tab" aria-selected="${x.key===ch.key}" class="gb-rib ${x.key===ch.key?'on':''} ${x.today?'today':''} ${x.focus?'focus':''}" data-gb-goto="${x.key}" title="${esc(x.title)}"><b>${x.label}</b>${x.spells.length?`<small>${x.spells.length}</small>`:''}</button>`).join('');
+  return list.map(x=>`<button type="button" role="tab" aria-selected="${x.key===ch.key}" class="gb-rib ${x.key===ch.key?'on':''} ${x.today?'today':''} ${x.focus?'focus':''}" data-gb-goto="${x.key}" title="${x.today?'Hoje — combo '+esc(x.combo.name):esc(x.title)}"${x.today?` style="${comboStyle(x.combo)}"`:''}><b>${x.label}</b>${x.spells.length?`<small>${x.spells.length}</small>`:''}</button>`).join('');
 }
 function renderHead(c){
   const t=spellTotals(c),sc=c.spellcasting,el=$('grimoireHead');if(!el)return;
@@ -4211,11 +4302,85 @@ function render(){
   root.querySelector('.gb-left').innerHTML=leftPage(ch,c,sel,list);
   root.querySelector('.gb-right').innerHTML=rightPage(ch,c,sel,list);
   root.querySelector('.gb-ribbons').innerHTML=ribbons(list,ch);
+  renderCombos(c,ch);
   root.querySelector('.gb-arrows .count').textContent=`${list.indexOf(ch)+1} / ${list.length}`;
   root.dataset.empty=String(!(c.spellcasting.spells||[]).length);
   try{queueSpellTranslations(ch.spells,()=>{if(!animating)render()},Math.min(ch.spells.length,12))}catch{}
 }
 window.renderGrimoire=render;
+
+function comboDots(s){
+  const c=current(),sc=c.spellcasting;if(!Array.isArray(sc.loadouts)||sc.loadouts.length<2)return '';
+  const inn=sc.loadouts.filter(l=>l.id!==sc.activeLoadout&&l.spellIds.includes(s.id));
+  return inn.length?` <span class="gb-cdots">${inn.map(l=>`<i style="${comboStyle(l)}" title="Também no combo ${esc(l.name)}">${comboIcon(l.icon)}</i>`).join('')}</span>`:'';
+}
+let comboEditing=false;
+function renderCombos(c,ch){
+  const el=$('grimoireCombos');if(!el)return;
+  const {list,active}=combos(c);
+  const tabs=list.map((l,idx)=>{const on=l.id===active.id,n=on?(c.spellcasting.spells||[]).filter(s=>s.prepared&&!s.isFocus).length:l.spellIds.length;
+    return `<button type="button" role="tab" aria-selected="${on}" class="gb-combo ${on?'on':''} ${on&&ch.today?'here':''}" style="${comboStyle(l)};--i:${idx}" data-gb-combo="${l.id}" title="${on?'Combo ativo — clique para editar':'Trocar para o combo '+esc(l.name)}"><i>${comboIcon(l.icon)}</i><b>${esc(l.name)}</b><small>${n}</small>${on?'<span class="gb-combo-edit-ic" aria-hidden="true">✎</span>':''}</button>`}).join('');
+  const add=list.length<8?`<button type="button" class="gb-combo add" data-gb-combo-new title="Criar um novo combo"><i>＋</i><b>Combo</b></button>`:'';
+  let pop='';
+  if(comboEditing){
+    pop=`<div class="gb-combo-pop" role="dialog" aria-label="Editar combo">
+      <label><small>Nome do combo</small><input type="text" maxlength="28" value="${esc(active.name)}" data-gb-combo-name></label>
+      <div class="gb-combo-row"><small>Símbolo</small><div class="gb-combo-icons">${COMBO_ICONS.map(i=>`<button type="button" class="${i===active.icon?'on':''}" data-gb-combo-icon="${i}">${comboIcon(i)}</button>`).join('')}</div></div>
+      <div class="gb-combo-row"><small>Cor da fita</small><div class="gb-combo-colors">${Object.keys(COMBO_COLORS).map(k=>`<button type="button" class="${k===active.color?'on':''}" style="${comboStyle({color:k})}" data-gb-combo-color="${k}" aria-label="${k}"></button>`).join('')}</div></div>
+      <div class="gb-combo-actions"><button type="button" class="gb-btn ghost" data-gb-combo-dup>Duplicar</button>${list.length>1?'<button type="button" class="gb-btn ghost danger" data-gb-combo-del>Excluir</button>':''}<button type="button" class="gb-btn seal" data-gb-combo-close><span>Pronto</span></button></div>
+    </div>`;
+  }
+  el.innerHTML=tabs+add+pop;
+}
+function snapshot(root){const L=root.querySelector('.gb-left'),R=root.querySelector('.gb-right'),sc=n=>n.querySelector('.gb-scroll')?.scrollTop||0;return {L:L.innerHTML,R:R.innerHTML,sL:sc(L),sR:sc(R)}}
+function applyCombo(id,opts={}){
+  const root=$('grimoireBook'),c=current(),cb=combos(c),target=cb.list.find(l=>l.id===id);if(!root||!target)return;
+  finishFlip();
+  const list0=chapters(c),from=list0.indexOf(currentChapter(list0));
+  const snap=snapshot(root),set=new Set(target.spellIds);
+  (c.spellcasting.spells||[]).forEach(s=>{if(!s.isFocus)s.prepared=set.has(s.id)});
+  c.spellcasting.activeLoadout=id;ui.ch='today';saveUi();
+  refreshAfter();render();snd('page');
+  const tab=$('grimoireCombos')?.querySelector(`[data-gb-combo="${id}"]`);if(tab&&!reduced()){tab.classList.add('pull');setTimeout(()=>tab.classList.remove('pull'),600)}
+  if(opts.flip===false){}else if(!reduced())flip(root,from>0?-1:1,snap.L,snap.R,snap.sL,snap.sR);
+  else root.querySelector('.gb-spread').animate([{opacity:.4},{opacity:1}],{duration:220});
+  if(!opts.quiet){const n=set.size;toast(`Combo “${target.name}” preparado — ${n} ${n===1?'magia':'magias'}.`)}
+}
+function comboClick(d,t){
+  const c=current(),cb=combos(c);
+  if(d.gbCombo){
+    if(d.gbCombo===cb.active.id){
+      if(currentChapter(chapters(c)).key!=='today'){goTo('today');return}
+      comboEditing=!comboEditing;render();if(comboEditing)$('grimoireCombos')?.querySelector('[data-gb-combo-name]')?.focus();snd('tick');return}
+    comboEditing=false;applyCombo(d.gbCombo);return;
+  }
+  if('gbComboNew' in d||'gbComboDup' in d){
+    const dup='gbComboDup' in d,base=cb.active;
+    const used=new Set(cb.list.map(l=>l.color)),color=dup?base.color:(Object.keys(COMBO_COLORS).find(k=>!used.has(k))||'gold');
+    const l={id:uid(),name:dup?`${base.name} (cópia)`.slice(0,28):(cb.list.length===1&&!cb.list.some(x=>/utilidade/i.test(x.name))?'Utilidade':'Novo combo'),icon:dup?base.icon:(cb.list.length===1?'✧':'✦'),color,spellIds:dup?base.spellIds.slice():[]};
+    c.spellcasting.loadouts.push(l);comboEditing=true;applyCombo(l.id,{quiet:true});
+    toast(dup?`Combo duplicado. Ajuste as magias à vontade.`:`Combo “${l.name}” criado. Prepare magias nele pelas fitas de cada círculo.`);
+    $('grimoireCombos')?.querySelector('[data-gb-combo-name]')?.select();return;
+  }
+  if('gbComboDel' in d){
+    if(cb.list.length<2||!confirm(`Excluir o combo “${cb.active.name}”? As magias continuam no grimório.`))return;
+    const rest=cb.list.filter(l=>l.id!==cb.active.id);c.spellcasting.loadouts=rest;comboEditing=false;const next=rest[0];c.spellcasting.activeLoadout=next.id;
+    const set=new Set(next.spellIds);(c.spellcasting.spells||[]).forEach(s=>{if(!s.isFocus)s.prepared=set.has(s.id)});
+    refreshAfter();render();toast(`Combo excluído. Agora preparado: “${next.name}”.`);return;
+  }
+  if(d.gbComboIcon){cb.active.icon=d.gbComboIcon;saveState();render();snd('tick');return}
+  if(d.gbComboColor){cb.active.color=d.gbComboColor;saveState();render();snd('tick');return}
+  if('gbComboClose' in d){comboEditing=false;saveState();render();snd('tick');return}
+}
+window.GrimoireCombos={get:()=>{const cb=combos(current());return {list:cb.list,active:cb.active,colors:COMBO_COLORS,icon:comboIcon}},apply:id=>applyCombo(id,{flip:state.currentPage==='spells'}),style:comboStyle};
+function bindCombos(){
+  const el=$('grimoireCombos');if(!el||el.dataset.bound)return;el.dataset.bound='1';
+  el.addEventListener('click',e=>{const t=e.target.closest('button');if(!t||!el.contains(t))return;e.stopPropagation();comboClick(t.dataset,t)});
+  el.addEventListener('input',e=>{const t=e.target;if(!('gbComboName' in t.dataset))return;const c=current(),{active}=combos(c);active.name=t.value.slice(0,28)||'Combo';
+    const tab=el.querySelector('.gb-combo.on b');if(tab)tab.textContent=active.name;const h=$('grimoireBook')?.querySelector('.gb-left .gb-combo-label');if(h)h.textContent=active.name;saveState()});
+  el.addEventListener('keydown',e=>{if(e.target.dataset&&'gbComboName' in e.target.dataset&&(e.key==='Enter'||e.key==='Escape')){e.preventDefault();comboEditing=false;render();el.querySelector('.gb-combo.on')?.focus()}});
+  document.addEventListener('pointerdown',e=>{if(comboEditing&&!el.contains(e.target)&&!e.target.closest?.('.gb-combo-name')){comboEditing=false;render()}});
+}
 
 /* ---------- Virar página ---------- */
 function finishFlip(){if(animating){animating.forEach(a=>{try{a.finish()}catch{}});animating=null}document.querySelectorAll('.gb-leaf,.gb-under').forEach(n=>n.remove())}
@@ -4303,13 +4468,14 @@ function bind(root){
     const t=e.target.closest('button');if(!t||!root.contains(t))return;
     const d=t.dataset,c=current();
     if(d.gbDice){const sp=t.closest('[data-spell-id]'),s=sp&&c.spellcasting.spells.find(x=>x.id===sp.dataset.spellId);const res=parseDice(d.gbDice);addRoll(s?`${s.name}: ${d.gbDice}`:d.gbDice,d.gbDice,res);return}
+    if(d.gbCombo){comboClick(d,t);return}
     if(d.gbGoto){goTo(d.gbGoto);return}
     if(d.gbSpell){selectSpell(d.gbSpell);return}
     if(d.gbCast){cast(d.gbCast);return}
     if(d.gbAttack){const s=c.spellcasting.spells.find(x=>x.id===d.gbAttack);rollCheck(s?`Ataque mágico: ${s.name}`:'Ataque mágico',spellTotals(c).attack);return}
     if('gbPip' in d&&d.gbPipRank){const slot=c.spellcasting.slots.find(x=>num(x.rank)===num(d.gbPipRank));if(!slot)return;const i=num(d.gbPip);slot.current=i<num(slot.current)?i:i+1;slot.current=Math.max(0,Math.min(num(slot.max),slot.current));refreshAfter();snd('tick');return}
     if('gbFocusPip' in d){const i=num(d.gbFocusPip);c.focus.current=Math.max(0,Math.min(num(c.focus.max),i<num(c.focus.current)?i:i+1));refreshAfter();snd('tick');return}
-    if(d.gbPrep){const s=c.spellcasting.spells.find(x=>x.id===d.gbPrep);if(!s)return;s.prepared=!s.prepared;refreshAfter();snd(s.prepared?'heal':'tick');toast(`${s.name} ${s.prepared?'preparada para hoje':'retirada das preparadas'}.`);return}
+    if(d.gbPrep){const s=c.spellcasting.spells.find(x=>x.id===d.gbPrep);if(!s)return;s.prepared=!s.prepared;refreshAfter();snd(s.prepared?'heal':'tick');const an=combos(c).active.name;toast(`${s.name} ${s.prepared?`entrou no combo “${an}”`:`saiu do combo “${an}”`}.`);return}
     if(d.gbEdit){editorSpell=d.gbEdit;renderSpellEditor();$('grimoireEditor')?.scrollIntoView({behavior:'smooth',block:'center'});return}
     if(d.gbDel){const s=c.spellcasting.spells.find(x=>x.id===d.gbDel);if(!s||!confirm(`Remover “${s.name}” do grimório?`))return;c.spellcasting.spells=c.spellcasting.spells.filter(x=>x.id!==d.gbDel);refreshAfter();toast(`${s.name} foi removida do grimório.`);return}
     if('gbJump' in d){const det=$(d.gbJump);if(det){det.open=true;det.scrollIntoView({behavior:'smooth',block:'start'})}return}
@@ -4362,7 +4528,7 @@ function enhanceEditor(){
 }
 /* ---------- Ligação com a ficha ---------- */
 function init(){
-  const root=$('grimoireBook');if(!root||root.dataset.bound)return;root.dataset.bound='1';bind(root);
+  const root=$('grimoireBook');if(!root||root.dataset.bound)return;root.dataset.bound='1';bind(root);bindCombos();
   const _renderSpells=window.renderSpells;
   if(typeof _renderSpells==='function')window.renderSpells=function(){const out=_renderSpells.apply(this,arguments);try{if(!animating)render()}catch(err){console.warn('Grimório',err)}return out};
   const _renderSpellEditor=window.renderSpellEditor;
