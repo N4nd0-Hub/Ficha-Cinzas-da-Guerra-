@@ -1733,10 +1733,10 @@ body[data-appearance-motion="reduced"] :is(.er-die,.er-grace-light,.er-ember,.er
 /* ---------- Combos: fitas de cetim penduradas no livro ----------
    Cada combo é uma fita que sai de entre as páginas e cai pela borda de baixo,
    com ponta em rabo de andorinha. A fita ativa é a mais longa e dourada. */
-.gb-combos{position:absolute;z-index:auto;left:42px;top:calc(100% - 26px);display:flex;align-items:flex-start;gap:10px;pointer-events:none}
+.gb-combos{position:absolute;z-index:auto;left:42px;top:calc(100% - 26px);display:flex;align-items:flex-start;gap:7px;pointer-events:none}
 .gb-combos>*{pointer-events:auto}
-.gb-combo{--cloth:#a27a2a;--cloth2:#6f4f14;--len:74px;position:relative;z-index:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px;
-  width:auto;min-width:64px;max-width:150px;height:var(--len);padding:30px 12px 0;border:0;cursor:pointer;color:#fff1d2;
+.gb-combo{--cloth:#a27a2a;--cloth2:#6f4f14;--len:104px;position:relative;z-index:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:4px;
+  width:84px;flex:none;height:var(--len);padding:32px 8px 0;border:0;cursor:pointer;color:#fff1d2;
   background:
     linear-gradient(90deg,rgba(0,0,0,.38),transparent 18%,rgba(255,240,210,.22) 34%,transparent 46%,transparent 76%,rgba(0,0,0,.35)),
     repeating-linear-gradient(0deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px),
@@ -1750,25 +1750,25 @@ body[data-appearance-motion="reduced"] :is(.er-die,.er-grace-light,.er-ember,.er
 .gb-combo::after{content:"";position:absolute;left:0;right:0;top:0;height:24px;pointer-events:none;background:linear-gradient(rgba(0,0,0,.55),transparent)}
 .gb-combo i{display:grid;place-items:center;width:22px;height:22px;border-radius:50%;font-style:normal;font-size:12px;line-height:1;color:#3a2408;
   background:radial-gradient(circle at 35% 30%,#ffe9b0,#c99a45 60%,#8a6322);box-shadow:0 1px 2px rgba(0,0,0,.5),inset 0 0 0 1px rgba(90,60,20,.5)}
-.gb-combo b{max-width:100%;font:700 12.5px/1.1 var(--display);letter-spacing:.04em;font-variant:small-caps;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-shadow:0 1px 1px rgba(0,0,0,.6)}
+.gb-combo b{max-width:100%;font:700 12px/1.05 var(--display);letter-spacing:.03em;font-variant:small-caps;text-align:center;white-space:normal;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;text-shadow:0 1px 1px rgba(0,0,0,.6)}
 .gb-combo small{font:700 9px var(--ui-font);letter-spacing:.08em;opacity:.8}
 .gb-combo-edit-ic{display:none}
-.gb-combo:hover{--len:86px;filter:saturate(.95) brightness(.95)}
-.gb-combo.on{--len:104px;z-index:0;filter:saturate(1.08) brightness(1.08) drop-shadow(0 6px 6px rgba(0,0,0,.5))}
+.gb-combo:hover{--len:114px;filter:saturate(.95) brightness(.95)}
+.gb-combo.on{--len:132px;z-index:0;filter:saturate(1.08) brightness(1.08) drop-shadow(0 6px 6px rgba(0,0,0,.5))}
 .gb-combo.on::before{border-color:rgba(255,226,160,.7)}
-.gb-combo.on:hover{--len:110px}
-.gb-combo.on b::after{content:" ✎";font-size:10px;opacity:.65}
+.gb-combo.on:hover{--len:138px}
+.gb-combo.on small::after{content:" · ✎";opacity:.8}
 .gb-combo.pull{animation:gbPull .55s cubic-bezier(.3,1.6,.5,1)}
 @keyframes gbSway{0%,100%{transform:rotate(-.9deg)}50%{transform:rotate(.9deg)}}
 @keyframes gbPull{0%{transform:scaleY(1)}35%{transform:scaleY(1.18) rotate(0)}70%{transform:scaleY(.96)}100%{transform:scaleY(1)}}
-.gb-combo.add{--cloth:#3a2c1c;--cloth2:#20170e;--len:58px;min-width:58px;filter:none;opacity:.6;padding-top:28px}
+.gb-combo.add{--cloth:#3a2c1c;--cloth2:#20170e;--len:78px;width:64px;filter:none;opacity:.6;padding-top:28px}
 .gb-combo.add i{background:none;box-shadow:none;color:#d9c08a;font-size:15px;width:auto;height:auto}
 .gb-combo.add b{font-size:11px;color:#d9c08a}
-.gb-combo.add:hover{opacity:1;--len:66px}
+.gb-combo.add:hover{opacity:1;--len:86px}
 .gb-combo:focus-visible{outline:none;filter:brightness(1.3)}
 body[data-appearance-motion="reduced"] .gb-combo{animation:none}
 @media(prefers-reduced-motion:reduce){.gb-combo{animation:none}}
-.gb-arrows{min-height:92px;justify-content:flex-end;align-items:flex-start;padding:16px 4px 0 0}
+.gb-arrows{min-height:122px;justify-content:flex-end;align-items:flex-start;padding:16px 4px 0 0}
 .gb-cdots{display:inline-flex;gap:2px;margin-left:5px;vertical-align:2px}
 .gb-cdots i{display:inline-grid;place-items:center;width:15px;height:15px;border-radius:50%;font:normal 9px/1 var(--display);color:#fff3d6;background:linear-gradient(var(--cloth),var(--cloth2));box-shadow:0 0 0 1px rgba(0,0,0,.2)}
 .gb-combo-pop{position:absolute;z-index:20;bottom:calc(100% + 34px);left:-10px;width:min(340px,86vw);display:grid;gap:10px;padding:14px;border-radius:6px;color:var(--ink);
@@ -1792,9 +1792,9 @@ body[data-appearance-motion="reduced"] .gb-combo{animation:none}
 @media(max-width:900px){
   .gb-combos{left:14px;right:14px;top:calc(100% - 16px);overflow-x:auto;scrollbar-width:none;gap:8px;padding-bottom:6px}
   .gb-combos::-webkit-scrollbar{display:none}
-  .gb-combo{flex:none;--len:66px;padding-top:24px}.gb-combo.on{--len:84px}.gb-combo:hover{--len:66px}.gb-combo.on:hover{--len:84px}
+  .gb-combo{flex:none;width:74px;--len:92px;padding-top:26px}.gb-combo.on{--len:112px}.gb-combo:hover{--len:92px}.gb-combo.on:hover{--len:112px}.gb-combo.add{--len:70px;width:56px}.gb-combo.add:hover{--len:70px}
   .gb-combo b{font-size:11.5px}
-  .gb-arrows{min-height:0;padding:96px 0 0;justify-content:center}
+  .gb-arrows{min-height:0;padding:124px 0 0;justify-content:center}
   .gb-combo-pop{position:fixed;z-index:400;top:50%;bottom:auto;left:50%;transform:translate(-50%,-50%);animation:none;max-height:80vh;overflow:auto}
 }
 
@@ -1894,6 +1894,88 @@ summary.fold-head:hover::after{opacity:1}
 .v6-quests-raw[hidden]{display:none!important}
 @media (max-width:700px){.v6-peek{padding-left:18px}.v6-item-ic{width:28px;height:28px;font-size:14px;margin-right:8px}}
 body[data-appearance-motion="reduced"] .v6-flash{animation:none}
+
+/* ==========================================================================
+   Talentos & Dedicações v6 — cartões de relíquia, trilha de dedicação
+   ========================================================================== */
+#page-feats .feat-collection{--ga:var(--group-accent,#bcab77);border:1px solid color-mix(in srgb,var(--ga) 26%,#2a241a);border-radius:8px;overflow:visible;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--ga) 6%,#110e0a),#0b0907 220px)}
+#page-feats .feat-collection-head{position:relative;padding:16px 18px;border-bottom:1px solid color-mix(in srgb,var(--ga) 22%,transparent);
+  background:radial-gradient(120% 140% at 0 0,color-mix(in srgb,var(--ga) 16%,transparent),transparent 60%),linear-gradient(90deg,color-mix(in srgb,var(--ga) 8%,transparent),transparent 70%);border-radius:8px 8px 0 0}
+#page-feats .feat-collection-head::after{content:"";position:absolute;left:18px;right:18px;bottom:-1px;height:1px;background:linear-gradient(90deg,var(--ga),transparent 70%);opacity:.7}
+#page-feats .feat-group-toggle{gap:14px}
+#page-feats .feat-group-toggle .collection-icon{width:46px;height:46px;display:grid;place-items:center;font-size:20px;color:var(--ga);border:1px solid color-mix(in srgb,var(--ga) 60%,transparent);
+  background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--ga) 30%,transparent),rgba(0,0,0,.4));transform:rotate(45deg);border-radius:6px;box-shadow:0 0 18px color-mix(in srgb,var(--ga) 22%,transparent)}
+#page-feats .feat-group-toggle .collection-icon>*{transform:rotate(-45deg)}
+#page-feats .feat-group-toggle b{font-family:var(--display,serif);font-size:22px;letter-spacing:.02em;font-variant:small-caps;color:var(--text,#f1e6cc)}
+#page-feats .feat-group-toggle small{color:color-mix(in srgb,var(--ga) 70%,#9c907a);letter-spacing:.08em}
+#page-feats .feat-group-toggle em{font-size:0!important;width:10px;height:10px;border-right:1.5px solid var(--ga);border-bottom:1.5px solid var(--ga);transform:rotate(45deg) translateY(-3px);transition:transform .25s;margin-left:6px;opacity:.8}
+#page-feats .feat-group-toggle[aria-expanded="false"] em{transform:rotate(-45deg)}
+#page-feats .feat-group-actions .btn{opacity:.75;transition:opacity .2s}
+#page-feats .feat-collection-head:hover .feat-group-actions .btn,#page-feats .feat-group-actions .btn:focus-visible{opacity:1}
+#page-feats .feat-group-body{gap:14px;padding:18px}
+/* cartão */
+#page-feats .feat-game-card{--ea:var(--entry-accent,var(--ga,#bcab77));position:relative;display:grid;grid-template-columns:58px 1fr;gap:16px;padding:18px 18px 14px;border:1px solid color-mix(in srgb,var(--ea) 24%,#2b251b)!important;border-radius:8px;
+  background:radial-gradient(90% 120% at 0 0,color-mix(in srgb,var(--ea) 11%,transparent),transparent 55%),linear-gradient(170deg,#17130d,#0d0b08 70%)!important;
+  box-shadow:0 10px 24px rgba(0,0,0,.35);transition:transform .25s cubic-bezier(.2,.8,.2,1),border-color .25s,box-shadow .25s}
+#page-feats .feat-game-card::before{content:"";position:absolute;left:14px;right:14px;top:-1px;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--ea),transparent);opacity:.75}
+#page-feats .feat-game-card:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--ea) 55%,#2b251b)!important;box-shadow:0 16px 32px rgba(0,0,0,.45),0 0 0 1px color-mix(in srgb,var(--ea) 15%,transparent),0 0 30px color-mix(in srgb,var(--ea) 10%,transparent)}
+#page-feats .feat-game-card .entry-sigil{width:50px;height:50px;margin:4px 0 0 4px;display:grid;place-items:center;font-size:21px;color:var(--ea);border:1px solid color-mix(in srgb,var(--ea) 55%,transparent)!important;border-radius:6px!important;transform:rotate(45deg);
+  background:radial-gradient(circle at 35% 30%,color-mix(in srgb,var(--ea) 26%,transparent),rgba(0,0,0,.45))!important;box-shadow:inset 0 0 0 3px rgba(0,0,0,.35),0 0 16px color-mix(in srgb,var(--ea) 16%,transparent);transition:transform .35s cubic-bezier(.3,1.5,.5,1)}
+#page-feats .feat-game-card .entry-sigil>span{transform:rotate(-45deg)}
+#page-feats .feat-game-card:hover .entry-sigil{transform:rotate(45deg) scale(1.06)}
+#page-feats .feat-game-card .entry-main{min-width:0;display:flex;flex-direction:column;gap:6px}
+#page-feats .entry-kicker{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:10px!important;letter-spacing:.16em!important}
+#page-feats .entry-kicker .v6-cat{color:var(--ea);font-weight:800;text-transform:uppercase}
+#page-feats .entry-kicker .v6-act{display:inline-flex;align-items:center;gap:5px;padding:2px 8px;border-radius:999px;border:1px solid rgba(215,180,106,.25);background:rgba(0,0,0,.3);color:#e9d6a6;letter-spacing:.06em;text-transform:none;font-weight:700}
+#page-feats .entry-kicker .v6-act i{font-style:normal;color:var(--v6-gold)}
+#page-feats .entry-title-row{align-items:flex-start;gap:12px}
+#page-feats .entry-title{font-family:var(--display,serif)!important;font-size:21px!important;line-height:1.15;letter-spacing:.01em;color:var(--text,#f3e8cf)}
+#page-feats .entry-title-row{padding-right:54px}
+#page-feats .v6-path .entry-title-row{padding-right:0}
+#page-feats .entry-level.v6-seal{position:absolute;top:16px;right:16px;display:grid;place-items:center;width:46px;height:46px;margin:0;padding:0!important;border-radius:50%!important;border:1px solid color-mix(in srgb,var(--ea) 60%,transparent)!important;
+  background:radial-gradient(circle at 40% 35%,color-mix(in srgb,var(--ea) 22%,#1a150e),#0b0906)!important;box-shadow:inset 0 0 0 3px rgba(0,0,0,.4),0 2px 8px rgba(0,0,0,.45);line-height:1;text-align:center}
+#page-feats .entry-level.v6-seal small{display:block;font:700 7.5px var(--ui-font,inherit);letter-spacing:.18em;color:color-mix(in srgb,var(--ea) 80%,#b9ad94);text-transform:uppercase}
+#page-feats .entry-level.v6-seal b{display:block;font:700 19px var(--display,serif);color:#f6e7bd;margin-top:1px}
+#page-feats .entry-meta{font-size:12px;color:var(--muted);font-style:italic}
+#page-feats .entry-tags .tag{border-color:color-mix(in srgb,var(--ea) 35%,transparent)!important;color:color-mix(in srgb,var(--ea) 55%,#e9dfc8)!important;background:color-mix(in srgb,var(--ea) 7%,transparent)!important;letter-spacing:.1em}
+#page-feats .v6-excerpt{margin:2px 0 0;padding:0;border:0;background:none;text-align:left;color:#cbbd9f;font:14px/1.55 var(--body-font,inherit);cursor:pointer;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+#page-feats .v6-excerpt:hover{color:#e8dcc0}
+#page-feats .feat-game-card:has(details[open]) .v6-excerpt{display:none}
+#page-feats .feat-description{border-top:1px solid rgba(215,180,106,.12)!important;margin-top:4px}
+#page-feats .feat-description>summary{color:var(--v6-gold)!important;font-size:11px!important;letter-spacing:.14em;text-transform:uppercase;font-weight:800}
+#page-feats .feat-description[open]>summary{margin-bottom:6px}
+#page-feats .feat-description .entry-desc{font-size:14.5px;line-height:1.6;color:#e1d5bb;animation:v6Fade .3s ease-out}
+@keyframes v6Fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+#page-feats .entry-actions{gap:6px;padding-top:10px;border-top:1px dashed rgba(215,180,106,.12)!important;opacity:.55;transition:opacity .25s}
+#page-feats .feat-game-card:hover .entry-actions,#page-feats .entry-actions:focus-within{opacity:1}
+#page-feats .entry-actions .btn.small{min-height:30px}
+@media (hover:none){#page-feats .entry-actions{opacity:1}}
+/* Trilha de dedicação: linha do tempo por nível */
+#page-feats .feat-collection.v6-path .feat-group-body{display:grid!important;grid-template-columns:1fr!important;position:relative;padding-left:84px}
+#page-feats .feat-collection.v6-path .feat-group-body::before{content:"";position:absolute;left:44px;top:30px;bottom:30px;width:2px;border-radius:2px;
+  background:linear-gradient(var(--ga),color-mix(in srgb,var(--ga) 30%,transparent));box-shadow:0 0 10px color-mix(in srgb,var(--ga) 40%,transparent)}
+#page-feats .v6-path .feat-game-card{overflow:visible}
+#page-feats .feat-game-card .v6-node{position:absolute;display:none}
+#page-feats .v6-path .feat-game-card .v6-node{display:grid;position:absolute;left:-58px;top:22px;width:36px;height:36px;display:grid;place-items:center;border-radius:50%;
+  border:2px solid var(--ga);background:#0e0b08;color:#f3e3b8;font:700 15px var(--display,serif);box-shadow:0 0 0 4px #0e0b08,0 0 14px color-mix(in srgb,var(--ga) 45%,transparent);z-index:1}
+#page-feats .v6-path .feat-game-card .v6-node small{position:absolute;top:-15px;font:700 7.5px var(--ui-font,inherit);letter-spacing:.2em;color:color-mix(in srgb,var(--ga) 80%,#b9ad94)}
+#page-feats .v6-path .feat-game-card .v6-node::after{content:"";position:absolute;left:100%;top:50%;width:22px;height:1px;background:color-mix(in srgb,var(--ga) 60%,transparent)}
+#page-feats .v6-path .entry-level.v6-seal{display:none}
+#page-feats .v6-path-note{margin:0 18px;padding:10px 0 0;font:600 11px var(--ui-font,inherit);letter-spacing:.14em;text-transform:uppercase;color:color-mix(in srgb,var(--ga) 75%,#9c907a)}
+#page-feats .feat-layout-list .feat-game-card,#page-feats .is-list .feat-game-card{grid-template-columns:42px 1fr;padding:12px 14px}
+@media (max-width:700px){
+  #page-feats .feat-game-card{grid-template-columns:40px 1fr;gap:12px;padding:14px}
+  #page-feats .feat-game-card .entry-sigil{width:36px;height:36px;font-size:16px}
+  #page-feats .entry-title{font-size:18px!important}
+  #page-feats .entry-level.v6-seal{width:38px;height:38px;top:12px;right:12px}#page-feats .entry-level.v6-seal b{font-size:16px}#page-feats .entry-level.v6-seal small{font-size:6.5px}
+  #page-feats .feat-game-card:not(.v6-x) .entry-kicker,#page-feats .feat-game-card .entry-title-row{padding-right:44px!important}
+  #page-feats .v6-path .feat-game-card .entry-kicker,#page-feats .v6-path .feat-game-card .entry-title-row{padding-right:0!important}
+  #page-feats .feat-collection.v6-path .feat-group-body{padding-left:56px}
+  #page-feats .feat-collection.v6-path .feat-group-body::before{left:26px}
+  #page-feats .v6-path .feat-game-card .v6-node{left:-46px;width:32px;height:32px}
+  #page-feats .v6-path .feat-game-card .v6-node::after{width:12px}
+}
 </style>
 </head>
 <body>
@@ -4725,9 +4807,33 @@ function items(){
 
 /* ---------- Talentos: texto formatado e espiada ---------- */
 let flashFeat=null;
+const ACT={one:['◆','1 ação'],two:['◆◆','2 ações'],three:['◆◆◆','3 ações'],reaction:['↶','Reação'],free:['◇','Livre'],passive:['●','Passiva']};
+const CAT={class:'Classe',ancestry:'Ancestralidade',archetype:'Arquétipo',general:'Geral',skill:'Perícia'};
+const plain=t=>String(t||'').replace(/\*\*|__|\*/g,'').replace(/^##\s*/gm,'').replace(/^\s*-\s+/gm,'• ').replace(/\s*\n\s*/g,' ').trim();
+const isPath=g=>/dedica|arqu[eé]tip|caminho|trilha/i.test((g.id||'')+' '+(g.name||''));
+function featCards(c){
+  const byId=new Map((c.feats||[]).map(f=>[f.id,f]));
+  const groups=new Map((c.featOrganization?.groups||[]).map(g=>[g.id,g]));
+  document.querySelectorAll('#page-feats .feat-collection').forEach(sec=>{const g=groups.get(sec.dataset.featCollection);const p=!!g&&isPath(g);if(sec.classList.contains('v6-path')!==p)sec.classList.toggle('v6-path',p);
+    const ic=sec.querySelector('.feat-group-toggle .collection-icon');if(ic&&!ic.querySelector('span')){const sp=document.createElement('span');sp.textContent=ic.textContent;ic.textContent='';ic.appendChild(sp)}});
+  document.querySelectorAll('#page-feats .feat-game-card[data-feat-id]').forEach(card=>{
+    const f=byId.get(card.dataset.featId);if(!f)return;
+    const sig=[f.name,f.level,f.category,f.action,f.description].join('|');if(card.dataset.v6Sig===sig)return;card.dataset.v6Sig=sig;
+    const sg=card.querySelector('.entry-sigil');if(sg&&!sg.querySelector('span')){const sp=document.createElement('span');sp.textContent=sg.textContent;sg.textContent='';sg.appendChild(sp)}
+    const k=card.querySelector('.entry-kicker');if(k){const a=ACT[f.action]||ACT.passive,cat=CAT[String(f.category||'').toLowerCase()]||f.category||'Habilidade';k.innerHTML=`<span class="v6-cat">${esc(cat)}</span><span class="v6-act"><i>${a[0]}</i>${a[1]}</span>`}
+    const lv=card.querySelector('.entry-level');if(lv){lv.classList.add('v6-seal');lv.innerHTML=`<small>Nível</small><b>${esc(f.level||'—')}</b>`}
+    let node=card.querySelector('.v6-node');if(!node){node=document.createElement('span');node.className='v6-node';node.setAttribute('aria-hidden','true');card.prepend(node)}
+    node.textContent=f.level||'—';node.title='Nível '+(f.level||'—');
+    let ex=card.querySelector('.v6-excerpt');const txt=plain(f.description);
+    if(txt){if(!ex){ex=document.createElement('button');ex.type='button';ex.className='v6-excerpt';const tags=card.querySelector('.entry-tags')||card.querySelector('.entry-meta');(tags||card.querySelector('.entry-title-row')).after(ex)}ex.textContent=txt}
+    else ex?.remove();
+  });
+}
+document.addEventListener('click',e=>{const ex=e.target.closest?.('.v6-excerpt');if(!ex)return;const d=ex.closest('.feat-game-card')?.querySelector('details.feat-description');if(d){d.open=true;snd('tick')}});
 function feats(){
   if(typeof window.spellRichText==='function')document.querySelectorAll('.entry-desc:not(.v6-rich)').forEach(d=>{const raw=d.textContent;if(!/\*\*|\*\S|\n|^\s*-\s|\d+d\d+|Sucesso|Falha/m.test(raw)){d.classList.add('v6-rich');return}d.innerHTML=window.spellRichText(raw);d.classList.add('v6-rich')});
   const c=current();if(!c)return;
+  featCards(c);
   document.querySelectorAll('.feat-collection').forEach(sec=>{
     const tog=sec.querySelector('.feat-group-toggle'),open=tog?.getAttribute('aria-expanded')==='true',gid=sec.dataset.featCollection;
     let peek=sec.querySelector(':scope > .v6-peek');
