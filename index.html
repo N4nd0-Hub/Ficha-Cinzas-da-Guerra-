@@ -1977,6 +1977,128 @@ body[data-appearance-motion="reduced"] .v6-flash{animation:none}
   #page-feats .v6-path .feat-game-card .v6-node::after{width:12px}
 }
 </style>
+<style id="journey-ledger-style">
+.ledger-banner {
+  grid-column:1/-1;
+  display:flex;
+  align-items:center;
+  gap:clamp(16px,4vw,30px);
+  min-width:0;
+  padding:clamp(20px,4vw,36px);
+  border:1px solid color-mix(in srgb,var(--gold) 45%,var(--line));
+  border-radius:var(--r-md);
+  background:
+    radial-gradient(ellipse at 12% 0%,color-mix(in srgb,var(--gold) 15%,transparent),transparent 64%),
+    repeating-linear-gradient(135deg,transparent 0 9px,color-mix(in srgb,var(--gold) 5%,transparent) 9px 10px),
+    var(--panel);
+}
+#page-journal .ledger-banner {
+  background:
+    radial-gradient(ellipse at 10% 0%,color-mix(in srgb,var(--gold) 21%,transparent),transparent 75%),
+    repeating-linear-gradient(0deg,transparent 0 18px,color-mix(in srgb,var(--gold) 8%,transparent) 18px 19px),
+    var(--panel);
+}
+.ledger-banner p {
+  margin:0 0 .35rem;
+  color:var(--muted);
+  font:700 .875rem var(--ui-font);
+  text-transform:uppercase;
+  letter-spacing:.09em;
+}
+.ledger-banner h2 {
+  margin:0;
+  color:var(--text);
+  font:700 clamp(1.65rem,4vw,2.8rem)/1.08 var(--display);
+}
+.ledger-emblem {
+  flex:none;
+  display:grid;
+  place-items:center;
+  inline-size:clamp(42px,8vw,68px);
+  aspect-ratio:1;
+  border:3px double var(--gold);
+  border-radius:50%;
+  color:var(--gold);
+  font-size:clamp(1.25rem,3.5vw,2rem);
+}
+#page-journal .journal-layout {grid-template-columns:minmax(0,1fr)}
+.journal-chapters,.ledger-filters {display:flex;flex-wrap:wrap;gap:8px}
+.journal-chapters .btn,.ledger-filters .btn {min-height:38px;font-size:.875rem}
+.journal-chapters .btn[aria-pressed="true"],.ledger-filters .btn[aria-pressed="true"] {
+  border-color:var(--gold);
+  background:color-mix(in srgb,var(--gold) 19%,var(--panel));
+  color:var(--text);
+  box-shadow:inset 0 -2px var(--gold);
+}
+.journal-chapters .btn span {color:var(--gold);margin-inline-end:.3em}
+#page-journal .journal-chapter[hidden] {display:none!important}
+#page-journal .journal-chapter textarea {font-size:1rem;min-height:clamp(220px,35vh,380px)}
+#page-journal .journal-chapter textarea.v6-quests-raw {min-height:160px}
+.quest-progress {
+  display:grid;
+  gap:8px;
+  padding:14px;
+  margin-bottom:14px;
+  border:1px solid var(--hair);
+  border-radius:var(--r-md);
+  color:var(--text);
+  background:color-mix(in srgb,var(--gold) 9%,var(--panel));
+  font:700 .9rem var(--ui-font);
+}
+.quest-progress progress {display:block;width:100%;height:12px;accent-color:var(--gold)}
+#chapter-quests .v6-quests {margin-top:12px}
+#chapter-quests .v6-quest {min-height:46px;padding-inline:16px;font-size:1rem;overflow-wrap:anywhere}
+#chapter-quests .v6-quest.done span {opacity:.8}
+#chapter-quests .v6-quest-add input {min-width:0;font-size:1rem}
+.inventory-tools {display:grid;grid-template-columns:minmax(0,1fr) minmax(140px,auto);gap:8px;margin-bottom:10px}
+.inventory-tools .input {min-height:40px;font-size:.875rem;min-width:0}
+.inventory-tools input[type="search"] {font-size:1rem}
+.ledger-count {margin:12px 0;color:var(--muted);font:.875rem var(--ui-font)}
+.ledger-empty {
+  margin:0;
+  padding:16px;
+  border:1px dashed var(--hair);
+  border-radius:var(--r-md);
+  color:var(--muted);
+  font:1rem/1.5 var(--ui-font);
+}
+#itemEditor:not(:empty) {margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--hair)}
+#itemList {display:grid;gap:11px}
+#itemList .ledger-item {
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:12px;
+  align-items:start;
+  padding:14px;
+  border:1px solid var(--hair);
+  border-inline-start:3px solid color-mix(in srgb,var(--gold) 42%,var(--line));
+  border-radius:var(--r-md);
+  background:linear-gradient(120deg,color-mix(in srgb,var(--gold) 9%,var(--panel)),var(--panel) 60%);
+}
+#itemList .ledger-item:has(.tag.gold) {border-inline-start-color:var(--gold)}
+#itemList .ledger-item-title {overflow-wrap:anywhere;min-width:0}
+#itemList .ledger-item-title .card-title {font-size:1.15rem}
+.ledger-item-note {white-space:pre-wrap;font-size:.875rem}
+.ledger-item-note:empty {display:none}
+.ledger-item-fields {
+  grid-column:1/-1;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);
+  gap:10px;
+  font:600 .875rem var(--ui-font);
+  color:var(--muted);
+}
+.ledger-item-fields > * {display:grid;gap:4px;min-width:0;overflow-wrap:anywhere}
+.ledger-item-fields strong {color:var(--text)}
+.ledger-item-fields .input {width:100%;min-height:36px;font-size:1rem}
+#itemList .ledger-item .card-actions {grid-column:1/-1;justify-content:flex-end;flex-wrap:wrap}
+#itemList .card-actions .btn {min-height:36px;font-size:.875rem}
+@media(max-width:650px) {
+  .inventory-tools {grid-template-columns:1fr}
+  .inventory-summary {grid-template-columns:repeat(3,minmax(0,1fr))}
+  #itemList .ledger-item {padding:11px}
+}
+</style>
 </head>
 <body>
 <header class="topbar">
@@ -2284,20 +2406,40 @@ body[data-appearance-motion="reduced"] .v6-flash{animation:none}
 <div class="compendium-results" id="compResults"></div>
 </div></details></div></div></section>
 <section class="page" id="page-inventory"><div class="page-grid">
+<header class="ledger-banner">
+  <span class="ledger-emblem" aria-hidden="true">▣</span>
+  <div><p>Equipamento e tesouros</p><h2>Baú do viajante</h2></div>
+</header>
 <div class="column">
 <div class="panel"><div class="panel-head"><h2>Moedas</h2></div><div class="panel-body"><div class="currency-grid"><div class="coin"><label>PP</label><input id="coinPP" type="number"/></div><div class="coin"><label>PO</label><input id="coinGP" type="number"/></div><div class="coin"><label>PR</label><input id="coinSP" type="number"/></div><div class="coin"><label>PC</label><input id="coinCP" type="number"/></div></div></div></div>
 <div class="panel"><div class="panel-head"><h2>Carga</h2></div><div class="panel-body"><div class="inventory-summary" id="inventorySummary"></div><div class="helper" style="margin-top:8px">Por padrão, a ficha sinaliza Sobrecarga acima de 5 + Força e limite máximo em 10 + Força. Itens L podem ser digitados como 0,1 Bulk.</div></div></div>
 <div class="panel"><div class="panel-head"><h2>Anotações de Equipamento</h2></div><div class="panel-body"><textarea class="input" id="equipmentNotes" style="min-height:180px"></textarea></div></div>
 </div>
-<div class="column"><div class="panel"><div class="panel-head"><h2>Inventário</h2><button class="btn small" id="addItemBtn">Adicionar Item</button></div><div class="panel-body"><div id="itemEditor"></div><div id="itemList"></div></div></div></div>
+<div class="column"><div class="panel"><div class="panel-head"><h2>Inventário</h2><button class="btn small" id="addItemBtn">Adicionar Item</button></div><div class="panel-body"><div id="itemEditor"></div>
+<div class="inventory-tools">
+  <input class="input" id="itemSearch" type="search" placeholder="Buscar itens…" aria-label="Buscar itens por nome ou notas">
+  <select class="input" id="itemSort" aria-label="Ordenar itens"><option value="original">Ordem de cadastro</option><option value="name">Nome (A–Z)</option><option value="bulk">Maior carga</option></select>
+</div>
+<div class="ledger-filters" id="itemFilters" role="group" aria-label="Filtrar itens">
+  <button type="button" class="btn small" data-item-filter="all" aria-pressed="true">Todos</button>
+  <button type="button" class="btn small" data-item-filter="equipped" aria-pressed="false">Equipados</button>
+  <button type="button" class="btn small" data-item-filter="stored" aria-pressed="false">Guardados</button>
+</div>
+<p class="ledger-count" id="itemCount" role="status"></p>
+<div id="itemList"></div></div></div></div>
 </div></section>
 <section class="page" id="page-journal"><div class="journal-layout">
-<div class="panel"><div class="panel-head"><h2>História</h2></div><div class="panel-body"><textarea class="input journal-area" data-path="journal.story" placeholder="Origem, objetivos, vínculos..."></textarea></div></div>
-<div class="panel"><div class="panel-head"><h2>Aparência &amp; Personalidade</h2></div><div class="panel-body"><textarea class="input journal-area" data-path="journal.personality"></textarea></div></div>
-<div class="panel"><div class="panel-head"><h2>Aliados, Facções &amp; Inimigos</h2></div><div class="panel-body"><textarea class="input journal-area" data-path="journal.people"></textarea></div></div>
-<div class="panel"><div class="panel-head"><h2>Missões &amp; Pistas</h2></div><div class="panel-body"><textarea class="input journal-area" data-path="journal.quests"></textarea></div></div>
-<div class="panel full"><div class="panel-head"><h2>Anotações Gerais</h2></div><div class="panel-body"><textarea class="input" data-path="journal.notes" style="min-height:220px"></textarea></div></div>
-<div class="panel full"><div class="panel-head"><h2>Histórico de Rolagens</h2><button class="btn small" id="clearAllRollsBtn">Limpar</button></div><div class="panel-body"><div class="roll-log" id="journalRollLog"></div></div></div>
+<header class="ledger-banner">
+  <span class="ledger-emblem" aria-hidden="true">☷</span>
+  <div><p>Crônica das Terras Intermédias</p><h2>Diário de jornada</h2></div>
+</header>
+<nav class="journal-chapters" aria-label="Capítulos do diário"><button class="btn" type="button" data-chapter="quests" aria-controls="chapter-quests" aria-pressed="true"><span aria-hidden="true">◇</span> Missões</button><button class="btn" type="button" data-chapter="notes" aria-controls="chapter-notes" aria-pressed="false"><span aria-hidden="true">✎</span> Anotações</button><button class="btn" type="button" data-chapter="story" aria-controls="chapter-story" aria-pressed="false"><span aria-hidden="true">☷</span> História</button><button class="btn" type="button" data-chapter="personality" aria-controls="chapter-personality" aria-pressed="false"><span aria-hidden="true">◈</span> Personagem</button><button class="btn" type="button" data-chapter="people" aria-controls="chapter-people" aria-pressed="false"><span aria-hidden="true">♙</span> Contatos</button><button class="btn" type="button" data-chapter="rolls" aria-controls="chapter-rolls" aria-pressed="false"><span aria-hidden="true">⚄</span> Rolagens</button></nav>
+<div class="panel journal-chapter" id="chapter-story" hidden><div class="panel-head"><h2>História</h2></div><div class="panel-body"><textarea class="input journal-area" data-path="journal.story" placeholder="Origem, objetivos, vínculos..."></textarea></div></div>
+<div class="panel journal-chapter" id="chapter-personality" hidden><div class="panel-head"><h2>Aparência &amp; Personalidade</h2></div><div class="panel-body"><textarea class="input journal-area" data-path="journal.personality"></textarea></div></div>
+<div class="panel journal-chapter" id="chapter-people" hidden><div class="panel-head"><h2>Aliados, Facções &amp; Inimigos</h2></div><div class="panel-body"><textarea class="input journal-area" data-path="journal.people"></textarea></div></div>
+<div class="panel journal-chapter" id="chapter-quests"><div class="panel-head"><h2>Missões &amp; Pistas</h2></div><div class="panel-body"><textarea class="input journal-area" data-path="journal.quests"></textarea></div></div>
+<div class="panel journal-chapter" id="chapter-notes" hidden><div class="panel-head"><h2>Anotações Gerais</h2></div><div class="panel-body"><textarea class="input" data-path="journal.notes" style="min-height:220px"></textarea></div></div>
+<div class="panel journal-chapter" id="chapter-rolls" hidden><div class="panel-head"><h2>Histórico de Rolagens</h2><button class="btn small" id="clearAllRollsBtn">Limpar</button></div><div class="panel-body"><div class="roll-log" id="journalRollLog"></div></div></div>
 </div></section>
 <div class="footer"><span>Cinzas da Guerra · Terras Intermédias</span><a class="art-credit" href="https://anto-finnstark.artstation.com/projects/8w5ZxO" target="_blank" rel="noopener noreferrer">Arte do cabeçalho · Anato Finnstark</a><a class="art-credit" href="https://icons8.com/icon/9MYh0e9cR79M/elden-ring" target="_blank" rel="noopener noreferrer">Ícone · Icons8</a><span>Pathfinder 2e alterado · Dados salvos neste navegador</span></div>
 </section>
@@ -3697,8 +3839,81 @@ function exportHomebrewLibrary(){const blob=new Blob([JSON.stringify({format:'pf
 function renderSpells(){renderPreparedSpells();renderSpellConfig();renderSlots();renderSpecialSlots();renderSpellEditor();renderSpellList();renderDivineGuide();renderTraditionLibrary();renderCompendiumControls()}
 function bulkOf(v){if(typeof v==='string'&&v.trim().toUpperCase()==='L')return .1;return Math.max(0,num(v))}
 function renderInventorySummary(){const c=current(),bulk=c.inventory.items.reduce((a,i)=>a+bulkOf(i.bulk)*Math.max(0,num(i.qty,1)),0),str=abilityVal(c,'str'),enc=Math.max(0,5+str),max=Math.max(0,10+str),status=bulk>max?'Acima do limite':bulk>enc?'Sobrecarregado':'Normal';const el=document.getElementById('inventorySummary');if(el)el.innerHTML=`<div class="inventory-stat"><small>Bulk</small><b>${bulk.toFixed(1).replace('.0','')}</b></div><div class="inventory-stat"><small>Sobrecarga</small><b>${enc}</b></div><div class="inventory-stat"><small>Limite</small><b>${max}</b></div><div class="inventory-stat"><small>Estado</small><b style="font-size:12px">${status}</b></div><div class="inventory-stat"><small>Itens</small><b>${c.inventory.items.length}</b></div>`}
-function renderItemEditor(){const el=document.getElementById('itemEditor');if(!editorItem){el.innerHTML='';return}const f=editorItem==='new'?{id:'',name:'',qty:1,bulk:0,value:'',equipped:false,notes:''}:current().inventory.items.find(x=>x.id===editorItem);if(!f){editorItem=null;return}el.innerHTML=`<div class="editor-grid"><input class="input wide" id="itemName" placeholder="Nome do item" value="${esc(f.name)}"/><input class="input" type="number" id="itemQty" min="0" value="${num(f.qty,1)}"/><input class="input" id="itemBulk" placeholder="Bulk" value="${esc(f.bulk)}"/><input class="input" id="itemValue" placeholder="Valor" value="${esc(f.value)}"/><select class="input" id="itemEquipped"><option value="false" ${!f.equipped?'selected':''}>Guardado</option><option value="true" ${f.equipped?'selected':''}>Equipado</option></select><textarea class="input full" id="itemNotes" placeholder="Notas">${esc(f.notes)}</textarea></div><div class="editor-actions"><button class="btn" id="cancelItem">Cancelar</button><button class="btn primary" id="saveItem">Salvar</button></div>`;document.getElementById('cancelItem').onclick=()=>{editorItem=null;renderItemEditor()};document.getElementById('saveItem').onclick=()=>{const obj={id:f.id||uid(),name:document.getElementById('itemName').value.trim()||'Item',qty:Math.max(0,num(document.getElementById('itemQty').value,1)),bulk:document.getElementById('itemBulk').value,value:document.getElementById('itemValue').value,equipped:document.getElementById('itemEquipped').value==='true',notes:document.getElementById('itemNotes').value};const arr=current().inventory.items,i=arr.findIndex(x=>x.id===obj.id);if(i>=0)arr[i]=obj;else arr.push(obj);editorItem=null;renderInventory();saveState()}}
-function renderItems(){const c=current(),el=document.getElementById('itemList');el.innerHTML=c.inventory.items.length?c.inventory.items.map(i=>`<div class="item-row"><div><div class="card-title">${esc(i.name)}</div><div class="card-sub">${esc(i.notes||'')}</div></div><input class="input quick-item" data-item="${i.id}" data-key="qty" type="number" value="${num(i.qty,1)}"/><input class="input quick-item" data-item="${i.id}" data-key="bulk" value="${esc(i.bulk)}"/><div class="item-value card-sub">${esc(i.value||'—')}</div><div class="item-equip"><span class="tag ${i.equipped?'gold':''}">${i.equipped?'Equipado':'Guardado'}</span></div><div class="card-actions"><button class="btn small" data-edit-item="${i.id}">Editar</button><button class="btn small danger" data-del-item="${i.id}">×</button></div></div>`).join(''):'<div class="helper">Nenhum item registrado.</div>';document.querySelectorAll('.quick-item').forEach(el=>el.addEventListener('input',()=>{const i=current().inventory.items.find(x=>x.id===el.dataset.item);i[el.dataset.key]=el.dataset.key==='qty'?Math.max(0,num(el.value)):el.value;renderInventorySummary();saveState()}));document.querySelectorAll('[data-edit-item]').forEach(b=>b.onclick=()=>{editorItem=b.dataset.editItem;renderItemEditor()});document.querySelectorAll('[data-del-item]').forEach(b=>b.onclick=()=>{current().inventory.items=current().inventory.items.filter(x=>x.id!==b.dataset.delItem);renderInventory();saveState()})}
+function renderItemEditor(){const el=document.getElementById('itemEditor');if(!editorItem){el.innerHTML='';return}const f=editorItem==='new'?{id:'',name:'',qty:1,bulk:0,value:'',equipped:false,notes:''}:current().inventory.items.find(x=>x.id===editorItem);if(!f){editorItem=null;el.replaceChildren();return}el.innerHTML=`<div class="editor-grid"><input aria-label="Nome do item" class="input wide" id="itemName" placeholder="Nome do item" value="${esc(f.name)}"/><input class="input" type="number" id="itemQty" aria-label="Quantidade" min="0" value="${num(f.qty,1)}"/><input class="input" id="itemBulk" aria-label="Bulk por unidade" placeholder="Bulk" value="${esc(f.bulk)}"/><input class="input" id="itemValue" aria-label="Valor do item" placeholder="Valor" value="${esc(f.value)}"/><select class="input" id="itemEquipped" aria-label="Estado do item"><option value="false" ${!f.equipped?'selected':''}>Guardado</option><option value="true" ${f.equipped?'selected':''}>Equipado</option></select><textarea class="input full" id="itemNotes" aria-label="Notas do item" placeholder="Notas">${esc(f.notes)}</textarea></div><div class="editor-actions"><button class="btn" id="cancelItem">Cancelar</button><button class="btn primary" id="saveItem">Salvar</button></div>`;document.getElementById('cancelItem').onclick=()=>{editorItem=null;renderItemEditor()};document.getElementById('saveItem').onclick=()=>{const obj={id:f.id||uid(),name:document.getElementById('itemName').value.trim()||'Item',qty:Math.max(0,num(document.getElementById('itemQty').value,1)),bulk:document.getElementById('itemBulk').value,value:document.getElementById('itemValue').value,equipped:document.getElementById('itemEquipped').value==='true',notes:document.getElementById('itemNotes').value};const arr=current().inventory.items,i=arr.findIndex(x=>x.id===obj.id);if(i>=0)arr[i]=obj;else arr.push(obj);editorItem=null;renderInventory();saveState()}}
+function inventorySearchText(value){
+  return String(value??'').normalize('NFD').replace(/\p{Diacritic}/gu,'').toLocaleLowerCase('pt-BR');
+}
+function renderItems(){
+  const items=current().inventory.items;
+  const list=document.getElementById('itemList');
+  const query=inventorySearchText(document.getElementById('itemSearch').value.trim());
+  const filter=document.querySelector('#itemFilters [aria-pressed="true"]').dataset.itemFilter;
+  const sort=document.getElementById('itemSort').value;
+  const visible=items.filter(item=>{
+    const matchesStatus=filter==='all'||Boolean(item.equipped)===(filter==='equipped');
+    return matchesStatus&&inventorySearchText([item.name,item.notes,item.value].join(' ')).includes(query);
+  });
+  if(sort==='name')visible.sort((a,b)=>String(a.name).localeCompare(String(b.name),'pt-BR'));
+  if(sort==='bulk'){
+    const weight=item=>bulkOf(item.bulk)*Math.max(0,num(item.qty,1));
+    visible.sort((a,b)=>weight(b)-weight(a));
+  }
+  document.getElementById('itemCount').textContent=`${visible.length} de ${items.length} ${items.length===1?'item':'itens'}`;
+  list.innerHTML=visible.length?visible.map(item=>`
+    <article class="item-row ledger-item" data-ledger-item="${esc(item.id)}">
+      <div class="ledger-item-title">
+        <div class="card-title">${esc(item.name)}</div>
+        <div class="card-sub ledger-item-note">${esc(item.notes||'')}</div>
+      </div>
+      <span class="tag ${item.equipped?'gold':''}">${item.equipped?'Equipado':'Guardado'}</span>
+      <div class="ledger-item-fields">
+        <label>Qtd.<input class="input quick-item" data-key="qty" type="number" min="0" value="${num(item.qty,1)}"></label>
+        <label>Bulk<input class="input quick-item" data-key="bulk" value="${esc(item.bulk)}"></label>
+        <div>Valor <strong>${esc(item.value||'—')}</strong></div>
+      </div>
+      <div class="card-actions">
+        <button type="button" class="btn small" data-item-action="equip">${item.equipped?'Guardar':'Equipar'}</button>
+        <button type="button" class="btn small" data-item-action="edit">Editar</button>
+        <button type="button" class="btn small danger" data-item-action="delete" aria-label="Remover ${esc(item.name)}">×</button>
+      </div>
+    </article>`).join(''):`<p class="ledger-empty">${items.length?'Nenhum item corresponde à busca ou ao filtro.':'Seu baú está vazio. Use Adicionar item para guardar o primeiro achado.'}</p>`;
+  for(const [index,row] of [...list.querySelectorAll('.ledger-item')].entries()){
+    const item=visible[index];
+    for(const input of row.querySelectorAll('.quick-item')){
+      input.oninput=()=>{
+        item[input.dataset.key]=input.dataset.key==='qty'?Math.max(0,num(input.value)):input.value;
+        renderInventorySummary();
+        saveState();
+      };
+      input.onchange=()=>{
+        if(sort!=='bulk')return;
+        renderItems();
+        const updated=[...list.children].find(card=>card.dataset.ledgerItem===item.id);
+        if(document.activeElement===document.body)updated?.querySelector(`[data-key="${input.dataset.key}"]`)?.focus();
+      };
+    }
+    row.querySelector('[data-item-action="equip"]').onclick=()=>{
+      item.equipped=!item.equipped;
+      saveState();
+      renderItems();
+      const updated=[...list.children].find(card=>card.dataset.ledgerItem===item.id);
+      (updated?.querySelector('[data-item-action="equip"]')||document.querySelector('#itemFilters [aria-pressed="true"]')).focus();
+    };
+    row.querySelector('[data-item-action="edit"]').onclick=()=>{
+      editorItem=item.id;
+      renderItemEditor();
+      document.getElementById('itemName').focus();
+    };
+    row.querySelector('[data-item-action="delete"]').onclick=()=>{
+      if(!window.confirm(`Remover "${item.name}" do inventário?`))return;
+      current().inventory.items=items.filter(entry=>entry!==item);
+      if(editorItem===item.id)editorItem=null;
+      renderInventory();
+      saveState();
+      document.getElementById('itemSearch').focus();
+    };
+  }
+}
 function renderInventory(){const c=current();document.getElementById('coinPP').value=c.inventory.coins.pp;document.getElementById('coinGP').value=c.inventory.coins.gp;document.getElementById('coinSP').value=c.inventory.coins.sp;document.getElementById('coinCP').value=c.inventory.coins.cp;document.getElementById('equipmentNotes').value=c.inventory.notes;renderInventorySummary();renderItemEditor();renderItems()}
 function renderJournal(){renderRollLogs()}
 function renderAll(){renderClassDatalist();renderHeader();renderDrawer();renderOverview();renderCombat();renderSkills();renderFeats();renderSpells();renderInventory();renderJournal();setPage(state.currentPage||'overview',false)}
@@ -3889,7 +4104,24 @@ document.getElementById('compClass').onchange=e=>{const p=CLASS_SPELL_PRESETS[e.
 
 
 // Inventory
-for(const [id,key] of [['coinPP','pp'],['coinGP','gp'],['coinSP','sp'],['coinCP','cp']])document.getElementById(id).oninput=e=>{current().inventory.coins[key]=Math.max(0,num(e.target.value));saveState()};document.getElementById('equipmentNotes').oninput=e=>{current().inventory.notes=e.target.value;saveState()};document.getElementById('addItemBtn').onclick=()=>{editorItem='new';renderItemEditor()};
+for(const [id,key] of [['coinPP','pp'],['coinGP','gp'],['coinSP','sp'],['coinCP','cp']])document.getElementById(id).oninput=e=>{current().inventory.coins[key]=Math.max(0,num(e.target.value));saveState()};document.getElementById('equipmentNotes').oninput=e=>{current().inventory.notes=e.target.value;saveState()};document.getElementById('addItemBtn').onclick=()=>{editorItem='new';renderItemEditor();document.getElementById('itemName').focus()};
+document.getElementById('itemSearch').oninput=renderItems;
+document.getElementById('itemSort').onchange=renderItems;
+document.getElementById('itemFilters').onclick=e=>{
+  const button=e.target.closest('[data-item-filter]');
+  if(!button)return;
+  for(const filter of document.querySelectorAll('[data-item-filter]'))filter.setAttribute('aria-pressed',String(filter===button));
+  renderItems();
+};
+document.querySelector('.journal-chapters').onclick=e=>{
+  const chapter=e.target.closest('[data-chapter]');
+  if(!chapter)return;
+  for(const button of document.querySelectorAll('[data-chapter]')){
+    button.setAttribute('aria-pressed',String(button===chapter));
+    document.getElementById(button.getAttribute('aria-controls')).hidden=button!==chapter;
+  }
+  window.tavolaEnhance?.();
+};
 
 // Presentation helpers. Character rules and persistence remain in the original model.
 function renderDossierSummary(){
@@ -4875,7 +5107,8 @@ document.addEventListener('click',e=>{
 
 /* ---------- Diário ---------- */
 const DONE=/^\s*(?:✓|\[x\])\s*/i;
-function grow(t){if(!t||(!t.offsetHeight&&!t.dataset.v6Min))return;if(!t.dataset.v6Min)t.dataset.v6Min=String(Math.max(120,t.offsetHeight));const min=+t.dataset.v6Min;t.style.height='auto';t.style.height=Math.max(min,t.scrollHeight+4)+'px'}
+let questFilter='all';
+function grow(t){if(!t||!t.offsetHeight)return;if(!t.dataset.v6Min)t.dataset.v6Min=String(Math.max(120,t.offsetHeight));const min=+t.dataset.v6Min;t.style.height='auto';t.style.height=Math.max(min,t.scrollHeight+4)+'px'}
 function journal(){
   const page=$('page-journal');if(!page)return;
   page.querySelectorAll('textarea[data-path^="journal."]').forEach(t=>{
@@ -4891,13 +5124,51 @@ function journal(){
   let box=page.querySelector('.v6-quest-box');
   if(!box){
     box=document.createElement('div');box.className='v6-quest-box';
-    box.innerHTML='<div class="v6-quests" role="list"></div><div class="v6-quest-add"><input class="input" type="text" placeholder="Nova missão ou pista…" aria-label="Nova missão" data-v6-quest-new><button type="button" class="btn small" data-v6-quest-add>Anotar</button></div><div class="v6-quest-tools"><span class="helper">Clique para marcar como concluída.</span><button type="button" class="btn small" data-v6-quest-raw>Editar como texto</button></div>';
+    box.innerHTML=`
+      <div class="quest-progress">
+        <label for="questProgress" id="questProgressText">Progresso das missões</label>
+        <progress id="questProgress" max="1" value="0"></progress>
+      </div>
+      <div class="ledger-filters" role="group" aria-label="Filtrar missões">
+        <button type="button" class="btn small" data-quest-filter="all" aria-pressed="true">Todas</button>
+        <button type="button" class="btn small" data-quest-filter="open" aria-pressed="false">Em aberto</button>
+        <button type="button" class="btn small" data-quest-filter="done" aria-pressed="false">Concluídas</button>
+      </div>
+      <div class="v6-quests"></div>
+      <div class="v6-quest-add">
+        <input class="input" type="text" placeholder="Nova missão ou pista…" aria-label="Nova missão ou pista" data-v6-quest-new>
+        <button type="button" class="btn small" data-v6-quest-add>Anotar</button>
+      </div>
+      <div class="v6-quest-tools">
+        <span class="helper">Marque uma missão para concluí-la.</span>
+        <button type="button" class="btn small" data-v6-quest-raw>Editar como texto</button>
+      </div>`;
+    box.querySelector('.ledger-filters').onclick=e=>{
+      const button=e.target.closest('[data-quest-filter]');
+      if(!button)return;
+      questFilter=button.dataset.questFilter;
+      for(const filter of box.querySelectorAll('[data-quest-filter]'))filter.setAttribute('aria-pressed',String(filter===button));
+      journal();
+    };
     q.before(box);q.classList.add('v6-quests-raw');q.hidden=!store.get('cinzas-v6-quests-raw',false);
   }
-  const sig=q.value;const list=box.querySelector('.v6-quests');
-  if(list.dataset.sig!==sig){list.dataset.sig=sig;
-    const ls=q.value.split('\n').map((l,i)=>({l,i})).filter(x=>x.l.trim());
-    list.innerHTML=ls.length?ls.map(({l,i})=>{const done=DONE.test(l);return `<button type="button" role="listitem" class="v6-quest ${done?'done':''}" data-v6-quest="${i}" aria-pressed="${done}"><i></i><span>${esc(l.replace(DONE,''))}</span></button>`}).join(''):'<p class="helper">Nenhuma missão anotada ainda.</p>';
+  const sig=questFilter+'|'+q.value;
+  const list=box.querySelector('.v6-quests');
+  if(list.dataset.sig!==sig){
+    const focused=document.activeElement?.dataset.v6Quest;
+    list.dataset.sig=sig;
+    const quests=q.value.split('\n').map((line,index)=>({line,index,done:DONE.test(line)})).filter(quest=>quest.line.trim());
+    const completed=quests.filter(quest=>quest.done).length;
+    const progress=box.querySelector('progress');
+    progress.max=Math.max(1,quests.length);
+    progress.value=completed;
+    box.querySelector('#questProgressText').textContent=`${completed} de ${quests.length} ${quests.length===1?'missão concluída':'missões concluídas'}`;
+    const visible=quests.filter(quest=>questFilter==='all'||quest.done===(questFilter==='done'));
+    list.innerHTML=visible.length?visible.map(({line,index,done})=>`
+      <button type="button" class="v6-quest ${done?'done':''}" data-v6-quest="${index}" aria-pressed="${done}">
+        <i aria-hidden="true"></i><span>${esc(line.replace(DONE,''))}</span>
+      </button>`).join(''):`<p class="ledger-empty">${quests.length?'Nenhuma missão neste filtro.':'Nenhuma missão anotada ainda.'}</p>`;
+    if(focused!==undefined)(list.querySelector(`[data-v6-quest="${focused}"]`)||box.querySelector('[data-quest-filter][aria-pressed="true"]')).focus();
   }
   const rawBtn=box.querySelector('[data-v6-quest-raw]'),lab=q.hidden?'Editar como texto':'Esconder texto';if(rawBtn.textContent!==lab)rawBtn.textContent=lab;
 }
@@ -4906,7 +5177,7 @@ document.addEventListener('click',e=>{
   const t=e.target.closest?.('[data-v6-quest],[data-v6-quest-add],[data-v6-quest-raw]');if(!t)return;
   const q=document.querySelector('#page-journal textarea[data-path="journal.quests"]');if(!q)return;
   if('v6Quest' in t.dataset){const ls=q.value.split('\n'),i=num(t.dataset.v6Quest);ls[i]=DONE.test(ls[i])?ls[i].replace(DONE,''):'✓ '+ls[i];setQuests(ls.join('\n'));snd(DONE.test(ls[i])?'grace':'tick');return}
-  if('v6QuestAdd' in t.dataset){const inp=document.querySelector('[data-v6-quest-new]'),v=inp.value.trim();if(!v)return;setQuests((q.value.trim()?q.value.replace(/\s+$/,'')+'\n':'')+v);inp.value='';inp.focus();snd('tick');return}
+  if('v6QuestAdd' in t.dataset){const inp=document.querySelector('[data-v6-quest-new]'),v=inp.value.trim();if(!v)return;if(questFilter==='done')document.querySelector('[data-quest-filter="open"]').click();setQuests((q.value.trim()?q.value.replace(/\s+$/,'')+'\n':'')+v);inp.value='';inp.focus();snd('tick');return}
   if('v6QuestRaw' in t.dataset){q.hidden=!q.hidden;store.set('cinzas-v6-quests-raw',!q.hidden);if(!q.hidden){grow(q);q.focus()}schedule()}
 });
 document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.matches?.('[data-v6-quest-new]')){e.preventDefault();document.querySelector('[data-v6-quest-add]')?.click()}});
