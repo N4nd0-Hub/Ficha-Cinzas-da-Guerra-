@@ -1799,6 +1799,102 @@ body[data-appearance-motion="reduced"] .gb-combo{animation:none}
 }
 
 </style>
+<style id="tavola-v6-style">
+/* ==========================================================================
+   Távola v6 — repaginada geral: luz que segue o cursor nos painéis, entradas
+   animadas por aba, setas das seções recolhíveis, perícias por graduação,
+   espaços de magia com pips, carga com barra, itens com ícones e diário vivo.
+   ========================================================================== */
+:root{--v6-gold:#d7b46a;--v6-gold2:#a8843f;--v6-ash:rgba(215,180,106,.14)}
+/* Seções recolhíveis: seta dourada à direita (corrige o traço solto) */
+summary.fold-head{position:relative;padding-right:52px!important}
+summary.fold-head::after{content:""!important;display:block!important;position:absolute!important;left:auto!important;right:22px!important;top:50%!important;bottom:auto!important;
+  width:8px!important;height:8px!important;border:0!important;border-right:1.5px solid var(--v6-gold)!important;border-bottom:1.5px solid var(--v6-gold)!important;background:none!important;
+  transform:translateY(-70%) rotate(45deg)!important;transition:transform .25s ease!important;opacity:.85}
+details[open]>summary.fold-head::after{transform:translateY(-25%) rotate(225deg)!important}
+summary.fold-head:hover::after{opacity:1}
+/* Luz que acompanha o cursor */
+@media (pointer:fine){
+  .panel::after{display:block!important;content:""!important;position:absolute!important;inset:0!important;border:0!important;border-radius:inherit;pointer-events:none;z-index:0;
+    background:radial-gradient(380px circle at var(--mx,50%) var(--my,-200px),rgba(225,182,100,.075),transparent 62%)!important;opacity:0;transition:opacity .35s}
+  .panel:hover::after{opacity:1}
+  .panel{transition:border-color .3s}
+  .panel:hover{border-color:color-mix(in srgb,var(--v6-gold) 34%,var(--line,#3a3020))}
+}
+.btn:active,.overview-roll:active{transform:translateY(1px) scale(.985)}
+/* Visão geral: graduação colorida */
+.overview-row select[data-rank]{font-weight:800;text-align:center;transition:background .2s,border-color .2s,color .2s}
+.overview-row select[data-rank="U"]{color:#8d8577}
+.overview-row select[data-rank="T"]{color:#9cc3e6;border-color:rgba(120,170,220,.45);background:rgba(70,120,170,.12)}
+.overview-row select[data-rank="E"]{color:#c9a6ef;border-color:rgba(170,130,220,.45);background:rgba(130,80,190,.13)}
+.overview-row select[data-rank="M"]{color:#f0cf7f;border-color:rgba(220,180,90,.5);background:rgba(190,140,40,.14)}
+.overview-row select[data-rank="L"]{color:#ffad7a;border-color:rgba(240,140,80,.5);background:rgba(210,100,40,.15)}
+.overview-row.v6-trained .overview-roll{color:var(--text,#f0e6cf)}
+.overview-row:not(.v6-trained) .overview-roll{opacity:.78}
+.overview-row output.v6-up{color:var(--v6-gold)}
+/* Espaços de magia: pips clicáveis e círculos vazios recolhidos */
+.slot-card{position:relative;transition:opacity .25s,border-color .25s}
+.slot-card.v6-empty{opacity:.42}
+#slotGrid.v6-hide-empty .slot-card.v6-empty{display:none}
+#slotGrid .slot-card{height:auto!important;max-height:none!important;padding-bottom:16px!important}
+.v6-slot-pips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;min-height:18px;padding-left:4px}
+.v6-slot-pips button{width:16px;height:16px;padding:0;border:1px solid var(--v6-gold2);background:transparent;transform:rotate(45deg);cursor:pointer;transition:background .2s,box-shadow .2s,transform .2s}
+.v6-slot-pips button.on{background:linear-gradient(135deg,#ffe3a0,#b88a35);box-shadow:0 0 8px rgba(230,180,90,.45)}
+.v6-slot-pips button:hover{transform:rotate(45deg) scale(1.2)}
+.v6-slot-toggle{margin-top:12px}
+/* Carga com barra */
+.v6-bulk{margin-top:30px}
+.v6-bulk-track{position:relative;height:12px;border:1px solid rgba(215,180,106,.35);border-radius:999px;background:rgba(0,0,0,.35);overflow:visible}
+.v6-bulk-fill{position:absolute;inset:0 auto 0 0;border-radius:999px;background:linear-gradient(90deg,#6f5523,#d7b46a);box-shadow:0 0 10px rgba(215,180,106,.35);transition:width .5s cubic-bezier(.2,.8,.2,1),background .3s}
+.v6-bulk.enc .v6-bulk-fill{background:linear-gradient(90deg,#7a4d17,#e08a2c)}
+.v6-bulk.over .v6-bulk-fill{background:linear-gradient(90deg,#6d1b14,#d9442f);box-shadow:0 0 12px rgba(217,68,47,.5)}
+.v6-bulk-mark{position:absolute;top:-5px;bottom:-5px;width:2px;background:#e08a2c;border-radius:2px}
+.v6-bulk-mark::after{content:attr(data-label);position:absolute;top:-17px;left:50%;transform:translateX(-50%);white-space:nowrap;font:700 9px var(--ui-font,inherit);letter-spacing:.12em;text-transform:uppercase;color:#e0a45c}
+.v6-bulk-legend{display:flex;justify-content:space-between;margin-top:6px;font-size:11px;color:var(--muted)}
+/* Itens com ícone */
+.item-row{transition:background .2s}
+.item-row:hover{background:rgba(215,180,106,.045)}
+.v6-item-ic{display:inline-grid;place-items:center;flex:none;width:34px;height:34px;margin-right:12px;border:1px solid rgba(215,180,106,.32);border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,rgba(215,180,106,.18),rgba(0,0,0,.25));color:var(--v6-gold);font-size:16px;line-height:1;transform:rotate(-4deg)}
+.item-row>div:first-child.v6-has-ic{display:flex;align-items:center}
+/* Talentos: espiada nos grupos recolhidos + texto formatado */
+.v6-peek{display:flex;flex-wrap:wrap;gap:6px;margin:-4px 0 2px;padding:0 18px 14px 74px}
+.v6-peek button{padding:4px 10px;border:1px solid color-mix(in srgb,var(--group-accent,#bcab77) 45%,transparent);border-radius:999px;background:color-mix(in srgb,var(--group-accent,#bcab77) 10%,transparent);
+  color:var(--text,#eee);font:600 12px var(--ui-font,inherit);cursor:pointer;transition:background .2s,transform .2s}
+.v6-peek button:hover{background:color-mix(in srgb,var(--group-accent,#bcab77) 22%,transparent);transform:translateY(-1px)}
+.v6-flash{animation:v6Flash 1.2s ease-out}
+@keyframes v6Flash{0%{box-shadow:0 0 0 2px var(--v6-gold),0 0 30px rgba(215,180,106,.5)}100%{box-shadow:0 0 0 0 transparent}}
+.entry-desc.v6-rich p{margin:0 0 .5em}.entry-desc.v6-rich strong{color:var(--v6-gold)}
+.entry-desc.v6-rich .gb-dice,.card-sub .gb-dice,.v6-rich .gb-dice{padding:0 5px;border:1px solid rgba(215,180,106,.45);border-radius:3px;background:rgba(215,180,106,.1);color:var(--v6-gold);font:inherit;font-weight:700;cursor:pointer}
+.entry-desc.v6-rich .gb-degrees{display:grid;gap:4px;margin:.4em 0}.entry-desc.v6-rich .deg{display:grid;grid-template-columns:120px 1fr;gap:8px}.entry-desc.v6-rich dt{font-weight:800;color:var(--v6-gold)}.entry-desc.v6-rich dd{margin:0}
+.entry-desc.v6-rich .gb-list{margin:.3em 0 .5em 1.1em;padding:0}
+/* Combate: troca rápida de combo */
+.v6-combo-switch{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:0 0 12px}
+.v6-combo-switch>small{font:700 10px var(--ui-font,inherit);letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-right:4px}
+.v6-combo-switch button{--cloth:#a27a2a;--cloth2:#6f4f14;display:inline-flex;align-items:center;gap:6px;padding:6px 14px 6px 12px;border:0;cursor:pointer;color:#fff1d2;font:700 13px var(--display,serif);font-variant:small-caps;letter-spacing:.04em;
+  background:linear-gradient(var(--cloth),var(--cloth2));clip-path:polygon(0 0,100% 0,calc(100% - 8px) 50%,100% 100%,0 100%);filter:saturate(.6) brightness(.7);transition:filter .2s,transform .2s}
+.v6-combo-switch button:hover{filter:saturate(.9) brightness(.9);transform:translateY(-1px)}
+.v6-combo-switch button.on{filter:none;box-shadow:inset 0 0 0 1px rgba(255,230,170,.35)}
+.v6-combo-switch button small{font:700 10px var(--ui-font,inherit);opacity:.8}
+/* Diário: páginas pautadas, crescem com o texto, missões como lista */
+#page-journal textarea.journal-area,#page-journal textarea[data-path]{background-image:repeating-linear-gradient(transparent 0 calc(1.6em - 1px),rgba(215,180,106,.08) calc(1.6em - 1px) 1.6em)!important;background-attachment:local!important;line-height:1.6em!important;resize:vertical;transition:border-color .25s,box-shadow .25s}
+#page-journal textarea:focus{box-shadow:0 0 0 3px rgba(215,180,106,.12)}
+.v6-count{margin-left:auto;font:600 11px var(--ui-font,inherit);color:var(--muted);letter-spacing:.04em}
+.v6-quests{display:grid;gap:6px;margin-bottom:12px}
+.v6-quest{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1px solid rgba(215,180,106,.18);border-radius:4px;background:rgba(0,0,0,.18);cursor:pointer;transition:background .2s,border-color .2s,opacity .25s;text-align:left;color:inherit;font:inherit;width:100%}
+.v6-quest:hover{border-color:rgba(215,180,106,.45);background:rgba(215,180,106,.05)}
+.v6-quest i{flex:none;display:grid;place-items:center;width:18px;height:18px;border:1.5px solid var(--v6-gold2);transform:rotate(45deg);font-style:normal}
+.v6-quest i::after{content:"";width:8px;height:8px;background:var(--v6-gold);transform:scale(0);transition:transform .25s cubic-bezier(.3,1.6,.5,1)}
+.v6-quest.done i::after{transform:scale(1)}
+.v6-quest.done span{text-decoration:line-through;text-decoration-color:rgba(215,180,106,.6);opacity:.55}
+.v6-quest-add{display:flex;gap:8px}
+.v6-quest-add input{flex:1}
+.v6-quest-tools{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:2px 0 10px}
+.v6-quest-tools button{font-size:12px}
+.v6-quests-raw[hidden]{display:none!important}
+@media (max-width:700px){.v6-peek{padding-left:18px}.v6-item-ic{width:28px;height:28px;font-size:14px;margin-right:8px}}
+body[data-appearance-motion="reduced"] .v6-flash{animation:none}
+</style>
 </head>
 <body>
 <header class="topbar">
@@ -4540,6 +4636,194 @@ function init(){
 if(document.readyState==='loading')addEventListener('DOMContentLoaded',init);else init();
 })();
 </script>
+<script id="tavola-v6-script">
+/* Távola v6 — camada de interação aplicada sobre o que a ficha já desenha.
+   Não muda o formato dos dados: lê os mesmos campos e grava pelos mesmos inputs. */
+(()=>{
+const $=id=>document.getElementById(id);
+const reduced=()=>document.body.dataset.appearanceMotion==='reduced'||matchMedia('(prefers-reduced-motion: reduce)').matches;
+const snd=n=>{try{window.ErSound?.play(n)}catch{}};
+const store={get(k,d){try{const v=localStorage.getItem(k);return v==null?d:JSON.parse(v)}catch{return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
+
+/* Luz que segue o cursor nos painéis */
+if(matchMedia('(pointer:fine)').matches){
+  let raf=0,last=null;
+  document.addEventListener('pointermove',e=>{last=e;if(raf)return;raf=requestAnimationFrame(()=>{raf=0;const p=last.target.closest?.('.panel');if(!p)return;const r=p.getBoundingClientRect();p.style.setProperty('--mx',(last.clientX-r.left)+'px');p.style.setProperty('--my',(last.clientY-r.top)+'px')})},{passive:true});
+}
+
+/* Entrada em cascata ao trocar de aba */
+function stagger(page){
+  if(reduced())return;const root=$('page-'+page);if(!root)return;
+  const items=[...root.querySelectorAll(':scope .column > .panel, :scope .column > details.panel, :scope .column > .gb, :scope .column > nav, :scope .column > section.panel, :scope > .panel, :scope .page-grid > .panel')].filter(el=>el.offsetParent).slice(0,12);
+  items.forEach((el,i)=>el.animate([{opacity:0,transform:'translateY(12px)'},{opacity:1,transform:'none'}],{duration:420,delay:i*45,easing:'cubic-bezier(.2,.8,.2,1)',fill:'backwards'}));
+}
+
+/* ---------- Visão geral: graduação colorida ---------- */
+function skills(){
+  document.querySelectorAll('.overview-row select').forEach(sel=>{
+    if(sel.dataset.rank!==sel.value){sel.dataset.rank=sel.value}
+    const row=sel.closest('.overview-row'),t=sel.value!=='U';if(row.classList.contains('v6-trained')!==t)row.classList.toggle('v6-trained',t);
+  });
+}
+document.addEventListener('change',e=>{if(e.target.matches?.('.overview-row select')){e.target.dataset.rank=e.target.value;e.target.closest('.overview-row').classList.toggle('v6-trained',e.target.value!=='U');snd('tick')}},true);
+
+/* ---------- Espaços de magia: pips e círculos vazios ---------- */
+function slots(){
+  const grid=$('slotGrid');if(!grid)return;
+  const showAll=store.get('cinzas-v6-slots-all',false);
+  let empty=0;
+  grid.querySelectorAll('.slot-card').forEach(card=>{
+    const cur=card.querySelector('[data-key="current"]'),max=card.querySelector('[data-key="max"]');if(!cur||!max)return;
+    const c=Math.max(0,num(cur.value)),m=Math.max(0,num(max.value)),isEmpty=m===0;
+    if(card.classList.contains('v6-empty')!==isEmpty)card.classList.toggle('v6-empty',isEmpty);
+    if(isEmpty)empty++;
+    let pips=card.querySelector('.v6-slot-pips');const sig=c+'/'+m;
+    if(!pips){pips=document.createElement('div');pips.className='v6-slot-pips';card.appendChild(pips)}
+    if(pips.dataset.sig!==sig){pips.dataset.sig=sig;pips.innerHTML=Array.from({length:Math.min(m,12)},(_,i)=>`<button type="button" class="${i<c?'on':''}" data-v6-pip="${i}" aria-label="${i<c?'Gastar':'Recuperar'} espaço"></button>`).join('')}
+  });
+  const hide=!showAll&&empty>0;if(grid.classList.contains('v6-hide-empty')!==hide)grid.classList.toggle('v6-hide-empty',hide);
+  let tg=$('v6SlotToggle');
+  if(!empty){tg?.remove();return}
+  if(!tg){tg=document.createElement('button');tg.type='button';tg.id='v6SlotToggle';tg.className='btn small v6-slot-toggle';grid.after(tg)}
+  const label=showAll?'Recolher círculos sem espaços':`Mostrar círculos sem espaços (${empty})`;if(tg.textContent!==label)tg.textContent=label;
+}
+document.addEventListener('click',e=>{
+  const pip=e.target.closest?.('[data-v6-pip]');
+  if(pip){const card=pip.closest('.slot-card'),cur=card.querySelector('[data-key="current"]'),max=num(card.querySelector('[data-key="max"]').value),i=num(pip.dataset.v6Pip);
+    let v=i<num(cur.value)?i:i+1;v=Math.max(0,Math.min(max,v));cur.value=v;cur.dispatchEvent(new Event('input',{bubbles:true}));
+    try{window.renderGrimoire?.()}catch{}try{renderHeroVitals()}catch{}snd('tick');schedule();return}
+  if(e.target.id==='v6SlotToggle'){store.set('cinzas-v6-slots-all',!store.get('cinzas-v6-slots-all',false));slots();snd('tick');return}
+});
+document.addEventListener('input',e=>{if(e.target.matches?.('.slot-input'))schedule()});
+
+/* ---------- Carga ---------- */
+function bulk(){
+  const sum=$('inventorySummary');if(!sum)return;
+  const val=k=>{const st=[...sum.querySelectorAll('.inventory-stat')].find(s=>s.querySelector('small')?.textContent.trim().toLowerCase()===k);return st?parseFloat(String(st.querySelector('b').textContent).replace(',','.'))||0:0};
+  const b=val('bulk'),enc=val('sobrecarga'),lim=val('limite');if(!lim)return;
+  let el=sum.parentElement.querySelector('.v6-bulk');
+  if(!el){el=document.createElement('div');el.className='v6-bulk';el.innerHTML='<div class="v6-bulk-track"><div class="v6-bulk-fill"></div><div class="v6-bulk-mark" data-label="Sobrecarga"></div></div><div class="v6-bulk-legend"><span></span><span></span></div>';sum.after(el)}
+  const sig=[b,enc,lim].join('|');if(el.dataset.sig===sig)return;el.dataset.sig=sig;
+  const pct=x=>Math.max(0,Math.min(100,x/lim*100));
+  el.querySelector('.v6-bulk-fill').style.width=pct(b)+'%';el.querySelector('.v6-bulk-mark').style.left=`calc(${pct(enc)}% - 1px)`;
+  el.classList.toggle('enc',b>enc&&b<=lim);el.classList.toggle('over',b>lim);
+  const [l,r]=el.querySelectorAll('.v6-bulk-legend span');l.textContent=`${String(b).replace('.',',')} de ${lim} Bulk`;r.textContent=b>lim?'Acima do limite':b>enc?'Sobrecarregado':`${String(+(enc-b).toFixed(1)).replace('.',',')} até sobrecarga`;
+}
+
+/* ---------- Itens com ícone ---------- */
+const ITEM_ICONS=[[/po[cç][aã]o|elixir|frasco|ant[ií]doto|[óo]leo|tônico/i,'⚗'],[/armadura|cota|couro batido|placas|escudo|elmo|brunea/i,'⛨'],[/espada|ma[cç]a|arco|besta|lan[cç]a|machado|adaga|martelo|alabarda|cimitarra|rapieira|flecha|virote|arma|foice|mangual|clava/i,'⚔'],
+  [/corda|gancho|corrente|cadeado|ferramenta|kit|pé de cabra|pa\b|picareta/i,'⚒'],[/s[ií]mbolo|sagrad|relic[aá]rio|ros[aá]rio|[ií]cone|amuleto/i,'☩'],[/pergaminho|livro|mapa|carta|di[aá]rio|tomo|grim[oó]rio|nota/i,'✉'],
+  [/anel|joia|gema|colar|bracelete|coroa|moeda|ouro|prata/i,'◇'],[/ra[cç][aã]o|comida|p[aã]o|vinho|cantil|água|queijo|carne/i,'♨'],[/tocha|lanterna|vela|lamparina|pederneira/i,'☼'],[/manto|capa|bota|luva|roupa|t[uú]nica|mochila|bolsa|saco/i,'❖'],[/varinha|cajado|orbe|cristal|runa|talism[aã]/i,'✶']];
+function items(){
+  document.querySelectorAll('#itemList .item-row').forEach(row=>{
+    const box=row.firstElementChild;if(!box||box.classList.contains('v6-has-ic'))return;
+    const name=box.querySelector('.card-title')?.textContent||'',hit=ITEM_ICONS.find(([re])=>re.test(name));
+    const ic=document.createElement('span');ic.className='v6-item-ic';ic.setAttribute('aria-hidden','true');ic.textContent=(hit?hit[1]:'◈')+'︎';
+    const wrap=document.createElement('div');while(box.firstChild)wrap.appendChild(box.firstChild);box.append(ic,wrap);box.classList.add('v6-has-ic');
+  });
+}
+
+/* ---------- Talentos: texto formatado e espiada ---------- */
+let flashFeat=null;
+function feats(){
+  if(typeof window.spellRichText==='function')document.querySelectorAll('.entry-desc:not(.v6-rich)').forEach(d=>{const raw=d.textContent;if(!/\*\*|\*\S|\n|^\s*-\s|\d+d\d+|Sucesso|Falha/m.test(raw)){d.classList.add('v6-rich');return}d.innerHTML=window.spellRichText(raw);d.classList.add('v6-rich')});
+  const c=current();if(!c)return;
+  document.querySelectorAll('.feat-collection').forEach(sec=>{
+    const tog=sec.querySelector('.feat-group-toggle'),open=tog?.getAttribute('aria-expanded')==='true',gid=sec.dataset.featCollection;
+    let peek=sec.querySelector(':scope > .v6-peek');
+    if(open){peek?.remove();return}
+    const list=(c.feats||[]).filter(f=>(f.groupId||'')===gid);
+    const sig=list.map(f=>f.id+f.name).join('|');
+    if(!list.length){peek?.remove();return}
+    if(peek&&peek.dataset.sig===sig)return;
+    if(!peek){peek=document.createElement('div');peek.className='v6-peek';sec.querySelector('.feat-collection-head')?.after(peek)}
+    peek.dataset.sig=sig;peek.innerHTML=list.slice(0,14).map(f=>`<button type="button" data-v6-peek="${f.id}" data-v6-group="${gid}">${esc(f.name)}</button>`).join('')+(list.length>14?`<button type="button" data-v6-group="${gid}">+${list.length-14}</button>`:'');
+  });
+  if(flashFeat){const a=document.querySelector(`[data-feat-id="${flashFeat}"]`);if(a){flashFeat=null;a.scrollIntoView({behavior:reduced()?'auto':'smooth',block:'center'});a.classList.remove('v6-flash');void a.offsetWidth;a.classList.add('v6-flash')}}
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest?.('[data-v6-group]');if(!b)return;
+  flashFeat=b.dataset.v6Peek||null;const sec=b.closest('.feat-collection');sec?.querySelector('.feat-group-toggle')?.click();schedule();
+});
+document.addEventListener('click',e=>{
+  const d=e.target.closest?.('.v6-rich .gb-dice');if(!d)return;e.preventDefault();
+  const card=d.closest('[data-feat-id]'),title=card?.querySelector('.entry-title')?.textContent;const f=d.dataset.gbDice;try{addRoll(title?`${title}: ${f}`:f,f,parseDice(f))}catch{}
+});
+
+/* ---------- Combate: trocar combo sem sair da aba ---------- */
+function combatCombos(){
+  const bar=$('combatSpellResources');if(!bar||!window.GrimoireCombos)return;
+  const c=current();let el=$('v6ComboSwitch');
+  if(!(c?.spellcasting?.spells||[]).length){el?.remove();return}
+  const {list,active,icon}=window.GrimoireCombos.get();
+  const sig=list.map(l=>[l.id,l.name,l.icon,l.color,l.id===active.id?(c.spellcasting.spells||[]).filter(s=>s.prepared&&!s.isFocus).length:l.spellIds.length].join(':')).join('|')+'#'+active.id;
+  if(!el){el=document.createElement('div');el.id='v6ComboSwitch';el.className='v6-combo-switch';bar.before(el)}
+  if(el.dataset.sig===sig)return;el.dataset.sig=sig;
+  el.innerHTML=`<small>Combo</small>`+list.map(l=>{const n=l.id===active.id?(c.spellcasting.spells||[]).filter(s=>s.prepared&&!s.isFocus).length:l.spellIds.length;return `<button type="button" class="${l.id===active.id?'on':''}" style="${window.GrimoireCombos.style(l)}" data-v6-combo="${l.id}" title="${l.id===active.id?'Combo preparado agora':'Preparar o combo '+esc(l.name)}">${icon(l.icon)} ${esc(l.name)} <small>${n}</small></button>`}).join('');
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest?.('[data-v6-combo]');if(!b)return;
+  if(b.classList.contains('on'))return;
+  window.GrimoireCombos.apply(b.dataset.v6Combo);try{renderCombat()}catch{}schedule();
+});
+
+/* ---------- Diário ---------- */
+const DONE=/^\s*(?:✓|\[x\])\s*/i;
+function grow(t){if(!t||(!t.offsetHeight&&!t.dataset.v6Min))return;if(!t.dataset.v6Min)t.dataset.v6Min=String(Math.max(120,t.offsetHeight));const min=+t.dataset.v6Min;t.style.height='auto';t.style.height=Math.max(min,t.scrollHeight+4)+'px'}
+function journal(){
+  const page=$('page-journal');if(!page)return;
+  page.querySelectorAll('textarea[data-path^="journal."]').forEach(t=>{
+    const head=t.closest('.panel')?.querySelector('.panel-head');if(!head)return;
+    let cnt=head.querySelector('.v6-count');if(!cnt){cnt=document.createElement('span');cnt.className='v6-count';head.appendChild(cnt)}
+    let txt;
+    if(t.dataset.path==='journal.quests'){const ls=t.value.split('\n').filter(l=>l.trim());const d=ls.filter(l=>DONE.test(l)).length;txt=ls.length?`${ls.length-d} ${ls.length-d===1?'aberta':'abertas'} · ${d} ${d===1?'concluída':'concluídas'}`:''}
+    else{const w=(t.value.match(/\S+/g)||[]).length;txt=w?`${w} ${w===1?'palavra':'palavras'}`:''}
+    if(cnt.textContent!==txt)cnt.textContent=txt;
+    if(page.classList.contains('active')&&!t.dataset.v6Grown&&t.offsetHeight){t.dataset.v6Grown='1';grow(t)}
+  });
+  const q=page.querySelector('textarea[data-path="journal.quests"]');if(!q)return;
+  let box=page.querySelector('.v6-quest-box');
+  if(!box){
+    box=document.createElement('div');box.className='v6-quest-box';
+    box.innerHTML='<div class="v6-quests" role="list"></div><div class="v6-quest-add"><input class="input" type="text" placeholder="Nova missão ou pista…" aria-label="Nova missão" data-v6-quest-new><button type="button" class="btn small" data-v6-quest-add>Anotar</button></div><div class="v6-quest-tools"><span class="helper">Clique para marcar como concluída.</span><button type="button" class="btn small" data-v6-quest-raw>Editar como texto</button></div>';
+    q.before(box);q.classList.add('v6-quests-raw');q.hidden=!store.get('cinzas-v6-quests-raw',false);
+  }
+  const sig=q.value;const list=box.querySelector('.v6-quests');
+  if(list.dataset.sig!==sig){list.dataset.sig=sig;
+    const ls=q.value.split('\n').map((l,i)=>({l,i})).filter(x=>x.l.trim());
+    list.innerHTML=ls.length?ls.map(({l,i})=>{const done=DONE.test(l);return `<button type="button" role="listitem" class="v6-quest ${done?'done':''}" data-v6-quest="${i}" aria-pressed="${done}"><i></i><span>${esc(l.replace(DONE,''))}</span></button>`}).join(''):'<p class="helper">Nenhuma missão anotada ainda.</p>';
+  }
+  const rawBtn=box.querySelector('[data-v6-quest-raw]'),lab=q.hidden?'Editar como texto':'Esconder texto';if(rawBtn.textContent!==lab)rawBtn.textContent=lab;
+}
+function setQuests(v){const q=document.querySelector('#page-journal textarea[data-path="journal.quests"]');if(!q)return;q.value=v;q.dispatchEvent(new Event('input',{bubbles:true}));schedule()}
+document.addEventListener('click',e=>{
+  const t=e.target.closest?.('[data-v6-quest],[data-v6-quest-add],[data-v6-quest-raw]');if(!t)return;
+  const q=document.querySelector('#page-journal textarea[data-path="journal.quests"]');if(!q)return;
+  if('v6Quest' in t.dataset){const ls=q.value.split('\n'),i=num(t.dataset.v6Quest);ls[i]=DONE.test(ls[i])?ls[i].replace(DONE,''):'✓ '+ls[i];setQuests(ls.join('\n'));snd(DONE.test(ls[i])?'grace':'tick');return}
+  if('v6QuestAdd' in t.dataset){const inp=document.querySelector('[data-v6-quest-new]'),v=inp.value.trim();if(!v)return;setQuests((q.value.trim()?q.value.replace(/\s+$/,'')+'\n':'')+v);inp.value='';inp.focus();snd('tick');return}
+  if('v6QuestRaw' in t.dataset){q.hidden=!q.hidden;store.set('cinzas-v6-quests-raw',!q.hidden);if(!q.hidden){grow(q);q.focus()}schedule()}
+});
+document.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.matches?.('[data-v6-quest-new]')){e.preventDefault();document.querySelector('[data-v6-quest-add]')?.click()}});
+document.addEventListener('input',e=>{const t=e.target;if(t.matches?.('#page-journal textarea')){grow(t);schedule()}});
+
+/* ---------- Orquestração ---------- */
+function enhance(){
+  for(const f of [skills,slots,bulk,items,feats,combatCombos,journal]){try{f()}catch(err){console.warn('Távola v6',f.name,err)}}
+}
+let queued=false;
+function schedule(){if(queued)return;queued=true;requestAnimationFrame(()=>{queued=false;enhance()})}
+window.tavolaEnhance=schedule;
+function init(){
+  const mo=new MutationObserver(schedule);
+  document.querySelectorAll('section.page').forEach(p=>mo.observe(p,{childList:true,subtree:true}));
+  const _setPage=window.setPage;
+  if(typeof _setPage==='function')window.setPage=function(page){const prev=state?.currentPage;const out=_setPage.apply(this,arguments);schedule();if(page!==prev)requestAnimationFrame(()=>stagger(page));if(page==='journal')requestAnimationFrame(()=>document.querySelectorAll('#page-journal textarea[data-path]').forEach(t=>{if(!t.hidden)grow(t)}));return out};
+  enhance();
+}
+if(document.readyState==='loading')addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+
 <script src="./assets/ficha-pdf.js"></script>
 </body>
 </html>
