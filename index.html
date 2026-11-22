@@ -2099,6 +2099,168 @@ body[data-appearance-motion="reduced"] .v6-flash{animation:none}
   #itemList .ledger-item {padding:11px}
 }
 </style>
+<style id="combat-v7-style">
+/* ==========================================================================
+   Combate v7 — turno interativo (ações, reação, penalidade de ataques
+   múltiplos), golpes com 1º/2º/3º ataque e dano, defesas em escudo,
+   conjurar/usar direto do combate e registro de rolagens com crítico.
+   ========================================================================== */
+#page-combat{--c7-gold:#d7b46a;--c7-gold2:#9c7a36;--c7-blood:#b8392b;--c7-ink:#f1e5c6}
+/* atalhos */
+#page-combat .combat-shortcuts{gap:10px}
+#page-combat .combat-shortcut{position:relative;display:flex;align-items:center;gap:10px;padding:12px 14px!important;border:1px solid rgba(215,180,106,.22)!important;border-radius:6px!important;
+  background:linear-gradient(180deg,rgba(215,180,106,.07),rgba(0,0,0,.25))!important;font-family:var(--display,serif)!important;font-variant:small-caps;letter-spacing:.05em;font-size:15px!important;transition:transform .2s,border-color .2s,background .2s}
+#page-combat .combat-shortcut::before{font-size:16px;color:var(--c7-gold);width:22px;text-align:center;font-variant:normal}
+#page-combat .combat-shortcut[data-combat-jump="combatAttacks"]::before{content:"⚔\FE0E"}
+#page-combat .combat-shortcut[data-combat-jump="combatSpells"]::before{content:"✦"}
+#page-combat .combat-shortcut[data-combat-jump="combatAbilities"]::before{content:"◆"}
+#page-combat .combat-shortcut[data-combat-jump="combatTalents"]::before{content:"♜\FE0E"}
+#page-combat .combat-shortcut strong{margin-left:auto;min-width:26px;padding:2px 7px;border-radius:999px;background:rgba(215,180,106,.14);color:var(--c7-gold);font:700 12px var(--ui-font,inherit);text-align:center}
+#page-combat .combat-shortcut:hover{transform:translateY(-2px);border-color:rgba(215,180,106,.55)!important;background:linear-gradient(180deg,rgba(215,180,106,.14),rgba(0,0,0,.2))!important}
+/* ---------- Turno ---------- */
+#page-combat .attacks-panel{order:0}
+.v7-mini{display:none}
+@media (max-width:900px){
+  body[data-page="combat"] .v7-mini.on{position:fixed;left:10px;right:10px;bottom:calc(60px + env(safe-area-inset-bottom));z-index:70;display:flex;align-items:center;gap:10px;padding:8px 10px;
+    border:1px solid rgba(215,180,106,.45);border-radius:10px;background:rgba(12,9,6,.94);backdrop-filter:blur(10px);box-shadow:0 10px 30px rgba(0,0,0,.6)}
+  body[data-page="combat"] #page-combat{padding-bottom:70px}
+  .v7-mini .v7-round{width:40px;height:40px}.v7-mini .v7-round b{font-size:17px}.v7-mini .v7-round small{font-size:6px}
+  .v7-mini .v7-act{width:32px;height:32px}.v7-mini .v7-act.react{width:34px;height:34px;margin-left:2px}.v7-mini .v7-act.react::after{font-size:14px}
+  #v7Mini .btn.small{margin-left:auto;min-height:38px;border-color:#c9a24f!important;background:linear-gradient(180deg,#e2bf6e,#a77b2c)!important;color:#1d1307!important;font-weight:800}
+}
+.v7-turn{display:grid;gap:14px}
+.v7-turn-top{display:flex;align-items:center;gap:12px}
+.v7-round{display:grid;place-items:center;flex:none;width:64px;height:64px;border-radius:50%;border:1px solid rgba(215,180,106,.55);
+  background:radial-gradient(circle at 40% 35%,rgba(215,180,106,.2),#0b0906 70%);box-shadow:inset 0 0 0 4px rgba(0,0,0,.45),0 0 20px rgba(215,180,106,.12);text-align:center;line-height:1}
+.v7-round small{font:700 7.5px var(--ui-font,inherit);letter-spacing:.2em;color:#b8a57c;text-transform:uppercase}
+.v7-round b{display:block;font:700 26px var(--display,serif);color:#f6e7bd;margin-top:2px}
+.v7-turn.idle .v7-round b{font-size:20px;color:#8c7f66}
+.v7-turn-title{flex:1;min-width:0}
+.v7-turn-title strong{display:block;font:700 18px var(--display,serif);font-variant:small-caps;letter-spacing:.04em;color:var(--c7-ink)}
+.v7-turn-title span{font-size:12px;color:var(--muted)}
+.v7-round-adj{display:flex;gap:4px}
+.v7-round-adj button{width:28px;height:28px;padding:0}
+.v7-pips{display:flex;align-items:center;justify-content:center;gap:14px;padding:16px 10px;border:1px solid rgba(215,180,106,.15);border-radius:8px;background:radial-gradient(ellipse at 50% 0,rgba(215,180,106,.09),transparent 70%),rgba(0,0,0,.25)}
+.v7-act{position:relative;width:44px;height:44px;padding:0;border:0;background:none;cursor:pointer}
+.v7-act::before{content:"";position:absolute;inset:7px;transform:rotate(45deg);border:2px solid var(--c7-gold);border-radius:3px;
+  background:linear-gradient(135deg,#ffe7a8,#c99a45 55%,#7c5a1e);box-shadow:0 0 16px rgba(230,180,90,.45),inset 0 0 0 2px rgba(255,255,255,.2);transition:all .3s cubic-bezier(.3,1.5,.5,1)}
+.v7-act.spent::before{background:rgba(0,0,0,.4);box-shadow:none;border-color:rgba(215,180,106,.5);border-style:dashed;transform:rotate(45deg) scale(.78)}
+.v7-act:hover::before{transform:rotate(45deg) scale(1.08)}
+.v7-act.spent:hover::before{transform:rotate(45deg) scale(.88)}
+.v7-act.react{width:48px;height:48px;margin-left:8px}
+.v7-act.react::before{border-radius:50%;transform:none;background:radial-gradient(circle at 40% 35%,#cfe3ff,#5d86b8 60%,#24405f);border-color:#9fc0e8;box-shadow:0 0 16px rgba(120,170,230,.45)}
+.v7-act.react.spent::before{background:rgba(0,0,0,.4);border-color:rgba(140,170,210,.3);box-shadow:none;transform:scale(.8)}
+.v7-act.react::after{content:"↶";position:absolute;inset:0;display:grid;place-items:center;font:700 18px var(--display,serif);color:#10213a}
+.v7-act.react.spent::after{color:rgba(160,190,230,.45)}
+.v7-sep{width:1px;height:34px;background:rgba(215,180,106,.2)}
+.v7-pop{animation:v7Pop .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes v7Pop{0%{transform:scale(.6)}60%{transform:scale(1.15)}100%{transform:none}}
+.v7-map{display:grid;gap:6px}
+.v7-map>small{font:700 9.5px var(--ui-font,inherit);letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+.v7-map-seg{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid rgba(215,180,106,.25);border-radius:6px;overflow:hidden}
+.v7-map-seg button{padding:8px 4px;border:0;border-right:1px solid rgba(215,180,106,.15);background:rgba(0,0,0,.25);color:#bfb196;font:600 12px var(--ui-font,inherit);cursor:pointer;transition:background .2s,color .2s}
+.v7-map-seg button:last-child{border-right:0}
+.v7-map-seg button b{display:block;font:700 16px var(--display,serif);color:inherit}
+.v7-map-seg button.on{background:linear-gradient(180deg,rgba(215,180,106,.28),rgba(215,180,106,.1));color:#fff1cc}
+.v7-turn-btns{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.v7-turn-btns .btn{justify-content:center}
+#page-combat .v7-turn-btns .btn.v7-next{border-color:#c9a24f!important;background:linear-gradient(180deg,#e2bf6e,#a77b2c)!important;color:#1d1307!important;box-shadow:0 6px 18px rgba(200,150,60,.25)}
+#page-combat .v7-turn-btns .btn.v7-next:hover{filter:brightness(1.08)}
+.v7-turn-btns .v7-next{grid-column:1/-1;min-height:46px;font:700 15px var(--display,serif)!important;font-variant:small-caps;letter-spacing:.06em}
+.v7-legend{display:flex;flex-wrap:wrap;gap:6px 12px;justify-content:center;font-size:11px;color:var(--muted)}
+.v7-legend b{color:var(--c7-gold);margin-right:3px}
+.v7-turnflash{animation:v7Turn .9s ease-out}
+@keyframes v7Turn{0%{box-shadow:0 0 0 0 rgba(215,180,106,.0)}25%{box-shadow:0 0 0 3px rgba(215,180,106,.6),0 0 40px rgba(215,180,106,.35)}100%{box-shadow:0 0 0 0 rgba(215,180,106,0)}}
+/* ---------- Defesas em escudo ---------- */
+#combatDefenseSummary.combat-defenses{display:grid!important;grid-template-columns:repeat(3,1fr)!important;gap:8px!important}
+#combatDefenseSummary .combat-defense{position:relative;display:grid!important;justify-items:center;align-content:center;gap:2px;min-height:86px;padding:10px 6px!important;text-align:center;border:1px solid rgba(215,180,106,.2)!important;border-radius:6px!important;
+  background:radial-gradient(ellipse at 50% 0,rgba(215,180,106,.1),transparent 70%),rgba(0,0,0,.3)!important;transition:transform .2s,border-color .2s,box-shadow .2s;cursor:pointer}
+#combatDefenseSummary .combat-defense small{font:700 9.5px var(--ui-font,inherit)!important;letter-spacing:.16em;text-transform:uppercase;color:#b8a57c!important}
+#combatDefenseSummary .combat-defense b{font:700 26px var(--display,serif)!important;color:var(--c7-ink)!important}
+#combatDefenseSummary .combat-defense span{font-size:10px!important;color:var(--muted)!important;opacity:0;transition:opacity .2s}
+#combatDefenseSummary button.combat-defense:hover{transform:translateY(-2px);border-color:rgba(215,180,106,.55)!important;box-shadow:0 8px 20px rgba(0,0,0,.4)}
+#combatDefenseSummary button.combat-defense:hover span{opacity:1}
+#combatDefenseSummary .combat-defense.fixed{grid-column:1/-1;min-height:118px;cursor:default;border:0!important;background:none!important}
+#combatDefenseSummary .combat-defense.fixed::before{content:"";position:absolute;left:50%;top:4px;width:104px;height:112px;transform:translateX(-50%);
+  clip-path:polygon(50% 0,100% 12%,96% 58%,50% 100%,4% 58%,0 12%);background:linear-gradient(160deg,#5a4520,#20180c 60%,#0c0906);z-index:0}
+#combatDefenseSummary .combat-defense.fixed::after{content:"";position:absolute;left:50%;top:9px;width:92px;height:100px;transform:translateX(-50%);
+  clip-path:polygon(50% 0,100% 12%,96% 58%,50% 100%,4% 58%,0 12%);background:radial-gradient(circle at 50% 30%,rgba(215,180,106,.25),#120d07 70%);z-index:0}
+#combatDefenseSummary .combat-defense.fixed>*{position:relative;z-index:1}
+#combatDefenseSummary .combat-defense.fixed b{font-size:38px!important;color:#fff0c8!important;text-shadow:0 0 18px rgba(215,180,106,.4)}
+#combatDefenseSummary .combat-defense.fixed span{opacity:.8;margin-top:-4px}
+#combatDefenseSummary .combat-defense:last-child:not(.fixed){grid-column:1/-1;min-height:62px;grid-template-columns:auto auto;justify-content:center;gap:12px;align-items:center}
+#combatDefenseSummary .combat-defense:last-child:not(.fixed) span{grid-column:1/-1}
+/* ---------- Golpes ---------- */
+#attackList .card.v7-atk{position:relative;display:grid;grid-template-columns:62px 1fr;gap:4px 16px;padding:18px!important;border:1px solid rgba(215,180,106,.2)!important;border-radius:8px!important;
+  background:radial-gradient(90% 130% at 0 0,rgba(184,57,43,.12),transparent 55%),linear-gradient(170deg,#17120d,#0c0a07 75%)!important;transition:border-color .25s,box-shadow .25s,transform .25s}
+#attackList .card.v7-atk.ranged{background:radial-gradient(90% 130% at 0 0,rgba(79,132,170,.14),transparent 55%),linear-gradient(170deg,#12141a,#0a0b0d 75%)!important}
+#attackList .card.v7-atk:hover{border-color:rgba(215,180,106,.45)!important;box-shadow:0 14px 30px rgba(0,0,0,.45)}
+#attackList .card.v7-atk>*{grid-column:2}
+#attackList .v7-atk-emblem{grid-column:1!important;grid-row:1/span 4;align-self:start;display:grid;place-items:center;width:56px;height:56px;margin-top:2px;border-radius:50%;border:1px solid rgba(215,180,106,.5);
+  background:radial-gradient(circle at 40% 35%,rgba(215,180,106,.22),#0b0906 72%);box-shadow:inset 0 0 0 4px rgba(0,0,0,.45);font-size:24px;color:var(--c7-gold);transition:transform .4s cubic-bezier(.3,1.5,.5,1)}
+#attackList .v7-atk:hover .v7-atk-emblem{transform:rotate(-12deg) scale(1.05)}
+#attackList .v7-atk .card-title{font:700 22px var(--display,serif)!important;color:var(--c7-ink)}
+#attackList .v7-atk .card-sub{font-size:12.5px}
+#attackList .v7-atk [data-roll-atk]{display:none}
+#attackList .v7-atk .card-actions .btn{opacity:.6}
+#attackList .v7-atk:hover .card-actions .btn,#attackList .v7-atk .card-actions .btn:focus-visible{opacity:1}
+#attackList .v7-atk .desc{border-top:1px dashed rgba(215,180,106,.15)!important;padding-top:8px;margin-top:4px;color:#cdbf9f;font-size:13.5px}
+.v7-strikes{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.v7-strike{position:relative;display:grid;justify-items:center;min-width:78px;padding:8px 12px 7px;border:1px solid rgba(215,180,106,.3);border-radius:6px;background:linear-gradient(180deg,rgba(215,180,106,.1),rgba(0,0,0,.3));
+  color:#d9caa6;cursor:pointer;font:600 10px var(--ui-font,inherit);letter-spacing:.12em;text-transform:uppercase;transition:transform .15s,border-color .2s,background .2s,opacity .2s}
+.v7-strike b{font:700 20px var(--display,serif);letter-spacing:0;text-transform:none;color:var(--c7-ink)}
+.v7-strike:hover{transform:translateY(-2px);border-color:var(--c7-gold);background:linear-gradient(180deg,rgba(215,180,106,.2),rgba(0,0,0,.25))}
+.v7-strike:active{transform:translateY(1px) scale(.97)}
+.v7-strike.next{border-color:var(--c7-gold);box-shadow:0 0 0 1px rgba(215,180,106,.4),0 0 18px rgba(215,180,106,.25)}
+.v7-strike.next::after{content:"próximo";position:absolute;top:-8px;left:50%;transform:translateX(-50%);padding:1px 6px;border-radius:999px;background:var(--c7-gold);color:#1b1207;font:800 8px var(--ui-font,inherit);letter-spacing:.14em}
+.v7-strike.past{opacity:.55}
+.v7-strike.dmg{border-color:rgba(200,80,60,.45);background:linear-gradient(180deg,rgba(184,57,43,.22),rgba(0,0,0,.3))}
+.v7-strike.dmg:hover{border-color:#e06a52}
+.v7-strike.crit{border-color:rgba(230,120,60,.55);background:linear-gradient(180deg,rgba(230,120,60,.22),rgba(0,0,0,.3))}
+.v7-strike.crit b{color:#ffb47a}
+.v7-strikes .v7-gap{flex:0 0 1px;align-self:stretch;margin:0 4px;background:rgba(215,180,106,.18)}
+/* ---------- Magias e habilidades: conjurar/usar ---------- */
+.v7-use{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px;padding-top:10px;border-top:1px dashed rgba(215,180,106,.15)}
+.v7-use .btn{gap:8px}
+.v7-use .btn.cast{border-color:rgba(184,57,43,.6)!important;background:linear-gradient(180deg,#8e2a20,#5a1711)!important;color:#ffeccc!important;font-family:var(--display,serif)!important;font-variant:small-caps;letter-spacing:.05em}
+.v7-use .btn.cast:hover{filter:brightness(1.15)}
+.v7-use small{color:var(--muted);font-size:12px}
+#page-combat .combat-entry{transition:border-color .2s,transform .2s,box-shadow .2s}
+#page-combat .combat-entry:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(0,0,0,.35)}
+#page-combat .combat-entry[open]{box-shadow:0 0 0 1px rgba(215,180,106,.25),0 14px 30px rgba(0,0,0,.4)}
+/* ---------- Condições ---------- */
+#conditionGrid .condition{transition:border-color .2s,background .2s,transform .15s;cursor:pointer}
+#conditionGrid .condition:hover{transform:translateY(-1px);border-color:rgba(215,180,106,.4)}
+#conditionGrid .condition.active{border-color:rgba(200,70,50,.65)!important;background:linear-gradient(180deg,rgba(184,57,43,.25),rgba(0,0,0,.3))!important;box-shadow:0 0 14px rgba(184,57,43,.25)}
+#conditionGrid .condition.active .condition-mark{color:#ff8a6a}
+#conditionsDetails.has-active-conditions>summary #conditionSummary{color:#ff9c80;font-weight:700}
+#conditionsDetails.has-active-conditions{border-color:rgba(200,70,50,.45)!important;box-shadow:0 0 0 1px rgba(184,57,43,.15),0 0 24px rgba(184,57,43,.12)}
+/* ---------- Rolagens ---------- */
+#combatRollLog{display:grid;gap:6px;max-height:440px;overflow:auto;padding-right:2px}
+.v7-roll{display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:12px;padding:8px 10px;border:1px solid rgba(215,180,106,.14);border-radius:6px;background:rgba(0,0,0,.25)}
+.v7-roll:first-child{border-color:rgba(215,180,106,.4);background:linear-gradient(90deg,rgba(215,180,106,.1),rgba(0,0,0,.25));animation:v7In .45s cubic-bezier(.2,.8,.2,1)}
+@keyframes v7In{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.v7-roll-total{display:grid;place-items:center;width:44px;height:44px;transform:rotate(45deg);border:1px solid rgba(215,180,106,.45);border-radius:6px;background:radial-gradient(circle,rgba(215,180,106,.15),#0b0906)}
+.v7-roll-total b{transform:rotate(-45deg);font:700 18px var(--display,serif);color:var(--c7-ink)}
+.v7-roll strong{display:block;font-size:13.5px;color:var(--c7-ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.v7-roll small{display:block;font-size:11.5px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.v7-roll time{font-size:11px;color:var(--muted)}
+.v7-roll.nat20{border-color:rgba(230,190,90,.7)}
+.v7-roll.nat20 .v7-roll-total{border-color:#f0c86a;box-shadow:0 0 16px rgba(240,200,106,.5);background:radial-gradient(circle,rgba(240,200,106,.4),#1a1208)}
+.v7-roll.nat1 .v7-roll-total{border-color:#c0392b;box-shadow:0 0 14px rgba(192,57,43,.45);background:radial-gradient(circle,rgba(192,57,43,.35),#140806)}
+.v7-roll .v7-tag{display:inline-block;margin-left:6px;padding:0 6px;border-radius:999px;font:800 9px var(--ui-font,inherit);letter-spacing:.12em;vertical-align:2px}
+.v7-roll.nat20 .v7-tag{background:#f0c86a;color:#1b1207}.v7-roll.nat1 .v7-tag{background:#c0392b;color:#fff}
+.v7-roll-empty{display:grid;justify-items:center;gap:6px;padding:20px 10px;color:var(--muted);text-align:center;font-size:13px}
+.v7-roll-empty i{font-style:normal;font-size:26px;color:rgba(215,180,106,.45)}
+@media (max-width:700px){
+  #attackList .card.v7-atk{grid-template-columns:44px 1fr;padding:14px!important}
+  #attackList .v7-atk-emblem{width:42px;height:42px;font-size:18px}
+  .v7-strike{min-width:64px;padding:7px 8px}
+  .v7-strikes .v7-gap{display:none}
+  .v7-act{width:40px;height:40px}
+}
+body[data-appearance-motion="reduced"] .v7-pop,body[data-appearance-motion="reduced"] .v7-turnflash,body[data-appearance-motion="reduced"] .v7-roll:first-child{animation:none}
+</style>
 </head>
 <body>
 <header class="topbar">
@@ -4854,15 +5016,16 @@ function cast(id){
   const c=current(),s=c.spellcasting.spells.find(x=>x.id===id);if(!s)return;
   const r=num(s.rank);let msg=`${s.name} conjurada.`;
   if(s.isFocus){
-    if(num(c.focus.current)<=0){toast('Sem Pontos de Foco. Refocalize ou descanse no Sítio da Graça.');shakePips();return}
+    if(num(c.focus.current)<=0){toast('Sem Pontos de Foco. Refocalize ou descanse no Sítio da Graça.');shakePips();return false}
     c.focus.current=num(c.focus.current)-1;msg=`${s.name} conjurada — Foco ${c.focus.current}/${num(c.focus.max)}.`;
   }else if(r>0){
     const slot=c.spellcasting.slots.find(x=>num(x.rank)===r);
-    if(!slot||num(slot.current)<=0){toast(`Sem espaços de ${ROMAN[r]} círculo restantes.`);shakePips();return}
+    if(!slot||num(slot.current)<=0){toast(`Sem espaços de ${ROMAN[r]} círculo restantes.`);shakePips();return false}
     slot.current=num(slot.current)-1;msg=`${s.name} conjurada — espaços de ${ROMAN[r]} círculo: ${slot.current}/${num(slot.max)}.`;
   }
-  refreshAfter();snd('cast');castFx();toast(msg);
+  refreshAfter();snd('cast');castFx();toast(msg);return true;
 }
+window.GrimoireCast=cast;
 function shakePips(){const p=$('grimoireBook')?.querySelector('.gb-left .gb-pips');if(p)p.animate([{transform:'translateX(0)'},{transform:'translateX(-5px)'},{transform:'translateX(4px)'},{transform:'translateX(-2px)'},{transform:'translateX(0)'}],{duration:320});snd('tick')}
 function selectSpell(id){
   const root=$('grimoireBook'),c=current(),list=chapters(c),ch=currentChapter(list);
@@ -5195,6 +5358,177 @@ function init(){
   document.querySelectorAll('section.page').forEach(p=>mo.observe(p,{childList:true,subtree:true}));
   const _setPage=window.setPage;
   if(typeof _setPage==='function')window.setPage=function(page){const prev=state?.currentPage;const out=_setPage.apply(this,arguments);schedule();if(page!==prev)requestAnimationFrame(()=>stagger(page));if(page==='journal')requestAnimationFrame(()=>document.querySelectorAll('#page-journal textarea[data-path]').forEach(t=>{if(!t.hidden)grow(t)}));return out};
+  enhance();
+}
+if(document.readyState==='loading')addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+
+<script id="combat-v7-script">
+/* Combate v7 — turno interativo e ações rápidas. O estado do turno (rodada,
+   ações, reação, ataques no turno) fica só neste navegador, por personagem;
+   os dados da ficha não mudam de formato. */
+(()=>{
+const $=id=>document.getElementById(id);
+const snd=n=>{try{window.ErSound?.play(n)}catch{}};
+const reduced=()=>document.body.dataset.appearanceMotion==='reduced'||matchMedia('(prefers-reduced-motion: reduce)').matches;
+const ORD=['1º','2º','3º'];
+/* ---------- estado do turno ---------- */
+const key=()=>'cinzas-turn-'+(current()?.id||'x');
+function turn(){let t;try{t=JSON.parse(localStorage.getItem(key())||'null')}catch{}return Object.assign({round:0,actions:3,reaction:true,map:0},t||{})}
+function saveTurn(t){try{localStorage.setItem(key(),JSON.stringify(t))}catch{}renderTurn()}
+const inCombat=()=>turn().round>0;
+function spend(n,what){
+  const t=turn();if(!t.round)return;
+  if(n==='reaction'){if(!t.reaction)toast('Sua reação já foi usada nesta rodada.');t.reaction=false;saveTurn(t);pop('.v7-act.react');return}
+  n=Math.max(0,n|0);if(!n)return;
+  if(t.actions<n)toast(`${what||'Isso'} custa ${n} ${n===1?'ação':'ações'} — restam ${t.actions}.`);
+  t.actions=Math.max(0,t.actions-n);saveTurn(t);
+}
+function pop(sel){if(reduced())return;document.querySelectorAll(sel).forEach(el=>{el.classList.remove('v7-pop');void el.offsetWidth;el.classList.add('v7-pop')})}
+function perception(){const b=document.querySelector('#combatDefenseSummary [data-session-defense="Percepção"]');return b?num(b.dataset.bonus):0}
+function renderTurn(){
+  const body=document.querySelector('#page-combat .actions-panel .panel-body');if(!body)return;
+  const h=body.parentElement.querySelector('.panel-head h2');if(h&&h.textContent!=='Turno & Ações')h.textContent='Turno & Ações';
+  const t=turn(),idle=!t.round,agileNote='';
+  const sig=JSON.stringify(t)+perception();if(body.dataset.sig===sig)return;body.dataset.sig=sig;
+  const panel=body.parentElement,def=document.querySelector('#page-combat .combat-defenses-panel');if(def&&panel.nextElementSibling!==def&&!panel.dataset.moved){panel.dataset.moved='1';def.before(panel)}
+  body.innerHTML=`<div class="v7-turn ${idle?'idle':''}">
+    <div class="v7-turn-top">
+      <div class="v7-round" aria-live="polite"><div><small>Rodada</small><b>${idle?'—':t.round}</b></div></div>
+      <div class="v7-turn-title"><strong>${idle?'Fora de combate':'Seu turno'}</strong><span>${idle?'Role iniciativa para começar a contar rodadas.':`${t.actions} ${t.actions===1?'ação restante':'ações restantes'} · reação ${t.reaction?'disponível':'usada'}`}</span></div>
+      ${idle?'':`<div class="v7-round-adj"><button type="button" class="btn small" data-v7-round="-1" aria-label="Rodada anterior">−</button><button type="button" class="btn small" data-v7-round="1" aria-label="Próxima rodada">+</button></div>`}
+    </div>
+    <div class="v7-pips" role="group" aria-label="Ações do turno">
+      ${[0,1,2].map(i=>`<button type="button" class="v7-act ${i<t.actions?'':'spent'}" data-v7-act="${i}" aria-label="Ação ${i+1}: ${i<t.actions?'disponível':'gasta'}" title="Clique para gastar ou recuperar"></button>`).join('')}
+      <span class="v7-sep" aria-hidden="true"></span>
+      <button type="button" class="v7-act react ${t.reaction?'':'spent'}" data-v7-react aria-label="Reação: ${t.reaction?'disponível':'usada'}" title="Reação"></button>
+    </div>
+    <div class="v7-map"><small>Ataques neste turno · penalidade de ataques múltiplos</small>
+      <div class="v7-map-seg" role="group">${ORD.map((o,i)=>`<button type="button" class="${t.map===i?'on':''}" data-v7-map="${i}" aria-pressed="${t.map===i}">${o} ataque<b>${i?`−${i*5}`:'±0'}</b></button>`).join('')}</div>
+    </div>
+    <div class="v7-turn-btns">
+      ${idle?`<button type="button" class="btn gold v7-next" data-v7-init>⚔ Rolar iniciativa (${signed(perception())})</button><button type="button" class="btn" data-v7-start style="grid-column:1/-1">Começar sem rolar</button>`
+           :`<button type="button" class="btn gold v7-next" data-v7-next>Novo turno ▸</button><button type="button" class="btn" data-v7-init>Rolar iniciativa</button><button type="button" class="btn" data-v7-end>Encerrar combate</button>`}
+    </div>
+    <div class="v7-legend"><span><b>◆</b>1 ação</span><span><b>◆◆</b>2 ações</span><span><b>◆◆◆</b>3 ações</span><span><b>↶</b>Reação</span><span><b>◇</b>Livre</span></div>
+  </div>`;
+  let mini=$('v7Mini');if(!mini){mini=document.createElement('div');mini.id='v7Mini';mini.className='v7-mini';mini.setAttribute('aria-label','Turno atual');document.body.appendChild(mini)}
+  mini.classList.toggle('on',!idle);
+  mini.innerHTML=idle?'':`<div class="v7-round"><div><small>Rod.</small><b>${t.round}</b></div></div>${[0,1,2].map(i=>`<button type="button" class="v7-act ${i<t.actions?'':'spent'}" data-v7-act="${i}" aria-label="Ação ${i+1}"></button>`).join('')}<button type="button" class="v7-act react ${t.reaction?'':'spent'}" data-v7-react aria-label="Reação"></button><button type="button" class="btn small" data-v7-next>Novo turno ▸</button>`;
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest?.('[data-v7-act],[data-v7-react],[data-v7-map],[data-v7-next],[data-v7-init],[data-v7-start],[data-v7-end],[data-v7-round]');if(!b)return;
+  const t=turn();
+  if('v7Act' in b.dataset){const i=num(b.dataset.v7Act);if(!t.round)t.round=1;t.actions=i<t.actions?i:i+1;saveTurn(t);snd('tick');return}
+  if('v7React' in b.dataset){if(!t.round)t.round=1;t.reaction=!t.reaction;saveTurn(t);snd('tick');return}
+  if('v7Map' in b.dataset){t.map=num(b.dataset.v7Map);saveTurn(t);paintStrikes();snd('tick');return}
+  if('v7Round' in b.dataset){t.round=Math.max(1,t.round+num(b.dataset.v7Round));saveTurn(t);snd('tick');return}
+  if('v7Next' in b.dataset){Object.assign(t,{round:t.round+1,actions:3,reaction:true,map:0});saveTurn(t);paintStrikes();snd('page');toast(`Rodada ${t.round} — 3 ações e reação de volta.`);flash();return}
+  if('v7Init' in b.dataset){rollCheck('Iniciativa',perception());Object.assign(t,{round:1,actions:3,reaction:true,map:0});saveTurn(t);paintStrikes();flash();return}
+  if('v7Start' in b.dataset){Object.assign(t,{round:1,actions:3,reaction:true,map:0});saveTurn(t);paintStrikes();snd('page');flash();return}
+  if('v7End' in b.dataset){Object.assign(t,{round:0,actions:3,reaction:true,map:0});saveTurn(t);paintStrikes();snd('grace');toast('Combate encerrado.');return}
+});
+function flash(){const p=document.querySelector('#page-combat .actions-panel');if(!p||reduced())return;p.classList.remove('v7-turnflash');void p.offsetWidth;p.classList.add('v7-turnflash');pop('.v7-act')}
+
+/* ---------- golpes ---------- */
+const isAgile=a=>/[áa]gil|agile/i.test(a.traits||'');
+const isRanged=a=>/ranged|dist[âa]ncia|arremesso/i.test(a.type||'');
+function dmgFormula(c,a){const d=String(a.damage||'').trim();if(!d)return '';const m=a.damageAbility==='none'?0:abilityVal(c,a.damageAbility||'str');return m?`${d}${m>0?'+':''}${m}`:d}
+function enhanceAttacks(){
+  const c=current(),list=$('attackList');if(!c||!list)return;
+  const cards=[...list.querySelectorAll(':scope > .card')];
+  cards.forEach((card,j)=>{
+    const a=c.attacks[j];if(!a)return;
+    const total=attackTotal(c,a),step=isAgile(a)?4:5,dmg=dmgFormula(c,a);
+    const sig=[a.id,total,step,dmg,a.type].join('|');if(card.dataset.v7===sig)return;card.dataset.v7=sig;card.dataset.atk=a.id;
+    card.classList.add('v7-atk');card.classList.toggle('ranged',isRanged(a));
+    card.querySelector('.v7-atk-emblem')?.remove();card.querySelector('.v7-strikes')?.remove();
+    const em=document.createElement('div');em.className='v7-atk-emblem';em.setAttribute('aria-hidden','true');em.textContent=isRanged(a)?'➶':'⚔︎';card.prepend(em);
+    const tg=card.querySelector('.tags .tag.gold');if(tg)tg.textContent=isRanged(a)?'À distância':/melee|corpo/i.test(a.type||'')?'Corpo a corpo':a.type;
+    const row=document.createElement('div');row.className='v7-strikes';
+    row.innerHTML=[0,1,2].map(i=>`<button type="button" class="v7-strike" data-v7-strike="${i}" title="Rolar ${ORD[i]} ataque (${signed(total-i*step)})">${ORD[i]} ataque<b>${signed(total-i*step)}</b></button>`).join('')
+      +(dmg?`<span class="v7-gap" aria-hidden="true"></span><button type="button" class="v7-strike dmg" data-v7-dmg title="Rolar dano">Dano<b>${esc(dmg)}</b></button><button type="button" class="v7-strike crit" data-v7-crit title="Dano crítico (dobrado)">Crítico<b>2×</b></button>`:'');
+    const tags=card.querySelector('.tags');(card.querySelector('.desc')||null)?card.querySelector('.desc').before(row):card.appendChild(row);
+    if(!card.querySelector('.desc')&&tags)tags.after(row);
+  });
+  paintStrikes();
+}
+function paintStrikes(){
+  const t=turn();
+  document.querySelectorAll('#attackList .v7-strike[data-v7-strike]').forEach(b=>{const i=num(b.dataset.v7Strike);b.classList.toggle('next',t.round>0&&i===t.map);b.classList.toggle('past',t.round>0&&i<t.map)});
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest?.('#attackList [data-v7-strike],#attackList [data-v7-dmg],#attackList [data-v7-crit]');if(!b)return;
+  const c=current(),a=c.attacks.find(x=>x.id===b.closest('[data-atk]')?.dataset.atk);if(!a)return;
+  if('v7Strike' in b.dataset){
+    const i=num(b.dataset.v7Strike),step=isAgile(a)?4:5;
+    rollCheck(i?`${a.name} (${ORD[i]} ataque)`:a.name,attackTotal(c,a)-i*step);
+    const t=turn();if(t.round){t.map=Math.min(2,Math.max(t.map,i+1));saveTurn(t);spend(1,'Golpear');paintStrikes()}
+    return;
+  }
+  const f=dmgFormula(c,a);if(!f)return;const res=parseDice(f);
+  if('v7Crit' in b.dataset){addRoll(`${a.name} — dano crítico`,`2×(${f})`,{total:res.total*2,detail:`${res.detail} ×2`});toast(`${a.name}: ${res.total*2} de dano crítico!`);snd('crit')}
+  else{addRoll(`${a.name} — dano`,f,res);toast(`${a.name}: ${res.total} de dano`)}
+});
+
+/* ---------- magias e habilidades ---------- */
+const ACOST={one:1,two:2,three:3};
+function costFromMeta(t){t=String(t||'');if(/↶|rea[cç][aã]o/i.test(t))return 'reaction';const m=t.match(/◆+/);return m?m[0].length:0}
+function spellCost(c,s){
+  if(s.isFocus)return `1 Ponto de Foco · ${num(c.focus.current)}/${num(c.focus.max)}`;
+  const r=num(s.rank);if(!r)return 'Truque · sem custo';
+  const sl=c.spellcasting.slots.find(x=>num(x.rank)===r);return `1 espaço de ${r}º círculo · ${sl?num(sl.current):0} restante(s)`;
+}
+function enhanceSpells(){
+  const c=current(),root=$('combatSpellList');if(!c||!root||!window.GrimoireCast)return;
+  root.querySelectorAll('details.combat-entry').forEach(d=>{
+    const name=d.querySelector('.combat-entry-name')?.textContent.trim();const s=(c.spellcasting.spells||[]).find(x=>x.name===name);if(!s)return;
+    let u=d.querySelector('.v7-use');
+    if(!u){u=document.createElement('div');u.className='v7-use';d.querySelector('.combat-entry-body')?.appendChild(u)}
+    const sig=s.id+spellCost(c,s);if(u.dataset.sig===sig)return;u.dataset.sig=sig;
+    u.innerHTML=`<button type="button" class="btn small cast" data-v7-cast="${s.id}">✦ Conjurar</button><small>${esc(spellCost(c,s))}${ACOST[s.action]?` · ${'◆'.repeat(ACOST[s.action])}`:s.action==='reaction'?' · ↶':''}</small>`;
+  });
+}
+function enhanceAbilities(){
+  const root=$('combatAbilityList');if(!root)return;
+  root.querySelectorAll('details.combat-entry').forEach(d=>{
+    if(d.querySelector('.v7-use'))return;const meta=d.querySelector('.combat-entry-meta')?.textContent||'';const cost=costFromMeta(meta);
+    const u=document.createElement('div');u.className='v7-use';
+    u.innerHTML=`<button type="button" class="btn small" data-v7-use="${cost}">${cost==='reaction'?'↶ Usar reação':cost?'◆'.repeat(cost)+' Usar':'◇ Usar'}</button><small>Em combate, desconta do turno</small>`;
+    d.querySelector('.combat-entry-body')?.appendChild(u);
+  });
+}
+document.addEventListener('click',e=>{
+  const b=e.target.closest?.('[data-v7-cast],[data-v7-use]');if(!b)return;
+  const c=current();
+  if(b.dataset.v7Cast){const s=c.spellcasting.spells.find(x=>x.id===b.dataset.v7Cast);if(!s)return;const ok=window.GrimoireCast(s.id);if(ok===false)return;
+    spend(s.action==='reaction'?'reaction':(ACOST[s.action]||0),s.name);const u=b.closest('.v7-use');if(u){u.dataset.sig='';enhanceSpells()}
+    if(!reduced())b.animate([{boxShadow:'0 0 0 0 rgba(255,140,90,.7)'},{boxShadow:'0 0 0 14px rgba(255,140,90,0)'}],{duration:600});return}
+  const cost=b.dataset.v7Use,name=b.closest('.combat-entry')?.querySelector('.combat-entry-name')?.textContent||'Habilidade';
+  spend(cost==='reaction'?'reaction':num(cost),name);snd(cost==='reaction'?'hit':'tick');toast(`${name} usada.`);
+});
+
+/* ---------- registro de rolagens ---------- */
+const _renderRollLogs=window.renderRollLogs;
+if(typeof _renderRollLogs==='function')window.renderRollLogs=function(){
+  const out=_renderRollLogs.apply(this,arguments);
+  const el=$('combatRollLog'),c=current();if(!el||!c)return out;
+  const rolls=(c.rolls||[]).slice(0,30);
+  el.innerHTML=rolls.length?rolls.map(r=>{const m=/1d20\s*\[(\d+)\]/.exec(r.detail||'');const nat=m?num(m[1]):0;const cls=nat===20?'nat20':nat===1?'nat1':'';const tm=String(r.time||'').split(',').pop().trim().slice(0,5);
+    return `<div class="v7-roll ${cls}"><div class="v7-roll-total"><b>${esc(r.total)}</b></div><div style="min-width:0"><strong>${esc(r.name)}${cls?`<span class="v7-tag">${nat===20?'NAT 20':'NAT 1'}</span>`:''}</strong><small>${esc(r.formula)} · ${esc(r.detail||'')}</small></div><time>${esc(tm)}</time></div>`}).join('')
+    :'<div class="v7-roll-empty"><i>⚄</i>Nenhuma rolagem ainda.<br>Clique num ataque, defesa ou perícia para rolar.</div>';
+  return out;
+};
+
+/* ---------- orquestração ---------- */
+let q=false;
+function enhance(){q=false;for(const f of [renderTurn,enhanceAttacks,enhanceSpells,enhanceAbilities])try{f()}catch(err){console.warn('Combate v7',f.name,err)}}
+function schedule(){if(!q){q=true;requestAnimationFrame(enhance)}}
+function init(){
+  const page=$('page-combat');if(!page)return;
+  new MutationObserver(schedule).observe(page,{childList:true,subtree:true});
+  try{renderRollLogs()}catch{}
   enhance();
 }
 if(document.readyState==='loading')addEventListener('DOMContentLoaded',init);else init();
