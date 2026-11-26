@@ -1798,6 +1798,12 @@ body[data-appearance-motion="reduced"] .gb-combo{animation:none}
   .gb-combo-pop{position:fixed;z-index:400;top:50%;bottom:auto;left:50%;transform:translate(-50%,-50%);animation:none;max-height:80vh;overflow:auto}
 }
 
+.gb-combo-desc{max-width:34em;margin:10px auto 0;font:italic 14px/1.45 var(--body,Georgia,serif);color:var(--ink2,#5c4631);text-align:center}
+.gb-guide-btn{display:flex;width:fit-content;flex-direction:column;align-items:center;gap:1px;margin:10px auto 0;padding:7px 16px;border:1px solid rgba(122,30,24,.35);border-radius:4px;background:rgba(255,250,240,.55);color:var(--rubric,#8a2a1e);font:700 14px var(--display,serif);font-variant:small-caps;letter-spacing:.04em;cursor:pointer;transition:background .2s,transform .2s}
+.gb-guide-btn small{font:600 9px var(--ui-font,sans-serif);letter-spacing:.16em;text-transform:uppercase;color:var(--ink3,#7a6650)}
+.gb-guide-btn:hover{background:#fff7e6;transform:translateY(-1px)}
+.gb-guide-btn.on{background:var(--rubric,#8a2a1e);color:#fff3dc;border-color:transparent}.gb-guide-btn.on small{color:#f3d9b5}
+.gb-guide .gb-body h4,.gb-guide .gb-body .gb-sub{margin-top:1.1em}
 </style>
 <style id="tavola-v6-style">
 /* ==========================================================================
@@ -4769,7 +4775,7 @@ function indexBlock(ch,sel){
 }
 function leftPage(ch,c,sel,list){
   const i=list.indexOf(ch),prev=list[i-1],next=list[i+1];
-  return `<div class="gb-scroll"><header class="gb-chapter"><small>${ch.kicker}</small><h2><span class="gb-mark">${ch.mark}</span><span class="gb-title">${esc(ch.title)}</span></h2>${ch.today?`<button type="button" class="gb-combo-name" style="${comboStyle(ch.combo)}" data-gb-combo="${ch.combo.id}" title="Editar combo"><i>${comboIcon(ch.combo.icon)}</i><span class="gb-combo-label">${esc(ch.combo.name)}</span></button>`:''}<div class="gb-rule"></div></header>
+  return `<div class="gb-scroll"><header class="gb-chapter"><small>${ch.kicker}</small><h2><span class="gb-mark">${ch.mark}</span><span class="gb-title">${esc(ch.title)}</span></h2>${ch.today?`<button type="button" class="gb-combo-name" style="${comboStyle(ch.combo)}" data-gb-combo="${ch.combo.id}" title="Editar combo"><i>${comboIcon(ch.combo.icon)}</i><span class="gb-combo-label">${esc(ch.combo.name)}</span></button>${ch.combo.description?`<p class="gb-combo-desc">${esc(ch.combo.description)}</p>`:''}${ch.combo.guideText?`<button type="button" class="gb-guide-btn ${ui.sel.today==='__guide'?'on':''}" data-gb-guide>📜 Guia do combo<small>sequências e regras</small></button>`:''}`:''}<div class="gb-rule"></div></header>
     ${slotBlock(ch,c)}
     ${indexBlock(ch,sel)}</div>
     ${prev?`<button type="button" class="gb-corner prev" data-gb-goto="${prev.key}" aria-label="Capítulo anterior: ${esc(prev.title)}"><span>‹ ${prev.label}</span></button>`:''}
@@ -4828,6 +4834,7 @@ function rightPage(ch,c,sel,list){
   const i=list.indexOf(ch),next=list[i+1];
   const corner=next?`<button type="button" class="gb-corner next" data-gb-goto="${next.key}" aria-label="Próximo capítulo: ${esc(next.title)}"><span>${next.label} ›</span></button>`:'';
   const folio=`<div class="gb-folio">${i*2+2}</div>`;
+  if(ch.today&&ch.combo?.guideText&&ui.sel.today==='__guide')return `<div class="gb-scroll"><article class="gb-spell gb-guide"><header class="gb-spell-head"><small>Guia do combo</small><h3>${comboIcon(ch.combo.icon)} ${esc(ch.combo.name)}</h3></header><div class="gb-body">${richText(ch.combo.guideText)}</div></article></div>${corner}${folio}`;
   if(!sel)return `<div class="gb-scroll"><div class="gb-blank"><div class="gb-blank-sigil">✦</div><p>Página em branco.</p><small>Adicione magias pela <button type="button" class="gb-link" data-gb-jump="spellLibraryDetails">Biblioteca</button> ou escreva uma <button type="button" class="gb-link" data-gb-new>magia manual</button>.</small></div></div>${corner}${folio}`;
   const s=sel,r=num(s.rank),t=spellTotals(c);
   const desc=spellDescriptionForDisplay(s);
@@ -5041,6 +5048,7 @@ function bind(root){
     const t=e.target.closest('button');if(!t||!root.contains(t))return;
     const d=t.dataset,c=current();
     if(d.gbDice){const sp=t.closest('[data-spell-id]'),s=sp&&c.spellcasting.spells.find(x=>x.id===sp.dataset.spellId);const res=parseDice(d.gbDice);addRoll(s?`${s.name}: ${d.gbDice}`:d.gbDice,d.gbDice,res);return}
+    if('gbGuide' in d){ui.sel.today='__guide';saveUi();render();snd('page');return}
     if(d.gbCombo){comboClick(d,t);return}
     if(d.gbGoto){goTo(d.gbGoto);return}
     if(d.gbSpell){selectSpell(d.gbSpell);return}
